@@ -464,7 +464,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "qw.kicad_pro",
+    "filename": "nixie_clock.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -497,7 +497,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.25,
+        "clearance": 0.35,
         "diff_pair_gap": 0.25,
         "diff_pair_width": 0.2,
         "microvia_diameter": 0.3,
@@ -657,10 +657,6 @@
       "Root"
     ],
     [
-      "068ff5e0-dcfc-4f0b-b1f7-14563affae87",
-      "driver_3_digits_1_dot_right"
-    ],
-    [
       "3e544bdc-8ef6-4ae7-86a5-8f5d44c9c569",
       "power_supply"
     ],
@@ -675,6 +671,10 @@
     [
       "7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b",
       "connectors"
+    ],
+    [
+      "fe830805-1f17-45c2-a3b2-c398af349661",
+      "driver_3_digits_1_dot_right"
     ]
   ],
   "text_variables": {}

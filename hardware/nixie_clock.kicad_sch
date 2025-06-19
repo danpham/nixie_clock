@@ -107,7 +107,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 88.9) (xy 151.13 104.14)
+			(xy 151.13 88.9) (xy 151.13 102.87)
 		)
 		(stroke
 			(width 0)
@@ -207,16 +207,6 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 104.14) (xy 151.13 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1343601b-aa17-4f1b-946d-1dd8cc9304ac")
-	)
-	(wire
-		(pts
 			(xy 100.33 101.6) (xy 109.22 101.6)
 		)
 		(stroke
@@ -307,7 +297,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 101.6) (xy 167.64 101.6)
+			(xy 152.4 100.33) (xy 167.64 100.33)
 		)
 		(stroke
 			(width 0)
@@ -347,7 +337,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 91.44) (xy 152.4 101.6)
+			(xy 152.4 91.44) (xy 152.4 100.33)
 		)
 		(stroke
 			(width 0)
@@ -404,6 +394,16 @@
 			(type default)
 		)
 		(uuid "5bae021b-7eb7-42c4-afd9-f6a02706de46")
+	)
+	(wire
+		(pts
+			(xy 151.13 102.87) (xy 167.64 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d2c71d7-2782-4103-8844-d2be59b55254")
 	)
 	(wire
 		(pts
@@ -886,128 +886,6 @@
 		(uuid "fb171cd1-09f5-4e70-bdb6-e82697293a34")
 	)
 	(sheet
-		(at 167.64 97.79)
-		(size 26.67 35.56)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "068ff5e0-dcfc-4f0b-b1f7-14563affae87")
-		(property "Sheetname" "driver_3_digits_1_dot_right"
-			(at 167.64 97.0784 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "driver_3_digits_1_dot.kicad_sch"
-			(at 167.64 133.9346 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "NOT_LE" input
-			(at 167.64 116.84 180)
-			(uuid "b8606909-879c-424f-8e2c-80dd4a803c54")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "170V" input
-			(at 167.64 125.73 180)
-			(uuid "ab228d8d-7142-4c49-be7f-0a27c2926209")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "GND" input
-			(at 167.64 128.27 180)
-			(uuid "d42aba5f-2381-4417-a6c9-32457bd100aa")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "NOT_BL" input
-			(at 167.64 114.3 180)
-			(uuid "14d75577-449f-420b-bb89-bc2720987492")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SPI_CLK" input
-			(at 167.64 104.14 180)
-			(uuid "e18ad5f7-2327-4c01-8fab-a3397ca568e3")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "12V" input
-			(at 167.64 123.19 180)
-			(uuid "20ba48d8-09cf-4247-a25b-47682a371333")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SPI_SDI" input
-			(at 167.64 101.6 180)
-			(uuid "c466e849-291b-4e1d-917d-eefdb535fda2")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SPI_SDO" input
-			(at 167.64 106.68 180)
-			(uuid "63b11bc1-fc62-4248-a399-7469800d96e3")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "qw"
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819"
-					(page "2")
-				)
-			)
-		)
-	)
-	(sheet
 		(at 109.22 45.72)
 		(size 33.02 25.4)
 		(exclude_from_sim no)
@@ -1082,7 +960,7 @@
 			)
 		)
 		(instances
-			(project "qw"
+			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819"
 					(page "3")
 				)
@@ -1204,7 +1082,7 @@
 			)
 		)
 		(instances
-			(project "qw"
+			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819"
 					(page "5")
 				)
@@ -1306,7 +1184,7 @@
 			)
 		)
 		(instances
-			(project "qw"
+			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819"
 					(page "6")
 				)
@@ -1428,9 +1306,131 @@
 			)
 		)
 		(instances
-			(project "qw"
+			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819"
 					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 167.64 97.79)
+		(size 26.67 35.56)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "fe830805-1f17-45c2-a3b2-c398af349661")
+		(property "Sheetname" "driver_3_digits_1_dot_right"
+			(at 167.64 97.0784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "driver_3_digits_1_dot_right.kicad_sch"
+			(at 167.64 133.9346 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "12V" input
+			(at 167.64 123.19 180)
+			(uuid "a4ad11c9-1f75-4d01-9542-94594e6f8ba6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "170V" input
+			(at 167.64 125.73 180)
+			(uuid "2e9012dc-096f-4561-b7f2-a03f81837243")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GND" input
+			(at 167.64 128.27 180)
+			(uuid "4c489346-33f2-4b76-8028-5021f4aa2853")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "NOT_BL" input
+			(at 167.64 114.3 180)
+			(uuid "bb2e5a86-0de2-4efa-bd2c-2fe195f39ea2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "NOT_LE" input
+			(at 167.64 116.84 180)
+			(uuid "8f6b707f-7f20-4be2-81ff-30385021a1a3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SPI_CLK" input
+			(at 167.64 102.87 180)
+			(uuid "a109172a-a0c0-40c5-ac77-66c23123f6be")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SPI_SDI" input
+			(at 167.64 100.33 180)
+			(uuid "9aae3320-8a31-4485-9f22-0cf333aec975")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SPI_SDO" input
+			(at 167.64 105.41 180)
+			(uuid "3e833466-23ae-4c76-a664-1c98ca5c05ca")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "nixie_clock"
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819"
+					(page "6")
 				)
 			)
 		)
