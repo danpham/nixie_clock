@@ -2,7 +2,7 @@
 	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
-	(uuid "8f5fb67d-01ff-44b6-916f-f7558cdc4cef")
+	(uuid "4890ab4c-6b33-4d9d-8f9f-a1d36b6197cb")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Device:C"
@@ -3368,7 +3368,7 @@
 		(dnp no)
 		(uuid "97d5b2db-6150-458f-9663-24611faec3e6")
 		(property "Reference" "N4"
-			(at 121.92 105.918 0)
+			(at 121.92 146.558 0)
 			(effects
 				(font
 					(size 1.143 1.143)
