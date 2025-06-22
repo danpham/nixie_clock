@@ -529,7 +529,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "gerbr/",
       "pos_files": "",
       "specctra_dsn": "ttttt.dsn",
       "step": "",
