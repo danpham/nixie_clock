@@ -1286,6 +1286,16 @@
 	)
 	(wire
 		(pts
+			(xy 68.58 63.5) (xy 80.01 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3efa5390-17f8-4250-920d-87000b8d54f9")
+	)
+	(wire
+		(pts
 			(xy 45.72 63.5) (xy 48.26 63.5)
 		)
 		(stroke
@@ -1293,6 +1303,16 @@
 			(type default)
 		)
 		(uuid "44fa0ec4-eee2-4288-b1dc-50220e12b63b")
+	)
+	(wire
+		(pts
+			(xy 78.74 66.04) (xy 95.25 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4978ac02-9387-45c7-abf6-462328c24e7d")
 	)
 	(wire
 		(pts
@@ -1363,6 +1383,16 @@
 			(type default)
 		)
 		(uuid "701c4de1-58fc-48e4-863a-7fe6b1bbcbaa")
+	)
+	(wire
+		(pts
+			(xy 87.63 63.5) (xy 95.25 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "709a959a-7bbb-4fae-87eb-6409e7758d9a")
 	)
 	(wire
 		(pts
@@ -1466,16 +1496,6 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 66.04) (xy 95.25 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ab64b700-b054-4072-8a5b-e679c25e17ad")
-	)
-	(wire
-		(pts
 			(xy 67.31 71.12) (xy 67.31 66.04)
 		)
 		(stroke
@@ -1533,16 +1553,6 @@
 			(type default)
 		)
 		(uuid "bd1b5ba0-640d-40b2-9a11-621c8623547c")
-	)
-	(wire
-		(pts
-			(xy 68.58 63.5) (xy 95.25 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c190f08f-e5af-4ee9-9991-fe94e2d14927")
 	)
 	(wire
 		(pts
@@ -1653,6 +1663,16 @@
 			(type default)
 		)
 		(uuid "f796ebd5-cba2-4d9a-a176-e54b4f545d6a")
+	)
+	(wire
+		(pts
+			(xy 67.31 66.04) (xy 71.12 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd6d3e22-3973-44f2-bcc2-a1b1ad76125c")
 	)
 	(hierarchical_label "GPIO1"
 		(shape output)
@@ -1893,6 +1913,74 @@
 			(project ""
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
 					(reference "SW1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 74.93 66.04 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2caddaa5-2d96-4d07-96f0-96365674fe3a")
+		(property "Reference" "R22"
+			(at 74.93 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 74.93 62.23 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 74.93 67.818 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 74.93 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 74.93 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8d92dffa-b26f-4bdf-8d97-d9cabc6cc315")
+		)
+		(pin "2"
+			(uuid "228d53cf-4bf9-4ac0-a6f5-50e14cfdf4e3")
+		)
+		(instances
+			(project "nixie_clock"
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
+					(reference "R22")
 					(unit 1)
 				)
 			)
@@ -2221,6 +2309,74 @@
 			(project ""
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
 					(reference "#FLG03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 83.82 63.5 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "90c6a958-3126-43fa-b675-fb27d03ce590")
+		(property "Reference" "R21"
+			(at 83.82 57.15 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 83.82 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 83.82 65.278 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 83.82 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 83.82 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a4b95021-bfd7-4b2d-bc37-73c073f7b7d3")
+		)
+		(pin "2"
+			(uuid "46110ebb-ccdd-4e51-a217-921386400f28")
+		)
+		(instances
+			(project "nixie_clock"
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
+					(reference "R21")
 					(unit 1)
 				)
 			)
