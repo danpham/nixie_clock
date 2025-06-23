@@ -1941,6 +1941,12 @@
 		(uuid "6ccd0a32-8b4a-4ff4-bd42-90c810bc71ca")
 	)
 	(junction
+		(at 158.75 100.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "86b665ed-294b-41c3-ba74-f8125e8a81b6")
+	)
+	(junction
 		(at 53.34 86.36)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2156,7 +2162,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 97.79) (xy 158.75 102.87)
+			(xy 158.75 97.79) (xy 158.75 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2286,6 +2292,16 @@
 	)
 	(wire
 		(pts
+			(xy 97.79 109.22) (xy 151.13 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b9bf164-6237-4085-aa2f-8146df336407")
+	)
+	(wire
+		(pts
 			(xy 124.46 123.19) (xy 124.46 139.7)
 		)
 		(stroke
@@ -2293,6 +2309,16 @@
 			(type default)
 		)
 		(uuid "6cb93874-dc4b-4a73-a3c5-71ae8ae73f0c")
+	)
+	(wire
+		(pts
+			(xy 151.13 100.33) (xy 158.75 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "702de345-d0b8-49f5-864e-9f6f71455848")
 	)
 	(wire
 		(pts
@@ -2333,6 +2359,16 @@
 			(type default)
 		)
 		(uuid "74b4e0d9-31fc-4f69-a5e3-80bb814a9f4e")
+	)
+	(wire
+		(pts
+			(xy 151.13 109.22) (xy 151.13 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77d969cc-cf19-43f8-bba9-cb8ac10e2d8e")
 	)
 	(wire
 		(pts
@@ -2473,6 +2509,16 @@
 			(type default)
 		)
 		(uuid "b81ee9bf-5dd3-427e-ad10-59ff77e02ae6")
+	)
+	(wire
+		(pts
+			(xy 158.75 100.33) (xy 158.75 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd272386-af1f-4484-9c8a-fa3933c98186")
 	)
 	(wire
 		(pts
@@ -2913,7 +2959,7 @@
 				)
 			)
 		)
-		(property "Value" "L"
+		(property "Value" "100uH"
 			(at 109.22 83.82 90)
 			(effects
 				(font
@@ -2921,7 +2967,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_SMD:L_APV_APH1050"
 			(at 109.22 86.36 0)
 			(effects
 				(font
@@ -2982,7 +3028,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "0.05"
 			(at 127 120.6499 0)
 			(effects
 				(font
@@ -2991,7 +3037,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 122.682 119.38 90)
 			(effects
 				(font
@@ -3476,7 +3522,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "100nF"
 			(at 57.15 119.3799 0)
 			(effects
 				(font
@@ -3485,7 +3531,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 54.3052 121.92 0)
 			(effects
 				(font
@@ -3703,7 +3749,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "100nF"
 			(at 180.34 124.4599 0)
 			(effects
 				(font
@@ -3712,7 +3758,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
 			(at 177.4952 127 0)
 			(effects
 				(font
@@ -3839,7 +3885,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C_Polarized"
+		(property "Value" "4.7uF"
 			(at 147.32 123.5709 0)
 			(effects
 				(font
@@ -3848,7 +3894,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 144.4752 127 0)
 			(effects
 				(font
@@ -3909,7 +3955,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "100nF"
 			(at 77.47 120.6499 0)
 			(effects
 				(font
@@ -3918,7 +3964,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 74.6252 123.19 0)
 			(effects
 				(font
@@ -3986,7 +4032,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
 			(at 139.7 86.36 0)
 			(effects
 				(font
@@ -4065,7 +4111,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "10k"
 			(at 161.29 124.4599 0)
 			(effects
 				(font
@@ -4074,7 +4120,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 156.972 123.19 90)
 			(effects
 				(font
@@ -4135,7 +4181,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "C_Polarized"
+		(property "Value" "100uF"
 			(at 39.37 118.4909 0)
 			(effects
 				(font
@@ -4144,7 +4190,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3528-15_AVX-H_HandSolder"
 			(at 36.5252 121.92 0)
 			(effects
 				(font
@@ -4205,7 +4251,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "1.5M"
 			(at 161.29 95.2499 0)
 			(effects
 				(font
@@ -4214,7 +4260,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 156.972 93.98 90)
 			(effects
 				(font
@@ -4284,7 +4330,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_SMD:TO-263-2"
 			(at 127 103.505 0)
 			(effects
 				(font
@@ -4360,7 +4406,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_3314G_Vertical"
 			(at 158.75 106.68 0)
 			(effects
 				(font

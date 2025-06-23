@@ -307,6 +307,16 @@
 	)
 	(wire
 		(pts
+			(xy 106.68 130.81) (xy 106.68 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c4ba74d-184a-437b-867b-83549884ddfd")
+	)
+	(wire
+		(pts
 			(xy 99.06 88.9) (xy 151.13 88.9)
 		)
 		(stroke
@@ -344,6 +354,16 @@
 			(type default)
 		)
 		(uuid "4e93d332-4e00-45e0-8bc5-966ffbc5a798")
+	)
+	(wire
+		(pts
+			(xy 147.32 137.16) (xy 147.32 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5259d215-faa7-4878-a2d3-214eff75f73e")
 	)
 	(wire
 		(pts
@@ -464,6 +484,26 @@
 			(type default)
 		)
 		(uuid "6e52a4a0-7019-40a2-87f3-78ff9204ca75")
+	)
+	(wire
+		(pts
+			(xy 147.32 53.34) (xy 142.24 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7093822e-3aa0-451f-8598-9cf3cf67bf5b")
+	)
+	(wire
+		(pts
+			(xy 106.68 137.16) (xy 147.32 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "737de104-58b0-4fcf-8f12-8b0fe7de04c9")
 	)
 	(wire
 		(pts
@@ -614,6 +654,16 @@
 			(type default)
 		)
 		(uuid "9cb63405-b4c7-436d-a5c6-96cc19498b2f")
+	)
+	(wire
+		(pts
+			(xy 109.22 130.81) (xy 106.68 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e513fc9-6c8c-4672-8d61-51761d24ddaf")
 	)
 	(wire
 		(pts
@@ -959,6 +1009,16 @@
 				(justify left)
 			)
 		)
+		(pin "170V_INTERN" output
+			(at 142.24 53.34 0)
+			(uuid "801d11fa-cdf8-42a3-af1b-988906172da7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 		(instances
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819"
@@ -1074,6 +1134,16 @@
 		(pin "SPI_SDO" input
 			(at 109.22 106.68 180)
 			(uuid "d2bfc145-4b35-4a6b-80e5-724edae6da56")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "170V_INTERN" input
+			(at 109.22 130.81 180)
+			(uuid "23744190-4d91-4a46-98ba-528ef54cc7fe")
 			(effects
 				(font
 					(size 1.27 1.27)
