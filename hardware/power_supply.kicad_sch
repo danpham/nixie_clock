@@ -4343,6 +4343,7 @@
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/91054/91054.pdf"
 			(at 127 105.41 0)
+			(show_name yes)
 			(effects
 				(font
 					(size 1.27 1.27)
