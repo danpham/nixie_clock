@@ -705,7 +705,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector_Generic:Conn_01x04"
+		(symbol "Connector_Generic:Conn_01x03"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -721,8 +721,8 @@
 					)
 				)
 			)
-			(property "Value" "Conn_01x04"
-				(at 0 -7.62 0)
+			(property "Value" "Conn_01x03"
+				(at 0 -5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -747,7 +747,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
 				(at 0 0 0)
 				(effects
 					(font
@@ -774,10 +774,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "Conn_01x04_1_1"
+			(symbol "Conn_01x03_1_1"
 				(rectangle
 					(start -1.27 3.81)
-					(end 1.27 -6.35)
+					(end 1.27 -3.81)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -811,17 +811,6 @@
 				(rectangle
 					(start -1.27 -2.413)
 					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -877,24 +866,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -5.08 0)
-					(length 3.81)
-					(name "Pin_4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1420,12 +1391,6 @@
 		(uuid "536c4632-4839-4c4c-9c8b-d6b19258b022")
 	)
 	(junction
-		(at 212.09 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5b7d6263-c8da-4dde-a629-0814b4ba56b9")
-	)
-	(junction
 		(at 173.99 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1443,7 +1408,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 45.72) (xy 212.09 45.72)
+			(xy 199.39 43.18) (xy 212.09 43.18)
 		)
 		(stroke
 			(width 0)
@@ -1573,16 +1538,6 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 41.91) (xy 212.09 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4c2fb493-249a-453d-abae-17020e06fd8f")
-	)
-	(wire
-		(pts
 			(xy 76.2 52.07) (xy 97.79 52.07)
 		)
 		(stroke
@@ -1623,6 +1578,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 40.64) (xy 208.28 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "62518cda-9707-45d6-a170-0ccd3f7356ca")
+	)
+	(wire
+		(pts
 			(xy 91.44 129.54) (xy 104.14 129.54)
 		)
 		(stroke
@@ -1640,16 +1605,6 @@
 			(type default)
 		)
 		(uuid "6c8bb78d-f05c-4cc3-83b7-efe02f4abad8")
-	)
-	(wire
-		(pts
-			(xy 212.09 40.64) (xy 212.09 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6cd7be2f-9618-43db-8979-63a59fd3d4e2")
 	)
 	(wire
 		(pts
@@ -1743,16 +1698,6 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 41.91) (xy 212.09 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aa7003f6-bb09-4e73-91af-a2d787cda71e")
-	)
-	(wire
-		(pts
 			(xy 53.34 92.71) (xy 53.34 96.52)
 		)
 		(stroke
@@ -1783,7 +1728,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 40.64) (xy 199.39 45.72)
+			(xy 199.39 40.64) (xy 199.39 43.18)
 		)
 		(stroke
 			(width 0)
@@ -1909,7 +1854,7 @@
 	)
 	(hierarchical_label "GND"
 		(shape input)
-		(at 208.28 41.91 180)
+		(at 208.28 40.64 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2213,7 +2158,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x04")
+		(lib_id "Connector_Generic:Conn_01x03")
 		(at 217.17 40.64 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2223,7 +2168,7 @@
 		(fields_autoplaced yes)
 		(uuid "2ff6dc06-c7ec-47bf-bef4-9c5c0de75070")
 		(property "Reference" "J3"
-			(at 219.71 40.6399 0)
+			(at 219.71 39.3699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2231,8 +2176,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x04"
-			(at 219.71 43.1799 0)
+		(property "Value" "Conn_01x03"
+			(at 219.71 41.9099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2240,7 +2185,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-4-3.5-H_1x04_P3.50mm_Horizontal"
+		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-3-3.5-H_1x03_P3.50mm_Horizontal"
 			(at 217.17 40.64 0)
 			(effects
 				(font
@@ -2258,7 +2203,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
 			(at 217.17 40.64 0)
 			(effects
 				(font
@@ -2275,9 +2220,6 @@
 		)
 		(pin "3"
 			(uuid "73348c81-340e-44b9-92e2-3b5478392e10")
-		)
-		(pin "4"
-			(uuid "b525d949-df28-4429-85b9-d4b0e05c3004")
 		)
 		(instances
 			(project ""
