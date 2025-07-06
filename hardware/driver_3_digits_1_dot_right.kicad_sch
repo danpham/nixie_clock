@@ -3183,7 +3183,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4416663c-8fc7-4c13-8647-9a4ead6cb057")
-		(property "Reference" "N4"
+		(property "Reference" "N5"
 			(at 120.65 26.67 0)
 			(effects
 				(font
@@ -3270,7 +3270,7 @@
 		(instances
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
-					(reference "N4")
+					(reference "N5")
 					(unit 1)
 				)
 			)
@@ -3285,7 +3285,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "571babd4-bbfb-48d9-84b5-fe3807b1da10")
-		(property "Reference" "N5"
+		(property "Reference" "N6"
 			(at 120.65 107.696 0)
 			(effects
 				(font
@@ -3372,7 +3372,7 @@
 		(instances
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
-					(reference "N5")
+					(reference "N6")
 					(unit 1)
 				)
 			)
@@ -3387,7 +3387,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "97d5b2db-6150-458f-9663-24611faec3e6")
-		(property "Reference" "N6"
+		(property "Reference" "N4"
 			(at 121.92 146.558 0)
 			(effects
 				(font
@@ -3474,7 +3474,7 @@
 		(instances
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
-					(reference "N6")
+					(reference "N4")
 					(unit 1)
 				)
 			)

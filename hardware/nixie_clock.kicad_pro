@@ -491,7 +491,7 @@
         "bus_width": 12,
         "name": "5V",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
+        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "wire_width": 6
       },
@@ -504,12 +504,19 @@
         "microvia_drill": 0.1,
         "name": "HV-170V",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
+        "priority": 2,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.25,
         "via_diameter": 1.0,
         "via_drill": 0.6,
         "wire_width": 6
+      },
+      {
+        "name": "large_GND",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.5
       }
     ],
     "meta": {
@@ -521,6 +528,10 @@
       {
         "netclass": "HV-170V",
         "pattern": "*HVOUT*"
+      },
+      {
+        "netclass": "large_GND",
+        "pattern": "/connectors/GND"
       }
     ]
   },
