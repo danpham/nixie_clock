@@ -4330,7 +4330,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+		(property "Footprint" "Package_TO_SOT_SMD:TO-263-2"
 			(at 127 103.505 0)
 			(effects
 				(font
