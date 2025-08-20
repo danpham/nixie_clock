@@ -15,11 +15,10 @@
 #define HV5622_SPI_HOST   SPI2_HOST
 
 // GPIOs (adapt according to your wiring)
-#define HV5622_PIN_MOSI   6
-#define HV5622_PIN_SCLK   7
-#define HV5622_PIN_LE     8
-#define HV5622_PIN_POL    9
-#define HV5622_PIN_BL     10
+#define HV5622_PIN_MOSI   16   /* SPI_MOSI */
+#define HV5622_PIN_SCLK   5    /* SPI_CLK */
+#define HV5622_PIN_LE     8    /* GPIO2 */
+#define HV5622_PIN_BL     7    /* GPIO1 */
 
 
 /******************************************************************

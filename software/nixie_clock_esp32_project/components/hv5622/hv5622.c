@@ -56,15 +56,11 @@ void hv5622_init(void)
     gpio_reset_pin(HV5622_PIN_LE);
     gpio_set_direction(HV5622_PIN_LE, GPIO_MODE_OUTPUT);
 
-    gpio_reset_pin(HV5622_PIN_POL);
-    gpio_set_direction(HV5622_PIN_POL, GPIO_MODE_OUTPUT);
-
     gpio_reset_pin(HV5622_PIN_BL);
     gpio_set_direction(HV5622_PIN_BL, GPIO_MODE_OUTPUT);
 
     // Initial state
     gpio_set_level(HV5622_PIN_LE, 0);
-    gpio_set_level(HV5622_PIN_POL, 0);
     gpio_set_level(HV5622_PIN_BL, 1); // BL active low
 }
 
