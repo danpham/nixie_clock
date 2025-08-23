@@ -2038,7 +2038,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10uf"
+		(property "Value" "C"
 			(at 177.8 48.2599 0)
 			(effects
 				(font
@@ -2839,7 +2839,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10uf"
+		(property "Value" "C"
 			(at 193.04 48.2599 0)
 			(effects
 				(font
