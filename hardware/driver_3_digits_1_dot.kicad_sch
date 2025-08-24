@@ -1857,12 +1857,6 @@
 		)
 	)
 	(junction
-		(at 139.7 87.63)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0a5db9cf-f191-475f-b0cf-e6ae363b47e4")
-	)
-	(junction
 		(at 182.88 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1960,7 +1954,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 44.45) (xy 152.4 44.45)
+			(xy 149.86 44.45) (xy 152.4 44.45)
 		)
 		(stroke
 			(width 0)
@@ -2050,7 +2044,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 162.56) (xy 58.42 162.56)
+			(xy 76.2 161.29) (xy 92.71 161.29)
 		)
 		(stroke
 			(width 0)
@@ -2190,7 +2184,7 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 44.45) (xy 140.97 44.45)
+			(xy 139.7 44.45) (xy 142.24 44.45)
 		)
 		(stroke
 			(width 0)
@@ -2240,7 +2234,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 87.63) (xy 152.4 87.63)
+			(xy 149.86 87.63) (xy 152.4 87.63)
 		)
 		(stroke
 			(width 0)
@@ -2300,16 +2294,6 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 161.29) (xy 92.71 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "92c8e7d4-4f34-40d9-9992-dc2ba7aeeacd")
-	)
-	(wire
-		(pts
 			(xy 182.88 60.96) (xy 201.93 60.96)
 		)
 		(stroke
@@ -2357,16 +2341,6 @@
 			(type default)
 		)
 		(uuid "a07b9bfd-b138-4405-9e3f-ffa512d189a3")
-	)
-	(wire
-		(pts
-			(xy 92.71 160.02) (xy 72.39 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a248e319-11fb-411d-9329-3d220f324513")
 	)
 	(wire
 		(pts
@@ -2560,6 +2534,16 @@
 	)
 	(wire
 		(pts
+			(xy 139.7 87.63) (xy 142.24 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4aacd7d-89a5-4765-9f90-1e06fec04bc5")
+	)
+	(wire
+		(pts
 			(xy 92.71 168.91) (xy 76.2 168.91)
 		)
 		(stroke
@@ -2570,7 +2554,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 160.02) (xy 60.96 160.02)
+			(xy 76.2 160.02) (xy 78.74 160.02)
 		)
 		(stroke
 			(width 0)
@@ -2587,16 +2571,6 @@
 			(type default)
 		)
 		(uuid "d9de14b0-bb6f-4da4-8b73-340964828104")
-	)
-	(wire
-		(pts
-			(xy 72.39 160.02) (xy 72.39 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "da762020-fbe4-483b-8d47-89231581e1df")
 	)
 	(wire
 		(pts
@@ -2650,7 +2624,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 162.56) (xy 58.42 160.02)
+			(xy 76.2 161.29) (xy 76.2 160.02)
 		)
 		(stroke
 			(width 0)
@@ -2687,16 +2661,6 @@
 			(type default)
 		)
 		(uuid "f459a0be-cded-46ee-9fee-9647bc094409")
-	)
-	(wire
-		(pts
-			(xy 139.7 87.63) (xy 138.43 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f8591969-b59a-4c9f-86e3-8470a562a50c")
 	)
 	(wire
 		(pts
@@ -2776,7 +2740,7 @@
 	)
 	(hierarchical_label "SPI_SDO"
 		(shape input)
-		(at 60.96 160.02 0)
+		(at 78.74 160.02 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3107,7 +3071,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 144.78 44.45 270)
+		(at 146.05 44.45 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3116,7 +3080,7 @@
 		(fields_autoplaced yes)
 		(uuid "36423960-6673-4b5f-aae1-9c59347cbbb3")
 		(property "Reference" "R7"
-			(at 144.78 38.1 90)
+			(at 146.05 38.1 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3124,7 +3088,7 @@
 			)
 		)
 		(property "Value" "15K"
-			(at 144.78 40.64 90)
+			(at 146.05 40.64 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3132,7 +3096,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 144.78 42.672 90)
+			(at 146.05 42.672 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3141,7 +3105,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 144.78 44.45 0)
+			(at 146.05 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3150,7 +3114,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 144.78 44.45 0)
+			(at 146.05 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3413,7 +3377,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 143.51 87.63 270)
+		(at 146.05 87.63 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3422,7 +3386,7 @@
 		(fields_autoplaced yes)
 		(uuid "a3f93794-7da2-4a54-8cb7-77f440926edd")
 		(property "Reference" "R6"
-			(at 143.51 81.28 90)
+			(at 146.05 81.28 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3430,7 +3394,7 @@
 			)
 		)
 		(property "Value" "15K"
-			(at 143.51 83.82 90)
+			(at 146.05 83.82 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3438,7 +3402,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 143.51 85.852 90)
+			(at 146.05 85.852 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3447,7 +3411,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 143.51 87.63 0)
+			(at 146.05 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3456,7 +3420,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 143.51 87.63 0)
+			(at 146.05 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
