@@ -2981,7 +2981,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nixies-us_IN-3"
+		(property "Footprint" "nixies-us:nixies-us-IN-3"
 			(at 161.798 55.88 0)
 			(effects
 				(font
@@ -3186,7 +3186,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nixies-us_IN-14"
+		(property "Footprint" "nixies-us:nixies-us-IN-14"
 			(at 120.142 41.91 0)
 			(effects
 				(font
@@ -3288,7 +3288,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nixies-us_IN-14"
+		(property "Footprint" "nixies-us:nixies-us-IN-14"
 			(at 121.412 82.55 0)
 			(effects
 				(font
@@ -3390,7 +3390,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nixies-us_IN-14"
+		(property "Footprint" "nixies-us:nixies-us-IN-14"
 			(at 122.682 121.92 0)
 			(effects
 				(font
