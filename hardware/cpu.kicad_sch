@@ -1391,6 +1391,16 @@
 	)
 	(wire
 		(pts
+			(xy 68.58 80.01) (xy 73.66 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12f8fc48-f3ae-4efe-8eda-31d89989c67b")
+	)
+	(wire
+		(pts
 			(xy 137.16 29.21) (xy 50.8 29.21)
 		)
 		(stroke
@@ -1398,6 +1408,16 @@
 			(type default)
 		)
 		(uuid "16435326-b7fa-41f1-a940-123af20b477d")
+	)
+	(wire
+		(pts
+			(xy 66.04 64.77) (xy 93.98 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1831f0e9-744d-4312-b7b7-45489f46b7b7")
 	)
 	(wire
 		(pts
@@ -1661,6 +1681,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 64.77) (xy 58.42 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af0cc6ab-c1dc-40db-a3ca-a00bbb4e345c")
+	)
+	(wire
+		(pts
 			(xy 66.04 80.01) (xy 66.04 74.93)
 		)
 		(stroke
@@ -1801,6 +1831,16 @@
 	)
 	(wire
 		(pts
+			(xy 81.28 80.01) (xy 93.98 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc5e7c78-74a4-435d-b997-da64e459783f")
+	)
+	(wire
+		(pts
 			(xy 50.8 62.23) (xy 48.26 62.23)
 		)
 		(stroke
@@ -1838,6 +1878,16 @@
 			(type default)
 		)
 		(uuid "f796ebd5-cba2-4d9a-a176-e54b4f545d6a")
+	)
+	(wire
+		(pts
+			(xy 68.58 82.55) (xy 68.58 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa4231d0-525f-4598-b9f8-09f7947ebf69")
 	)
 	(wire
 		(pts
@@ -1926,6 +1976,17 @@
 		)
 		(uuid "7abf0db2-f222-45d6-9706-2d721a5fa872")
 	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 55.88 64.77 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "937e4df8-74cd-4214-9175-e12cead8f554")
+	)
 	(hierarchical_label "SPI_MOSI"
 		(shape output)
 		(at 86.36 67.31 180)
@@ -1958,6 +2019,17 @@
 			(justify right)
 		)
 		(uuid "d0f02ebd-160f-4dff-8cde-1538711f169d")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 68.58 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "fe97e106-4927-441d-b97e-3f4076f1a81f")
 	)
 	(hierarchical_label "SPI_CLK"
 		(shape output)
@@ -2501,6 +2573,74 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 62.23 64.77 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7f2d244d-2279-4dcc-b835-4ac922cf87b0")
+		(property "Reference" "R25"
+			(at 62.23 58.42 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 62.23 60.96 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 62.23 66.548 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 62.23 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 62.23 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8c987faa-02a1-4a36-9bae-2095c5f5775a")
+		)
+		(pin "2"
+			(uuid "f0557250-2dc5-412d-8ac7-c0e3bbb35890")
+		)
+		(instances
+			(project "nixie_clock"
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
+					(reference "R25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 82.55 72.39 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2562,6 +2702,74 @@
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
 					(reference "R21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 77.47 80.01 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9b6baf7b-bd25-4ebf-9bc4-f20e22a557fd")
+		(property "Reference" "R24"
+			(at 77.47 73.66 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 77.47 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 77.47 81.788 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 77.47 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 77.47 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b63fad6a-fb29-499c-a403-75b2d859f034")
+		)
+		(pin "2"
+			(uuid "040f3284-d533-4437-960f-cdac28a54a43")
+		)
+		(instances
+			(project "nixie_clock"
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
+					(reference "R24")
 					(unit 1)
 				)
 			)
