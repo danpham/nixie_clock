@@ -9,6 +9,16 @@
         "gpio.h": "c",
         "uart.h": "c",
         "queue.h": "c",
-        "task.h": "c"
+        "task.h": "c",
+        "esp_log.h": "c",
+        "clock.h": "c",
+        "gpio_driver.h": "c",
+        "iosfwd": "c",
+        "xlocbuf": "c",
+        "thread": "c",
+        "xlocale": "c",
+        "chrono": "c",
+        "gpio_task.h": "c",
+        "xiosbase": "c"
     }
 }

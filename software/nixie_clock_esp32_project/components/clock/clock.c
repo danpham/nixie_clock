@@ -53,3 +53,11 @@ void clock_set(clock_t *clk, uint8_t h, uint8_t m, uint8_t s) {
     clk->minutes = m % 60;
     clk->seconds = s % 60;
 }
+
+void clock_increment_hours(clock_t *clk) {
+    clk->hours = (clk->hours + 1) % 24;
+}
+
+void clock_increment_minutes(clock_t *clk) {
+    clk->minutes = (clk->minutes + 1) % 60;
+}

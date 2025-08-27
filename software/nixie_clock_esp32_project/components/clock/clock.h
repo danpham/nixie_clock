@@ -39,10 +39,19 @@ typedef struct {
 // Initialize the clock
 void clock_init(clock_t *clk, uint8_t h, uint8_t m, uint8_t s);
 
-// Advance the clock by one second
+// Advance the clock by one second (called by tick)
 void clock_tick(clock_t *clk);
 
-// Optional: set the time
+// Set the time explicitly
 void clock_set(clock_t *clk, uint8_t h, uint8_t m, uint8_t s);
+
+// Increment hours immediately (e.g., called from button)
+void clock_increment_hours(clock_t *clk);
+
+// Increment minutes immediately (e.g., called from button)
+void clock_increment_minutes(clock_t *clk);
+
+// Start the FreeRTOS clock task
+void clock_task_start(void);
 
 #endif // CLOCK_H

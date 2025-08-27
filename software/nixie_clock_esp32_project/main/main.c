@@ -10,6 +10,7 @@
 #include "hv5622.h"
 #include "display.h"
 #include "clock.h"
+#include "gpio_driver.h"
 
 
 /******************************************************************
@@ -41,6 +42,10 @@ void app_main(void)
     hv5622_init();
     display_init();
 
-    // Create clock task
-    xTaskCreate(clock_task, "clock_task", 2048, NULL, 5, NULL);
+    clock_task_start();
+    gpio_task_start();
+
+    while(1) {
+        vTaskDelay(pdMS_TO_TICKS(1000)); // Main loop remains free
+    }
 }

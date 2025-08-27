@@ -46,3 +46,4 @@ void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds) {
     uint64_t data = encode_time(hours, minutes, seconds);
     hv5622_send64(data);
 }
+
