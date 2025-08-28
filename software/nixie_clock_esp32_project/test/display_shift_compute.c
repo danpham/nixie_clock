@@ -3,9 +3,6 @@
 #include "unity.h"
 #include "display.h"
 
-void setUp(void) {}
-void tearDown(void) {}
-
 void test_shift_compute_zero(void) {
     uint8_t val = shift_compute(0);
     printf("shift_compute(0) = %u\n", val);

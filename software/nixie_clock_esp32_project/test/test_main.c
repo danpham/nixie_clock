@@ -1,5 +1,8 @@
 #include "unity.h"
 
+void setUp(void) {}
+void tearDown(void) {}
+
 extern void test_shift_compute_zero(void);
 extern void test_shift_compute_positive(void);
 extern void test_shift_compute_max(void);
