@@ -1,12 +1,14 @@
 add_executable(native_tests
-    display_shift_compute.c
-    display_encode_time.c
+    test_display.c
+    test_clock.c
     test_main.c
     ../components/display/display.c   # pour inclure shift_compute
+    ../components/clock/clock.c   # pour inclure shift_compute
 )
 
 include_directories(
     ../components/display
+    ../components/clock
     C:/Espressif/frameworks/esp-idf-v5.5/components/unity/include
     C:/Espressif/frameworks/esp-idf-v5.5/components/unity/unity/src
 )
