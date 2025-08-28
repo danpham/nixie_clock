@@ -23,6 +23,8 @@
         "random": "c",
         "hv5622.h": "c",
         "unity.h": "c",
-        "display.h": "c"
+        "display.h": "c",
+        "hv5622_mock.h": "c",
+        "functional": "c"
     }
 }

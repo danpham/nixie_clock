@@ -2,7 +2,9 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include "display.h"
-#ifndef UNITY_TESTING
+#ifdef UNITY_TESTING
+#include "hv5622_mock.h"
+#else
 #include "hv5622.h"
 #endif
 
@@ -72,16 +74,12 @@ uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t do
     return data;
 }
 
-void display_init(void) {
-#ifndef UNITY_TESTING    
+void display_init(void) {  
     hv5622_init();
-#endif
 }
 
 void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds) {
     uint64_t data = encode_time(hours, minutes, seconds, 1, 1, 0, 0);
-#ifndef UNITY_TESTING    
     hv5622_send64(data);
-#endif
 }
 
