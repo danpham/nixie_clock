@@ -37,7 +37,7 @@ static uint8_t shift_compute(uint8_t number){
        shift_number = 10 - number;
     }
 
-    return number;
+    return shift_number;
 }
 
 static uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
