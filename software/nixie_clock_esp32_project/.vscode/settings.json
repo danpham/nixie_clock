@@ -19,6 +19,10 @@
         "xlocale": "c",
         "chrono": "c",
         "gpio_task.h": "c",
-        "xiosbase": "c"
+        "xiosbase": "c",
+        "random": "c",
+        "hv5622.h": "c",
+        "unity.h": "c",
+        "display.h": "c"
     }
 }
