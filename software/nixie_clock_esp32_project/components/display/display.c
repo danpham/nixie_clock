@@ -2,13 +2,18 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include "display.h"
+#ifndef UNITY_TESTING
 #include "hv5622.h"
-
+#endif
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-
+#ifdef UNITY_TESTING
+#define NOT_STATIC
+#else
+#define NOT_STATIC static
+#endif
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -23,16 +28,16 @@
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
-static uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
+NOT_STATIC uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
  
 
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-static uint8_t shift_compute(uint8_t number){
+NOT_STATIC uint8_t shift_compute(uint8_t number){
     uint8_t shift_number = 0;
 
-    if  (number > 0)
+    if  ((number > 0) && (number <= 10))
     {
        shift_number = 10 - number;
     }
@@ -40,7 +45,7 @@ static uint8_t shift_compute(uint8_t number){
     return shift_number;
 }
 
-static uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
+uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
     uint64_t data = 0;
     uint8_t nixies[6];
 
@@ -68,11 +73,15 @@ static uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uin
 }
 
 void display_init(void) {
+#ifndef UNITY_TESTING    
     hv5622_init();
+#endif
 }
 
 void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds) {
     uint64_t data = encode_time(hours, minutes, seconds, 1, 1, 0, 0);
+#ifndef UNITY_TESTING    
     hv5622_send64(data);
+#endif
 }
 
