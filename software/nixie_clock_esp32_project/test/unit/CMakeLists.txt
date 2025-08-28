@@ -1,16 +1,16 @@
 add_executable(native_tests
     test_display.c
     test_clock.c
-    test_main.c
-    ../components/hv5622/hv5622_mock.c
-    ../components/display/display.c
-    ../components/clock/clock.c
+    test_unit_main.c
+    ../../components/hv5622/hv5622_mock.c
+    ../../components/display/display.c
+    ../../components/clock/clock.c
 )
 
 include_directories(
-    ../components/hv5622
-    ../components/display
-    ../components/clock
+    ../../components/hv5622
+    ../../components/display
+    ../../components/clock
     C:/Espressif/frameworks/esp-idf-v5.5/components/unity/include
     C:/Espressif/frameworks/esp-idf-v5.5/components/unity/unity/src
 )

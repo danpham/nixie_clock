@@ -78,8 +78,8 @@ void display_init(void) {
     hv5622_init();
 }
 
-void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds) {
-    uint64_t data = encode_time(hours, minutes, seconds, 1, 1, 0, 0);
+void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2) {
+    uint64_t data = encode_time(hours, minutes, seconds, dot1, dot2, 0, 0);
     hv5622_send64(data);
 }
 

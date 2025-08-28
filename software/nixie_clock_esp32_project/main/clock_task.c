@@ -33,6 +33,8 @@
 void clock_task(void *arg) {
     clock_t clk;
     button_event_t event;
+    bool dots = true;
+    uint8_t dots_state;
 
     clock_init(&clk, 0, 0, 0);  // Initialize time to 00:00:00
 
@@ -40,6 +42,10 @@ void clock_task(void *arg) {
     const TickType_t xFrequency = pdMS_TO_TICKS(1000); // 1 second
 
     while (1) {
+        // Show time
+        dots_state = dots ? 1 : 0;
+        display_set_time(clk.hours, clk.minutes, clk.seconds, dots_state, dots_state);
+
         // Read buttons
         if (xQueueReceive(buttonQueue, &event, 0) == pdTRUE) {
             if (event.id == 1 && event.pressed) {
@@ -51,7 +57,9 @@ void clock_task(void *arg) {
         }
 
         clock_tick(&clk);  // Advance clock by one second
-        display_set_time(clk.hours, clk.minutes, clk.seconds);
+
+        // Toggle dots
+        dots = !dots;
 
         // Wait exactly 1 second before next loop
         vTaskDelayUntil(&xLastWakeTime, xFrequency);
