@@ -8,6 +8,335 @@
 		(title "Connectors")
 	)
 	(lib_symbols
+		(symbol "Connector:Barrel_Jack_Switch"
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.334 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Barrel_Jack_Switch"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 1.27 -1.016 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 1.27 -1.016 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "DC Barrel Jack with an internal switch"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "DC power barrel jack connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "BarrelJack*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Barrel_Jack_Switch_0_1"
+				(rectangle
+					(start -5.08 3.81)
+					(end 5.08 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.81 -2.54) (xy -2.54 -2.54) (xy -1.27 -1.27) (xy 0 -2.54) (xy 2.54 -2.54) (xy 5.08 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -3.302 1.905)
+					(mid -3.9343 2.54)
+					(end -3.302 3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -3.302 1.905)
+					(mid -3.9343 2.54)
+					(end -3.302 3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.286) (xy 1.905 -1.651)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.683 3.175)
+					(end -3.302 1.905)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 3.81 2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 0) (xy 1.27 0) (xy 1.27 -2.286) (xy 0.635 -1.651)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Barrel_Jack_Switch_1_1"
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:TestPoint"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.762)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector:USB_C_Receptacle_USB2.0_16P"
 			(pin_names
 				(offset 1.016)
@@ -705,177 +1034,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector_Generic:Conn_01x03"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x03"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Conn_01x03_1_1"
-				(rectangle
-					(start -1.27 3.81)
-					(end 1.27 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 2.54 0)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -1542,6 +1700,12 @@
 		(uuid "536c4632-4839-4c4c-9c8b-d6b19258b022")
 	)
 	(junction
+		(at 214.63 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5607ebd7-feab-437d-af68-89d076978957")
+	)
+	(junction
 		(at 173.99 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1559,7 +1723,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 43.18) (xy 212.09 43.18)
+			(xy 214.63 43.18) (xy 217.17 43.18)
 		)
 		(stroke
 			(width 0)
@@ -1569,7 +1733,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 50.8) (xy 200.66 50.8)
+			(xy 198.12 50.8) (xy 201.93 50.8)
 		)
 		(stroke
 			(width 0)
@@ -1659,6 +1823,16 @@
 	)
 	(wire
 		(pts
+			(xy 214.63 40.64) (xy 217.17 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3075380f-a9c6-4a92-bb57-037aec4089dc")
+	)
+	(wire
+		(pts
 			(xy 104.14 129.54) (xy 127 129.54)
 		)
 		(stroke
@@ -1666,16 +1840,6 @@
 			(type default)
 		)
 		(uuid "3e9aa765-adff-4a3b-97bb-0ce163395df8")
-	)
-	(wire
-		(pts
-			(xy 185.42 38.1) (xy 189.23 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "40ad655f-6c1e-4396-aabb-54a3fc19bc36")
 	)
 	(wire
 		(pts
@@ -1729,7 +1893,7 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 40.64) (xy 208.28 40.64)
+			(xy 214.63 26.67) (xy 210.82 26.67)
 		)
 		(stroke
 			(width 0)
@@ -1779,7 +1943,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 38.1) (xy 212.09 38.1)
+			(xy 189.23 38.1) (xy 201.93 38.1)
 		)
 		(stroke
 			(width 0)
@@ -1789,7 +1953,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 50.8) (xy 209.55 50.8)
+			(xy 209.55 50.8) (xy 214.63 50.8)
 		)
 		(stroke
 			(width 0)
@@ -1809,7 +1973,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 38.1) (xy 177.8 38.1)
+			(xy 152.4 38.1) (xy 189.23 38.1)
 		)
 		(stroke
 			(width 0)
@@ -1849,13 +2013,23 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 40.64) (xy 199.39 40.64)
+			(xy 173.99 40.64) (xy 198.12 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "aa6a65f9-d29f-4e3b-8653-2d80f1468683")
+	)
+	(wire
+		(pts
+			(xy 214.63 38.1) (xy 217.17 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa7f0405-9236-4d3e-95d5-abe3829995ab")
 	)
 	(wire
 		(pts
@@ -1879,7 +2053,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 40.64) (xy 199.39 50.8)
+			(xy 198.12 40.64) (xy 198.12 50.8)
 		)
 		(stroke
 			(width 0)
@@ -1929,13 +2103,33 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 50.8) (xy 209.55 43.18)
+			(xy 214.63 50.8) (xy 214.63 43.18)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "e9bbd0d8-3e80-43b7-9600-f9c49df2bbcf")
+	)
+	(wire
+		(pts
+			(xy 214.63 38.1) (xy 214.63 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb1ca930-3803-432e-8828-c29773987a5b")
+	)
+	(wire
+		(pts
+			(xy 214.63 26.67) (xy 214.63 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef6e9786-e2be-4e64-89c8-2c985af5bb79")
 	)
 	(wire
 		(pts
@@ -2025,7 +2219,7 @@
 	)
 	(hierarchical_label "GND"
 		(shape input)
-		(at 208.28 40.64 180)
+		(at 210.82 26.67 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2121,74 +2315,6 @@
 			(justify right)
 		)
 		(uuid "f8fc863c-e511-4141-913e-51c35b44bfb2")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 181.61 38.1 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "150db43d-e837-4a86-8d8a-91b5e647352e")
-		(property "Reference" "R16"
-			(at 181.61 31.75 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0"
-			(at 181.61 34.29 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 181.61 36.322 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 181.61 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 181.61 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "427e1c3e-5b77-4411-bf43-9a324118eab9")
-		)
-		(pin "2"
-			(uuid "319515f8-cef6-4d41-813b-61b11caa511f")
-		)
-		(instances
-			(project "nixie_clock"
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b"
-					(reference "R16")
-					(unit 1)
-				)
-			)
-		)
 	)
 	(symbol
 		(lib_id "Device:C")
@@ -2328,17 +2454,16 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x03")
-		(at 217.17 40.64 0)
+		(lib_id "Connector:TestPoint")
+		(at 201.93 38.1 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2ff6dc06-c7ec-47bf-bef4-9c5c0de75070")
-		(property "Reference" "J3"
-			(at 219.71 39.3699 0)
+		(uuid "3af9a758-a848-4d88-83ae-5535ef7fc483")
+		(property "Reference" "TP1"
+			(at 197.612 29.972 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2346,8 +2471,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x03"
-			(at 219.71 41.9099 0)
+		(property "Value" "TestPoint"
+			(at 197.612 32.512 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2355,8 +2480,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-3-3.5-H_1x03_P3.50mm_Horizontal"
-			(at 217.17 40.64 0)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D2.0mm"
+			(at 207.01 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2365,7 +2490,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 217.17 40.64 0)
+			(at 207.01 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2373,8 +2498,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 217.17 40.64 0)
+		(property "Description" "test point"
+			(at 201.93 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2383,18 +2508,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1ecaafd6-4802-43c7-bbbc-096fff36dc15")
-		)
-		(pin "2"
-			(uuid "de4686e7-57d5-4c4d-9940-f16fc7c30e4a")
-		)
-		(pin "3"
-			(uuid "73348c81-340e-44b9-92e2-3b5478392e10")
+			(uuid "ce3ca2f9-aa2f-4299-9686-fcdba876288f")
 		)
 		(instances
 			(project ""
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b"
-					(reference "J3")
+					(reference "TP1")
 					(unit 1)
 				)
 			)
@@ -2855,6 +2974,78 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Barrel_Jack_Switch")
+		(at 224.79 40.64 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "be3b4281-e6c7-4d45-bf4e-549e62f4bf86")
+		(property "Reference" "J7"
+			(at 231.14 39.3699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Barrel_Jack_Switch"
+			(at 231.14 41.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Connector_BarrelJack:BarrelJack_Horizontal"
+			(at 240.538 34.036 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 223.52 39.624 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "DC Barrel Jack with an internal switch"
+			(at 224.79 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "01a91ad3-981c-4c18-872a-b5be715aa912")
+		)
+		(pin "3"
+			(uuid "9cd65edd-f44d-454f-8725-75e907e94494")
+		)
+		(pin "2"
+			(uuid "5b22c24d-435b-45c6-9cfd-b167a1033c08")
+		)
+		(instances
+			(project ""
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b"
+					(reference "J7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 87.63 81.28 0)
 		(unit 1)
@@ -3133,7 +3324,7 @@
 	)
 	(symbol
 		(lib_id "Device:Thermistor_PTC")
-		(at 204.47 50.8 90)
+		(at 205.74 50.8 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3141,7 +3332,7 @@
 		(dnp no)
 		(uuid "dec50316-2c34-49bc-9f38-f9704ac9407c")
 		(property "Reference" "TH1"
-			(at 204.47 47.498 90)
+			(at 204.216 47.244 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3150,7 +3341,7 @@
 			)
 		)
 		(property "Value" "Thermistor_PTC"
-			(at 198.374 45.466 90)
+			(at 199.39 44.704 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3159,7 +3350,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
-			(at 209.55 49.53 0)
+			(at 210.82 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3169,7 +3360,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 204.47 50.8 0)
+			(at 205.74 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3178,7 +3369,7 @@
 			)
 		)
 		(property "Description" "Temperature dependent resistor, positive temperature coefficient"
-			(at 204.47 50.8 0)
+			(at 205.74 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
