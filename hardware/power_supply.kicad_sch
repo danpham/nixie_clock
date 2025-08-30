@@ -3267,7 +3267,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "21bd962e-b687-45a2-acf2-94fc64a936f4")
-		(property "Reference" "TP2"
+		(property "Reference" "3V3"
 			(at 158.242 49.022 0)
 			(effects
 				(font
@@ -3318,7 +3318,7 @@
 		(instances
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/3e544bdc-8ef6-4ae7-86a5-8f5d44c9c569"
-					(reference "TP2")
+					(reference "3V3")
 					(unit 1)
 				)
 			)
