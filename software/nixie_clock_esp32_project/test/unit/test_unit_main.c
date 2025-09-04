@@ -15,6 +15,7 @@ extern void test_clock_tick_rollover_hours_to_zero(void);
 extern void test_clock_set_wraps_values(void);
 extern void test_clock_increment_hours(void);
 extern void test_clock_increment_minutes(void);
+extern void test_display_pattern_1(void);
 
 int main(void) {
     UNITY_BEGIN();
@@ -30,6 +31,7 @@ int main(void) {
     RUN_TEST(test_clock_set_wraps_values);
     RUN_TEST(test_clock_increment_hours);
     RUN_TEST(test_clock_increment_minutes);
-    
+    RUN_TEST(test_display_pattern_1);
+
     return UNITY_END();
 }

@@ -81,3 +81,14 @@ void test_encode_time_binary(void) {
     print_uint64_binary(val);
     TEST_ASSERT_TRUE_MESSAGE(val != 0, "encode_time should not return 0");
 }
+
+void test_display_pattern_1(void) {
+    for (uint8_t i = 0; i < 10; i++) {
+        uint64_t val = display_pattern_1_get(i);
+         printf("Test %i: ", i);
+        print_uint64_binary(val);
+        char msg[50];
+        snprintf(msg, sizeof(msg), "encode_time should not return 0 for step %d", i);
+        TEST_ASSERT_TRUE_MESSAGE(val != 0, msg);
+    }
+}

@@ -37,10 +37,13 @@ void display_init(void);
 
 // Display the time (hh:mm:ss) and dot1, dot2
 void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2);
+void display_set_pattern_1(uint8_t step);
 
 #ifdef UNITY_TESTING
 uint8_t shift_compute(uint8_t number);
 uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
+uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
+uint64_t display_pattern_1_get(uint8_t step);
 #endif
 
 #endif // DISPLAY_H
