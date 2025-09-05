@@ -4140,7 +4140,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_Elec_8x10.2"
 			(at 144.4752 127 0)
 			(effects
 				(font
@@ -4278,7 +4278,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
+		(property "Footprint" "Diode_SMD:D_SMB"
 			(at 139.7 86.36 0)
 			(effects
 				(font
@@ -4436,7 +4436,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3528-15_AVX-H_HandSolder"
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D_HandSolder"
 			(at 36.5252 121.92 0)
 			(effects
 				(font
@@ -4653,7 +4653,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_3314G_Vertical"
+		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_3224G_Horizontal"
 			(at 158.75 106.68 0)
 			(effects
 				(font
