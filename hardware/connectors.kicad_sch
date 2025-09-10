@@ -2527,72 +2527,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 201.93 38.1 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3af9a758-a848-4d88-83ae-5535ef7fc483")
-		(property "Reference" "HV1"
-			(at 197.612 29.972 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "TestPoint"
-			(at 197.612 32.512 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 207.01 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 207.01 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "test point"
-			(at 201.93 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ce3ca2f9-aa2f-4299-9686-fcdba876288f")
-		)
-		(instances
-			(project ""
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b"
-					(reference "HV1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Mechanical:MountingHole_Pad")
 		(at 104.14 127 0)
 		(unit 1)
@@ -3041,6 +2975,72 @@
 			(project ""
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b"
 					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 201.93 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b80763f0-d70f-4e2b-a4fe-c5d903f9b619")
+		(property "Reference" "170V_EXT1"
+			(at 197.612 29.972 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 197.612 32.512 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 207.01 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 207.01 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 201.93 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e01392e7-7274-4921-a998-11509f7fd876")
+		)
+		(instances
+			(project "nixie_clock"
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b"
+					(reference "170V_EXT1")
 					(unit 1)
 				)
 			)

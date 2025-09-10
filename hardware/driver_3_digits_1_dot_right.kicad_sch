@@ -1866,12 +1866,6 @@
 		(uuid "270f51ae-2811-428e-ab7b-5b86c207cc45")
 	)
 	(junction
-		(at 175.26 83.82)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8ce41944-3481-413c-ac80-8a8bcea48b7c")
-	)
-	(junction
 		(at 175.26 62.23)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2505,16 +2499,6 @@
 	)
 	(wire
 		(pts
-			(xy 175.26 91.44) (xy 175.26 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d3c45d23-54f1-4458-ac34-7c98b2e8cb43")
-	)
-	(wire
-		(pts
 			(xy 81.28 50.8) (xy 111.76 50.8)
 		)
 		(stroke
@@ -2741,17 +2725,6 @@
 		)
 		(uuid "8121b13a-a05b-4eed-b0f6-8cd8c04541e6")
 	)
-	(hierarchical_label "GND"
-		(shape input)
-		(at 175.26 95.25 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "9bc4ad94-0114-4da0-ab01-fb6b92eea41c")
-	)
 	(hierarchical_label "170V"
 		(shape input)
 		(at 179.07 62.23 0)
@@ -2793,7 +2766,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "100nF"
 			(at 118.11 154.9399 0)
 			(effects
 				(font
@@ -3683,76 +3656,6 @@
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
 					(reference "U5")
 					(unit 4)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 175.26 87.63 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b7918001-255e-4398-82de-3c30229c8f7b")
-		(property "Reference" "C14"
-			(at 179.07 86.3599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C"
-			(at 179.07 88.8999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
-			(at 176.2252 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 175.26 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 175.26 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "45e5c560-a499-4400-893b-16ea4261cafd")
-		)
-		(pin "1"
-			(uuid "658cac99-eec2-498d-9d3d-b8ea00589922")
-		)
-		(instances
-			(project "nixie_clock"
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
-					(reference "C14")
-					(unit 1)
 				)
 			)
 		)

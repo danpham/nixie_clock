@@ -1881,12 +1881,6 @@
 		(uuid "7bc681bb-51e5-4915-b8c9-ad536536ee80")
 	)
 	(junction
-		(at 182.88 82.55)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a5df4c0d-6934-405f-b584-2006e9491091")
-	)
-	(junction
 		(at 105.41 148.59)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2141,16 +2135,6 @@
 			(type default)
 		)
 		(uuid "5a775225-8c3a-4d2c-95af-ac20a14712af")
-	)
-	(wire
-		(pts
-			(xy 182.88 90.17) (xy 182.88 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "66e1e11c-9ee6-4cae-a270-7c48901e82de")
 	)
 	(wire
 		(pts
@@ -2781,17 +2765,6 @@
 			(justify left)
 		)
 		(uuid "e2ebb7f4-ec9f-4985-bcc7-6f3b2e520db1")
-	)
-	(hierarchical_label "GND"
-		(shape input)
-		(at 182.88 93.98 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "fe4930ac-3f22-49ec-b551-937633f6e3e3")
 	)
 	(hierarchical_label "SPI_CLK"
 		(shape input)
@@ -4301,76 +4274,6 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 182.88 86.36 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ecf43358-ef33-4072-bae8-637f3ee99cb0")
-		(property "Reference" "C10"
-			(at 186.69 85.0899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "C"
-			(at 186.69 87.6299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
-			(at 183.8452 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 182.88 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 182.88 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "c3f99cc1-60a3-468e-96a7-10c666689a9f")
-		)
-		(pin "1"
-			(uuid "ff15cbce-8d28-431c-92ec-842d0b817186")
-		)
-		(instances
-			(project ""
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/4b7e288e-9913-4bd2-a435-f0a0986d442d"
-					(reference "C10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
 		(at 121.92 152.4 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4388,7 +4291,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "C"
+		(property "Value" "100nF"
 			(at 125.73 153.6699 0)
 			(effects
 				(font
