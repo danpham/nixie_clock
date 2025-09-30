@@ -4729,7 +4729,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_3224G_Horizontal"
+		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_3314J_Vertical"
 			(at 158.75 106.68 0)
 			(effects
 				(font
