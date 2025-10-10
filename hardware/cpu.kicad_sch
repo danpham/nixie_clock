@@ -1666,7 +1666,7 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 78.74) (xy 102.87 78.74)
+			(xy 96.52 78.74) (xy 99.06 78.74)
 		)
 		(stroke
 			(width 0)
@@ -2266,7 +2266,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 78.74) (xy 121.92 78.74)
+			(xy 106.68 78.74) (xy 121.92 78.74)
 		)
 		(stroke
 			(width 0)
@@ -2552,7 +2552,7 @@
 	)
 	(hierarchical_label "GND"
 		(shape input)
-		(at 101.6 78.74 180)
+		(at 96.52 78.74 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3326,7 +3326,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.01uF"
+		(property "Value" "10nF"
 			(at 101.6 121.9199 0)
 			(effects
 				(font
@@ -3379,7 +3379,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 106.68 78.74 90)
+		(at 102.87 78.74 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3387,7 +3387,7 @@
 		(dnp no)
 		(uuid "9b6baf7b-bd25-4ebf-9bc4-f20e22a557fd")
 		(property "Reference" "R24"
-			(at 106.68 76.454 90)
+			(at 102.87 76.454 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3395,7 +3395,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 106.68 81.28 90)
+			(at 102.87 81.28 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3403,7 +3403,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 106.68 80.518 90)
+			(at 102.87 80.518 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3412,7 +3412,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 106.68 78.74 0)
+			(at 102.87 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3421,7 +3421,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 106.68 78.74 0)
+			(at 102.87 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3539,7 +3539,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.01uF"
+		(property "Value" "10nF"
 			(at 83.82 123.1899 0)
 			(effects
 				(font
