@@ -1583,6 +1583,12 @@
 		(uuid "a7f3cdd7-358f-4b5c-b68a-6bf883304c71")
 	)
 	(junction
+		(at 72.39 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a9dfc285-3e94-41bd-ae6a-5329fc35f4c9")
+	)
+	(junction
 		(at 80.01 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2505,6 +2511,17 @@
 			(justify right)
 		)
 		(uuid "937e4df8-74cd-4214-9175-e12cead8f554")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 72.39 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "aebe48a3-acf6-45c1-bf59-8bd1b0ee9963")
 	)
 	(hierarchical_label "GND"
 		(shape input)
@@ -3789,6 +3806,76 @@
 			(project ""
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
 					(reference "MT1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 72.39 97.79 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c07454b3-a445-4da3-b60d-2da51eb4f144")
+		(property "Reference" "C17"
+			(at 76.2 96.5199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 76.2 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 73.3552 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 72.39 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 72.39 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "93fccba6-518e-49b8-a25e-9e6865a35872")
+		)
+		(pin "1"
+			(uuid "975148e6-7f02-4acf-9ee8-5643fe69029b")
+		)
+		(instances
+			(project "nixie_clock"
+				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
+					(reference "C17")
 					(unit 1)
 				)
 			)
