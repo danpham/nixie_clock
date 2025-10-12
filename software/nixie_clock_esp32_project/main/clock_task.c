@@ -28,11 +28,13 @@
  * 5. Functions prototypes (static only)
 ******************************************************************/
 static void clock_menu(clock_t *clk, button_event_t *event);
+static void clock_task(void *arg);
 
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void clock_task(void *arg) {
+
+static void clock_task(void *arg) {
     clock_t clk;
     button_event_t event;
     bool dots = true;
@@ -137,7 +139,7 @@ void clock_menu(clock_t *clk, button_event_t *event)
 }
 
 // Function to start the clock task
-void clock_task_start()
+void clock_task_start(void)
 {
     // Create clock task
     xTaskCreate(clock_task, "clock_task", 2048, NULL, 5, NULL);

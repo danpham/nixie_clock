@@ -35,6 +35,3 @@ typedef struct {
 // GPIO functions
 esp_err_t my_gpio_init(my_gpio_btn_t *btn);
 int my_gpio_read_btn(my_gpio_btn_t *btn);
-
-// Start the GPIO task
-void gpio_task_start(void);

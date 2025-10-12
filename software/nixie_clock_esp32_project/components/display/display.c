@@ -83,7 +83,7 @@ NOT_STATIC uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t d
 
 NOT_STATIC uint64_t display_pattern_1_get(uint8_t step) {
     uint8_t nixies[DISPLAY_NIXIE_COUNT];
-    step %= 10;
+    step %= (uint8_t)10;
     
     for (uint8_t i = 0; i < sizeof(nixies); ++i) {
         nixies[i] = step;

@@ -93,7 +93,7 @@ static void gpio_task(void *pvParameter)
     }
 }
 
-void gpio_task_start()
+void gpio_task_start(void)
 {
     // Create queue: 10 events max, each of size button_event_t
     buttonQueue = xQueueCreate(10, sizeof(button_event_t));
