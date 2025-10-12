@@ -1,0 +1,35 @@
+# Ignore folders
+software/nixie_clock_esp32_project/build/
+software/nixie_clock_esp32_project/test/integration/build/
+software/nixie_clock_esp32_project/test/unit/build/
+hardware/nixie_clock-backups
+hardware/jlcpcb
+
+# Temporary IDE files
+*.swp
+*.tmp
+*.bak
+
+# Local configuration files
+*.vscode/
+*.idea/
+
+# CMake / Make generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Generated binaries
+*.elf
+*.bin
+*.hex
+
+# Log files
+*.log
+
+# Other temporary files
+*.o
+*.d
+*.lck
+*.old
