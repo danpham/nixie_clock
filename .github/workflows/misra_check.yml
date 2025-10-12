@@ -14,27 +14,24 @@ jobs:
       - name: Install cppcheck
         run: sudo apt-get install -y cppcheck
 
-
       - name: Run MISRA C analysis
         run: |
           cppcheck \
-          --enable=all \
-          --std=c99 \
-          --language=c \
-          --addon=misra \
-          --inline-suppr \
-          --error-exitcode=1 \
-          --suppress=missingIncludeSystem \
-          --suppress=missingInclude:*esp_* \
-          --suppress=missingInclude:*freertos/* \
-          --suppress=missingInclude:*driver/* \
-          --exclude=software/nixie_clock_esp32_project/test/ \
-          -Isoftware/nixie_clock_esp32_project/components \
-          -Isoftware/nixie_clock_esp32_project/components/uart \
-          -Isoftware/nixie_clock_esp32_project/components/gpio_driver \
-          -Isoftware/nixie_clock_esp32_project/components/display \
-          -Isoftware/nixie_clock_esp32_project/components/clock \
-          -Isoftware/nixie_clock_esp32_project/components/hv5622 \
-          -Isoftware/nixie_clock_esp32_project/main \
-          software/nixie_clock_esp32_project
-
+            --enable=all \
+            --std=c99 \
+            --language=c \
+            --addon=misra \
+            --inline-suppr \
+            --error-exitcode=1 \
+            --suppress=missingIncludeSystem \
+            --suppress=missingInclude:*esp_* \
+            --suppress=missingInclude:*freertos/* \
+            --suppress=missingInclude:*driver/* \
+            --suppress-dir=software/nixie_clock_esp32_project/test \
+            -Isoftware/nixie_clock_esp32_project/components \
+            -Isoftware/nixie_clock_esp32_project/components/uart \
+            -Isoftware/nixie_clock_esp32_project/components/gpio_driver \
+            -Isoftware/nixie_clock_esp32_project/components/display \
+            -Isoftware/nixie_clock_esp32_project/components/clock \
+            -Isoftware/nixie_clock_esp32_project/components/hv5622 \
+            -Isoftware/nixie_clock_esp32
