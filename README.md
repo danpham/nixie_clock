@@ -22,6 +22,7 @@ Un projet de **horloge Nixie basée sur ESP32-C3** avec des tubes IN14 et IN3, p
 
 Le code est écrit en C pour ESP32-C3 et organisé comme suit :
 
+```
 software/nixie_clock_esp32_project/
 ├── components/
 │   ├── uart/
@@ -30,6 +31,7 @@ software/nixie_clock_esp32_project/
 │   ├── clock/
 │   └── hv5622/
 └── main/
+```
 
 ### Fonctionnalités actuelles
 
