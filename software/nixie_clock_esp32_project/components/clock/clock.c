@@ -58,6 +58,14 @@ void clock_increment_hours(clock_t *clk) {
     clk->hours = (clk->hours + 1) % 24;
 }
 
+void clock_decrement_hours(clock_t *clk) {
+    clk->hours = (clk->hours - 1) % 24;
+}
+
 void clock_increment_minutes(clock_t *clk) {
     clk->minutes = (clk->minutes + 1) % 60;
+}
+
+void clock_decrement_minutes(clock_t *clk) {
+    clk->minutes = (clk->minutes - 1) % 60;
 }

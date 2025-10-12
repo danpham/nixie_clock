@@ -16,6 +16,7 @@
 #else
 #define NOT_STATIC static
 #endif
+#define DISPLAY_NIXIE_COUNT   (6U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -50,7 +51,7 @@ NOT_STATIC uint8_t shift_compute(uint8_t number) {
 }
 
 NOT_STATIC uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
-    uint8_t nixies[6];
+    uint8_t nixies[DISPLAY_NIXIE_COUNT];
 
     // Split
     nixies[0] = hours / 10;
@@ -81,7 +82,7 @@ NOT_STATIC uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t d
 }
 
 NOT_STATIC uint64_t display_pattern_1_get(uint8_t step) {
-    uint8_t nixies[6];
+    uint8_t nixies[DISPLAY_NIXIE_COUNT];
     step %= 10;
     
     for (uint8_t i = 0; i < sizeof(nixies); ++i) {

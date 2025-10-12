@@ -8,54 +8,91 @@ QueueHandle_t buttonQueue;
 
 static const char *TAG = "GPIO_TASK";
 
-static my_gpio_btn_t btn1 = {
+static my_gpio_btn_t rotaryEncoderSwitch = {
     .pin = GPIO_NUM_3,
-    .pull = MY_GPIO_PULL_DOWN,
+    .pull = MY_GPIO_PULL_NONE,
     .debounce_ms = 50
 };
 
-static my_gpio_btn_t btn2 = {
+static my_gpio_btn_t rotaryEncoderChanB = {
     .pin = GPIO_NUM_4,
-    .pull = MY_GPIO_PULL_DOWN,
+    .pull = MY_GPIO_PULL_NONE,
     .debounce_ms = 50
 };
 
+static my_gpio_btn_t rotaryEncoderChanA = {
+    .pin = GPIO_NUM_5,
+    .pull = MY_GPIO_PULL_NONE,
+    .debounce_ms = 50
+};
 
 // FreeRTOS task to handle GPIO reading
 static void gpio_task(void *pvParameter)
 {
     button_event_t event;
-    my_gpio_init(&btn1); // Initialize the GPIO 4
-    my_gpio_init(&btn2); // Initialize the GPIO 3
+    button_event_t lastState;
+
+    int state_rotarySwitch = 0;
+    int state_rotaryChanA = 0;
+    int state_last_rotaryChanA = 0;
+    int state_last_rotarySwitch = 0;
+    int state_rotaryChanB = 0;
+
+    if (my_gpio_init(&rotaryEncoderSwitch) != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize rotaryEncoderSwitch!");
+    }
+
+    if (my_gpio_init(&rotaryEncoderChanA) != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize rotaryEncoderChanA!");
+    }
+
+    if (my_gpio_init(&rotaryEncoderChanB) != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize rotaryEncoderChanB!");
+    }
+
+    /* Initialize state_last_ variables */
+    state_last_rotaryChanA = my_gpio_read_btn(&rotaryEncoderChanA);
+    state_last_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
     while(1) {
-        int state_btn1 = my_gpio_read_btn(&btn1);
-        int state_btn2 = my_gpio_read_btn(&btn2);
-        if (state_btn1 == 1) {
-            event.id = 1;       // button 1
-            event.pressed = 1;  // pressed
-            xQueueSend(buttonQueue, &event, 0);
-            ESP_LOGI(TAG, "Button 1 pressed!");
-        } else {
-            event.id = 1;       // button 1
-            event.pressed = 0;  // released
-            xQueueSend(buttonQueue, &event, 0);
-            ESP_LOGI(TAG, "Button 1 released");
+        state_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
+
+        /* Avoid sending event when no changes */
+        if (state_last_rotarySwitch != state_rotarySwitch){
+            if (state_rotarySwitch == BUTTON_STATE_PRESS) {
+                event.id = BUTTON_ROTARY_SWITCH_1;
+                event.pressed = rotaryEncoderSwitch.press_type;
+                xQueueSend(buttonQueue, &event, 0);
+                ESP_LOGI(TAG, "Rotary swtich pressed!");
+            } else {
+                event.id = BUTTON_ROTARY_SWITCH_1;
+                event.pressed = rotaryEncoderSwitch.press_type;
+                xQueueSend(buttonQueue, &event, 0);
+                ESP_LOGI(TAG, "Rotary swtich released");
+            }
+            state_last_rotarySwitch = state_rotarySwitch;
         }
 
-        if (state_btn2 == 1) {
-            event.id = 2;       // button 2
-            event.pressed = 1;  // released
-            xQueueSend(buttonQueue, &event, 0);
-            ESP_LOGI(TAG, "Button 2 pressed!");
-        } else {
-            event.id = 2;       // button 2
-            event.pressed = 0;  // released
-            xQueueSend(buttonQueue, &event, 0);
-            ESP_LOGI(TAG, "Button 2 released");
+        state_rotaryChanA = my_gpio_read_btn(&rotaryEncoderChanA);
+        if (state_rotaryChanA != state_last_rotaryChanA)
+        {
+            state_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
+            if (state_rotaryChanA != state_rotaryChanB)
+            {
+                event.id = BUTTON_ROTARY_ENCODER;
+                event.updateValue = ROTARY_ENCODER_EVENT_INCREMENT;
+                xQueueSend(buttonQueue, &event, 0);
+                ESP_LOGI(TAG, "Rotary encoder increment");
+            } else {
+                event.id = BUTTON_ROTARY_ENCODER;
+                event.updateValue = ROTARY_ENCODER_EVENT_DECREMENT;
+                xQueueSend(buttonQueue, &event, 0);
+                ESP_LOGI(TAG, "Rotary encoder decrement");
+            }
         }
+        state_last_rotaryChanA = state_rotaryChanA;
         
-        vTaskDelay(pdMS_TO_TICKS(50)); // Loop every 50 ms
+        vTaskDelay(pdMS_TO_TICKS(5)); // Loop every 5 ms
     }
 }
 
