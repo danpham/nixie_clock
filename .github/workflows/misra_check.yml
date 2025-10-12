@@ -24,5 +24,12 @@ jobs:
             --addon=misra \
             --inline-suppr \
             --error-exitcode=1 \
+            -Isoftware/nixie_clock_esp32_project/components \
+            -Isoftware/nixie_clock_esp32_project/components/uart \
+            -Isoftware/nixie_clock_esp32_project/components/gpio_driver \
+            -Isoftware/nixie_clock_esp32_project/components/display \
+            -Isoftware/nixie_clock_esp32_project/components/clock \
+            -Isoftware/nixie_clock_esp32_project/components/hv5622 \
+            -Isoftware/nixie_clock_esp32_project/main \
             software/nixie_clock_esp32_project/components \
             software/nixie_clock_esp32_project/main
