@@ -60,7 +60,6 @@ void clock_task(void *arg) {
             if (clk.seconds == 0) {
                 in_pattern = true;
                 pattern_step = 0;
-                pattern_loops = 0;
             }
         }
 
