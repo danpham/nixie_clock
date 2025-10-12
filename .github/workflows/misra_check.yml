@@ -20,10 +20,13 @@ jobs:
             --enable=all \
             --std=c99 \
             --language=c \
-            --suppress=missingIncludeSystem \
             --addon=misra \
             --inline-suppr \
             --error-exitcode=1 \
+            --suppress=missingIncludeSystem \
+            --suppress=missingInclude:*esp_* \
+            --suppress=missingInclude:*freertos/* \
+            --suppress=missingInclude:*driver/* \
             -Isoftware/nixie_clock_esp32_project/components \
             -Isoftware/nixie_clock_esp32_project/components/uart \
             -Isoftware/nixie_clock_esp32_project/components/gpio_driver \

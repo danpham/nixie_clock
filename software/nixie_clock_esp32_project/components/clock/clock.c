@@ -35,13 +35,13 @@ void clock_init(clock_t *clk, uint8_t h, uint8_t m, uint8_t s) {
 
 void clock_tick(clock_t *clk) {
     clk->seconds++;
-    if(clk->seconds >= 60) {
+    if (clk->seconds >= (uint8_t)60U) {
         clk->seconds = 0;
         clk->minutes++;
-        if(clk->minutes >= 60) {
+        if (clk->minutes >= (uint8_t)60U) {
             clk->minutes = 0;
             clk->hours++;
-            if(clk->hours >= 24) {
+            if (clk->hours >= (uint8_t)24U) {
                 clk->hours = 0;
             }
         }
@@ -49,23 +49,23 @@ void clock_tick(clock_t *clk) {
 }
 
 void clock_set(clock_t *clk, uint8_t h, uint8_t m, uint8_t s) {
-    clk->hours = h % 24;
-    clk->minutes = m % 60;
-    clk->seconds = s % 60;
+    clk->hours = h % (uint8_t)24U;
+    clk->minutes = m % (uint8_t)60U;
+    clk->seconds = s % (uint8_t)60U;
 }
 
 void clock_increment_hours(clock_t *clk) {
-    clk->hours = (clk->hours + 1) % 24;
+    clk->hours = (clk->hours + 1) % (uint8_t)24U;
 }
 
 void clock_decrement_hours(clock_t *clk) {
-    clk->hours = (clk->hours - 1) % 24;
+    clk->hours = (clk->hours - 1) % (uint8_t)24U;
 }
 
 void clock_increment_minutes(clock_t *clk) {
-    clk->minutes = (clk->minutes + 1) % 60;
+    clk->minutes = (clk->minutes + 1) % (uint8_t)60U;
 }
 
 void clock_decrement_minutes(clock_t *clk) {
-    clk->minutes = (clk->minutes - 1) % 60;
+    clk->minutes = (clk->minutes - 1) % (uint8_t)60U;
 }

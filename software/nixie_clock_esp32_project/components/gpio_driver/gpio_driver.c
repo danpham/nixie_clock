@@ -33,7 +33,7 @@ int my_gpio_read_btn(my_gpio_btn_t *btn) {
     int state = BUTTON_STATE_RELEASE;
     uint32_t now = esp_timer_get_time() / 1000;
     uint32_t duration = 0;
-    uint32_t  long_press_ms = BUTTON_LONG_PRESS_MS;
+    uint32_t long_press_ms = BUTTON_LONG_PRESS_MS;
 
     if (btn != NULL) {
         state = gpio_get_level(btn->pin);
