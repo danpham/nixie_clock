@@ -53,8 +53,7 @@ idf.py flash
 
 ## Licence
 
-Ce projet est sous **GPL**.  
-Un fichier LICENSE séparé contiendra le texte complet de la licence.
+Ce projet est sous **GPL**.
 
 ---
 
