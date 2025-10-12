@@ -4,13 +4,13 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 
-typedef enum {
+typedef enum buttons_type_e {
     BUTTON_ROTARY_SWITCH_1 = 0,
     BUTTON_ROTARY_ENCODER = 1,
     BUTTON_COUNT
 } buttons_type_t;
 
-typedef enum {
+typedef enum rotary_encoder_event_e {
     ROTARY_ENCODER_EVENT_INCREMENT = 0,
     ROTARY_ENCODER_EVENT_DECREMENT = 1,
     ROTARY_ENCODER_EVENT_COUNT

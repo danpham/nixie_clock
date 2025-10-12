@@ -32,12 +32,9 @@ static void gpio_task(void *pvParameter)
     button_event_t event;
     button_event_t lastState;
 
-    int state_rotarySwitch = 0;
-    int state_rotaryChanA = 0;
     int state_last_rotaryChanA = 0;
     int state_last_rotarySwitch = 0;
-    int state_rotaryChanB = 0;
-
+ 
     if (my_gpio_init(&rotaryEncoderSwitch) != ESP_OK) {
         ESP_LOGE(TAG, "Failed to initialize rotaryEncoderSwitch!");
     }
@@ -55,6 +52,10 @@ static void gpio_task(void *pvParameter)
     state_last_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
     while(1) {
+        int state_rotarySwitch = 0;
+        int state_rotaryChanA = 0;
+        int state_rotaryChanB = 0;
+
         state_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
         /* Avoid sending event when no changes */
@@ -63,12 +64,12 @@ static void gpio_task(void *pvParameter)
                 event.id = BUTTON_ROTARY_SWITCH_1;
                 event.pressed = rotaryEncoderSwitch.press_type;
                 xQueueSend(buttonQueue, &event, 0);
-                ESP_LOGI(TAG, "Rotary swtich pressed!");
+                ESP_LOGI(TAG, "Rotary switch pressed!");
             } else {
                 event.id = BUTTON_ROTARY_SWITCH_1;
                 event.pressed = rotaryEncoderSwitch.press_type;
                 xQueueSend(buttonQueue, &event, 0);
-                ESP_LOGI(TAG, "Rotary swtich released");
+                ESP_LOGI(TAG, "Rotary switch released");
             }
             state_last_rotarySwitch = state_rotarySwitch;
         }
@@ -102,15 +103,14 @@ void gpio_task_start()
     buttonQueue = xQueueCreate(10, sizeof(button_event_t));
     if (buttonQueue == NULL) {
         ESP_LOGE("GPIO_TASK", "Failed to create button queue!");
-        return;
+    } else {
+        xTaskCreate(
+            gpio_task,     // Task function
+            "gpio_task",   // Task name (for debugging)
+            2048,          // Stack size in bytes
+            NULL,          // Parameter passed to the task
+            5,             // Task priority
+            NULL           // Task handle (optional)
+        );
     }
-
-    xTaskCreate(
-        gpio_task,     // Task function
-        "gpio_task",   // Task name (for debugging)
-        2048,          // Stack size in bytes
-        NULL,          // Parameter passed to the task
-        5,             // Task priority
-        NULL           // Task handle (optional)
-    );
 }
