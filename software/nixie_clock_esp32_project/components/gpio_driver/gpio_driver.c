@@ -32,8 +32,6 @@ esp_err_t my_gpio_init(my_gpio_btn_t *btn)
 int my_gpio_read_btn(my_gpio_btn_t *btn) {
     int state = BUTTON_STATE_RELEASE;
     uint32_t now = esp_timer_get_time() / 1000;
-    uint32_t duration = 0;
-    uint32_t long_press_ms = BUTTON_LONG_PRESS_MS;
 
     if (btn != NULL) {
         state = gpio_get_level(btn->pin);
@@ -47,8 +45,9 @@ int my_gpio_read_btn(my_gpio_btn_t *btn) {
                 }
 
                 if (state == BUTTON_STATE_RELEASE && btn->last_state == BUTTON_STATE_PRESS) {
+                    uint32_t duration = 0;
                     duration = now - btn->press_start_ms;
-                    btn->press_type = (duration >= long_press_ms) ? BUTTON_LONG_PRESS : BUTTON_SHORT_PRESS;
+                    btn->press_type = (duration >= BUTTON_LONG_PRESS_MS) ? BUTTON_LONG_PRESS : BUTTON_SHORT_PRESS;
                 }
 
                 btn->last_state = state;

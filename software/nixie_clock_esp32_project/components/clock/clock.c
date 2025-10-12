@@ -55,17 +55,17 @@ void clock_set(clock_t *clk, uint8_t h, uint8_t m, uint8_t s) {
 }
 
 void clock_increment_hours(clock_t *clk) {
-    clk->hours = (clk->hours + 1) % (uint8_t)24U;
+    clk->hours = (clk->hours + (uint8_t)1U) % (uint8_t)24U;
 }
 
 void clock_decrement_hours(clock_t *clk) {
-    clk->hours = (clk->hours - 1) % (uint8_t)24U;
+    clk->hours = (clk->hours - (uint8_t)1U) % (uint8_t)24U;
 }
 
 void clock_increment_minutes(clock_t *clk) {
-    clk->minutes = (clk->minutes + 1) % (uint8_t)60U;
+    clk->minutes = (clk->minutes + (uint8_t)1U) % (uint8_t)60U;
 }
 
 void clock_decrement_minutes(clock_t *clk) {
-    clk->minutes = (clk->minutes - 1) % (uint8_t)60U;
+    clk->minutes = (clk->minutes - (uint8_t)1U) % (uint8_t)60U;
 }

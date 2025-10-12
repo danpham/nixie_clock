@@ -20,8 +20,6 @@
  * 4. Variable definitions (static then global)
 ******************************************************************/
 static spi_device_handle_t hv5622_spi;
-static uint64_t hv5622_buffer = 0;
-
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -80,6 +78,8 @@ void hv5622_send64(uint64_t data)
 
 void hv5622_set_output(int pin, bool value)
 {
+    uint64_t hv5622_buffer = 0;
+
     if (pin < 0 || pin >= 64) return; // safety check
 
     if (value) {

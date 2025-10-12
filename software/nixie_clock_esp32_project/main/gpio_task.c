@@ -81,12 +81,12 @@ static void gpio_task(void *pvParameter)
             if (state_rotaryChanA != state_rotaryChanB)
             {
                 event.id = BUTTON_ROTARY_ENCODER;
-                event.updateValue = ROTARY_ENCODER_EVENT_INCREMENT;
+                event.updateValue = (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT;
                 xQueueSend(buttonQueue, &event, 0);
                 ESP_LOGI(TAG, "Rotary encoder increment");
             } else {
                 event.id = BUTTON_ROTARY_ENCODER;
-                event.updateValue = ROTARY_ENCODER_EVENT_DECREMENT;
+                event.updateValue = (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT;
                 xQueueSend(buttonQueue, &event, 0);
                 ESP_LOGI(TAG, "Rotary encoder decrement");
             }

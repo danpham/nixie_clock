@@ -42,9 +42,9 @@ NOT_STATIC uint64_t display_pattern_1_get(uint8_t step);
 NOT_STATIC uint8_t shift_compute(uint8_t number) {
     uint8_t shift_number = 0;
 
-    if  ((number > 0) && (number <= 10))
+    if  ((number > 0) && (number <= (uint8_t)10U))
     {
-       shift_number = 10 - number;
+       shift_number = (uint8_t)10U - number;
     }
 
     return shift_number;
@@ -54,12 +54,12 @@ NOT_STATIC uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds,
     uint8_t nixies[DISPLAY_NIXIE_COUNT];
 
     // Split
-    nixies[0] = hours / 10;
-    nixies[1] = hours % 10;
-    nixies[2] = minutes / 10;
-    nixies[3] = minutes % 10;
-    nixies[4] = seconds / 10;
-    nixies[5] = seconds % 10;
+    nixies[0] = hours / (uint8_t)10U;
+    nixies[1] = hours % (uint8_t)10U;
+    nixies[2] = minutes / (uint8_t)10U;
+    nixies[3] = minutes % (uint8_t)10U;
+    nixies[4] = seconds / (uint8_t)10U;
+    nixies[5] = seconds % (uint8_t)10U;
 
     return encode_time_digits(nixies, dot1, dot2, nixie3_dot, nixie6_dot);
 }
@@ -67,10 +67,10 @@ NOT_STATIC uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds,
 NOT_STATIC uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
     uint64_t data = 0;
  
-    data |= ((uint64_t)dot1 & 0x01) << 11;
-    data |= ((uint64_t)dot2 & 0x01) << 53;
-    data |= ((uint64_t)nixie3_dot & 0x01);
-    data |= ((uint64_t)nixie6_dot & 0x01) << 32;
+    data |= ((uint64_t)dot1 & (uint64_t)0x01U) << 11;
+    data |= ((uint64_t)dot2 & (uint64_t)0x01U) << 53;
+    data |= ((uint64_t)nixie3_dot & (uint64_t)0x01U);
+    data |= ((uint64_t)nixie6_dot & (uint64_t)0x01U) << 32;
     data |= (uint64_t)0x01 << shift_compute(nixies[0]) << 22; // hour hi
     data |= (uint64_t)0x01 << shift_compute(nixies[1]) << 12; // hour low   
     data |= (uint64_t)0x01 << shift_compute(nixies[2]) << 1; // minute hi

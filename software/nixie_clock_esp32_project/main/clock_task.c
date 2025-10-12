@@ -102,12 +102,12 @@ void clock_menu(clock_t *clk, button_event_t *event)
                 {
                     state = MENU_CONFIGURE_HOURS;
                 }
-                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == ROTARY_ENCODER_EVENT_INCREMENT)
+                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT)
                 {
                     clock_increment_minutes(clk);
                     state = MENU_CONFIGURE_MINUTES;
                 }
-                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == ROTARY_ENCODER_EVENT_DECREMENT)
+                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT)
                 {
                     clock_decrement_minutes(clk);
                     state = MENU_CONFIGURE_MINUTES;
