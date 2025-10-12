@@ -38,7 +38,7 @@ int my_gpio_read_btn(my_gpio_btn_t *btn) {
         btn->press_type = BUTTON_SHORT_PRESS;
 
         if (state != btn->last_state) {
-            if (now - btn->last_change_ms > btn->debounce_ms) {
+            if ((uint32_t)(now - btn->last_change_ms) > btn->debounce_ms) {
                 
                 if (state == (button_state_t)BUTTON_STATE_PRESS && btn->last_state == (button_state_t)BUTTON_STATE_RELEASE) {
                     btn->press_start_ms = now;

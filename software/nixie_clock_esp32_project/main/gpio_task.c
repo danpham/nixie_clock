@@ -6,31 +6,28 @@
 
 QueueHandle_t buttonQueue;
 
-static const char *TAG = "GPIO_TASK";
-
-static my_gpio_btn_t rotaryEncoderSwitch = {
-    .pin = GPIO_NUM_3,
-    .pull = MY_GPIO_PULL_NONE,
-    .debounce_ms = 50
-};
-
-static my_gpio_btn_t rotaryEncoderChanB = {
-    .pin = GPIO_NUM_4,
-    .pull = MY_GPIO_PULL_NONE,
-    .debounce_ms = 50
-};
-
-static my_gpio_btn_t rotaryEncoderChanA = {
-    .pin = GPIO_NUM_5,
-    .pull = MY_GPIO_PULL_NONE,
-    .debounce_ms = 50
-};
-
 // FreeRTOS task to handle GPIO reading
 static void gpio_task(void *pvParameter)
 {
-    button_event_t event;
+    const char *TAG = "GPIO_TASK";
+    my_gpio_btn_t rotaryEncoderSwitch = {
+        .pin = GPIO_NUM_3,
+        .pull = MY_GPIO_PULL_NONE,
+        .debounce_ms = 50
+    };
 
+    my_gpio_btn_t rotaryEncoderChanB = {
+        .pin = GPIO_NUM_4,
+        .pull = MY_GPIO_PULL_NONE,
+        .debounce_ms = 50
+    };
+
+    my_gpio_btn_t rotaryEncoderChanA = {
+        .pin = GPIO_NUM_5,
+        .pull = MY_GPIO_PULL_NONE,
+        .debounce_ms = 50
+    };
+    button_event_t event;
     int state_last_rotaryChanA = 0;
     int state_last_rotarySwitch = 0;
  
@@ -58,7 +55,7 @@ static void gpio_task(void *pvParameter)
 
         /* Avoid sending event when no changes */
         if (state_last_rotarySwitch != state_rotarySwitch){
-            if (state_rotarySwitch == BUTTON_STATE_PRESS) {
+            if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
                 event.id = BUTTON_ROTARY_SWITCH_1;
                 event.pressed = rotaryEncoderSwitch.press_type;
                 xQueueSend(buttonQueue, &event, 0);
