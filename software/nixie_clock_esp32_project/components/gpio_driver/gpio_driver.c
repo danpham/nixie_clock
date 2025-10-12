@@ -40,14 +40,14 @@ int my_gpio_read_btn(my_gpio_btn_t *btn) {
         if (state != btn->last_state) {
             if (now - btn->last_change_ms > btn->debounce_ms) {
                 
-                if (state == BUTTON_STATE_PRESS && btn->last_state == BUTTON_STATE_RELEASE) {
+                if (state == (button_state_t)BUTTON_STATE_PRESS && btn->last_state == (button_state_t)BUTTON_STATE_RELEASE) {
                     btn->press_start_ms = now;
                 }
 
-                if (state == BUTTON_STATE_RELEASE && btn->last_state == BUTTON_STATE_PRESS) {
+                if (state == (button_state_t)BUTTON_STATE_RELEASE && btn->last_state == (button_state_t)BUTTON_STATE_PRESS) {
                     uint32_t duration = 0;
                     duration = now - btn->press_start_ms;
-                    btn->press_type = (duration >= BUTTON_LONG_PRESS_MS) ? BUTTON_LONG_PRESS : BUTTON_SHORT_PRESS;
+                    btn->press_type = (duration >= BUTTON_LONG_PRESS_MS) ? (button_press_t)BUTTON_LONG_PRESS : (button_press_t)BUTTON_SHORT_PRESS;
                 }
 
                 btn->last_state = state;

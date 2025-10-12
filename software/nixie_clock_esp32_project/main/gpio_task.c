@@ -30,7 +30,6 @@ static my_gpio_btn_t rotaryEncoderChanA = {
 static void gpio_task(void *pvParameter)
 {
     button_event_t event;
-    button_event_t lastState;
 
     int state_last_rotaryChanA = 0;
     int state_last_rotarySwitch = 0;
@@ -54,8 +53,7 @@ static void gpio_task(void *pvParameter)
     while(1) {
         int state_rotarySwitch = 0;
         int state_rotaryChanA = 0;
-        int state_rotaryChanB = 0;
-
+   
         state_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
         /* Avoid sending event when no changes */
@@ -77,6 +75,7 @@ static void gpio_task(void *pvParameter)
         state_rotaryChanA = my_gpio_read_btn(&rotaryEncoderChanA);
         if (state_rotaryChanA != state_last_rotaryChanA)
         {
+            int state_rotaryChanB = 0;
             state_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
             if (state_rotaryChanA != state_rotaryChanB)
             {

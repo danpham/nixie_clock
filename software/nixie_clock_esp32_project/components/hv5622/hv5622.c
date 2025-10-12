@@ -41,7 +41,7 @@ void hv5622_init(void)
     };
 
     spi_device_interface_config_t devcfg = {
-        .clock_speed_hz = 1 * 1000 * 1000, // 1 MHz
+        .clock_speed_hz = (uint32_t)(1U * 1000U * 1000U), // 1 MHz
         .mode = 0,
         .spics_io_num = -1, // no CS, handled by LE
         .queue_size = 1,
@@ -79,13 +79,13 @@ void hv5622_send64(uint64_t data)
 void hv5622_set_output(int pin, bool value)
 {
     uint64_t hv5622_buffer = 0;
-
-    if (pin < 0 || pin >= 64) return; // safety check
+    
+    if (pin < (int)0 || pin >= (int)64) return; // safety check
 
     if (value) {
-        hv5622_buffer |= (1ULL << pin);
+        hv5622_buffer |= (1ULL << (uint64_t)pin);
     } else {
-        hv5622_buffer &= ~(1ULL << pin);
+        hv5622_buffer &= ~(1ULL << (uint64_t)pin);
     }
 
     hv5622_send64(hv5622_buffer);
