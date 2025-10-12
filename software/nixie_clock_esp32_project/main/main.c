@@ -37,8 +37,18 @@ extern void clock_task(void *arg);
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
+void app_main(void);
+
+/* MISRA C:2012 Rule 8.9 deviation:
+   app_main() is called externally by FreeRTOS/ESP-IDF runtime */
 void app_main(void)
 {
+    char hello[] = "Nixie clock v1.0: Starting...";
+    size_t len = sizeof(hello) - 1U;
+
+    uart_init();
+    uart_write(hello, len);
+
     hv5622_init();
     display_init();
 

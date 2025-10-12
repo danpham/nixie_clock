@@ -5,6 +5,8 @@
 
 // ------------------- Mock hardware -------------------
 // Variable to store what would have been sent to the HV5622
+/* MISRA C:2012 Rule 8.5 deviation:
+   last_sent_data is accessed from multiple files for integration testing */
 extern uint64_t last_sent_data;
 
 // ------------------- Test variables -------------------
