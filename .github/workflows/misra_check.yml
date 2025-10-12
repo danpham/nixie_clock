@@ -11,11 +11,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install cppcheck >= 2.8
-        run: |
-          sudo add-apt-repository -y ppa:damien-moore/cppcheck
-          sudo apt-get update
-          sudo apt-get install -y cppcheck
+      - name: Install cppcheck
+        run: sudo apt-get install -y cppcheck
 
       - name: Run MISRA C analysis
         run: |
@@ -30,7 +27,8 @@ jobs:
             --suppress=missingInclude:*esp_* \
             --suppress=missingInclude:*freertos/* \
             --suppress=missingInclude:*driver/* \
-            --suppress-dir=software/nixie_clock_esp32_project/test \
+            --suppress=missingIncludeSystem software/nixie_clock_esp32_project
+            --exclude=software/nixie_clock_esp32_project/test/ \
             -Isoftware/nixie_clock_esp32_project/components \
             -Isoftware/nixie_clock_esp32_project/components/uart \
             -Isoftware/nixie_clock_esp32_project/components/gpio_driver \
@@ -38,4 +36,5 @@ jobs:
             -Isoftware/nixie_clock_esp32_project/components/clock \
             -Isoftware/nixie_clock_esp32_project/components/hv5622 \
             -Isoftware/nixie_clock_esp32_project/main \
-            software/nixie_clock_esp32_project
+            software/nixie_clock_esp32_project/components \
+            software/nixie_clock_esp32_project/main
