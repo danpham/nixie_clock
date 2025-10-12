@@ -3,9 +3,9 @@
 ******************************************************************/
 #include "display.h"
 #ifdef UNITY_TESTING
-#include "hv5622_mock.h"
+#include "../hv5622/hv5622_mock.h"
 #else
-#include "hv5622.h"
+#include "../hv5622/hv5622.h"
 #endif
 
 /******************************************************************

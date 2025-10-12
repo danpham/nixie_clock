@@ -28,6 +28,7 @@ jobs:
             --suppress=missingInclude:*freertos/* \
             --suppress=missingInclude:*driver/* \
             --suppress=missingIncludeSystem software/nixie_clock_esp32_project
+            --exclude=software/nixie_clock_esp32_project/test/ \
             -Isoftware/nixie_clock_esp32_project/components \
             -Isoftware/nixie_clock_esp32_project/components/uart \
             -Isoftware/nixie_clock_esp32_project/components/gpio_driver \

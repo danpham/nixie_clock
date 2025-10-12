@@ -6,11 +6,11 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
-#include "uart.h"
-#include "hv5622.h"
-#include "display.h"
-#include "clock.h"
-#include "gpio_driver.h"
+#include "components/uart/uart.h"
+#include "components/hv5622/hv5622.h"
+#include "components/display/display.h"
+#include "components/clock/clock.h"
+#include "components/gpio_driver/gpio_driver.h"
 
 
 /******************************************************************
