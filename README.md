@@ -1,26 +1,22 @@
 # Nixie Clock ESP32-C3
 
-Un projet de **horloge Nixie basée sur ESP32-C3** avec des tubes IN14 et IN3, pilotée par les drivers **HV5622**.
+A **Nixie tube clock project** based on the **ESP32-C3**, using **IN14** and **IN3** tubes driven by **HV5622** high-voltage drivers.
 
----
+## Hardware
 
-## Matériel
+- **Microcontroller:** ESP32-C3  
+- **Nixie tubes:** 6 × IN14 and 2 × IN3  
+- **Driver:** HV5622 for cathode switching  
+- **Rotary encoder:** EC11 for time configuration  
+- **3.3V regulator:** AP63203WU to power the ESP32-C3 and logic components  
+- **PCB design:** SMD (Surface-Mount) components for a compact and reliable board  
 
-- **Microcontrôleur :** ESP32-C3  
-- **Tubes Nixie :** 6 × IN14 et 2 × IN3  
-- **Driver :** HV5622 pour la commutation des cathodes  
-- **Transistors :** NPN haute tension, supportant 300V  
-- **Encodeur rotatif :** EC11 pour la configuration de l’heure  
-- **Régulateur 3.3V :** AP63203WU pour alimenter l’ESP32-C3 et les composants logiques  
-- **Design PCB :** Composants CMS (SMD) pour un circuit compact et fiable  
+> ⚠️ **Warning:** This project involves high voltage. Follow proper electrical safety procedures!
 
-> ⚠️ Attention : ce projet manipule de la haute tension. Respectez les règles de sécurité électrique !
 
----
+## Software
 
-## Logiciel
-
-Le code est écrit en C pour ESP32-C3 et organisé comme suit :
+The code is written in **C for the ESP32-C3**, organized as follows:
 
 ```
 software/nixie_clock_esp32_project/
@@ -33,23 +29,21 @@ software/nixie_clock_esp32_project/
 └── main/
 ```
 
-### Fonctionnalités actuelles
+### Current Features
 
-- Gestion de l’affichage des tubes Nixie via HV5622
-- Lecture des boutons rotatifs (EC11 pour configurer l’heure)
-- Horloge interne
-- Routine anti cathode poisoning : cycle périodique et gestion des cathodes pour réduire la formation d'oxydes/carbonisation et prolonger la durée de vie des tubes
+- Nixie tube display control via HV5622  
+- Rotary encoder input (EC11) for setting the time  
+- Internal clock management  
+- **Anti–cathode poisoning routine:** periodic cycling and cathode management to prevent oxide buildup and extend tube lifespan  
 
-### Fonctionnalités futures
+### Future Features
 
-- Connectivité Wi-Fi pour synchronisation automatique de l’heure  
-- Interface web pour configurer : fuseau horaire, luminosité, mode nuit, activation/désactivation de l’écran
-
----
+- Wi-Fi connectivity for automatic time synchronization  
+- Web interface for configuration: timezone, brightness, night mode, and display enable/disable  
 
 ## Compilation
 
-Le projet utilise **ESP-IDF pour ESP32-C3**. Assurez-vous que votre environnement ESP32-C3 est configuré correctement.
+The project uses **ESP-IDF for ESP32-C3**. Make sure your ESP32-C3 development environment is properly set up.
 
 ```bash
 cd software/nixie_clock_esp32_project
@@ -57,18 +51,16 @@ idf.py build
 idf.py flash
 ```
 
----
+## License
 
-## Licence
+This project is released under the **GPL v3** license.  
+A separate `LICENSE` file contains the complete text of the license.
 
-Ce projet est sous **GPL v3**.  
-Un fichier LICENSE séparé contient le texte complet de la licence.
 
----
+## Safety
 
-## Sécurité
+⚠️ This project involves **high voltage (~170V for Nixie tubes)**.  
+- Never touch the circuit while it is powered  
+- Use proper insulation materials  
+- Work carefully and only with proper knowledge of high-voltage electronics
 
-⚠️ Ce projet implique de la haute tension (~170V pour les tubes Nixie).  
-- Ne jamais toucher le circuit sous tension  
-- Utiliser des isolations appropriées  
-- Travailler avec précaution et connaissances en électronique HV
