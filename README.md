@@ -9,7 +9,7 @@ A **Nixie tube clock project** based on the **ESP32-C3**, using **IN14** and **I
 - **Driver:** HV5622 for cathode switching  
 - **Rotary encoder:** EC11 for time configuration  
 - **3.3V regulator:** AP63203WU to power the ESP32-C3 and logic components  
-- **PCB design:** SMD (Surface-Mount) components for a compact and reliable board  
+- **PCB design:** SMD (Surface-Mount) components
 
 > ⚠️ **Warning:** This project involves high voltage. Follow proper electrical safety procedures!
 
@@ -60,7 +60,6 @@ A separate `LICENSE` file contains the complete text of the license.
 ## Safety
 
 ⚠️ This project involves **high voltage (~170V for Nixie tubes)**.  
-- Never touch the circuit while it is powered  
-- Use proper insulation materials  
+- Never touch the circuit while it is powered
 - Work carefully and only with proper knowledge of high-voltage electronics
 
