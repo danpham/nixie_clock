@@ -1782,6 +1782,16 @@
 	)
 	(wire
 		(pts
+			(xy 62.23 93.98) (xy 72.39 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "43621356-64ae-4c95-bba1-ea4dc70c9e33")
+	)
+	(wire
+		(pts
 			(xy 80.01 73.66) (xy 121.92 73.66)
 		)
 		(stroke
@@ -1959,16 +1969,6 @@
 			(type default)
 		)
 		(uuid "7ecc8dd2-1727-4b49-85d9-96980f82009c")
-	)
-	(wire
-		(pts
-			(xy 69.85 93.98) (xy 72.39 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "81979209-4108-4791-aec1-1d8f7aa677af")
 	)
 	(wire
 		(pts
@@ -2611,74 +2611,6 @@
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
 					(reference "R22")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 66.04 93.98 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "055ac6bb-6d19-4019-9f53-8768aad54ca3")
-		(property "Reference" "R21"
-			(at 66.04 87.63 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 66.04 90.17 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 66.04 95.758 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 66.04 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 66.04 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "489eb8b4-af09-41fa-815c-f93272fd46da")
-		)
-		(pin "2"
-			(uuid "ff07dc7f-e229-4d3f-81dd-4839350d8986")
-		)
-		(instances
-			(project "nixie_clock"
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/99bf9233-4f4b-4c20-a5a1-eeea9a6ff67a"
-					(reference "R21")
 					(unit 1)
 				)
 			)
