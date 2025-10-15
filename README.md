@@ -2,6 +2,10 @@
 
 A **Nixie tube clock project** based on the **ESP32-C3**, using **IN14** and **IN3** tubes driven by **HV5622** high-voltage drivers.
 
+![alt text](https://github.com/danpham/nixie_clock/3d_view.png?raw=true)
+
+![alt text](https://github.com/danpham/nixie_clock/pcb_view.png?raw=true)
+
 ## Hardware
 
 - **Microcontroller:** ESP32-C3  
