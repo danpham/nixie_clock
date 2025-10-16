@@ -17,8 +17,8 @@
 // GPIOs (adapt according to your wiring)
 #define HV5622_PIN_MOSI   16   /* SPI_MOSI */
 #define HV5622_PIN_SCLK   5    /* SPI_CLK */
-#define HV5622_PIN_LE     8    /* GPIO2 */
-#define HV5622_PIN_BL     7    /* GPIO1 */
+#define HV5622_PIN_LE     2    /* GPIO2 */
+#define HV5622_PIN_BL     1    /* GPIO1 */
 
 
 /******************************************************************
