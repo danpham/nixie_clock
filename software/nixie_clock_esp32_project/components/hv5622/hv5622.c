@@ -53,11 +53,9 @@ void hv5622_init(void)
     // Configure control GPIOs
     gpio_reset_pin(HV5622_PIN_LE);
     gpio_set_direction(HV5622_PIN_LE, GPIO_MODE_OUTPUT);
-    gpio_set_pull_mode(HV5622_PIN_LE, GPIO_FLOATING);  // Pull none
 
     gpio_reset_pin(HV5622_PIN_BL);
     gpio_set_direction(HV5622_PIN_BL, GPIO_MODE_OUTPUT);
-    gpio_set_pull_mode(HV5622_PIN_BL, GPIO_FLOATING);  // Pull none
     
     // Initial state
     gpio_set_level(HV5622_PIN_LE, 0);
