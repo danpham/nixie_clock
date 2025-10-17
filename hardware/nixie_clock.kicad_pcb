@@ -2216,7 +2216,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q2"
-			(at 0 -2.4 90)
+			(at -2.7 0 0)
 			(layer "F.SilkS")
 			(uuid "699833c5-a332-4db5-abdd-5ba9550d4258")
 			(effects
@@ -2948,7 +2948,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q7"
-			(at -2.71 0.01 0)
+			(at -2.7 0 0)
 			(layer "F.SilkS")
 			(uuid "e817743e-4409-4834-aab5-cdd072afa79a")
 			(effects
@@ -3983,7 +3983,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q6"
-			(at 0 -2.4 90)
+			(at -2.7 0 180)
 			(layer "F.SilkS")
 			(uuid "54619b0f-5eb9-4177-a3b5-ce3c21c0507b")
 			(effects
@@ -9842,7 +9842,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q9"
-			(at -2.69 -0.055 0)
+			(at -2.7 0 0)
 			(layer "F.SilkS")
 			(uuid "54dc1e51-a0c9-48ff-83bc-4a70f5c00234")
 			(effects
@@ -11256,7 +11256,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q5"
-			(at 0 -2.4 90)
+			(at -2.7 0 180)
 			(layer "F.SilkS")
 			(uuid "f90045c2-5951-4b69-bebd-4123d7fa44ae")
 			(effects
@@ -12754,7 +12754,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q8"
-			(at -2.62 0.04 180)
+			(at -2.7 0 180)
 			(layer "F.SilkS")
 			(uuid "ebb07da5-2f8b-45e7-9cdc-c88b38336717")
 			(effects
@@ -13286,7 +13286,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R32"
-			(at 0 1.91 0)
+			(at 0 1.65 0)
 			(layer "F.SilkS")
 			(uuid "eaa6d906-adf9-426d-8305-48ac381f0f4f")
 			(effects
@@ -13787,7 +13787,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R24"
-			(at 0 1.67 0)
+			(at 0 1.65 0)
 			(layer "F.SilkS")
 			(uuid "0add3ee5-9fc0-458a-bf3d-ae731ae37fe2")
 			(effects
@@ -16991,7 +16991,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R29"
-			(at 0 1.69 0)
+			(at 0 1.65 0)
 			(layer "F.SilkS")
 			(uuid "e3817cf0-0b22-4041-95f2-3f19d9c67af2")
 			(effects
@@ -19240,7 +19240,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q3"
-			(at 0.3575 -2.36 90)
+			(at -2.7 0 180)
 			(layer "F.SilkS")
 			(uuid "18e2e548-d902-46a2-b446-dd37ba60e576")
 			(effects
@@ -20171,7 +20171,7 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q4"
-			(at -2.81 0.01 180)
+			(at -2.7 0 180)
 			(layer "F.SilkS")
 			(uuid "2e1d3eb8-b5b1-4182-acee-54374261f570")
 			(effects
@@ -21742,7 +21742,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R31"
-			(at 0 1.68 0)
+			(at 0 1.65 0)
 			(layer "F.SilkS")
 			(uuid "a2a77d3d-bd74-4588-bbda-97e95976b8d5")
 			(effects
