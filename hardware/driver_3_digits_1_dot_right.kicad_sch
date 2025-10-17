@@ -2182,12 +2182,6 @@
 		(uuid "b69d1499-5c08-4810-963b-bf4fdafe408c")
 	)
 	(junction
-		(at 83.82 158.75)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d99f2e82-738e-4a8b-9c90-c51946c2446e")
-	)
-	(junction
 		(at 101.6 168.91)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2361,16 +2355,6 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 166.37) (xy 76.2 166.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "37461346-d73e-4783-9dff-2b1bf469a537")
-	)
-	(wire
-		(pts
 			(xy 123.19 153.67) (xy 139.7 153.67)
 		)
 		(stroke
@@ -2378,16 +2362,6 @@
 			(type default)
 		)
 		(uuid "37f997ca-d8df-4596-a68b-aaf10e8c500b")
-	)
-	(wire
-		(pts
-			(xy 83.82 158.75) (xy 83.82 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "38a8847a-5fb2-4a6a-9530-9c54b566f551")
 	)
 	(wire
 		(pts
@@ -2651,16 +2625,6 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 171.45) (xy 83.82 190.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "901e8700-ce84-4968-b1fd-b76096ed6726")
-	)
-	(wire
-		(pts
 			(xy 167.64 100.33) (xy 189.23 100.33)
 		)
 		(stroke
@@ -2691,16 +2655,6 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 127) (xy 83.82 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9fcf9260-62a1-4a60-8a8e-83c93f07511e")
-	)
-	(wire
-		(pts
 			(xy 199.39 77.47) (xy 229.87 77.47)
 		)
 		(stroke
@@ -2708,16 +2662,6 @@
 			(type default)
 		)
 		(uuid "a0584d08-f5dc-4ba9-ae27-f0946cc40112")
-	)
-	(wire
-		(pts
-			(xy 83.82 158.75) (xy 139.7 158.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a3c53736-5997-4205-af44-ade885a6596c")
 	)
 	(wire
 		(pts
@@ -2818,16 +2762,6 @@
 			(type default)
 		)
 		(uuid "b703cf8f-1d4e-4571-b90e-2f7e26c1187a")
-	)
-	(wire
-		(pts
-			(xy 83.82 137.16) (xy 83.82 158.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bea19ec1-0433-4d43-b823-514799f34aa1")
 	)
 	(wire
 		(pts
@@ -3099,6 +3033,16 @@
 		)
 		(uuid "f72b8eff-8d92-4231-a167-96c52c4f307b")
 	)
+	(wire
+		(pts
+			(xy 128.27 158.75) (xy 139.7 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "febc058f-61b7-477f-ac6a-6499d5bbcc45")
+	)
 	(hierarchical_label "GND"
 		(shape input)
 		(at 157.48 181.61 0)
@@ -3123,7 +3067,7 @@
 	)
 	(hierarchical_label "SPI_SDI"
 		(shape input)
-		(at 55.88 166.37 180)
+		(at 128.27 158.75 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3164,17 +3108,6 @@
 			(justify left)
 		)
 		(uuid "6939ef6f-425c-4864-b1f3-dba214f11257")
-	)
-	(hierarchical_label "GND"
-		(shape input)
-		(at 83.82 190.5 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "6f3cdd83-b3cf-46da-a211-76808a5b39e1")
 	)
 	(hierarchical_label "12V"
 		(shape input)
@@ -3263,17 +3196,6 @@
 			(justify right)
 		)
 		(uuid "e11773ab-2f8c-4a3a-aa25-bd856bce5919")
-	)
-	(hierarchical_label "12V"
-		(shape input)
-		(at 83.82 127 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "ef80f6e8-adc0-428e-9b6c-8669c659f5ab")
 	)
 	(hierarchical_label "GND"
 		(shape input)
@@ -3645,82 +3567,6 @@
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
 					(reference "R18")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_FET:BSS138")
-		(at 81.28 166.37 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "29a0a619-b9fb-4904-b24b-5149e9e162d7")
-		(property "Reference" "Q7"
-			(at 87.63 165.0999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "BSS138"
-			(at 87.63 167.6399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 86.36 168.275 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BSS138-D.PDF"
-			(at 86.36 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"
-			(at 81.28 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "dbc05cd3-24fb-4fe2-83f6-ae5a7856742d")
-		)
-		(pin "3"
-			(uuid "e4714dbe-3736-48fd-b6cc-f51f6aafc029")
-		)
-		(pin "2"
-			(uuid "655b7e52-e409-4861-b490-e9529518a0a4")
-		)
-		(instances
-			(project "nixie_clock"
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
-					(reference "Q7")
 					(unit 1)
 				)
 			)
@@ -4839,73 +4685,6 @@
 			(project "nixie_clock"
 				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
 					(reference "U5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 83.82 133.35 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c3ab5bfd-6a11-4b0a-ad3f-d7ba057b9cb5")
-		(property "Reference" "R33"
-			(at 81.534 133.35 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 86.36 133.35 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 85.598 133.35 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 83.82 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Bootmode"
-			(at 89.408 137.414 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "febfb8f7-42f0-4597-bcc0-74d242992d77")
-		)
-		(pin "2"
-			(uuid "0bcbca81-42b7-4ac4-9d93-50dfc802effd")
-		)
-		(instances
-			(project "nixie_clock"
-				(path "/90430e5f-7049-4de8-b92d-f897c4a89819/fe830805-1f17-45c2-a3b2-c398af349661"
-					(reference "R33")
 					(unit 1)
 				)
 			)
