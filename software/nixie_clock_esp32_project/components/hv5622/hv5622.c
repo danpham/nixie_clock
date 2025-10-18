@@ -42,7 +42,7 @@ void hv5622_init(void)
 
     spi_device_interface_config_t devcfg = {
         .clock_speed_hz = (uint32_t)(1U * 1000U * 1000U), // 1 MHz
-        .mode = 0,
+        .mode = 3,
         .spics_io_num = -1, // no CS, handled by LE
         .queue_size = 1,
     };
@@ -58,22 +58,24 @@ void hv5622_init(void)
     gpio_set_direction(HV5622_PIN_BL, GPIO_MODE_OUTPUT);
     
     // Initial state
-    gpio_set_level(HV5622_PIN_LE, 0);
-    gpio_set_level(HV5622_PIN_BL, 1); // BL active low
+    gpio_set_level(HV5622_PIN_LE, 1);
+    gpio_set_level(HV5622_PIN_BL, 0);
 }
 
 void hv5622_send64(uint64_t data)
 {
+    uint64_t inverted = ~data; // invert bits
+
     spi_transaction_t t = {
         .length = 64, // 64 bits
-        .tx_buffer = &data,
+        .tx_buffer = &inverted,
     };
 
     ESP_ERROR_CHECK(spi_device_transmit(hv5622_spi, &t));
 
     // latch
-    gpio_set_level(HV5622_PIN_LE, 1);
     gpio_set_level(HV5622_PIN_LE, 0);
+    gpio_set_level(HV5622_PIN_LE, 1);
 }
 
 void hv5622_set_output(int pin, bool value)
