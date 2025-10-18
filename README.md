@@ -15,7 +15,11 @@ A **Nixie tube clock project** based on the **ESP32-C3**, using **IN14** and **I
 
 > ⚠️ **Warning:** This project involves high voltage. Follow proper electrical safety procedures!
 > 
-![3D View](https://github.com/danpham/nixie_clock/raw/master/pcb_view.png)
+
+![PCB Back](https://github.com/danpham/nixie_clock/raw/master/pcb_view.png)
+
+![PCB Back 3D](https://github.com/danpham/nixie_clock/raw/master/pcb_view_back.png)
+
 
 ## Software
 
