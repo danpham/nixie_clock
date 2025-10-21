@@ -58,6 +58,26 @@ idf.py build
 idf.py flash
 ```
 
+## Test
+
+### Unit testing
+
+```bash
+cd software/nixie_clock_esp32_project/test/unit
+cmake -S . -B build
+cmake --build build --config Release
+.\build\Release\native_tests.exe
+```
+
+### Integration testing
+
+```bash
+cd software/nixie_clock_esp32_project/test/integration
+cmake -S . -B build
+cmake --build build --config Release
+.\build\Release\native_tests.exe
+```
+
 ## License
 
 This project is released under the **GPL v3** license.  
