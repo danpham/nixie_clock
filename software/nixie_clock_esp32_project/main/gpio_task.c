@@ -2,6 +2,7 @@
 #include "freertos/task.h"
 #include "gpio_task.h"
 #include "gpio_driver.h"
+#include "rotary_encoder.h"
 #include "esp_log.h"
 
 QueueHandle_t buttonQueue;
@@ -70,23 +71,15 @@ static void gpio_task(void *pvParameter)
         }
 
         state_rotaryChanA = my_gpio_read_btn(&rotaryEncoderChanA);
-        if (state_rotaryChanA != state_last_rotaryChanA)
-        {
-            int state_rotaryChanB = 0;
-            state_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
-            if (state_rotaryChanA != state_rotaryChanB)
-            {
-                event.id = BUTTON_ROTARY_ENCODER;
-                event.updateValue = (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT;
-                xQueueSend(buttonQueue, &event, 0);
-                ESP_LOGI(TAG, "Rotary encoder increment");
-            } else {
-                event.id = BUTTON_ROTARY_ENCODER;
-                event.updateValue = (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT;
-                xQueueSend(buttonQueue, &event, 0);
-                ESP_LOGI(TAG, "Rotary encoder decrement");
-            }
+        int state_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
+        rotary_encoder_event_t ev = process_rotary_encoder(state_last_rotaryChanA, state_rotaryChanA, state_rotaryChanB);
+        if (ev != ROTARY_ENCODER_EVENT_NONE) {
+            event.id = BUTTON_ROTARY_ENCODER;
+            event.updateValue = (uint8_t)ev;
+            xQueueSend(buttonQueue, &event, 0);
+            ESP_LOGI(TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
         }
+
         state_last_rotaryChanA = state_rotaryChanA;
         
         vTaskDelay(pdMS_TO_TICKS(5)); // Loop every 5 ms

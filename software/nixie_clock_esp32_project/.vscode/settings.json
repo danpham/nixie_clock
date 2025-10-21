@@ -26,6 +26,8 @@
         "display.h": "c",
         "hv5622_mock.h": "c",
         "functional": "c",
-        "charconv": "c"
-    }
+        "charconv": "c",
+        "rotary_encoder.h": "c"
+    },
+    "idf.flashType": "UART"
 }

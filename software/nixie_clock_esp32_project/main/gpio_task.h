@@ -10,12 +10,6 @@ typedef enum buttons_type_e {
     BUTTON_COUNT
 } buttons_type_t;
 
-typedef enum rotary_encoder_event_e {
-    ROTARY_ENCODER_EVENT_INCREMENT = 0,
-    ROTARY_ENCODER_EVENT_DECREMENT = 1,
-    ROTARY_ENCODER_EVENT_COUNT
-} rotary_encoder_event_type_t;
-
 // Event struct shared between tasks
 typedef struct {
     uint8_t id;       // Button number (1, 2, etc.)

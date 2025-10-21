@@ -7,6 +7,7 @@
 #include "clock.h"
 #include "gpio_task.h"
 #include "gpio_driver.h"
+#include "rotary_encoder.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

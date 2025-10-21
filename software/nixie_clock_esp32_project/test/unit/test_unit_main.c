@@ -16,6 +16,7 @@ extern void test_clock_set_wraps_values(void);
 extern void test_clock_increment_hours(void);
 extern void test_clock_increment_minutes(void);
 extern void test_display_pattern_1(void);
+extern void test_rotary_encoder(void);
 
 int main(void) {
     UNITY_BEGIN();
@@ -32,6 +33,7 @@ int main(void) {
     RUN_TEST(test_clock_increment_hours);
     RUN_TEST(test_clock_increment_minutes);
     RUN_TEST(test_display_pattern_1);
+    RUN_TEST(test_rotary_encoder);
 
     return UNITY_END();
 }

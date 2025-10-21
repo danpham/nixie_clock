@@ -1,14 +1,17 @@
 add_executable(native_tests
     test_display.c
     test_clock.c
+    test_rotary_encoder.c
     test_unit_main.c
     ../../components/hv5622/hv5622_mock.c
+    ../../components/rotary_encoder/rotary_encoder.c
     ../../components/display/display.c
     ../../components/clock/clock.c
 )
 
 include_directories(
     ../../components/hv5622
+    ../../components/rotary_encoder
     ../../components/display
     ../../components/clock
     C:/Espressif/frameworks/esp-idf-v5.5/components/unity/include
