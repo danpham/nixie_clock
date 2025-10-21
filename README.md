@@ -62,6 +62,7 @@ idf.py flash
 
 ### Unit testing
 
+In ESP-IDF terminal:
 ```bash
 cd software/nixie_clock_esp32_project/test/unit
 cmake -S . -B build
@@ -71,6 +72,7 @@ cmake --build build --config Release
 
 ### Integration testing
 
+In ESP-IDF terminal:
 ```bash
 cd software/nixie_clock_esp32_project/test/integration
 cmake -S . -B build
