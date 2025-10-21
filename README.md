@@ -77,7 +77,7 @@ In ESP-IDF terminal:
 cd software/nixie_clock_esp32_project/test/integration
 cmake -S . -B build
 cmake --build build --config Release
-.\build\Release\native_tests.exe
+.\build\Release\native_integration_tests.exe
 ```
 
 ## License
