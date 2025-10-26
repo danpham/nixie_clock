@@ -77,18 +77,3 @@ void hv5622_send64(uint64_t data)
     gpio_set_level(HV5622_PIN_LE, 0);
     gpio_set_level(HV5622_PIN_LE, 1);
 }
-
-void hv5622_set_output(int pin, bool value)
-{
-    uint64_t hv5622_buffer = 0;
-    
-    if (pin < (int)0 || pin >= (int)64) return; // safety check
-
-    if (value) {
-        hv5622_buffer |= (1ULL << (uint64_t)pin);
-    } else {
-        hv5622_buffer &= ~(1ULL << (uint64_t)pin);
-    }
-
-    hv5622_send64(hv5622_buffer);
-}

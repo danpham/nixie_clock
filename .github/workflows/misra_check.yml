@@ -2,11 +2,12 @@ name: MISRA C Check
 
 on:
   push:
+  pull_request:
 
 jobs:
-  cppcheck:
+  misra:
     runs-on: ubuntu-latest
-    name: Run MISRA-style static analysis
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -14,7 +15,8 @@ jobs:
       - name: Install cppcheck
         run: sudo apt-get install -y cppcheck
 
-      - name: Run MISRA C analysis
+      - name: Run MISRA C analysis (compile_commands mode)
+        working-directory: software/nixie_clock_esp32_project
         run: |
           cppcheck \
             --enable=all \
@@ -23,18 +25,10 @@ jobs:
             --addon=misra \
             --inline-suppr \
             --error-exitcode=1 \
+            --suppress=missingInclude \
             --suppress=missingIncludeSystem \
-            --suppress=missingInclude:*esp_* \
-            --suppress=missingInclude:*freertos/* \
-            --suppress=missingInclude:*driver/* \
-            --suppress=missingIncludeSystem software/nixie_clock_esp32_project
-            --exclude=software/nixie_clock_esp32_project/test/ \
-            -Isoftware/nixie_clock_esp32_project/components \
-            -Isoftware/nixie_clock_esp32_project/components/uart \
-            -Isoftware/nixie_clock_esp32_project/components/gpio_driver \
-            -Isoftware/nixie_clock_esp32_project/components/display \
-            -Isoftware/nixie_clock_esp32_project/components/clock \
-            -Isoftware/nixie_clock_esp32_project/components/hv5622 \
-            -Isoftware/nixie_clock_esp32_project/main \
-            software/nixie_clock_esp32_project/components \
-            software/nixie_clock_esp32_project/main
+            --force \
+            -I main \
+            -I components \
+            -DSTATIC_ANALYSIS=1 \
+            main components

@@ -41,7 +41,4 @@ void uart_init(void);
 // Send a string via UART
 void uart_write(const char *str, size_t len);
 
-// Read data from UART
-int uart_read(uint8_t *buf, size_t buf_size);
-
 #endif // UART_H

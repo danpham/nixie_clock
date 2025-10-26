@@ -7,13 +7,13 @@
 typedef enum buttons_type_e {
     BUTTON_ROTARY_SWITCH_1 = 0,
     BUTTON_ROTARY_ENCODER = 1,
-    BUTTON_COUNT
+    BUTTON_COUNT = 2
 } buttons_type_t;
 
 // Event struct shared between tasks
 typedef struct {
-    uint8_t id;       // Button number (1, 2, etc.)
-    uint8_t pressed;  // 1 = pressed, 0 = released
+    buttons_type_t id;    // Button number (1, 2, etc.)
+    uint8_t pressed;      // 1 = pressed, 0 = released
     uint8_t updateValue;  // 1 = increment, 0 = decrement
 } button_event_t;
 

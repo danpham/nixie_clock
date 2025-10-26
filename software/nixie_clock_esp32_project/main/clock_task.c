@@ -3,11 +3,13 @@
 ******************************************************************/
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "clock_task.h"
 #include "display.h"
 #include "clock.h"
 #include "gpio_task.h"
-#include "gpio_driver.h"
-#include "rotary_encoder.h"
+#include "../components/gpio_driver/gpio_driver.h"
+#include "../components/rotary_encoder/rotary_encoder.h"
+#include "esp_stub.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -35,13 +37,14 @@ static void clock_task(void *arg);
  * 6. Functions definitions
 ******************************************************************/
 
-static void clock_task(void *arg) {
+static void clock_task(void *arg) { 
     clock_t clk;
     button_event_t event;
     bool dots = true;
     bool in_pattern = false;
     uint8_t pattern_step = 0;
-    
+    (void)arg; 
+
     clock_init(&clk, 0, 0, 0);
 
     TickType_t lastTick = xTaskGetTickCount();
@@ -87,61 +90,74 @@ static void clock_task(void *arg) {
 void clock_menu(clock_t *clk, button_event_t *event)
 {
     static int state = MENU_CLOCK;
+    void *buffer = NULL;
 
     switch (state)
     {
         case MENU_CLOCK:
-            if (xQueueReceive(buttonQueue, event, 0) == pdTRUE) {
-                if (event->id == BUTTON_ROTARY_SWITCH_1 && event->pressed == BUTTON_LONG_PRESS)
+            buffer = (void *)event;
+            if (xQueueReceive(buttonQueue, buffer, 0) == pdTRUE) {
+                if ((event->id == (buttons_type_t)BUTTON_ROTARY_SWITCH_1) && (event->pressed == (uint8_t)BUTTON_LONG_PRESS))
                 {
                     state = MENU_CONFIGURE_MINUTES;
                 }
             }
-            return;
+            break;
         case MENU_CONFIGURE_MINUTES:
-            if (xQueueReceive(buttonQueue, event, 0) == pdTRUE) {
-                if (event->id == BUTTON_ROTARY_SWITCH_1 && event->pressed == BUTTON_LONG_PRESS)
+            buffer = (void *)event;
+            if (xQueueReceive(buttonQueue, buffer, 0) == pdTRUE) {
+                if ((event->id == (buttons_type_t)BUTTON_ROTARY_SWITCH_1) && (event->pressed == (uint8_t)BUTTON_LONG_PRESS))
                 {
                     state = MENU_CONFIGURE_HOURS;
                 }
-                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT)
+                else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT))
                 {
                     clock_increment_minutes(clk);
                     state = MENU_CONFIGURE_MINUTES;
                 }
-                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT)
+                else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT))
                 {
                     clock_decrement_minutes(clk);
                     state = MENU_CONFIGURE_MINUTES;
                 }
+                else {
+                    state = MENU_CONFIGURE_MINUTES;
+                }
             }
-            return;
+            break;
         case MENU_CONFIGURE_HOURS:
-            if (xQueueReceive(buttonQueue, event, 0) == pdTRUE) {
-                if (event->id == BUTTON_ROTARY_SWITCH_1 && event->pressed == BUTTON_LONG_PRESS)
+            buffer = (void *)event;
+            if (xQueueReceive(buttonQueue, buffer, 0) == pdTRUE) {
+                if ((event->id == (buttons_type_t)BUTTON_ROTARY_SWITCH_1) && (event->pressed == (uint8_t)BUTTON_LONG_PRESS))
                 {
                     state = MENU_CLOCK;
                 }
-                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == ROTARY_ENCODER_EVENT_INCREMENT)
+                else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT))
                 {
                     clock_increment_hours(clk);
                     state = MENU_CONFIGURE_HOURS;
                 }
-                else if (event->id == BUTTON_ROTARY_ENCODER && event->updateValue == ROTARY_ENCODER_EVENT_DECREMENT)
+                else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT))
                 {
                     clock_decrement_hours(clk);
                     state = MENU_CONFIGURE_HOURS;
                 }
+                else {
+                    state = MENU_CONFIGURE_HOURS;
+                }
             }
-            return;
+            break;
         default:
             state = MENU_CLOCK;
+            break;
     }
+
+    return;
 }
 
 // Function to start the clock task
 void clock_task_start(void)
 {
     // Create clock task
-    xTaskCreate(clock_task, "clock_task", 2048, NULL, 5, NULL);
+    xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
 }

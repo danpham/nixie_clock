@@ -5,9 +5,6 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include <stdint.h>
-#ifndef UNITY_TESTING
-#include "hv5622.h"
-#endif
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -42,7 +39,7 @@ void display_set_pattern_1(uint8_t step);
 #ifdef UNITY_TESTING
 uint8_t shift_compute(uint8_t number);
 uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
-uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
+uint64_t encode_time_digits(const uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
 uint64_t display_pattern_1_get(uint8_t step);
 #endif
 

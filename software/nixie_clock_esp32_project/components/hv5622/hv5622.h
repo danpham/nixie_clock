@@ -41,6 +41,5 @@
 ******************************************************************/
 void hv5622_init(void);
 void hv5622_send64(uint64_t data);
-void hv5622_set_output(int pin, bool value);
 
 #endif // HV5622_H

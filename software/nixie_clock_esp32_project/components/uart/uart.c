@@ -52,8 +52,3 @@ void uart_write(const char *str, size_t len)
 {
     uart_write_bytes(UART_PORT, str, len);
 }
-
-int uart_read(uint8_t *buf, size_t buf_size)
-{
-    return uart_read_bytes(UART_PORT, buf, buf_size, 100 / portTICK_PERIOD_MS);
-}

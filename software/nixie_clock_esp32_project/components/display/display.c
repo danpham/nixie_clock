@@ -33,7 +33,7 @@
 ******************************************************************/
 NOT_STATIC uint8_t shift_compute(uint8_t number);
 NOT_STATIC uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
-NOT_STATIC uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
+NOT_STATIC uint64_t encode_time_digits(const uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot);
 NOT_STATIC uint64_t display_pattern_1_get(uint8_t step);
 
 /******************************************************************
@@ -42,7 +42,7 @@ NOT_STATIC uint64_t display_pattern_1_get(uint8_t step);
 NOT_STATIC uint8_t shift_compute(uint8_t number) {
     uint8_t shift_number = 0;
 
-    if  ((number > 0) && (number <= (uint8_t)10U))
+    if  ((number > 0U) && (number <= (uint8_t)10U))
     {
        shift_number = (uint8_t)10U - number;
     }
@@ -64,7 +64,7 @@ NOT_STATIC uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds,
     return encode_time_digits(nixies, dot1, dot2, nixie3_dot, nixie6_dot);
 }
 
-NOT_STATIC uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
+NOT_STATIC uint64_t encode_time_digits(const uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
     uint64_t data = 0;
  
     data |= ((uint64_t)dot1 & (uint64_t)0x01U) << 11;
@@ -83,10 +83,10 @@ NOT_STATIC uint64_t encode_time_digits(uint8_t * nixies, uint8_t dot1, uint8_t d
 
 NOT_STATIC uint64_t display_pattern_1_get(uint8_t step) {
     uint8_t nixies[DISPLAY_NIXIE_COUNT];
-    step %= (uint8_t)10;
+    uint8_t tmp = (uint8_t)(step % (uint8_t)10U);
     
     for (uint8_t i = 0; i < sizeof(nixies); ++i) {
-        nixies[i] = step;
+        nixies[i] = tmp;
     }
 
     return encode_time_digits(nixies, 1, 1, 1, 1);

@@ -1,7 +1,8 @@
+#include <stdint.h>
 #include "unity.h"
 #include "clock.h"
 #include "display.h"
-#include <stdint.h>
+#include "hv5622_mock.h"
 
 // ------------------- Mock hardware -------------------
 // Variable to store what would have been sent to the HV5622
@@ -15,7 +16,7 @@ static clock_t clk;
 // ------------------- SetUp / TearDown -------------------
 void setUp(void) {
     clock_init(&clk, 0, 0, 0);
-    last_sent_data = 0;
+    last_sent_data = 0ULL;
 }
 
 void tearDown(void) {

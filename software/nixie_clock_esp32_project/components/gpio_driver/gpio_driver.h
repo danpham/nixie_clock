@@ -2,7 +2,7 @@
 #include "driver/gpio.h"
 #include "esp_err.h"
 
-#define BUTTON_LONG_PRESS_MS 2000
+#define BUTTON_LONG_PRESS_MS 2000U
 
 typedef enum {
     BUTTON_STATE_RELEASE  = 0,
@@ -25,7 +25,7 @@ typedef enum {
 typedef struct {
     gpio_num_t pin;
     my_gpio_pull_t pull;
-    int last_state;
+    button_state_t last_state;
     button_press_t press_type;
     uint32_t last_change_ms;
     uint32_t press_start_ms;
