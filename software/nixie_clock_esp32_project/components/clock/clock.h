@@ -53,9 +53,4 @@ void clock_increment_minutes(clock_t *clk);
 // Decrement minutes immediately (e.g., called from button)
 void clock_decrement_minutes(clock_t *clk);
 
-#ifdef UNITY_TESTING
-// Set the time explicitly
-void clock_set(clock_t *clk, uint8_t h, uint8_t m, uint8_t s);
-#endif
-
 #endif // CLOCK_H

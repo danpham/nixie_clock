@@ -28,9 +28,9 @@
  * 6. Functions definitions
 ******************************************************************/
 void clock_init(clock_t *clk, uint8_t h, uint8_t m, uint8_t s) {
-    clk->hours = h;
-    clk->minutes = m;
-    clk->seconds = s;
+    clk->hours = h % (uint8_t)24U;
+    clk->minutes = m % (uint8_t)60U;
+    clk->seconds = s % (uint8_t)60U;
 }
 
 void clock_tick(clock_t *clk) {
@@ -47,14 +47,6 @@ void clock_tick(clock_t *clk) {
         }
     }
 }
-
-#ifdef UNITY_TESTING
-void clock_set(clock_t *clk, uint8_t h, uint8_t m, uint8_t s) {
-    clk->hours = h % (uint8_t)24U;
-    clk->minutes = m % (uint8_t)60U;
-    clk->seconds = s % (uint8_t)60U;
-}
-#endif
 
 void clock_increment_hours(clock_t *clk) {
     clk->hours = (clk->hours + (uint8_t)1U) % (uint8_t)24U;
