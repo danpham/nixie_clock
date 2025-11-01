@@ -23,7 +23,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char *TAG = "time_sync";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -36,7 +35,7 @@ static const char *TAG = "time_sync";
 void time_sync_task(void *arg)
 {
     (void)arg;
-
+    const char *TAG = "time_sync";
     ESP_LOGI(TAG, "Initialisation de SNTP...");
     esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
     esp_sntp_setservername(0, "pool.ntp.org");

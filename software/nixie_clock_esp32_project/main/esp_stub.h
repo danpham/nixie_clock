@@ -11,6 +11,12 @@
 /* ESP-IDF error codes */
 #define ESP_OK   0
 
+/* Wifi */
+#define WIFI_EVENT 1
+#define WIFI_EVENT_STA_START 1
+#define WIFI_EVENT_STA_DISCONNECTED 1
+#define IP_EVENT_STA_GOT_IP 1
+
 typedef int esp_err_t;
 
 BaseType_t xQueueReceive( QueueHandle_t xQueue,
