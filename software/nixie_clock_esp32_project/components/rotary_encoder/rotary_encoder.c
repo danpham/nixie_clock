@@ -55,12 +55,15 @@ rotary_encoder_event_t process_rotary_encoder(uint8_t lastA, uint8_t lastB, uint
     {
         int8_t direction = 0;
         direction = transition_table[lastCode][currentCode];
-
+        
         if (direction > 0) {
           ret = ROTARY_ENCODER_EVENT_INCREMENT;
         }
-        else {
+        else if (direction < 0) {
           ret = ROTARY_ENCODER_EVENT_DECREMENT;
+        }
+        else {
+          ret = ROTARY_ENCODER_EVENT_NONE;
         }
     }
 

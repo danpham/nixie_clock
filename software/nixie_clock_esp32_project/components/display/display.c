@@ -3,7 +3,7 @@
 ******************************************************************/
 #include "display.h"
 #ifdef UNITY_TESTING
-#include "../hv5622/hv5622_mock.h"
+#include "../../test/common/hv5622_mock.h"
 #else
 #include "../hv5622/hv5622.h"
 #endif

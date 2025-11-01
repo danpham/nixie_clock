@@ -3,7 +3,7 @@ add_executable(native_tests
     test_clock.c
     test_rotary_encoder.c
     test_unit_main.c
-    ../../components/hv5622/hv5622_mock.c
+    ../common/hv5622_mock.c
     ../../components/rotary_encoder/rotary_encoder.c
     ../../components/display/display.c
     ../../components/clock/clock.c

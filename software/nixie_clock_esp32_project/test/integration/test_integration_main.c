@@ -2,7 +2,7 @@
 #include "unity.h"
 #include "clock.h"
 #include "display.h"
-#include "hv5622_mock.h"
+#include "../common/hv5622_mock.h"
 
 // ------------------- Mock hardware -------------------
 // Variable to store what would have been sent to the HV5622

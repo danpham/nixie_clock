@@ -1,7 +1,7 @@
 # Exécutable de tests d’intégration
 add_executable(native_integration_tests
     test_integration_main.c
-    ../../components/hv5622/hv5622_mock.c
+    ../common/hv5622_mock.c
     ../../components/display/display.c
     ../../components/clock/clock.c
 )
