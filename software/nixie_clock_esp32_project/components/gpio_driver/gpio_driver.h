@@ -1,9 +1,20 @@
-#pragma once
+#ifndef GPIO_DRIVER_H
+#define GPIO_DRIVER_H
+
+/******************************************************************
+ * 1. Included files (microcontroller ones then user defined ones)
+******************************************************************/
 #include "driver/gpio.h"
 #include "esp_err.h"
 
+/******************************************************************
+ * 2. Define declarations (macros then function macros)
+******************************************************************/
 #define BUTTON_LONG_PRESS_MS 2000U
 
+/******************************************************************
+ * 3. Typedef definitions (simple typedef, then enum and structs)
+******************************************************************/
 typedef enum {
     BUTTON_STATE_RELEASE  = 0,
     BUTTON_STATE_PRESS = 1
@@ -32,6 +43,18 @@ typedef struct {
     uint32_t debounce_ms;
 } my_gpio_btn_t;
 
-// GPIO functions
+/******************************************************************
+ * 4. Variable definitions (static then global)
+******************************************************************/
+
+/******************************************************************
+ * 5. Functions prototypes (static only)
+******************************************************************/
+
+/******************************************************************
+ * 6. Functions definitions
+******************************************************************/
 esp_err_t my_gpio_init(my_gpio_btn_t *btn);
 int my_gpio_read_btn(my_gpio_btn_t *btn);
+
+#endif // GPIO_DRIVER_H

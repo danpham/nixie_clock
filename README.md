@@ -21,6 +21,18 @@ A **Nixie tube clock project** based on the **ESP32-C3**, using **IN14** and **I
 ![PCB Back 3D](https://github.com/danpham/nixie_clock/raw/master/pcb_view_back.png)
 
 
+## Current Features
+
+- Nixie tube display control via HV5622
+- Rotary encoder input (EC11) for setting the time
+- Internal clock management
+- **Anti–cathode poisoning routine:** periodic cycling and cathode management to prevent oxide buildup and extend tube lifespan
+- Wi-Fi connectivity with NTP time synchronization
+
+## Future Features
+
+- Web interface for configuration: timezone, brightness, night mode, and display enable/disable
+
 ## Software
 
 The code is written in **C for the ESP32-C3**, organized as follows:
@@ -32,23 +44,29 @@ software/nixie_clock_esp32_project/
 │   ├── gpio_driver/
 │   ├── display/
 │   ├── clock/
-│   └── hv5622/
+│   ├── hv5622/
+│   ├── rotary_encoder/
+│   └── wifi/
 └── main/
 ```
 
-### Current Features
+### Code Quality & Standards
 
-- Nixie tube display control via HV5622  
-- Rotary encoder input (EC11) for setting the time  
-- Internal clock management  
-- **Anti–cathode poisoning routine:** periodic cycling and cathode management to prevent oxide buildup and extend tube lifespan  
+- The firmware is developed in compliance with MISRA C:2012 guidelines to ensure reliability and safety in embedded systems.
+- Modular driver-based architecture for maintainability and scalability.
 
-### Future Features
+## Building
 
-- Wi-Fi connectivity for automatic time synchronization  
-- Web interface for configuration: timezone, brightness, night mode, and display enable/disable  
+### Wi-Fi Configuration
 
-## Compilation
+Before building the project, configure your Wi-Fi credentials in `main.c`:
+
+```c
+#define WIFI_SSID     "YourSSID"
+#define WIFI_PASSWORD "MyPassword"
+```
+
+### Compilation
 
 The project uses **ESP-IDF for ESP32-C3**. Make sure your ESP32-C3 development environment is properly set up.
 
@@ -82,7 +100,7 @@ cmake --build build --config Release
 
 ## License
 
-This project is released under the **GPL v3** license.  
+This project is released under the **GPL v3** license.
 A separate `LICENSE` file contains the complete text of the license.
 
 

@@ -1,22 +1,20 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
-#include <string.h>
-#include "driver/gpio.h"
-#include "gpio_task.h"
+#include <time.h>
+#include "esp_sntp.h"
+#include "esp_netif.h"
+#include "esp_netif_sntp.h"
+#include "esp_log.h"
+#include "esp_stub.h"
+#include "clock.h"
 #include "clock_task.h"
 #include "ntp_sync_task.h"
-#include "../components/uart/uart.h"
-#include "../components/hv5622/hv5622.h"
-#include "../components/display/display.h"
-#include "../components/clock/clock.h"
-#include "../components/wifi/wifi.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define WIFI_SSID       "YourSSID"
-#define WIFI_PASSWORD   "MyPassword"
+#define NTP_SYNC_TIMEOUT_MS     60000U
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -25,45 +23,52 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-myclock_t nixie_clock = {0};
+static const char *TAG = "time_sync";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
-static void on_wifi_ready(void);
 
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void app_main(void);
 
-/* MISRA C:2012 Rule 8.9 deviation:
-   app_main() is called externally by FreeRTOS/ESP-IDF runtime */
-// cppcheck-suppress unusedFunction
-void app_main(void)
+void time_sync_task(void *arg)
 {
-    const char hello[] = "Nixie clock v1.0: Starting...";
-    size_t len = sizeof(hello) - 1U;
+    (void)arg;
 
-    uart_init();
-    uart_write(hello, len);
+    ESP_LOGI(TAG, "Initialisation de SNTP...");
+    esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
+    esp_sntp_setservername(0, "pool.ntp.org");
+    esp_sntp_init();
 
-    hv5622_init();
-    display_init();
+    if (esp_netif_sntp_sync_wait(pdMS_TO_TICKS(NTP_SYNC_TIMEOUT_MS)) != ESP_OK) {
+        ESP_LOGW("time_sync", "Failed to update system time");
+    } else {
+        time_t now;
+        struct tm timeinfo;
+        time(&now);
+        localtime_r(&now, &timeinfo);
 
-    clock_task_start();
-    gpio_task_start();
+        myclock_t clockUpdate = {
+            .hours = timeinfo.tm_hour,
+            .minutes = timeinfo.tm_min,
+            .seconds = timeinfo.tm_sec
+        };
 
-    /* Time syncrhonisation */
-    wifi_register_on_got_ip_callback(on_wifi_ready);
-    wifi_init_sta(WIFI_SSID, WIFI_PASSWORD);
-
-    while(1) {
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        xQueueSend(clockUpdateQueue, &clockUpdate, 0);
     }
+
+    /* Free task */
+    vTaskDelete(NULL);
 }
 
-static void on_wifi_ready(void)
+void time_sync_task_start(myclock_t *clk)
 {
-    time_sync_task_start(&nixie_clock);
+    xTaskCreate(time_sync_task,
+                "time_sync_task",
+                4096,
+                clk,
+                2U,
+                NULL);
 }

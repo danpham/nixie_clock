@@ -26,11 +26,12 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
+QueueHandle_t clockUpdateQueue;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
-static void clock_menu(clock_t *clk, button_event_t *event);
+static void clock_menu(myclock_t *clk, button_event_t *event);
 static void clock_task(void *arg);
 
 /******************************************************************
@@ -38,7 +39,7 @@ static void clock_task(void *arg);
 ******************************************************************/
 
 static void clock_task(void *arg) { 
-    clock_t clk;
+    myclock_t clk;
     button_event_t event;
     bool dots = true;
     bool in_pattern = false;
@@ -59,6 +60,14 @@ static void clock_task(void *arg) {
 
         // Every second
         if ((now - lastTick) >= tickPeriod) {
+
+            /* Update with NTP */
+            myclock_t upd;
+            if (xQueueReceive(clockUpdateQueue, &upd, 0) == pdPASS)
+            {
+                clock_init(&clk, upd.hours, upd.minutes, upd.seconds);
+            }
+
             lastTick += tickPeriod;
             clock_tick(&clk);
             dots = !dots;
@@ -87,7 +96,7 @@ static void clock_task(void *arg) {
 }
 
 // Menu
-void clock_menu(clock_t *clk, button_event_t *event)
+void clock_menu(myclock_t *clk, button_event_t *event)
 {
     static int state = MENU_CLOCK;
     void *buffer = NULL;
