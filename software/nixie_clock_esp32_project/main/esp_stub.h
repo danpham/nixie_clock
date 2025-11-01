@@ -7,6 +7,7 @@
 
 /* FreeRTOS boolean macros */
 #define pdTRUE  1
+#define pdPASS  1
 
 /* ESP-IDF error codes */
 #define ESP_OK   0
@@ -16,6 +17,7 @@
 #define WIFI_EVENT_STA_START 1
 #define WIFI_EVENT_STA_DISCONNECTED 1
 #define IP_EVENT_STA_GOT_IP 1
+#define IP_EVENT 1
 
 typedef int esp_err_t;
 
