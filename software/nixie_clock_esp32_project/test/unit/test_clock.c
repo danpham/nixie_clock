@@ -13,7 +13,7 @@ void test_clock_init_sets_values(void) {
 
 // Simple tick test
 void test_clock_tick_increments_seconds(void) {
-    clock_set(&system_clock_ticks, 1, 2, 3);
+    clock_init(&system_clock_ticks, 1, 2, 3);
     clock_tick(&system_clock_ticks);
     TEST_ASSERT_EQUAL_UINT8(4, system_clock_ticks.seconds);
     TEST_ASSERT_EQUAL_UINT8(2, system_clock_ticks.minutes);
@@ -22,7 +22,7 @@ void test_clock_tick_increments_seconds(void) {
 
 // Test seconds rollover → minutes
 void test_clock_tick_rollover_seconds_to_minutes(void) {
-    clock_set(&system_clock_ticks, 1, 2, 59);
+    clock_init(&system_clock_ticks, 1, 2, 59);
     clock_tick(&system_clock_ticks);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.seconds);
     TEST_ASSERT_EQUAL_UINT8(3, system_clock_ticks.minutes);
@@ -31,7 +31,7 @@ void test_clock_tick_rollover_seconds_to_minutes(void) {
 
 // Test minutes rollover → hours
 void test_clock_tick_rollover_minutes_to_hours(void) {
-    clock_set(&system_clock_ticks, 1, 59, 59);
+    clock_init(&system_clock_ticks, 1, 59, 59);
     clock_tick(&system_clock_ticks);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.seconds);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.minutes);
@@ -40,7 +40,7 @@ void test_clock_tick_rollover_minutes_to_hours(void) {
 
 // Test hours rollover → 0
 void test_clock_tick_rollover_hours_to_zero(void) {
-    clock_set(&system_clock_ticks, 23, 59, 59);
+    clock_init(&system_clock_ticks, 23, 59, 59);
     clock_tick(&system_clock_ticks);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.seconds);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.minutes);
@@ -49,7 +49,7 @@ void test_clock_tick_rollover_hours_to_zero(void) {
 
 // Test clock_set with modulo wrapping
 void test_clock_set_wraps_values(void) {
-    clock_set(&system_clock_ticks, 25, 61, 70);
+    clock_init(&system_clock_ticks, 25, 61, 70);
     TEST_ASSERT_EQUAL_UINT8(1, system_clock_ticks.hours);    // 25 % 24 = 1
     TEST_ASSERT_EQUAL_UINT8(1, system_clock_ticks.minutes);  // 61 % 60 = 1
     TEST_ASSERT_EQUAL_UINT8(10, system_clock_ticks.seconds); // 70 % 60 = 10
@@ -57,14 +57,14 @@ void test_clock_set_wraps_values(void) {
 
 // Test incrementing hours
 void test_clock_increment_hours(void) {
-    clock_set(&system_clock_ticks, 23, 0, 0);
+    clock_init(&system_clock_ticks, 23, 0, 0);
     clock_increment_hours(&system_clock_ticks);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.hours);
 }
 
 // Test incrementing minutes
 void test_clock_increment_minutes(void) {
-    clock_set(&system_clock_ticks, 0, 59, 0);
+    clock_init(&system_clock_ticks, 0, 59, 0);
     clock_increment_minutes(&system_clock_ticks);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.minutes);
 }
