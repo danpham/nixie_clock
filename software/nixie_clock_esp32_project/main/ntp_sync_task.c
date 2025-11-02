@@ -1,7 +1,6 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
-#include <time.h>
 #include "esp_sntp.h"
 #include "esp_netif.h"
 #include "esp_netif_sntp.h"
@@ -31,30 +30,29 @@
 ******************************************************************/
 static void time_sync_task(void *arg);
 static void time_sync_notification_cb(struct timeval *tv);
+static void timestamp_to_hms(uint32_t timestamp, myclock_t *clock);
 
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
+static void timestamp_to_hms(uint32_t timestamp, myclock_t *clock)
+{
+    uint32_t t = timestamp % 86400U;
+    clock->hours   = (uint8_t)(t / 3600U);
+    clock->minutes = (uint8_t)((t % 3600U) / 60U);
+    clock->seconds = (uint8_t)(t % 60U);
+}
+
 static void time_sync_notification_cb(struct timeval *tv)
 {
     time_t now;
-    struct tm timeinfo;
     (void)tv;
 
     // Use the NTP-synced timestamp
     now = tv->tv_sec;
 
-    // Set France timezone with automatic daylight saving
-    setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
-    tzset();
-
-    localtime_r(&now, &timeinfo);
-
-    myclock_t clockUpdate = {
-        .hours = timeinfo.tm_hour,
-        .minutes = timeinfo.tm_min,
-        .seconds = timeinfo.tm_sec
-    };
+    myclock_t clockUpdate;
+    timestamp_to_hms(now, &clockUpdate);
 
     xQueueSend(clockUpdateQueue, &clockUpdate, 0);
 }
@@ -71,7 +69,7 @@ static void time_sync_task(void *arg)
     {
         int netif_index = esp_netif_get_netif_impl_index(ESP_IF_WIFI_STA);
         esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-        if (netif_index != -1 && netif != NULL && esp_netif_is_netif_up(netif)) {
+        if ((netif_index != -1) && (netif != NULL) && (esp_netif_is_netif_up(netif))) {
             wifi_ready = true;
         } else {
             vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
