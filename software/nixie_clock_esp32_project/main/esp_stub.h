@@ -14,7 +14,6 @@
 
 /* Wifi */
 #define WIFI_EVENT 1
-#define ESP_IF_WIFI_STA 1
 #define WIFI_EVENT_STA_START 1
 #define WIFI_EVENT_STA_DISCONNECTED 1
 #define IP_EVENT_STA_GOT_IP 1
