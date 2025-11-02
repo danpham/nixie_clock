@@ -10,11 +10,13 @@
 #include "clock.h"
 #include "clock_task.h"
 #include "ntp_sync_task.h"
+#include "esp_interface.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
 #define NTP_SYNC_INTERVAL_MS    (30U * 60U * 1000U)
+#define NTP_WAIT_WIFI_MS        1000U
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -37,6 +39,7 @@ static void time_sync_notification_cb(struct timeval *tv)
 {
     time_t now;
     struct tm timeinfo;
+    (void)tv;
 
     // Use the NTP-synced timestamp
     now = tv->tv_sec;
@@ -60,6 +63,15 @@ static void time_sync_task(void *arg)
 {
     (void)arg;
     const char *TAG = "time_sync";
+
+    ESP_LOGI(TAG, "Waiting for Wi-Fi connection...");
+
+    // Wait Wi-Fi for first sync
+    while (esp_netif_get_netif_impl_index(ESP_IF_WIFI_STA) == -1 ||
+           esp_netif_is_netif_up(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF")) == false) {
+        vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
+    }
+
     ESP_LOGI(TAG, "Initialisation de SNTP...");
     esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
     esp_sntp_setservername(0, "pool.ntp.org");

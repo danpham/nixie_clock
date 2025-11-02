@@ -25,7 +25,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-myclock_t nixie_clock = {0};
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -55,15 +54,9 @@ void app_main(void)
     gpio_task_start();
 
     /* Time syncrhonisation */
-    wifi_register_on_got_ip_callback(on_wifi_ready);
     wifi_init_sta(WIFI_SSID, WIFI_PASSWORD);
 
     while(1) {
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
-}
-
-static void on_wifi_ready(void)
-{
-    time_sync_task_start(&nixie_clock);
 }
