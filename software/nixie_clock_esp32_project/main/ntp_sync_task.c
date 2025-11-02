@@ -67,9 +67,14 @@ static void time_sync_task(void *arg)
     // Wait Wi-Fi for first sync
     while (!wifi_ready)
     {
+        bool is_if_up = false;
         int netif_index = esp_netif_get_netif_impl_index(ESP_IF_WIFI_STA);
         esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-        if ((netif_index != -1) && (netif != NULL) && (esp_netif_is_netif_up(netif))) {
+        if (netif != NULL) {
+            is_if_up = esp_netif_is_netif_up(netif);
+        }
+
+        if ((netif_index != -1) && (netif != NULL) && is_if_up) {
             wifi_ready = true;
         } else {
             vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
