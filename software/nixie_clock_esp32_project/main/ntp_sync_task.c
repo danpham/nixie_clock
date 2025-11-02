@@ -67,8 +67,8 @@ static void time_sync_task(void *arg)
     ESP_LOGI(TAG, "Waiting for Wi-Fi connection...");
 
     // Wait Wi-Fi for first sync
-    while (esp_netif_get_netif_impl_index(ESP_IF_WIFI_STA) == -1 ||
-           esp_netif_is_netif_up(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF")) == false) {
+    while ((esp_netif_get_netif_impl_index(ESP_IF_WIFI_STA) == -1) ||
+           (esp_netif_is_netif_up(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF")) == false)) {
         vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
     }
 
@@ -83,12 +83,12 @@ static void time_sync_task(void *arg)
     vTaskDelete(NULL);
 }
 
-void time_sync_task_start(myclock_t *clk)
+void time_sync_task_start(void)
 {
     xTaskCreate(time_sync_task,
                 "time_sync_task",
                 4096,
-                clk,
+                NULL,
                 2U,
                 NULL);
 }

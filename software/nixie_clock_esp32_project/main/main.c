@@ -29,7 +29,6 @@
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
-static void on_wifi_ready(void);
 
 /******************************************************************
  * 6. Functions definitions
@@ -55,6 +54,7 @@ void app_main(void)
 
     /* Time syncrhonisation */
     wifi_init_sta(WIFI_SSID, WIFI_PASSWORD);
+    time_sync_task_start();
 
     while(1) {
         vTaskDelay(pdMS_TO_TICKS(1000));

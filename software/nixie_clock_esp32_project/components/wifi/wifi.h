@@ -25,6 +25,5 @@
  * 6. Functions definitions
 ******************************************************************/
 void wifi_init_sta(const char *ssid, const char *password);
-void wifi_register_on_got_ip_callback(void (*cb)(void));
 
 #endif // WIFI_H

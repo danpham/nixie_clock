@@ -29,12 +29,6 @@ static void (*wifi_on_got_ip_cb)(void) = NULL;
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-
-void wifi_register_on_got_ip_callback(void (*cb)(void))
-{
-    wifi_on_got_ip_cb = cb;
-}
-
 static void wifi_event_handler(void* arg, esp_event_base_t event_base,
                                int32_t event_id, void* event_data)
 {
@@ -44,7 +38,7 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
     if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_STA_START)) {
         esp_wifi_connect();
     } else if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_STA_DISCONNECTED)) {
-        ESP_LOGI(TAG, "Wi-Fi déconnecté, reconnexion...");
+        ESP_LOGI(TAG, "Wi‑Fi disconnected, reconnecting…");
         esp_wifi_connect();
     } else if ((event_base == IP_EVENT) && (event_id == IP_EVENT_STA_GOT_IP)) {
         ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;

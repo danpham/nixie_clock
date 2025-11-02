@@ -25,6 +25,6 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void time_sync_task_start(myclock_t *clk);
+void time_sync_task_start(void);
 
 #endif // NTP_SYNC_TASK_H
