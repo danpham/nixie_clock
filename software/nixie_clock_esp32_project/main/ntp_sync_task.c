@@ -63,13 +63,19 @@ static void time_sync_task(void *arg)
 {
     (void)arg;
     const char *TAG = "time_sync";
-
+    bool wifi_ready = false;
     ESP_LOGI(TAG, "Waiting for Wi-Fi connection...");
 
     // Wait Wi-Fi for first sync
-    while ((esp_netif_get_netif_impl_index(ESP_IF_WIFI_STA) == -1) ||
-           (esp_netif_is_netif_up(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF")) == false)) {
-        vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
+    while (!wifi_ready)
+    {
+        int netif_index = esp_netif_get_netif_impl_index(ESP_IF_WIFI_STA);
+        esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+        if (netif_index != -1 && netif != NULL && esp_netif_is_netif_up(netif)) {
+            wifi_ready = true;
+        } else {
+            vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
+        }
     }
 
     ESP_LOGI(TAG, "Initialisation de SNTP...");
