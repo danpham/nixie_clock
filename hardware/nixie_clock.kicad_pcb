@@ -18175,6 +18175,18 @@
 				)
 			)
 		)
+		(property "LCSC" "C870811"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ca443ddd-7cc6-4ae2-aef6-3a78e08c4776")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/7e2fbc03-0d09-4c94-a49f-ff5156ee2f2b/d9500590-10ec-4f16-90e6-e6d033c27e09")
 		(sheetname "/connectors/")
@@ -20890,6 +20902,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6f089a2e-990b-448e-bc5d-2302a115363f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C870811"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "2164690a-3eeb-4f7f-a29c-a0935ca7349d")
 			(effects
 				(font
 					(size 1.27 1.27)
