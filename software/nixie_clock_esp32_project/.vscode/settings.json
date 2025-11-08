@@ -27,7 +27,25 @@
         "hv5622_mock.h": "c",
         "functional": "c",
         "charconv": "c",
-        "rotary_encoder.h": "c"
+        "rotary_encoder.h": "c",
+        "stdint.h": "c",
+        "wifi.h": "c",
+        "ntp_sync_task.h": "c",
+        "clock_task.h": "c",
+        "ctime": "c",
+        "esp_netif.h": "c",
+        "esp_sntp.h": "c",
+        "esp_stub.h": "c",
+        "esp_wifi.h": "c",
+        "freertos.h": "c",
+        "esp_netif_sntp.h": "c",
+        "time.h": "c",
+        "esp_interface.h": "c",
+        "webserver.h": "c",
+        "nvs_flash.h": "c",
+        "nvs.h": "c",
+        "config.h": "c",
+        "esp_err.h": "c"
     },
     "idf.flashType": "UART"
 }

@@ -1,13 +1,16 @@
-#ifndef WIFI_H
-#define WIFI_H
+#ifndef WEBSERVER_H
+#define WEBSERVER_H
 
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#include "esp_http_server.h"
+#include "driver/gpio.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define LED_PIN 2
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -24,7 +27,7 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
-                     const char *ap_ssid, const char *ap_password);
 
-#endif // WIFI_H
+httpd_handle_t start_webserver(void);
+
+#endif // WEBSERVER_H

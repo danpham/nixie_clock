@@ -1,9 +1,11 @@
-#ifndef WIFI_H
-#define WIFI_H
+#ifndef NVS_H
+#define NVS_H
 
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#include "esp_err.h"
+#include <stdint.h>
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -24,7 +26,17 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
-                     const char *ap_ssid, const char *ap_password);
 
-#endif // WIFI_H
+// Initialize NVS
+esp_err_t nvs_init(void);
+
+esp_err_t nvs_save_ntp(int32_t enabled);
+esp_err_t nvs_load_ntp(int32_t *enabled);
+
+esp_err_t nvs_save_cathode(int32_t enabled);
+esp_err_t nvs_load_cathode(int32_t *enabled);
+
+esp_err_t nvs_save_counter(int32_t value);
+esp_err_t nvs_load_counter(int32_t *value);
+
+#endif // NVS_H
