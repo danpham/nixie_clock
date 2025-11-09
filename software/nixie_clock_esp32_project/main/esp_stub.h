@@ -12,6 +12,8 @@
 /* ESP-IDF error codes */
 #define ESP_OK   0
 #define ESP_ERR_INVALID_STATE 0
+#define ESP_ERR_NVS_NO_FREE_PAGES 0
+#define ESP_ERR_NVS_NEW_VERSION_FOUND 0
 
 /* Wifi */
 #define WIFI_EVENT 1

@@ -32,7 +32,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char *MAIN_TAG = "MAIN";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -48,6 +47,7 @@ void app_main(void);
 // cppcheck-suppress unusedFunction
 void app_main(void)
 {
+    const char *MAIN_TAG = "MAIN";
     const char hello[] = "Nixie clock v1.0: Starting...";
     esp_err_t ret = ESP_FAIL;
     size_t len = sizeof(hello) - 1U;

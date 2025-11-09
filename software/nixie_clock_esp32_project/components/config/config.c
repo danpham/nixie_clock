@@ -20,7 +20,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char *CONFIG_TAG = "config";
 static config_t cfg;
 static config_t cfg_last;
 static SemaphoreHandle_t config_mutex = NULL;
@@ -40,6 +39,7 @@ static const TickType_t CONFIG_MUTEX_TIMEOUT = portMAX_DELAY;
  */
 esp_err_t config_init(void)
 {
+    const char *CONFIG_TAG = "config";
     esp_err_t ret = ESP_OK;
 
     if (config_mutex == NULL)
