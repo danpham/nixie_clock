@@ -7,6 +7,7 @@
 #include "freertos/semphr.h"
 #include "config.h"
 #include "nvs.h"
+#include "../../main/esp_stub.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

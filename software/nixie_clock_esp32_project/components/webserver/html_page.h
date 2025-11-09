@@ -1,34 +1,49 @@
+#ifndef HTML_PAGE_H
+#define HTML_PAGE_H
+
+/******************************************************************
+ * 1. Included files (microcontroller ones then user defined ones)
+******************************************************************/
+#include "../../main/esp_stub.h"
+
+/******************************************************************
+ * 2. Define declarations (macros then function macros)
+******************************************************************/
+
+/******************************************************************
+ * 3. Typedef definitions (simple typedef, then enum and structs)
+******************************************************************/
+
+/******************************************************************
+ * 4. Variable definitions (static then global)
+******************************************************************/
+
+/******************************************************************
+ * 5. Functions prototypes (static only)
+******************************************************************/
+
+/******************************************************************
+ * 6. Functions definitions
+******************************************************************/
+
 /**
- * @file html_page.h
- * @brief HTML page template for Nixie Clock control interface.
+ * @brief HTML page served by the embedded web interface.
  *
- * This header defines a constant C string containing the full HTML page
- * for controlling the Nixie Clock via a web interface. The page includes:
- * 
- * - Time setting inputs (HH:MM:SS)
- * - Wi-Fi configuration (SSID and password)
- * - Time synchronization option (NTP)
- * - Mode selection (Hour mode, Cathode antipoisoning, Counter mode)
- *
- * Placeholders (e.g., %d, %s) are used for dynamic values to be filled
- * in when serving the page from the ESP32.
+ * Constant character array containing the full HTML configuration page
+ * (time settings, Wi-Fi credentials, NTP option, operating mode).
+ * Dynamic values are inserted using snprintf() before sending it to
+ * the HTTP client.
  *
  * Usage:
  * @code
  * char buffer[3500];
- * snprintf(buffer, sizeof(buffer), html_page, hour, min, sec, ssid, password,
- *          ntp_checked, mode0_checked, mode1_checked, mode2_checked);
+ * snprintf(buffer, sizeof(buffer), html_page,
+ *          hour, min, sec,
+ *          ssid, password,
+ *          ntp_checked,
+ *          mode0_checked, mode1_checked, mode2_checked);
  * @endcode
- *
- * Styling:
- * - Dark theme with Roboto font
- * - Centered card layout
- * - Input fields, checkboxes, radio buttons, and buttons styled for clarity
  */
-
-#ifndef HTML_PAGE_H
-#define HTML_PAGE_H
-
 static const char html_page[] = R"rawliteral(
 <!DOCTYPE html>
 <html lang="en">

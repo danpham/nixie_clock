@@ -5,6 +5,7 @@
 #include "nvs.h"
 #include "esp_log.h"
 #include "esp_err.h"
+#include "../../main/esp_stub.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

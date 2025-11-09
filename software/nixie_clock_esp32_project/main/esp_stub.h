@@ -11,11 +11,14 @@
 
 /* ESP-IDF error codes */
 #define ESP_OK   0
+#define ESP_ERR_INVALID_STATE 0
 
 /* Wifi */
 #define WIFI_EVENT 1
 #define WIFI_EVENT_STA_START 1
 #define WIFI_EVENT_STA_DISCONNECTED 1
+#define WIFI_EVENT_AP_STACONNECTED 1
+#define WIFI_EVENT_AP_STADISCONNECTED 1
 #define IP_EVENT_STA_GOT_IP 1
 #define IP_EVENT 1
 

@@ -20,7 +20,7 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char *TAG = "wifi";
+static const char *WIFI_TAG = "wifi";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -52,25 +52,25 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
 
 
     if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_STA_START)) {
-        ESP_LOGI(TAG, "Wi‑Fi STA started, connecting...");
+        ESP_LOGI(WIFI_TAG, "Wi‑Fi STA started, connecting...");
         esp_wifi_connect();
     } else if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_STA_DISCONNECTED)) {
-        ESP_LOGI(TAG, "Wi‑Fi STA disconnected, reconnecting…");
+        ESP_LOGI(WIFI_TAG, "Wi‑Fi STA disconnected, reconnecting…");
         esp_wifi_connect();
     } else if ((event_base == IP_EVENT) && (event_id == IP_EVENT_STA_GOT_IP)) {
         ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
-        ESP_LOGI(TAG, "IP: " IPSTR, IP2STR(&event->ip_info.ip));
+        ESP_LOGI(WIFI_TAG, "IP: " IPSTR, IP2STR(&event->ip_info.ip));
     }
     else if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_AP_STACONNECTED)) {
         wifi_event_ap_staconnected_t* e = (wifi_event_ap_staconnected_t*) event_data;
-        ESP_LOGI(TAG, "AP client connected: MAC=%02x:%02x:%02x:%02x:%02x:%02x, AID=%d",
+        ESP_LOGI(WIFI_TAG, "AP client connected: MAC=%02x:%02x:%02x:%02x:%02x:%02x, AID=%d",
                     e->mac[0], e->mac[1], e->mac[2],
                     e->mac[3], e->mac[4], e->mac[5],
                     e->aid);
     }
     else if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_AP_STADISCONNECTED)) {
         wifi_event_ap_stadisconnected_t* e = (wifi_event_ap_stadisconnected_t*) event_data;
-        ESP_LOGI(TAG, "AP client disconnected: MAC=%02x:%02x:%02x:%02x:%02x:%02x, AID=%d",
+        ESP_LOGI(WIFI_TAG, "AP client disconnected: MAC=%02x:%02x:%02x:%02x:%02x:%02x, AID=%d",
                     e->mac[0], e->mac[1], e->mac[2],
                     e->mac[3], e->mac[4], e->mac[5],
                     e->aid);
@@ -92,14 +92,14 @@ static esp_err_t wifi_register_event_handlers(void)
     ret = esp_event_handler_instance_register(WIFI_EVENT, ESP_EVENT_ANY_ID,
                                               &wifi_event_handler, NULL, NULL);
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "WIFI_EVENT handler register failed: %s", esp_err_to_name(ret));
+        ESP_LOGE(WIFI_TAG, "WIFI_EVENT handler register failed: %s", esp_err_to_name(ret));
     }
 
     if (ret == ESP_OK) {
         ret = esp_event_handler_instance_register(IP_EVENT, IP_EVENT_STA_GOT_IP,
                                                   &wifi_event_handler, NULL, NULL);
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "IP_EVENT handler register failed: %s", esp_err_to_name(ret));
+            ESP_LOGE(WIFI_TAG, "IP_EVENT handler register failed: %s", esp_err_to_name(ret));
         }
     }
 
@@ -127,13 +127,13 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
 
     ret = esp_netif_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "esp_netif_init failed: %s", esp_err_to_name(ret));
+        ESP_LOGE(WIFI_TAG, "esp_netif_init failed: %s", esp_err_to_name(ret));
     }
 
     if (ret == ESP_OK) {
         ret = esp_event_loop_create_default();
         if ((ret != ESP_OK) && (ret != ESP_ERR_INVALID_STATE)) {
-            ESP_LOGE(TAG, "esp_event_loop_create_default failed: %s", esp_err_to_name(ret));
+            ESP_LOGE(WIFI_TAG, "esp_event_loop_create_default failed: %s", esp_err_to_name(ret));
         } else {
             ret = ESP_OK;
         }
@@ -142,7 +142,7 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
     if (ret == ESP_OK) {
         netif_sta = esp_netif_create_default_wifi_sta();
         if (netif_sta == NULL) {
-            ESP_LOGE(TAG, "esp_netif_create_default_wifi_sta failed");
+            ESP_LOGE(WIFI_TAG, "esp_netif_create_default_wifi_sta failed");
             ret = ESP_FAIL;
         }
     }
@@ -150,7 +150,7 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
     if (ret == ESP_OK) {
         netif_ap = esp_netif_create_default_wifi_ap();
         if (netif_ap == NULL) {
-            ESP_LOGE(TAG, "esp_netif_create_default_wifi_ap failed");
+            ESP_LOGE(WIFI_TAG, "esp_netif_create_default_wifi_ap failed");
             ret = ESP_FAIL;
         }
     }
@@ -159,7 +159,7 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
     if (ret == ESP_OK) {
         ret = esp_wifi_init(&cfg);
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "esp_wifi_init failed: %s", esp_err_to_name(ret));
+            ESP_LOGE(WIFI_TAG, "esp_wifi_init failed: %s", esp_err_to_name(ret));
         }
     }
 
@@ -194,7 +194,7 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
         }
 
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "WiFi start/config failed: %s", esp_err_to_name(ret));
+            ESP_LOGE(WIFI_TAG, "WiFi start/config failed: %s", esp_err_to_name(ret));
         }
     }
 }
