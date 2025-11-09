@@ -46,7 +46,7 @@ static esp_err_t root_handler(httpd_req_t *req)
     char buffer_page[WEBSERVER_HTML_PAGE_SIZE];
     err = config_get_copy(&config);
     if (ESP_OK == err) {
-        snprintf(buffer_page, sizeof(buffer_page), html_page,
+        snprintf(buffer_page, sizeof(buffer_page), (const char *)html_page,
         12, 0, 0,
         "","",
         "",
@@ -110,8 +110,10 @@ httpd_handle_t start_webserver(void)
 {
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     httpd_handle_t server = NULL;
+    esp_err_t start_result = ESP_FAIL;
 
-    if (httpd_start(&server, &config) == ESP_OK) {
+    start_result = httpd_start(&server, &config);
+    if (start_result == ESP_OK) {
 
         httpd_uri_t root = {
             .uri       = "/",
@@ -136,9 +138,7 @@ httpd_handle_t start_webserver(void)
             .user_ctx  = NULL
         };
         httpd_register_uri_handler(server, &led_off);
-
-        return server;
     }
 
-    return NULL;
+    return server;
 }

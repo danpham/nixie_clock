@@ -122,8 +122,8 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
                      const char *ap_ssid, const char *ap_password)
 {
     esp_err_t ret = ESP_OK;
-    esp_netif_t *netif_sta = NULL;
-    esp_netif_t *netif_ap = NULL;
+    const esp_netif_t *netif_sta = NULL;
+    const esp_netif_t *netif_ap = NULL;
 
     ret = esp_netif_init();
     if (ret != ESP_OK) {

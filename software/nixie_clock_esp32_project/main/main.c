@@ -7,6 +7,7 @@
 #include "clock_task.h"
 #include "ntp_sync_task.h"
 #include "esp_log.h"
+#include "esp_stub.h"
 #include "../components/uart/uart.h"
 #include "../components/hv5622/hv5622.h"
 #include "../components/display/display.h"
@@ -31,7 +32,7 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char *TAG = "MAIN";
+static const char *MAIN_TAG = "MAIN";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -56,7 +57,7 @@ void app_main(void)
 
     ret = config_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Config init failed: %d", ret);
+        ESP_LOGE(MAIN_TAG, "Config init failed: %d", ret);
     }
 
     hv5622_init();

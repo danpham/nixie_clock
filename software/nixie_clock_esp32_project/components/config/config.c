@@ -20,7 +20,7 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char *TAG = "config";
+static const char *CONFIG_TAG = "config";
 static config_t cfg;
 static config_t cfg_last;
 static SemaphoreHandle_t config_mutex = NULL;
@@ -47,7 +47,7 @@ esp_err_t config_init(void)
         config_mutex = xSemaphoreCreateMutex();
         if (config_mutex == NULL)
         {
-            ESP_LOGE(TAG, "Failed to create config mutex");
+            ESP_LOGE(CONFIG_TAG, "Failed to create config mutex");
             return ESP_FAIL;
         }
     }
