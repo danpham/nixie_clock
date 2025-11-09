@@ -94,7 +94,7 @@ static esp_err_t nvs_save_value(const char *key, int32_t value)
 static esp_err_t nvs_load_value(const char *key, int32_t *value)
 {
     nvs_handle_t handle = 0U;
-    esp_err_t err = ESP_FAIL;
+    esp_err_t err;
     esp_err_t ret = ESP_FAIL;
 
     if (NULL != value) {

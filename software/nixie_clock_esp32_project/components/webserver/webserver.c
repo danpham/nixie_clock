@@ -44,9 +44,10 @@ static esp_err_t root_handler(httpd_req_t *req)
     esp_err_t err = ESP_FAIL;
     config_t config;
     char buffer_page[WEBSERVER_HTML_PAGE_SIZE];
+    const char * html_page = get_html_page();
     err = config_get_copy(&config);
     if (ESP_OK == err) {
-        snprintf(buffer_page, sizeof(buffer_page), (const char *)html_page,
+        snprintf(buffer_page, sizeof(buffer_page), html_page,
         12, 0, 0,
         "","",
         "",
