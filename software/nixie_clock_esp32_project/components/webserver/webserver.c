@@ -9,6 +9,7 @@
 #include "esp_netif.h"
 #include "webserver.h"
 #include "config.h"
+#include "../../main/esp_stub.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
