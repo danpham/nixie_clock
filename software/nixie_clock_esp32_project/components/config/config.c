@@ -41,7 +41,7 @@ esp_err_t config_init(void)
 {
     const char *CONFIG_TAG = "config";
     esp_err_t ret = ESP_OK;
-    esp_err_t ret_load = ESP_OK;
+
 
     if (config_mutex == NULL)
     {
@@ -58,7 +58,7 @@ esp_err_t config_init(void)
         ret = nvs_init();
         if (ret == ESP_OK)
         {
-            ret_load = nvs_load_counter(&cfg.mode);
+            esp_err_t ret_load = nvs_load_counter(&cfg.mode);
             if (ret_load != ESP_OK)
             {
                 cfg.mode = 0;
@@ -99,24 +99,26 @@ esp_err_t config_save(void)
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE)
     {
+        esp_err_t ret_save;
+
         if (cfg.mode != cfg_last.mode)
         {
-            if (nvs_save_counter(cfg.mode) == ESP_OK)
-            {
+            ret_save = nvs_save_counter(cfg.mode);
+            if (ret_save == ESP_OK) {
                 changed = ESP_OK;
             }
         }
         if (cfg.param1 != cfg_last.param1)
         {
-            if (nvs_save_ntp(cfg.param1) == ESP_OK)
-            {
+            ret_save = nvs_save_counter(cfg.param1);
+            if (ret_save == ESP_OK) {
                 changed = ESP_OK;
             }
         }
         if (cfg.param2 != cfg_last.param2)
         {
-            if (nvs_save_cathode(cfg.param2) == ESP_OK)
-            {
+            ret_save = nvs_save_counter(cfg.param2);
+            if (ret_save == ESP_OK) {
                 changed = ESP_OK;
             }
         }
@@ -141,20 +143,27 @@ esp_err_t config_save(void)
  */
 esp_err_t config_get_copy(config_t *copy)
 {
+    esp_err_t ret = ESP_OK;
+
     if (copy == NULL)
     {
-        return ESP_ERR_INVALID_ARG;
+        ret = ESP_ERR_INVALID_ARG;
     }
 
-    BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
-    if (taken == pdTRUE)
-    {
-        *copy = cfg;
-        (void)xSemaphoreGive(config_mutex);
-        return ESP_OK;
+    if (ret == ESP_OK) {
+        BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
+        if (taken == pdTRUE)
+        {
+            *copy = cfg;
+            (void)xSemaphoreGive(config_mutex);
+            ret = ESP_OK;
+        }
+        else {
+            ret = ESP_FAIL;
+        }
     }
 
-    return ESP_FAIL;
+    return ret;
 }
 
 /**
