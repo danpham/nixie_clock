@@ -94,11 +94,10 @@ static esp_err_t nvs_save_value(const char *key, int32_t value)
 static esp_err_t nvs_load_value(const char *key, int32_t *value)
 {
     nvs_handle_t handle = 0U;
-    esp_err_t err;
     esp_err_t ret = ESP_FAIL;
 
     if (NULL != value) {
-        err = nvs_open(NVS_NAMESPACE, NVS_READONLY, &handle);
+        esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READONLY, &handle);
         if (err == ESP_OK) {
             ret = nvs_get_i32(handle, key, value);
             nvs_close(handle);

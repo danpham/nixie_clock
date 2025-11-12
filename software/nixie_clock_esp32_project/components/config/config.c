@@ -39,7 +39,6 @@ static const TickType_t CONFIG_MUTEX_TIMEOUT = portMAX_DELAY;
  */
 esp_err_t config_init(void)
 {
-    const char *CONFIG_TAG = "config";
     esp_err_t ret = ESP_OK;
 
 
@@ -48,6 +47,7 @@ esp_err_t config_init(void)
         config_mutex = xSemaphoreCreateMutex();
         if (config_mutex == NULL)
         {
+            const char *CONFIG_TAG = "config";
             ESP_LOGE(CONFIG_TAG, "Failed to create config mutex");
             ret = ESP_FAIL;
         }

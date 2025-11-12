@@ -44,10 +44,16 @@ static esp_err_t root_handler(httpd_req_t *req)
     esp_err_t err = ESP_FAIL;
     config_t config;
     char buffer_page[WEBSERVER_HTML_PAGE_SIZE];
-    const char * html_page = get_html_page();
+    char html_format[WEBSERVER_HTML_PAGE_SIZE];
+    const char *html_page_orig = get_html_page();
+
+    /* Copy original HTML page to local buffer (safe because size is bounded) */
+    (void)strncpy(html_format, html_page_orig, sizeof(html_format) - 1U);
+    html_format[sizeof(html_format) - 1U] = '\0';
+
     err = config_get_copy(&config);
     if (ESP_OK == err) {
-        snprintf(buffer_page, sizeof(buffer_page), html_page,
+        snprintf(buffer_page, sizeof(buffer_page), html_format,
         12, 0, 0,
         "","",
         "",
@@ -70,33 +76,44 @@ static esp_err_t root_handler(httpd_req_t *req)
  *
  * @return ESP_OK Always returns ESP_OK after handling the request.
  */
-static esp_err_t led_on_handler(httpd_req_t *req)
+static esp_err_t update_handler(httpd_req_t *req)
 {
-    gpio_set_level(LED_PIN, 1);
+    char buf[200];
+    char tmp[32];
+    config_t new_config;
+
+    config_get_copy(&new_config); // on part d'une copie existante
+
+    int len = httpd_req_recv(req, buf, sizeof(buf) - 1);
+    if (len <= 0) {
+        if (len == HTTPD_SOCK_ERR_TIMEOUT) {
+            httpd_resp_send_408(req);
+        }
+        return ESP_FAIL;
+    }
+
+    buf[len] = 0; // <-- important, on termine la chaîne
+
+    // Extraction des champs
+    if (httpd_query_key_value(buf, "mode", tmp, sizeof(tmp)) == ESP_OK)
+        new_config.mode = atoi(tmp);
+
+    if (httpd_query_key_value(buf, "param1", tmp, sizeof(tmp)) == ESP_OK)
+        new_config.param1 = atoi(tmp);
+
+    if (httpd_query_key_value(buf, "param2", tmp, sizeof(tmp)) == ESP_OK)
+        new_config.param2 = atoi(tmp);
+
+    // Mise à jour de la config globale
+    //config_set(&new_config);
+
+    // Redirection vers /
     httpd_resp_set_status(req, "303 See Other");
     httpd_resp_set_hdr(req, "Location", "/");
     httpd_resp_send(req, NULL, 0);
     return ESP_OK;
 }
 
-/**
- * @brief Handles the "/off" request to turn the LED off.
- *
- * This handler sets the LED GPIO low, then redirects the client
- * back to the root page using an HTTP 303 redirect.
- *
- * @param req Pointer to the HTTP request structure.
- *
- * @return ESP_OK Always returns ESP_OK after handling the request.
- */
-static esp_err_t led_off_handler(httpd_req_t *req)
-{
-    gpio_set_level(LED_PIN, 0);
-    httpd_resp_set_status(req, "303 See Other");
-    httpd_resp_set_hdr(req, "Location", "/");
-    httpd_resp_send(req, NULL, 0);
-    return ESP_OK;
-}
 
 /**
  * @brief Starts the HTTP web server and registers URI handlers.
@@ -124,21 +141,13 @@ httpd_handle_t start_webserver(void)
         };
         httpd_register_uri_handler(server, &root);
 
-        httpd_uri_t led_on = {
-            .uri       = "/on",
-            .method    = HTTP_GET,
-            .handler   = led_on_handler,
+        httpd_uri_t update = {
+            .uri       = "/update",
+            .method    = HTTP_POST,
+            .handler   = update_handler,
             .user_ctx  = NULL
         };
-        httpd_register_uri_handler(server, &led_on);
-
-        httpd_uri_t led_off = {
-            .uri       = "/off",
-            .method    = HTTP_GET,
-            .handler   = led_off_handler,
-            .user_ctx  = NULL
-        };
-        httpd_register_uri_handler(server, &led_off);
+        httpd_register_uri_handler(server, &update);
     }
 
     return server;
