@@ -7,6 +7,7 @@
 
 /* FreeRTOS boolean macros */
 #define pdTRUE  1
+#define pdFALSE 0
 #define pdPASS  1
 
 /* ESP-IDF error codes */

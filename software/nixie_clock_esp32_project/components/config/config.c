@@ -165,7 +165,7 @@ esp_err_t config_set_params(int32_t mode, int32_t param1, int32_t param2)
 {
     esp_err_t result = ESP_FAIL;
 
-    if (xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT) == pdTRUE)
+    if (xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT) != pdFALSE)
     {
         if ((cfg.mode != mode) || (cfg.param1 != param1) || (cfg.param2 != param2))
         {
