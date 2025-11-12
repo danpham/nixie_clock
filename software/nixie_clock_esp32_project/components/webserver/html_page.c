@@ -14,7 +14,7 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char html_page[] =
+static const char html_page_data[] =
 "<!DOCTYPE html>\n"
 "<html lang=\"en\">\n"
 "<head>\n"
@@ -143,6 +143,8 @@ static const char html_page[] =
 "</body>\n"
 "</html>\n";
 
+static const char * const html_page = html_page_data;
+
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
@@ -152,16 +154,16 @@ static const char html_page[] =
 ******************************************************************/
 
 /**
- * @brief Retourne le contenu HTML statique de la page.
+ * @brief Returns the static HTML content of the page.
  *
- * Cette fonction fournit un accès au tableau statique `html_page` contenant
- * le code HTML complet de la page. Le tableau est stocké dans le segment
- * en lecture seule et n'est pas modifiable par l'appelant.
+ * This function provides access to the static `html_page` array containing
+ * the full HTML code of the page. The array is stored in read-only memory
+ * and cannot be modified by the caller.
  *
- * @return const char* Pointeur vers le début du contenu HTML.
+ * @return const char* Pointer to the beginning of the HTML content.
  *
- * @note La mémoire est gérée statiquement ; il ne faut pas tenter de libérer
- *       le pointeur retourné.
+ * @note The memory is managed statically; do not attempt to free
+ *       the returned pointer.
  */
 const char* get_html_page(void) {
     return html_page;
