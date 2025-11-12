@@ -47,7 +47,6 @@ void app_main(void);
 // cppcheck-suppress unusedFunction
 void app_main(void)
 {
-    const char *MAIN_TAG = "MAIN";
     const char hello[] = "Nixie clock v1.0: Starting...";
     esp_err_t ret = ESP_FAIL;
     size_t len = sizeof(hello) - 1U;
@@ -57,6 +56,7 @@ void app_main(void)
 
     ret = config_init();
     if (ret != ESP_OK) {
+        const char *MAIN_TAG = "MAIN";
         ESP_LOGE(MAIN_TAG, "Config init failed: %d", ret);
     }
 

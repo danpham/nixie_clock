@@ -10,7 +10,6 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define LED_PIN 2
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)

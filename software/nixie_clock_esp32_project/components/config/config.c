@@ -41,7 +41,6 @@ esp_err_t config_init(void)
 {
     esp_err_t ret = ESP_OK;
 
-
     if (config_mutex == NULL)
     {
         config_mutex = xSemaphoreCreateMutex();
