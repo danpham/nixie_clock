@@ -41,6 +41,7 @@ esp_err_t config_init(void)
 {
     const char *CONFIG_TAG = "config";
     esp_err_t ret = ESP_OK;
+    esp_err_t ret_load = ESP_OK;
 
     if (config_mutex == NULL)
     {
@@ -48,32 +49,38 @@ esp_err_t config_init(void)
         if (config_mutex == NULL)
         {
             ESP_LOGE(CONFIG_TAG, "Failed to create config mutex");
-            return ESP_FAIL;
+            ret = ESP_FAIL;
         }
     }
 
-    ret = nvs_init();
-    if (ret != ESP_OK)
-    {
-        return ESP_FAIL;
+    if (ret == ESP_OK) {
+
+        ret = nvs_init();
+        if (ret == ESP_OK)
+        {
+            ret_load = nvs_load_counter(&cfg.mode);
+            if (ret_load != ESP_OK)
+            {
+                cfg.mode = 0;
+            }
+
+            ret_load = nvs_load_ntp(&cfg.param1);
+            if (ret_load != ESP_OK)
+            {
+                cfg.param1 = 0;
+            }
+
+            ret_load = nvs_load_cathode(&cfg.param2);
+            if (ret_load != ESP_OK)
+            {
+                cfg.param2 = 0;
+            }
+
+            cfg_last = cfg;
+        }
     }
 
-    if (nvs_load_counter(&cfg.mode) != ESP_OK)
-    {
-        cfg.mode = 0;
-    }
-    if (nvs_load_ntp(&cfg.param1) != ESP_OK)
-    {
-        cfg.param1 = 0;
-    }
-    if (nvs_load_cathode(&cfg.param2) != ESP_OK)
-    {
-        cfg.param2 = 0;
-    }
-
-    cfg_last = cfg;
-
-    return ESP_OK;
+    return ret;
 }
 
 /**
@@ -89,7 +96,8 @@ esp_err_t config_save(void)
 {
     esp_err_t changed = ESP_FAIL;
 
-    if (xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT) == pdTRUE)
+    BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
+    if (taken == pdTRUE)
     {
         if (cfg.mode != cfg_last.mode)
         {
@@ -138,7 +146,8 @@ esp_err_t config_get_copy(config_t *copy)
         return ESP_ERR_INVALID_ARG;
     }
 
-    if (xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT) == pdTRUE)
+    BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
+    if (taken == pdTRUE)
     {
         *copy = cfg;
         (void)xSemaphoreGive(config_mutex);
