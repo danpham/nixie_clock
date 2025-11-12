@@ -24,6 +24,9 @@
 #define IP_EVENT_STA_GOT_IP 1
 #define IP_EVENT 1
 
+/* HTTP Server */
+#define HTTPD_SOCK_ERR_TIMEOUT   -3
+
 typedef int esp_err_t;
 
 BaseType_t xQueueReceive( QueueHandle_t xQueue,

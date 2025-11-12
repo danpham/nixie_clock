@@ -82,37 +82,75 @@ static esp_err_t update_handler(httpd_req_t *req)
     char buf[200];
     char tmp[32];
     config_t new_config;
+    esp_err_t query_res;
+    esp_err_t ret = ESP_OK;
+    char *endptr = NULL;
+    long value = 0;
 
-    config_get_copy(&new_config); // on part d'une copie existante
+    /* Start from a copy of the current configuration */
+    config_get_copy(&new_config);
 
-    int len = httpd_req_recv(req, buf, sizeof(buf) - 1);
+    ssize_t len = httpd_req_recv(req, buf, (size_t)(sizeof(buf) - 1U));
     if (len <= 0) {
         if (len == HTTPD_SOCK_ERR_TIMEOUT) {
             httpd_resp_send_408(req);
         }
-        return ESP_FAIL;
+        ret = ESP_FAIL;
     }
 
-    buf[len] = 0; // <-- important, on termine la chaîne
+    if (ret == ESP_OK) {
+        buf[(size_t)len] = 0; /* Null-terminate received data */
 
-    // Extraction des champs
-    if (httpd_query_key_value(buf, "mode", tmp, sizeof(tmp)) == ESP_OK)
-        new_config.mode = atoi(tmp);
+        /* Read "mode" parameter */
+        query_res = httpd_query_key_value(buf, "mode", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            endptr = NULL;
+            value = strtol(tmp, &endptr, 10);
+            /* Check for successful numeric conversion */
+            if ((endptr != tmp) && (*endptr == '\0'))
+            {
+                new_config.mode = (int)value;
+            }
+        }
 
-    if (httpd_query_key_value(buf, "param1", tmp, sizeof(tmp)) == ESP_OK)
-        new_config.param1 = atoi(tmp);
+        /* Read "param1" parameter */
+        query_res = httpd_query_key_value(buf, "param1", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            endptr = NULL;
+            value = strtol(tmp, &endptr, 10);
+            /* Check for successful numeric conversion */
+            if ((endptr != tmp) && (*endptr == '\0'))
+            {
+                new_config.param1 = (int)value;
+            }
+        }
 
-    if (httpd_query_key_value(buf, "param2", tmp, sizeof(tmp)) == ESP_OK)
-        new_config.param2 = atoi(tmp);
+        /* Read "param2" parameter */
+        query_res = httpd_query_key_value(buf, "param2", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            endptr = NULL;
+            value = strtol(tmp, &endptr, 10);
+            /* Check for successful numeric conversion */
+            if ((endptr != tmp) && (*endptr == '\0'))
+            {
+                new_config.param2 = (int)value;
+            }
+        }
 
-    // Mise à jour de la config globale
-    //config_set(&new_config);
+        /* Update global configuration (currently commented out for test safety) */
+        // (void)config_set(&new_config);
 
-    // Redirection vers /
-    httpd_resp_set_status(req, "303 See Other");
-    httpd_resp_set_hdr(req, "Location", "/");
-    httpd_resp_send(req, NULL, 0);
-    return ESP_OK;
+        /* Redirect client back to the root page */
+        httpd_resp_set_status(req, "303 See Other");
+        httpd_resp_set_hdr(req, "Location", "/");
+        httpd_resp_send(req, NULL, 0);
+
+    }
+    
+    return ret;
 }
 
 
