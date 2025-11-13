@@ -80,12 +80,9 @@ static esp_err_t root_handler(httpd_req_t *req)
 static esp_err_t update_handler(httpd_req_t *req)
 {
     char buf[200];
-    char tmp[32];
     config_t new_config;
-    esp_err_t query_res;
     esp_err_t ret = ESP_OK;
     char *endptr = NULL;
-    long value = 0;
 
     /* Start from a copy of the current configuration */
     config_get_copy(&new_config);
@@ -99,6 +96,9 @@ static esp_err_t update_handler(httpd_req_t *req)
     }
 
     if (ret == ESP_OK) {
+        esp_err_t query_res;
+        char tmp[32];
+        long value = 0;
         buf[(size_t)len] = 0; /* Null-terminate received data */
 
         /* Read "mode" parameter */
