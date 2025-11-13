@@ -2,6 +2,11 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include "uart.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
+#include "esp_log.h"
+#include "../../main/esp_stub.h"
+
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -84,7 +89,8 @@ void uart_init(void)
 void uart_write(const char *str, size_t len)
 {
     if (uart_mutex != NULL) {
-        if (xSemaphoreTake(uart_mutex, pdMS_TO_TICKS(UART_MUTEX_TIMEOUT)) == pdTRUE) {
+        BaseType_t taken = xSemaphoreTake(uart_mutex, pdMS_TO_TICKS(UART_MUTEX_TIMEOUT));
+        if (taken == pdTRUE) {
             uart_write_bytes(UART_PORT, str, len);
             xSemaphoreGive(uart_mutex);
         } else {

@@ -60,7 +60,8 @@
         "xutility": "c",
         "xstring": "c",
         "array": "c",
-        "vector": "c"
+        "vector": "c",
+        "semphr.h": "c"
     },
     "idf.flashType": "UART"
 }
