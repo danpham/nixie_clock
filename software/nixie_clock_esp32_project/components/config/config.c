@@ -203,7 +203,7 @@ esp_err_t config_get_copy(config_t *copy)
  * @return ESP_OK if configuration was updated, ESP_FAIL if nothing changed
  *         or mutex could not be acquired.
  */
-esp_err_t config_set_config(config_t *config)
+esp_err_t config_set_config(const config_t *config)
 {
     esp_err_t result = ESP_FAIL;
 
