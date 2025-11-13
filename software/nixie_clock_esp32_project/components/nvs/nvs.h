@@ -39,10 +39,10 @@ esp_err_t nvs_load_cathode(int32_t *enabled);
 esp_err_t nvs_save_counter(int32_t value);
 esp_err_t nvs_load_counter(int32_t *value);
 
-esp_err_t nvs_save_ssid(char *value);
+esp_err_t nvs_save_ssid(const char *value);
 esp_err_t nvs_load_ssid(char *value, size_t length);
 
-esp_err_t nvs_save_wpa_passphrase(char *value);
+esp_err_t nvs_save_wpa_passphrase(const char *value);
 esp_err_t nvs_load_wpa_passphrase(char *value, size_t length);
 
 #endif // NVS_H
