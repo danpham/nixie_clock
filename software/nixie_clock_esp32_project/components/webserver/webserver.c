@@ -111,6 +111,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             char *local_endptr = NULL;
+            errno = 0;  /* Reset errno before calling strtol */
             const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
@@ -124,6 +125,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             char *local_endptr = NULL;
+            errno = 0;  /* Reset errno before calling strtol */
             const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
@@ -137,6 +139,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             char *local_endptr = NULL;
+            errno = 0;  /* Reset errno before calling strtol */
             const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
