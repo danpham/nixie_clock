@@ -1,7 +1,7 @@
 #include "unity.h"
 #include "clock.h"
 
-static clock_t system_clock_ticks;
+static myclock_t system_clock_ticks;
 
 // Test initialization with clock_init
 void test_clock_init_sets_values(void) {
