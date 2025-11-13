@@ -88,7 +88,6 @@ static esp_err_t update_handler(httpd_req_t *req)
     char buf[200];
     config_t new_config;
     esp_err_t ret = ESP_OK;
-    char *endptr = NULL;
 
     /* Start from a copy of the current configuration */
     config_get_copy(&new_config);
@@ -111,10 +110,10 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(buf, "mode", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            endptr = NULL;
-            const long tmp_val = strtol(tmp, &endptr, 10);
+            char *local_endptr = NULL;
+            const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
-            if ((endptr != tmp) && (*endptr == '\0') && (errno == 0))
+            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
                 new_config.mode = (int)tmp_val;
             }
@@ -124,10 +123,10 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(buf, "param1", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            endptr = NULL;
-            const long tmp_val = strtol(tmp, &endptr, 10);
+            char *local_endptr = NULL;
+            const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
-            if ((endptr != tmp) && (*endptr == '\0') && (errno == 0))
+            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
                 new_config.param1 = (int)tmp_val;
             }
@@ -137,10 +136,10 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(buf, "param2", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            endptr = NULL;
-            const long tmp_val = strtol(tmp, &endptr, 10);
+            char *local_endptr = NULL;
+            const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
-            if ((endptr != tmp) && (*endptr == '\0') && (errno == 0))
+            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
                 new_config.param2 = (int)tmp_val;
             }
