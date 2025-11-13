@@ -21,7 +21,6 @@
 ******************************************************************/
 static SemaphoreHandle_t uart_mutex = NULL;
 static const char UART_TAG[] = "UART";
-static const TickType_t UART_MUTEX_TIMEOUT = 100U;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -89,6 +88,7 @@ void uart_init(void)
 void uart_write(const char *str, size_t len)
 {
     if (uart_mutex != NULL) {
+        static const TickType_t UART_MUTEX_TIMEOUT = 100U;
         BaseType_t taken = xSemaphoreTake(uart_mutex, pdMS_TO_TICKS(UART_MUTEX_TIMEOUT));
         if (taken == pdTRUE) {
             uart_write_bytes(UART_PORT, str, len);

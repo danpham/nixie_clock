@@ -59,14 +59,14 @@ esp_err_t config_init(void)
             ret = nvs_init();
             if (ret == ESP_OK)
             {
-                size_t len = (size_t)CONFIG_SSID_BUF_SZ;
+                size_t len = CONFIG_SSID_BUF_SZ;
                 esp_err_t ret_load = nvs_load_ssid(cfg.ssid, &len);
                 if (ret_load != ESP_OK)
                 {
                     cfg.ssid[0] = '\0';
                 }
 
-                len = (size_t)CONFIG_WPA_PASSPHRASE_BUF_SZ;
+                len = CONFIG_WPA_PASSPHRASE_BUF_SZ;
                 ret_load = nvs_load_wpa_passphrase(cfg.wpa_passphrase, &len);
                 if (ret_load != ESP_OK)
                 {
