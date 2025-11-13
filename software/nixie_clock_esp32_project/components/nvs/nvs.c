@@ -19,6 +19,7 @@
  * 4. Variable definitions (static then global)
 ******************************************************************/
 static const char *NVS_NAMESPACE = "storage";
+static const char NVS_TAG[] = "NVS";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -82,6 +83,46 @@ static esp_err_t nvs_save_value(const char *key, int32_t value)
     return ret;
 }
 
+
+/**
+ * @brief Save a string value to NVS under a given key.
+ *
+ * Opens the NVS namespace in read/write mode, writes the string, commits
+ * it, and closes the handle.
+ *
+ * @param key The key under which the string will be stored.
+ * @param value The null-terminated string to save.
+ * @return esp_err_t ESP_OK on success, otherwise an error code.
+ */
+static esp_err_t nvs_save_str(const char * key, const char * value)
+{
+    nvs_handle_t handle = 0U;
+    esp_err_t err = ESP_FAIL;
+    esp_err_t ret = ESP_FAIL;
+
+    /* Open namespace */
+    err = nvs_open(NVS_NAMESPACE, NVS_READWRITE, &handle);
+    if (err == ESP_OK)
+    {
+        ret = nvs_set_str(handle, key, value);
+        if (ret == ESP_OK) {
+            ret = nvs_commit(handle);
+        }
+        else {
+            ESP_LOGE(NVS_TAG, "Write error: %s", esp_err_to_name(ret));
+        }
+
+        (void)nvs_close(handle);
+    }
+    else {
+        ret = err;
+        ESP_LOGE(NVS_TAG, "Open error: %s", esp_err_to_name(err));
+    }
+
+    return ret;
+}
+
+
 /**
  * @brief Load an integer value from NVS using a given key.
  *
@@ -112,12 +153,57 @@ static esp_err_t nvs_load_value(const char *key, int32_t *value)
     return ret;
 }
 
+/**
+ * @brief Load a string value from NVS under a given key.
+ *
+ * Opens the NVS namespace in read-only mode, reads the string value into
+ * the provided buffer, and closes the handle.
+ *
+ * @param key The key from which the string will be read.
+ * @param value Buffer to store the string read from NVS.
+ * @param length Pointer to a variable containing the buffer length on input,
+ *               updated with the actual string length (including null terminator).
+ * @return esp_err_t ESP_OK on success, otherwise an error code.
+ */
+static esp_err_t nvs_load_str(const char * key, char * value, size_t * length)
+{
+    nvs_handle_t handle = 0U;
+    esp_err_t err = ESP_FAIL;
+    esp_err_t ret = ESP_FAIL;
 
-esp_err_t nvs_save_ntp(int32_t enabled)         { return nvs_save_value("ntp", enabled); }
-esp_err_t nvs_load_ntp(int32_t *enabled)        { return nvs_load_value("ntp", enabled); }
+    /* Open namespace */
+    err = nvs_open(NVS_NAMESPACE, NVS_READONLY, &handle);
+    if (err == ESP_OK)
+    {
+        /* Read string from NVS */
+        ret = nvs_get_str(handle, key, value, length);
+        if (ret != ESP_OK)
+        {
+            ESP_LOGE(NVS_TAG, "Read error: %s", esp_err_to_name(ret));
+        }
 
-esp_err_t nvs_save_cathode(int32_t enabled)     { return nvs_save_value("cathode", enabled); }
-esp_err_t nvs_load_cathode(int32_t *enabled)    { return nvs_load_value("cathode", enabled); }
+        (void)nvs_close(handle);
+    }
+    else
+    {
+        ret = err;
+        ESP_LOGE(NVS_TAG, "Open error: %s", esp_err_to_name(err));
+    }
 
-esp_err_t nvs_save_counter(int32_t value)       { return nvs_save_value("counter", value); }
-esp_err_t nvs_load_counter(int32_t *value)      { return nvs_load_value("counter", value); }
+    return ret;
+}
+
+esp_err_t nvs_save_ntp(int32_t enabled)             { return nvs_save_value("ntp", enabled); }
+esp_err_t nvs_load_ntp(int32_t *enabled)            { return nvs_load_value("ntp", enabled); }
+
+esp_err_t nvs_save_cathode(int32_t enabled)         { return nvs_save_value("cathode", enabled); }
+esp_err_t nvs_load_cathode(int32_t *enabled)        { return nvs_load_value("cathode", enabled); }
+
+esp_err_t nvs_save_counter(int32_t value)           { return nvs_save_value("counter", value); }
+esp_err_t nvs_load_counter(int32_t *value)          { return nvs_load_value("counter", value); }
+
+esp_err_t nvs_save_ssid(char *value)                               { return nvs_save_str("ssid", value); }
+esp_err_t nvs_load_ssid(char *value, size_t length)                { return nvs_load_str("ssid", value, &length); }
+
+esp_err_t nvs_save_wpa_passphrase(char *value)                     { return nvs_save_str("wpa_passphrase", value); }
+esp_err_t nvs_load_wpa_passphrase(char *value, size_t length)      { return nvs_load_str("wpa_passphrase", value, &length); }

@@ -100,6 +100,20 @@ esp_err_t config_save(void)
     {
         esp_err_t ret_save;
 
+        if (cfg.ssid != cfg_last.ssid)
+        {
+            ret_save = nvs_save_ssid(cfg.ssid);
+            if (ret_save == ESP_OK) {
+                changed = ESP_OK;
+            }
+        }
+        if (cfg.wpa_passphrase != cfg_last.wpa_passphrase)
+        {
+            ret_save = nvs_save_wpa_passphrase(cfg.wpa_passphrase);
+            if (ret_save == ESP_OK) {
+                changed = ESP_OK;
+            }
+        }
         if (cfg.mode != cfg_last.mode)
         {
             ret_save = nvs_save_counter(cfg.mode);
@@ -166,32 +180,24 @@ esp_err_t config_get_copy(config_t *copy)
 }
 
 /**
- * @brief Set new configuration parameters.
+ * @brief Set a new configuration.
  *
- * Updates the configuration in RAM if any value differs from the current one.
+ * Updates the configuration in RAM.
  * Access is protected by mutex to avoid race conditions.
  *
- * @param[in] mode   New mode value.
- * @param[in] param1 New param1 value.
- * @param[in] param2 New param2 value.
+ * @param[in] config Pointer to a config_t structure from which data will be copied.
  *
  * @return ESP_OK if configuration was updated, ESP_FAIL if nothing changed
  *         or mutex could not be acquired.
  */
-esp_err_t config_set_params(int32_t mode, int32_t param1, int32_t param2)
+esp_err_t config_set_config(config_t *config)
 {
     esp_err_t result = ESP_FAIL;
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE)
     {
-        if ((cfg.mode != mode) || (cfg.param1 != param1) || (cfg.param2 != param2))
-        {
-            cfg.mode = mode;
-            cfg.param1 = param1;
-            cfg.param2 = param2;
-            result = ESP_OK;
-        }
+        cfg = *config;
 
         (void)xSemaphoreGive(config_mutex);
     }

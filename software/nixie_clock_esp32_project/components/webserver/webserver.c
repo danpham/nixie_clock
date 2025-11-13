@@ -57,7 +57,7 @@ static esp_err_t root_handler(httpd_req_t *req)
     if (ESP_OK == ret) {
         int ret_modify_html = snprintf(buffer_page, sizeof(buffer_page), html_format,
         12, 0, 0,
-        "","",
+        config.ssid, config.wpa_passphrase,
         "",
         (config.mode == 0) ? "checked" : "",
         (config.param1 == 1) ? "checked" : "",
@@ -74,9 +74,9 @@ static esp_err_t root_handler(httpd_req_t *req)
 }
 
 /**
- * @brief Handles the "/on" request to turn the LED on.
+ * @brief Handles the "/update" request to update configuration.
  *
- * This handler sets the LED GPIO high, then redirects the client
+ * This handler updates configuration, then redirects the client
  * back to the root page using an HTTP 303 redirect.
  *
  * @param req Pointer to the HTTP request structure.
@@ -105,6 +105,22 @@ static esp_err_t update_handler(httpd_req_t *req)
         char tmp[32];
 
         buf[(size_t)len] = 0; /* Null-terminate received data */
+
+        /* Read "ssid" parameter */
+        query_res = httpd_query_key_value(buf, "ssid", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            strncpy(new_config.ssid, tmp, sizeof(new_config.ssid) - 1);
+            new_config.ssid[sizeof(new_config.ssid) - 1] = '\0';
+        }
+
+        /* Read "wpa-passphrase" parameter */
+        query_res = httpd_query_key_value(buf, "wpa-passphrase", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase) - 1);
+            new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase) - 1] = '\0';
+        }
 
         /* Read "mode" parameter */
         query_res = httpd_query_key_value(buf, "mode", tmp, sizeof(tmp));
@@ -149,13 +165,16 @@ static esp_err_t update_handler(httpd_req_t *req)
         }
 
         /* Update global configuration (currently commented out for test safety) */
-        // (void)config_set(&new_config);
+        ret = config_set_config(&new_config);
+
+        if (ret == ESP_OK) {
+            ret = config_save();
+        }
 
         /* Redirect client back to the root page */
         httpd_resp_set_status(req, "303 See Other");
         httpd_resp_set_hdr(req, "Location", "/");
         httpd_resp_send(req, NULL, 0);
-
     }
     
     return ret;
@@ -323,8 +342,8 @@ static const char* get_html_page(void) {
     "  <input type=\"text\" id=\"ssid\" name=\"ssid\" value=\"%s\">\n"
     "</div>\n"
     "<div class=\"input-group\">\n"
-    "  <label for=\"password\">Password:</label>\n"
-    "  <input type=\"text\" id=\"password\" name=\"password\" value=\"%s\">\n"
+    "  <label for=\"wpa-passphrase\">WPA passphrase:</label>\n"
+    "  <input type=\"text\" id=\"wpa-passphrase\" name=\"wpa-passphrase\" value=\"%s\">\n"
     "</div>\n"
     "<h2>Time synchronization</h2>\n"
     "<div class=\"checkbox-container\">\n"

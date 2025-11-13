@@ -11,12 +11,19 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define CONFIG_SSID_SIZE 32
+#define CONFIG_SSID_BUF_SZ (CONFIG_SSID_SIZE + 1)
+
+#define CONFIG_WPA_PASSPHRASE_SIZE 64
+#define CONFIG_WPA_PASSPHRASE_BUF_SZ (CONFIG_WPA_PASSPHRASE_SIZE + 1)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
 typedef struct
 {
+    char ssid[CONFIG_SSID_BUF_SZ];
+    char wpa_passphrase[CONFIG_WPA_PASSPHRASE_BUF_SZ];
     int32_t mode;
     int32_t param1;
     int32_t param2;
@@ -37,6 +44,6 @@ typedef struct
 esp_err_t config_init(void);
 esp_err_t config_save(void);
 esp_err_t config_get_copy(config_t *copy);
-esp_err_t config_set_params(int32_t mode, int32_t param1, int32_t param2);
+esp_err_t config_set_config(config_t *config);
 
 #endif // CONFIG_H
