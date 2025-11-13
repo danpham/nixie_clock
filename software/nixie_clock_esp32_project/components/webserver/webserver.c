@@ -10,6 +10,7 @@
 #include "webserver.h"
 #include "config.h"
 #include "../../main/esp_stub.h"
+#include <errno.h>
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -42,7 +43,7 @@ static const char* get_html_page(void);
  */
 static esp_err_t root_handler(httpd_req_t *req)
 {
-    esp_err_t err = ESP_FAIL;
+    esp_err_t ret = ESP_FAIL;
     config_t config;
     char buffer_page[WEBSERVER_HTML_PAGE_SIZE];
     char html_format[WEBSERVER_HTML_PAGE_SIZE];
@@ -52,19 +53,24 @@ static esp_err_t root_handler(httpd_req_t *req)
     (void)strncpy(html_format, html_page_orig, sizeof(html_format) - 1U);
     html_format[sizeof(html_format) - 1U] = '\0';
 
-    err = config_get_copy(&config);
-    if (ESP_OK == err) {
-        snprintf(buffer_page, sizeof(buffer_page), html_format,
+    ret = config_get_copy(&config);
+    if (ESP_OK == ret) {
+        int ret_modify_html = snprintf(buffer_page, sizeof(buffer_page), html_format,
         12, 0, 0,
         "","",
         "",
         (config.mode == 0) ? "checked" : "",
         (config.param1 == 1) ? "checked" : "",
         (config.param2 == 2) ? "checked" : "");
+
+        if (ret_modify_html <0) {
+            ret = ESP_FAIL;
+        }
     }
 
     httpd_resp_send(req, buffer_page, HTTPD_RESP_USE_STRLEN);
-    return ESP_OK;
+
+    return ret;
 }
 
 /**
@@ -98,7 +104,7 @@ static esp_err_t update_handler(httpd_req_t *req)
     if (ret == ESP_OK) {
         esp_err_t query_res;
         char tmp[32];
-        long value = 0;
+
         buf[(size_t)len] = 0; /* Null-terminate received data */
 
         /* Read "mode" parameter */
@@ -106,11 +112,11 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             endptr = NULL;
-            value = strtol(tmp, &endptr, 10);
+            const long tmp_val = strtol(tmp, &endptr, 10);
             /* Check for successful numeric conversion */
-            if ((endptr != tmp) && (*endptr == '\0'))
+            if ((endptr != tmp) && (*endptr == '\0') && (errno == 0))
             {
-                new_config.mode = (int)value;
+                new_config.mode = (int)tmp_val;
             }
         }
 
@@ -119,11 +125,11 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             endptr = NULL;
-            value = strtol(tmp, &endptr, 10);
+            const long tmp_val = strtol(tmp, &endptr, 10);
             /* Check for successful numeric conversion */
-            if ((endptr != tmp) && (*endptr == '\0'))
+            if ((endptr != tmp) && (*endptr == '\0') && (errno == 0))
             {
-                new_config.param1 = (int)value;
+                new_config.param1 = (int)tmp_val;
             }
         }
 
@@ -132,11 +138,11 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             endptr = NULL;
-            value = strtol(tmp, &endptr, 10);
+            const long tmp_val = strtol(tmp, &endptr, 10);
             /* Check for successful numeric conversion */
-            if ((endptr != tmp) && (*endptr == '\0'))
+            if ((endptr != tmp) && (*endptr == '\0') && (errno == 0))
             {
-                new_config.param2 = (int)value;
+                new_config.param2 = (int)tmp_val;
             }
         }
 

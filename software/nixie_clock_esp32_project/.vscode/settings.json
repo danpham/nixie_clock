@@ -48,7 +48,16 @@
         "esp_err.h": "c",
         "esp_compiler.h": "c",
         "html_page.h": "c",
-        "esp_event.h": "c"
+        "esp_event.h": "c",
+        "algorithm": "c",
+        "complex": "c",
+        "optional": "c",
+        "regex": "c",
+        "system_error": "c",
+        "type_traits": "c",
+        "xlocmon": "c",
+        "xtr1common": "c",
+        "xutility": "c"
     },
     "idf.flashType": "UART"
 }
