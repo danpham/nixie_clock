@@ -24,6 +24,7 @@ static config_t cfg;
 static config_t cfg_last;
 static SemaphoreHandle_t config_mutex = NULL;
 static const TickType_t CONFIG_MUTEX_TIMEOUT = portMAX_DELAY;
+static const char CONFIG_TAG[] = "CONFIG";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -46,49 +47,60 @@ esp_err_t config_init(void)
         config_mutex = xSemaphoreCreateMutex();
         if (config_mutex == NULL)
         {
-            const char *CONFIG_TAG = "config";
             ESP_LOGE(CONFIG_TAG, "Failed to create config mutex");
             ret = ESP_FAIL;
         }
     }
 
     if (ret == ESP_OK) {
-
-        ret = nvs_init();
-        if (ret == ESP_OK)
+        BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
+        if (taken == pdTRUE)
         {
-            esp_err_t 
-            ret_load = nvs_load_ssid(cfg.ssid, CONFIG_SSID_BUF_SZ);
-            if (ret_load != ESP_OK)
+            ret = nvs_init();
+            if (ret == ESP_OK)
             {
-                cfg.ssid[0] = '\0';
+                esp_err_t ret_load = nvs_load_ssid(cfg.ssid, CONFIG_SSID_BUF_SZ);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.ssid[0] = '\0';
+                }
+
+                ret_load = nvs_load_wpa_passphrase(cfg.wpa_passphrase, CONFIG_WPA_PASSPHRASE_BUF_SZ);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.wpa_passphrase[0] = '\0';
+                }       
+                
+                ret_load = nvs_load_counter(&cfg.mode);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.mode = 0;
+                }
+
+                ret_load = nvs_load_ntp(&cfg.param1);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.param1 = 0;
+                }
+
+                ret_load = nvs_load_cathode(&cfg.param2);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.param2 = 0;
+                }
+
+                cfg_last = cfg;
             }
 
-            ret_load = nvs_load_wpa_passphrase(cfg.wpa_passphrase, CONFIG_WPA_PASSPHRASE_BUF_SZ);
-            if (ret_load != ESP_OK)
+            BaseType_t give_ret = xSemaphoreGive(config_mutex);
+            if (give_ret != pdTRUE)
             {
-                cfg.wpa_passphrase[0] = '\0';
-            }       
-            
-            ret_load = nvs_load_counter(&cfg.mode);
-            if (ret_load != ESP_OK)
-            {
-                cfg.mode = 0;
+                ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
+                ret = ESP_FAIL;
             }
-
-            ret_load = nvs_load_ntp(&cfg.param1);
-            if (ret_load != ESP_OK)
-            {
-                cfg.param1 = 0;
+            else {
+                ret = ESP_OK;
             }
-
-            ret_load = nvs_load_cathode(&cfg.param2);
-            if (ret_load != ESP_OK)
-            {
-                cfg.param2 = 0;
-            }
-
-            cfg_last = cfg;
         }
     }
 
@@ -106,54 +118,62 @@ esp_err_t config_init(void)
  */
 esp_err_t config_save(void)
 {
-    esp_err_t changed = ESP_FAIL;
+    esp_err_t ret = ESP_FAIL;
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE)
     {
         esp_err_t ret_save;
 
-        if (cfg.ssid != cfg_last.ssid)
+        if (strcmp(cfg.ssid, cfg_last.ssid) != 0)
         {
             ret_save = nvs_save_ssid(cfg.ssid);
             if (ret_save == ESP_OK) {
-                changed = ESP_OK;
+                ret = ESP_OK;
             }
         }
-        if (cfg.wpa_passphrase != cfg_last.wpa_passphrase)
+        if (strcmp(cfg.wpa_passphrase, cfg_last.wpa_passphrase) != 0)
         {
             ret_save = nvs_save_wpa_passphrase(cfg.wpa_passphrase);
             if (ret_save == ESP_OK) {
-                changed = ESP_OK;
+                ret = ESP_OK;
             }
         }
         if (cfg.mode != cfg_last.mode)
         {
-            ret_save = nvs_save_ntp(cfg.mode);
+            ret_save = nvs_save_counter(cfg.mode);
             if (ret_save == ESP_OK) {
-                changed = ESP_OK;
+                ret = ESP_OK;
             }
         }
         if (cfg.param1 != cfg_last.param1)
         {
-            ret_save = nvs_save_cathode(cfg.param1);
+            ret_save = nvs_save_ntp(cfg.param1);
             if (ret_save == ESP_OK) {
-                changed = ESP_OK;
+                ret = ESP_OK;
             }
         }
         if (cfg.param2 != cfg_last.param2)
         {
-            ret_save = nvs_save_counter(cfg.param2);
+            ret_save = nvs_save_cathode(cfg.param2);
             if (ret_save == ESP_OK) {
-                changed = ESP_OK;
+                ret = ESP_OK;
             }
         }
 
         cfg_last = cfg;
-        (void)xSemaphoreGive(config_mutex);
+        BaseType_t give_ret = xSemaphoreGive(config_mutex);
+        if (give_ret != pdTRUE)
+        {
+            ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
+            ret = ESP_FAIL;
+        }
+        else {
+            ret = ESP_OK;
+        }
     }
 
-    return changed;
+    return ret;
 }
 
 /**
@@ -181,8 +201,15 @@ esp_err_t config_get_copy(config_t *copy)
         if (taken == pdTRUE)
         {
             *copy = cfg;
-            (void)xSemaphoreGive(config_mutex);
-            ret = ESP_OK;
+            BaseType_t give_ret = xSemaphoreGive(config_mutex);
+            if (give_ret != pdTRUE)
+            {
+                ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
+                ret = ESP_FAIL;
+            }
+            else {
+                ret = ESP_OK;
+            }
         }
         else {
             ret = ESP_FAIL;
@@ -211,8 +238,16 @@ esp_err_t config_set_config(const config_t *config)
     if (taken == pdTRUE)
     {
         cfg = *config;
-
         (void)xSemaphoreGive(config_mutex);
+        BaseType_t give_ret = xSemaphoreGive(config_mutex);
+        if (give_ret != pdTRUE)
+        {
+            ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
+            result = ESP_FAIL;
+        }
+        else {
+            result = ESP_OK;
+        }
     }
 
     return result;
