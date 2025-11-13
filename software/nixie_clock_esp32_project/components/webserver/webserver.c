@@ -110,7 +110,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(buf, "ssid", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            strncpy(new_config.ssid, tmp, sizeof(new_config.ssid) - 1);
+            strncpy(new_config.ssid, tmp, sizeof(new_config.ssid) - 1U);
             new_config.ssid[sizeof(new_config.ssid) - 1] = '\0';
         }
 
@@ -118,8 +118,8 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(buf, "wpa-passphrase", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase) - 1);
-            new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase) - 1] = '\0';
+            strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase) - 1U);
+            new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase) - 1U] = '\0';
         }
 
         /* Read "mode" parameter */
