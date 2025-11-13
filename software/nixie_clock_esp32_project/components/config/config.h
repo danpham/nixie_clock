@@ -44,6 +44,6 @@ typedef struct
 esp_err_t config_init(void);
 esp_err_t config_save(void);
 esp_err_t config_get_copy(config_t *copy);
-esp_err_t config_set_config(config_t *config);
+esp_err_t config_set_config(const config_t *config);
 
 #endif // CONFIG_H
