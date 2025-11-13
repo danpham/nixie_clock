@@ -57,7 +57,20 @@ esp_err_t config_init(void)
         ret = nvs_init();
         if (ret == ESP_OK)
         {
-            esp_err_t ret_load = nvs_load_counter(&cfg.mode);
+            esp_err_t 
+            ret_load = nvs_load_ssid(cfg.ssid, CONFIG_SSID_BUF_SZ);
+            if (ret_load != ESP_OK)
+            {
+                cfg.ssid[0] = '\0';
+            }
+
+            ret_load = nvs_load_wpa_passphrase(cfg.wpa_passphrase, CONFIG_WPA_PASSPHRASE_BUF_SZ);
+            if (ret_load != ESP_OK)
+            {
+                cfg.wpa_passphrase[0] = '\0';
+            }       
+            
+            ret_load = nvs_load_counter(&cfg.mode);
             if (ret_load != ESP_OK)
             {
                 cfg.mode = 0;
