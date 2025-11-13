@@ -21,6 +21,7 @@
  * 4. Variable definitions (static then global)
 ******************************************************************/
 QueueHandle_t buttonQueue;
+static const char GPIO_TASK_TAG[] = "GPIO_TASK";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -33,7 +34,6 @@ static void gpio_task(void *arg);
 
 static void gpio_task(void *arg)
 {
-    const char *TAG = "GPIO_TASK";
     (void)arg;
 
     my_gpio_btn_t rotaryEncoderSwitch = {
@@ -59,15 +59,15 @@ static void gpio_task(void *arg)
     button_state_t state_last_rotarySwitch = 0;
  
     if (my_gpio_init(&rotaryEncoderSwitch) != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize rotaryEncoderSwitch!");
+        ESP_LOGE(GPIO_TASK_TAG, "Failed to initialize rotaryEncoderSwitch!");
     }
 
     if (my_gpio_init(&rotaryEncoderChanA) != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize rotaryEncoderChanA!");
+        ESP_LOGE(GPIO_TASK_TAG, "Failed to initialize rotaryEncoderChanA!");
     }
 
     if (my_gpio_init(&rotaryEncoderChanB) != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize rotaryEncoderChanB!");
+        ESP_LOGE(GPIO_TASK_TAG, "Failed to initialize rotaryEncoderChanB!");
     }
 
     /* Initialize state_last_ variables */
@@ -83,16 +83,13 @@ static void gpio_task(void *arg)
 
         /* Avoid sending event when no changes */
         if (state_last_rotarySwitch != state_rotarySwitch){
+            event.id = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
+            event.pressed = rotaryEncoderSwitch.press_type;
+            xQueueSend(buttonQueue, &event, 0);
             if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
-                event.id = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
-                event.pressed = rotaryEncoderSwitch.press_type;
-                xQueueSend(buttonQueue, &event, 0);
-                ESP_LOGI(TAG, "Rotary switch pressed!");
+                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
             } else {
-                event.id = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
-                event.pressed = rotaryEncoderSwitch.press_type;
-                xQueueSend(buttonQueue, &event, 0);
-                ESP_LOGI(TAG, "Rotary switch released");
+                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
             }
             state_last_rotarySwitch = state_rotarySwitch;
         }
@@ -104,7 +101,7 @@ static void gpio_task(void *arg)
             event.id = (buttons_type_t)BUTTON_ROTARY_ENCODER;
             event.updateValue = (uint8_t)ev;
             xQueueSend(buttonQueue, &event, 0);
-            ESP_LOGI(TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
+            ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
         }
 
         state_last_rotaryChanA = state_rotaryChanA;
@@ -119,7 +116,7 @@ void gpio_task_start(void)
     // Create queue: 10 events max, each of size button_event_t
     buttonQueue = xQueueCreate(10, sizeof(button_event_t));
     if (buttonQueue == NULL) {
-        ESP_LOGE("GPIO_TASK", "Failed to create button queue!");
+        ESP_LOGE(GPIO_TASK_TAG, "Failed to create button queue!");
     } else {
         xTaskCreate(
             gpio_task,     // Task function

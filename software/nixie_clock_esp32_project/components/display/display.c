@@ -83,7 +83,7 @@ NOT_STATIC uint64_t display_pattern_1_get(uint8_t step) {
     uint8_t nixies[DISPLAY_NIXIE_COUNT];
     uint8_t tmp = (uint8_t)(step % (uint8_t)10U);
     
-    for (uint8_t i = 0; i < sizeof(nixies); ++i) {
+    for (uint8_t i = 0; i < DISPLAY_NIXIE_COUNT; ++i) {
         nixies[i] = tmp;
     }
 

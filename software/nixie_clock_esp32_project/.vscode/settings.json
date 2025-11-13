@@ -58,7 +58,9 @@
         "xlocmon": "c",
         "xtr1common": "c",
         "xutility": "c",
-        "xstring": "c"
+        "xstring": "c",
+        "array": "c",
+        "vector": "c"
     },
     "idf.flashType": "UART"
 }

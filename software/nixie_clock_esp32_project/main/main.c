@@ -56,7 +56,7 @@ void app_main(void)
 
     ret = config_init();
     if (ret != ESP_OK) {
-        const char *MAIN_TAG = "MAIN";
+        static const char MAIN_TAG[] = "MAIN";
         ESP_LOGE(MAIN_TAG, "Config init failed: %d", ret);
     }
 

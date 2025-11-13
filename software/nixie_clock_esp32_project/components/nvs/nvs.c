@@ -202,8 +202,8 @@ esp_err_t nvs_load_cathode(int32_t *enabled)        { return nvs_load_value("cat
 esp_err_t nvs_save_counter(int32_t value)           { return nvs_save_value("counter", value); }
 esp_err_t nvs_load_counter(int32_t *value)          { return nvs_load_value("counter", value); }
 
-esp_err_t nvs_save_ssid(const char *value)                               { return nvs_save_str("ssid", value); }
-esp_err_t nvs_load_ssid(char *value, size_t length)                { return nvs_load_str("ssid", value, &length); }
+esp_err_t nvs_save_ssid(const char *value)                         { return nvs_save_str("ssid", value); }
+esp_err_t nvs_load_ssid(char *value, size_t *length)               { return nvs_load_str("ssid", value, length); }
 
-esp_err_t nvs_save_wpa_passphrase(const char *value)                     { return nvs_save_str("wpa_passphrase", value); }
-esp_err_t nvs_load_wpa_passphrase(char *value, size_t length)      { return nvs_load_str("wpa_passphrase", value, &length); }
+esp_err_t nvs_save_wpa_passphrase(const char *value)               { return nvs_save_str("wpa_passphrase", value); }
+esp_err_t nvs_load_wpa_passphrase(char *value, size_t *length)     { return nvs_load_str("wpa_passphrase", value, length); }

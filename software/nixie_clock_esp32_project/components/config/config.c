@@ -59,13 +59,15 @@ esp_err_t config_init(void)
             ret = nvs_init();
             if (ret == ESP_OK)
             {
-                esp_err_t ret_load = nvs_load_ssid(cfg.ssid, CONFIG_SSID_BUF_SZ);
+                size_t len = (size_t)CONFIG_SSID_BUF_SZ;
+                esp_err_t ret_load = nvs_load_ssid(cfg.ssid, &len);
                 if (ret_load != ESP_OK)
                 {
                     cfg.ssid[0] = '\0';
                 }
 
-                ret_load = nvs_load_wpa_passphrase(cfg.wpa_passphrase, CONFIG_WPA_PASSPHRASE_BUF_SZ);
+                len = (size_t)CONFIG_WPA_PASSPHRASE_BUF_SZ;
+                ret_load = nvs_load_wpa_passphrase(cfg.wpa_passphrase, &len);
                 if (ret_load != ESP_OK)
                 {
                     cfg.wpa_passphrase[0] = '\0';
@@ -238,7 +240,6 @@ esp_err_t config_set_config(const config_t *config)
     if (taken == pdTRUE)
     {
         cfg = *config;
-        (void)xSemaphoreGive(config_mutex);
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
         if (give_ret != pdTRUE)
         {

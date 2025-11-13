@@ -11,11 +11,11 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define CONFIG_SSID_SIZE 32
-#define CONFIG_SSID_BUF_SZ (CONFIG_SSID_SIZE + 1)
+#define CONFIG_SSID_SIZE 32U
+#define CONFIG_SSID_BUF_SZ (CONFIG_SSID_SIZE + 1U)
 
-#define CONFIG_WPA_PASSPHRASE_SIZE 64
-#define CONFIG_WPA_PASSPHRASE_BUF_SZ (CONFIG_WPA_PASSPHRASE_SIZE + 1)
+#define CONFIG_WPA_PASSPHRASE_SIZE 64U
+#define CONFIG_WPA_PASSPHRASE_BUF_SZ (CONFIG_WPA_PASSPHRASE_SIZE + 1U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
