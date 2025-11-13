@@ -129,14 +129,14 @@ esp_err_t config_save(void)
         }
         if (cfg.mode != cfg_last.mode)
         {
-            ret_save = nvs_save_counter(cfg.mode);
+            ret_save = nvs_save_ntp(cfg.mode);
             if (ret_save == ESP_OK) {
                 changed = ESP_OK;
             }
         }
         if (cfg.param1 != cfg_last.param1)
         {
-            ret_save = nvs_save_counter(cfg.param1);
+            ret_save = nvs_save_cathode(cfg.param1);
             if (ret_save == ESP_OK) {
                 changed = ESP_OK;
             }
