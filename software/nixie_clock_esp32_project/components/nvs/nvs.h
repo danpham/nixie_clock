@@ -36,8 +36,8 @@ esp_err_t nvs_load_ntp(int32_t *enabled);
 esp_err_t nvs_save_cathode(int32_t enabled);
 esp_err_t nvs_load_cathode(int32_t *enabled);
 
-esp_err_t nvs_save_counter(int32_t value);
-esp_err_t nvs_load_counter(int32_t *value);
+esp_err_t nvs_save_mode(int32_t value);
+esp_err_t nvs_load_mode(int32_t *value);
 
 esp_err_t nvs_save_ssid(const char *value);
 esp_err_t nvs_load_ssid(char *value, size_t *length);

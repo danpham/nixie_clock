@@ -74,7 +74,7 @@ esp_err_t config_init(void)
                     cfg.wpa_passphrase[0] = '\0';
                 }       
                 
-                ret_load = nvs_load_counter(&cfg.mode);
+                ret_load = nvs_load_mode(&cfg.mode);
                 if (ret_load != ESP_OK)
                 {
                     cfg.mode = 0;
@@ -144,7 +144,7 @@ esp_err_t config_save(void)
         }
         if (cfg.mode != cfg_last.mode)
         {
-            ret_save = nvs_save_counter(cfg.mode);
+            ret_save = nvs_save_mode(cfg.mode);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }

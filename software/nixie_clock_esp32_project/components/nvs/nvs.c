@@ -199,8 +199,8 @@ esp_err_t nvs_load_ntp(int32_t *enabled)            { return nvs_load_value("ntp
 esp_err_t nvs_save_cathode(int32_t enabled)         { return nvs_save_value("cathode", enabled); }
 esp_err_t nvs_load_cathode(int32_t *enabled)        { return nvs_load_value("cathode", enabled); }
 
-esp_err_t nvs_save_counter(int32_t value)           { return nvs_save_value("counter", value); }
-esp_err_t nvs_load_counter(int32_t *value)          { return nvs_load_value("counter", value); }
+esp_err_t nvs_save_mode(int32_t value)              { return nvs_save_value("mode", value); }
+esp_err_t nvs_load_mode(int32_t *value)             { return nvs_load_value("mode", value); }
 
 esp_err_t nvs_save_ssid(const char *value)                         { return nvs_save_str("ssid", value); }
 esp_err_t nvs_load_ssid(char *value, size_t *length)               { return nvs_load_str("ssid", value, length); }
