@@ -1,6 +1,7 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#include <errno.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_wifi.h"
@@ -9,8 +10,8 @@
 #include "esp_netif.h"
 #include "webserver.h"
 #include "config.h"
+#include "../wifi/wifi.h"
 #include "../../main/esp_stub.h"
-#include <errno.h>
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -88,6 +89,8 @@ static esp_err_t update_handler(httpd_req_t *req)
     char buf[200];
     config_t new_config;
     esp_err_t ret = ESP_OK;
+    bool wifi_needs_update = false;
+    static const char WEBSERVER_TAG[] = "WEBSERVER";
 
     /* Start from a copy of the current configuration */
     config_get_copy(&new_config);
@@ -102,7 +105,7 @@ static esp_err_t update_handler(httpd_req_t *req)
 
     if (ret == ESP_OK) {
         esp_err_t query_res;
-        char tmp[32];
+        char tmp[64];
 
         buf[(size_t)len] = 0; /* Null-terminate received data */
 
@@ -110,16 +113,22 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(buf, "ssid", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            (void)strncpy(new_config.ssid, tmp, sizeof(new_config.ssid) - 1U);
-            new_config.ssid[sizeof(new_config.ssid) - 1U] = '\0';
+            if (strncmp(new_config.ssid, tmp, sizeof(new_config.ssid)) != 0) {
+                strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1);
+                new_config.ssid[sizeof(new_config.ssid)-1] = '\0';
+                wifi_needs_update = true;
+            }
         }
 
         /* Read "wpa-passphrase" parameter */
         query_res = httpd_query_key_value(buf, "wpa-passphrase", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            (void)strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase) - 1U);
-            new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase) - 1U] = '\0';
+            if (strncmp(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)) != 0) {
+                strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1);
+                new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase)-1] = '\0';
+                wifi_needs_update = true;
+            }
         }
 
         /* Read "mode" parameter */
@@ -166,9 +175,16 @@ static esp_err_t update_handler(httpd_req_t *req)
 
         /* Update global configuration (currently commented out for test safety) */
         ret = config_set_config(&new_config);
-
         if (ret == ESP_OK) {
             ret = config_save();
+        }
+
+        if (wifi_needs_update) {
+            esp_err_t wifi_ret = wifi_change_sta(new_config.ssid, new_config.wpa_passphrase);
+            if (wifi_ret != ESP_OK) {
+                ESP_LOGE(WEBSERVER_TAG, "Failed to update STA Wi-Fi");
+                ret = wifi_ret;
+            }
         }
 
         /* Redirect client back to the root page */
