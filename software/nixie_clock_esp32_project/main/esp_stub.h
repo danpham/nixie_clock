@@ -27,6 +27,9 @@
 /* HTTP Server */
 #define HTTPD_SOCK_ERR_TIMEOUT   -3
 
+/* Tasks */
+#define eDeleted 1
+
 typedef int esp_err_t;
 
 BaseType_t xQueueReceive( QueueHandle_t xQueue,

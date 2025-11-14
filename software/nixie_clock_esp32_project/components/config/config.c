@@ -27,8 +27,6 @@ static config_t cfg_last;
 static SemaphoreHandle_t config_mutex = NULL;
 static const TickType_t CONFIG_MUTEX_TIMEOUT = portMAX_DELAY;
 static const char CONFIG_TAG[] = "CONFIG";
-static bool ntp_initialized = false;
-static bool wifi_initialized = false;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -268,6 +266,8 @@ esp_err_t config_set_config(const config_t *config)
 esp_err_t config_apply(void)
 {
     esp_err_t result = ESP_OK;
+    static bool ntp_initialized = false;
+    static bool wifi_initialized = false;
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE)

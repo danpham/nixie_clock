@@ -10,6 +10,7 @@
 #include "clock_task.h"
 #include "ntp_sync_task.h"
 #include "esp_interface.h"
+#include "freertos/FreeRTOS.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -105,7 +106,7 @@ void stop_ntp(void)
     if (time_sync_task_handle != NULL) {
         ESP_LOGI("time_sync", "Waiting for time_sync_task to finish...");
         while (eTaskGetState(time_sync_task_handle) != eDeleted) {
-            vTaskDelay(pdMS_TO_TICKS(50)); // wait a little
+            vTaskDelay(pdMS_TO_TICKS(50));
         }
         time_sync_task_handle = NULL;
     }
