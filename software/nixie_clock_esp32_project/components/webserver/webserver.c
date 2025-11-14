@@ -89,7 +89,6 @@ static esp_err_t update_handler(httpd_req_t *req)
     char buf[200];
     config_t new_config;
     esp_err_t ret = ESP_OK;
-    bool wifi_needs_update = false;
     static const char WEBSERVER_TAG[] = "WEBSERVER";
 
     /* Start from a copy of the current configuration */
@@ -106,6 +105,7 @@ static esp_err_t update_handler(httpd_req_t *req)
     if (ret == ESP_OK) {
         esp_err_t query_res;
         char tmp[64];
+        bool wifi_needs_update = false;
 
         buf[(size_t)len] = 0; /* Null-terminate received data */
 
@@ -114,8 +114,8 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             if (strncmp(new_config.ssid, tmp, sizeof(new_config.ssid)) != 0) {
-                strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1);
-                new_config.ssid[sizeof(new_config.ssid)-1] = '\0';
+                strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1U);
+                new_config.ssid[sizeof(new_config.ssid)-1U] = '\0';
                 wifi_needs_update = true;
             }
         }
@@ -125,8 +125,8 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             if (strncmp(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)) != 0) {
-                strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1);
-                new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase)-1] = '\0';
+                strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1U);
+                new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase)-1U] = '\0';
                 wifi_needs_update = true;
             }
         }
