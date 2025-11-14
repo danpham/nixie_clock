@@ -114,7 +114,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             if (strncmp(new_config.ssid, tmp, sizeof(new_config.ssid)) != 0) {
-                strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1U);
+                (void)strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1U);
                 new_config.ssid[sizeof(new_config.ssid)-1U] = '\0';
                 wifi_needs_update = true;
             }
@@ -125,7 +125,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (query_res == ESP_OK)
         {
             if (strncmp(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)) != 0) {
-                strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1U);
+                (void)strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1U);
                 new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase)-1U] = '\0';
                 wifi_needs_update = true;
             }
