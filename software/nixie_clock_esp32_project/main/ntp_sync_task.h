@@ -4,7 +4,6 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
-#include "clock.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -26,5 +25,6 @@
  * 6. Functions definitions
 ******************************************************************/
 void time_sync_task_start(void);
+void stop_ntp(void);
 
 #endif // NTP_SYNC_TASK_H

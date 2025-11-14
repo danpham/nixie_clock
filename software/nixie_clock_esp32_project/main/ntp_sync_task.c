@@ -6,7 +6,7 @@
 #include "esp_netif_sntp.h"
 #include "esp_log.h"
 #include "esp_stub.h"
-#include "clock.h"
+#include "../components/clock/clock.h"
 #include "clock_task.h"
 #include "ntp_sync_task.h"
 #include "esp_interface.h"
@@ -24,6 +24,7 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
+static TaskHandle_t time_sync_task_handle;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -48,7 +49,7 @@ static void time_sync_notification_cb(struct timeval *tv)
     time_t now;
     (void)tv;
 
-    // Use the NTP-synced timestamp
+    /* Use the NTP-synced timestamp */
     now = tv->tv_sec;
 
     myclock_t clockUpdate;
@@ -64,7 +65,7 @@ static void time_sync_task(void *arg)
     bool wifi_ready = false;
     ESP_LOGI(TAG, "Waiting for Wi-Fi connection...");
 
-    // Wait Wi-Fi for first sync
+    /* Wait Wi-Fi for first sync */
     while (!wifi_ready)
     {
         esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
@@ -95,5 +96,25 @@ void time_sync_task_start(void)
                 4096,
                 NULL,
                 2U,
-                NULL);
+                &time_sync_task_handle);
+}
+
+void stop_ntp(void)
+{
+    /* Wait for the time_sync_task to finish */
+    if (time_sync_task_handle != NULL) {
+        ESP_LOGI("time_sync", "Waiting for time_sync_task to finish...");
+        while (eTaskGetState(time_sync_task_handle) != eDeleted) {
+            vTaskDelay(pdMS_TO_TICKS(50)); // wait a little
+        }
+        time_sync_task_handle = NULL;
+    }
+
+    /* Stop SNTP */
+    esp_sntp_stop();
+
+    /* Disable callback */
+    sntp_set_time_sync_notification_cb(NULL);
+
+    ESP_LOGI("time_sync", "NTP stopped");
 }

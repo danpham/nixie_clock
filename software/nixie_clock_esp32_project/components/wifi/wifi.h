@@ -9,6 +9,8 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define WIFI_AP_SSID        "NixieClock-Setup"
+#define WIFI_AP_PASSWORD    "12345678"
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)

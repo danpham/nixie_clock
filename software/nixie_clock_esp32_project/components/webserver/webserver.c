@@ -10,7 +10,6 @@
 #include "esp_netif.h"
 #include "webserver.h"
 #include "config.h"
-#include "../wifi/wifi.h"
 #include "../../main/esp_stub.h"
 
 /******************************************************************
@@ -59,10 +58,10 @@ static esp_err_t root_handler(httpd_req_t *req)
         int ret_modify_html = snprintf(buffer_page, sizeof(buffer_page), html_format,
         12, 0, 0,
         config.ssid, config.wpa_passphrase,
-        "",
+        (config.ntp == 1) ? "checked" : "",
         (config.mode == 0) ? "checked" : "",
-        (config.param1 == 1) ? "checked" : "",
-        (config.param2 == 2) ? "checked" : "");
+        (config.mode == 1) ? "checked" : "",
+        (config.mode == 2) ? "checked" : "");
 
         if (ret_modify_html < 0) {
             ret = ESP_FAIL;
@@ -89,7 +88,6 @@ static esp_err_t update_handler(httpd_req_t *req)
     char buf[200];
     config_t new_config;
     esp_err_t ret = ESP_OK;
-    static const char WEBSERVER_TAG[] = "WEBSERVER";
 
     /* Start from a copy of the current configuration */
     config_get_copy(&new_config);
@@ -105,7 +103,6 @@ static esp_err_t update_handler(httpd_req_t *req)
     if (ret == ESP_OK) {
         esp_err_t query_res;
         char tmp[64];
-        bool wifi_needs_update = false;
 
         buf[(size_t)len] = 0; /* Null-terminate received data */
 
@@ -113,22 +110,16 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(buf, "ssid", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            if (strncmp(new_config.ssid, tmp, sizeof(new_config.ssid)) != 0) {
-                (void)strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1U);
-                new_config.ssid[sizeof(new_config.ssid)-1U] = '\0';
-                wifi_needs_update = true;
-            }
+            (void)strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1U);
+            new_config.ssid[sizeof(new_config.ssid)-1U] = '\0';
         }
 
         /* Read "wpa-passphrase" parameter */
         query_res = httpd_query_key_value(buf, "wpa-passphrase", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            if (strncmp(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)) != 0) {
-                (void)strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1U);
-                new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase)-1U] = '\0';
-                wifi_needs_update = true;
-            }
+            (void)strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1U);
+            new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase)-1U] = '\0';
         }
 
         /* Read "mode" parameter */
@@ -145,8 +136,8 @@ static esp_err_t update_handler(httpd_req_t *req)
             }
         }
 
-        /* Read "param1" parameter */
-        query_res = httpd_query_key_value(buf, "param1", tmp, sizeof(tmp));
+        /* Read "ntp" parameter */
+        query_res = httpd_query_key_value(buf, "ntp", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
             char *local_endptr = NULL;
@@ -155,7 +146,7 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.param1 = (int)tmp_val;
+                new_config.ntp = (int)tmp_val;
             }
         }
 
@@ -175,17 +166,13 @@ static esp_err_t update_handler(httpd_req_t *req)
 
         /* Update global configuration (currently commented out for test safety) */
         ret = config_set_config(&new_config);
+
         if (ret == ESP_OK) {
             ret = config_save();
         }
 
-        if (wifi_needs_update) {
-            esp_err_t wifi_ret = wifi_change_sta(new_config.ssid, new_config.wpa_passphrase);
-            if (wifi_ret != ESP_OK) {
-                ESP_LOGE(WEBSERVER_TAG, "Failed to update STA Wi-Fi");
-                ret = wifi_ret;
-            }
-        }
+        /* Read config on RAM and apply changes */
+        config_apply();
 
         /* Redirect client back to the root page */
         httpd_resp_set_status(req, "303 See Other");

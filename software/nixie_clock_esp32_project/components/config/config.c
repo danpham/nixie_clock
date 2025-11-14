@@ -7,7 +7,9 @@
 #include "freertos/semphr.h"
 #include "config.h"
 #include "nvs.h"
+#include "../wifi/wifi.h"
 #include "../../main/esp_stub.h"
+#include "../../main/ntp_sync_task.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -25,6 +27,8 @@ static config_t cfg_last;
 static SemaphoreHandle_t config_mutex = NULL;
 static const TickType_t CONFIG_MUTEX_TIMEOUT = portMAX_DELAY;
 static const char CONFIG_TAG[] = "CONFIG";
+static bool ntp_initialized = false;
+static bool wifi_initialized = false;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -78,10 +82,10 @@ esp_err_t config_init(void)
                     cfg.mode = 0;
                 }
 
-                ret_load = nvs_load_ntp(&cfg.param1);
+                ret_load = nvs_load_ntp(&cfg.ntp);
                 if (ret_load != ESP_OK)
                 {
-                    cfg.param1 = 0;
+                    cfg.ntp = 0;
                 }
 
                 ret_load = nvs_load_cathode(&cfg.param2);
@@ -147,9 +151,9 @@ esp_err_t config_save(void)
                 ret = ESP_OK;
             }
         }
-        if (cfg.param1 != cfg_last.param1)
+        if (cfg.ntp != cfg_last.ntp)
         {
-            ret_save = nvs_save_ntp(cfg.param1);
+            ret_save = nvs_save_ntp(cfg.ntp);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
@@ -252,3 +256,60 @@ esp_err_t config_set_config(const config_t *config)
 
     return result;
 }
+
+/**
+ * @brief Apply config changes to services.
+ *
+ * Updates dependent services (e.g., Wi-Fi) when related config fields change.
+ * Mutex-protected to avoid race conditions.
+ *
+ * @return ESP_OK on success, or an error code on failure.
+ */
+esp_err_t config_apply(void)
+{
+    esp_err_t result = ESP_OK;
+
+    BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
+    if (taken == pdTRUE)
+    {
+        if (wifi_initialized == false)
+        {
+            wifi_init_apsta(cfg.ssid, cfg.wpa_passphrase, WIFI_AP_SSID, WIFI_AP_PASSWORD);
+            wifi_initialized = true;
+        }
+        else {
+            esp_err_t wifi_ret = wifi_change_sta(cfg.ssid, cfg.wpa_passphrase);
+            if (wifi_ret != ESP_OK) {
+                ESP_LOGE(CONFIG_TAG, "Failed to update STA Wi-Fi");
+                result = ESP_FAIL;
+            }
+        }
+
+        /* NTP sync */
+        if (cfg.ntp == 1)
+        {
+            if (ntp_initialized == false) {
+                time_sync_task_start();
+                ntp_initialized = true;
+            }
+        }
+        else {
+            if (ntp_initialized == true) {
+                stop_ntp();
+                ntp_initialized = false;
+            }
+        }
+
+        BaseType_t give_ret = xSemaphoreGive(config_mutex);
+        if (give_ret != pdTRUE)
+        {
+            ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
+            if (result == ESP_OK) {
+                result = ESP_FAIL;
+            }
+        }
+    }
+
+    return result;
+}
+

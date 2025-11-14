@@ -12,18 +12,12 @@
 #include "../components/hv5622/hv5622.h"
 #include "../components/display/display.h"
 #include "../components/clock/clock.h"
-#include "../components/wifi/wifi.h"
 #include "../components/webserver/webserver.h"
 #include "../components/config/config.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define WIFI_STA_SSID       "YourStaSSID"
-#define WIFI_STA_PASSWORD   "YourStaPassword"
-
-#define WIFI_AP_SSID        "NixieClock-Setup"
-#define WIFI_AP_PASSWORD    "12345678"
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -66,10 +60,7 @@ void app_main(void)
     clock_task_start();
     gpio_task_start();
 
-    /* Time syncrhonisation */
-    wifi_init_apsta(WIFI_STA_SSID, WIFI_STA_PASSWORD, WIFI_AP_SSID, WIFI_AP_PASSWORD);
-    time_sync_task_start();
-
+    config_apply();
     start_webserver();
 
     while(1) {

@@ -25,7 +25,7 @@ typedef struct
     char ssid[CONFIG_SSID_BUF_SZ];
     char wpa_passphrase[CONFIG_WPA_PASSPHRASE_BUF_SZ];
     int32_t mode;
-    int32_t param1;
+    int32_t ntp;
     int32_t param2;
 } config_t;
 
@@ -45,5 +45,6 @@ esp_err_t config_init(void);
 esp_err_t config_save(void);
 esp_err_t config_get_copy(config_t *copy);
 esp_err_t config_set_config(const config_t *config);
+esp_err_t config_apply(void);
 
 #endif // CONFIG_H
