@@ -198,3 +198,50 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
         }
     }
 }
+
+/**
+ * @brief Change the STA Wi-Fi credentials and reconnect.
+ *
+ * Disconnects the current STA, applies a new SSID/password, and reconnects
+ * using the updated configuration. Does not affect AP mode.
+ *
+ * @param sta_ssid        New STA SSID (null-terminated)
+ * @param sta_passphrase  New STA password (null-terminated)
+ *
+ * @return ESP_OK on success, or an ESP-IDF error code.
+ */
+esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphrase)
+{
+    esp_err_t ret = ESP_OK;
+
+    /* Stop STA */
+    ret = esp_wifi_disconnect();
+    if (ret != ESP_OK) {
+        ESP_LOGE(WIFI_TAG, "esp_wifi_disconnect failed: %s", esp_err_to_name(ret));
+    }
+
+    /* Configure the new STA */
+    if (ret == ESP_OK) {
+        wifi_config_t wifi_config = { 0 };
+        strlcpy((char *)wifi_config.sta.ssid, sta_ssid, sizeof(wifi_config.sta.ssid));
+        strlcpy((char *)wifi_config.sta.password, sta_passphrase, sizeof(wifi_config.sta.password));
+        wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+
+        ret = esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
+        if (ret != ESP_OK) {
+            ESP_LOGE(WIFI_TAG, "esp_wifi_set_config failed: %s", esp_err_to_name(ret));
+        }
+    }
+
+    /* Reconnect the STA */
+    if (ret == ESP_OK) {
+        ret = esp_wifi_connect();
+        if (ret != ESP_OK) {
+            ESP_LOGE(WIFI_TAG, "esp_wifi_connect failed: %s", esp_err_to_name(ret));
+        } else {
+            ESP_LOGI(WIFI_TAG, "STA updated: SSID=%s", sta_ssid);
+        }
+    }
+
+    return ret;
+}

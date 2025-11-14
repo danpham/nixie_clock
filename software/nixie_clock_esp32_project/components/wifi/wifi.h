@@ -4,6 +4,7 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#include "esp_err.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -26,5 +27,6 @@
 ******************************************************************/
 void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
                      const char *ap_ssid, const char *ap_password);
+esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphrase);
 
 #endif // WIFI_H

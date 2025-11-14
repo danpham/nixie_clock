@@ -63,7 +63,7 @@ static esp_err_t root_handler(httpd_req_t *req)
         (config.param1 == 1) ? "checked" : "",
         (config.param2 == 2) ? "checked" : "");
 
-        if (ret_modify_html <0) {
+        if (ret_modify_html < 0) {
             ret = ESP_FAIL;
         }
     }

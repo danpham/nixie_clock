@@ -5,7 +5,6 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include "esp_http_server.h"
-#include "driver/gpio.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
