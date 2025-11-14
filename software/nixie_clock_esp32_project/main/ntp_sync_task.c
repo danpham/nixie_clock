@@ -11,6 +11,7 @@
 #include "ntp_sync_task.h"
 #include "esp_interface.h"
 #include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

@@ -266,12 +266,13 @@ esp_err_t config_set_config(const config_t *config)
 esp_err_t config_apply(void)
 {
     esp_err_t result = ESP_OK;
-    static bool ntp_initialized = false;
-    static bool wifi_initialized = false;
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE)
     {
+        static bool wifi_initialized = false;
+        static bool ntp_initialized = false;
+
         if (wifi_initialized == false)
         {
             wifi_init_apsta(cfg.ssid, cfg.wpa_passphrase, WIFI_AP_SSID, WIFI_AP_PASSWORD);
