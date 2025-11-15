@@ -61,7 +61,9 @@
         "xstring": "c",
         "array": "c",
         "vector": "c",
-        "semphr.h": "c"
+        "semphr.h": "c",
+        "nvs_mock.h": "c",
+        "string.h": "c"
     },
     "idf.flashType": "UART"
 }

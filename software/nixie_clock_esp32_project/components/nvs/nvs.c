@@ -1,15 +1,24 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
-#include "nvs_flash.h"
-#include "nvs.h"
+#ifdef UNITY_TESTING
+#include "nvs_mock.h"
+#else
 #include "esp_log.h"
-#include "esp_err.h"
+#include "nvs_flash.h"
+#endif
+#include "nvs.h"
+
 #include "../../main/esp_stub.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#ifdef UNITY_TESTING
+#define NOT_STATIC
+#else
+#define NOT_STATIC static
+#endif
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -62,7 +71,7 @@ esp_err_t nvs_init(void)
  * @param value The int32_t value to save.
  * @return esp_err_t ESP_OK on success, otherwise an error code.
  */
-static esp_err_t nvs_save_value(const char *key, int32_t value)
+NOT_STATIC esp_err_t nvs_save_value(const char *key, int32_t value)
 {
     nvs_handle_t handle = 0U;
     esp_err_t err = ESP_FAIL;
@@ -83,7 +92,6 @@ static esp_err_t nvs_save_value(const char *key, int32_t value)
     return ret;
 }
 
-
 /**
  * @brief Save a string value to NVS under a given key.
  *
@@ -94,7 +102,7 @@ static esp_err_t nvs_save_value(const char *key, int32_t value)
  * @param value The null-terminated string to save.
  * @return esp_err_t ESP_OK on success, otherwise an error code.
  */
-static esp_err_t nvs_save_str(const char * key, const char * value)
+NOT_STATIC esp_err_t nvs_save_str(const char * key, const char * value)
 {
     nvs_handle_t handle = 0U;
     esp_err_t err = ESP_FAIL;
@@ -122,7 +130,6 @@ static esp_err_t nvs_save_str(const char * key, const char * value)
     return ret;
 }
 
-
 /**
  * @brief Load an integer value from NVS using a given key.
  *
@@ -132,7 +139,7 @@ static esp_err_t nvs_save_str(const char * key, const char * value)
  * @param value Pointer to an int32_t variable where the result will be stored.
  * @return esp_err_t ESP_OK on success, otherwise an error code.
  */
-static esp_err_t nvs_load_value(const char *key, int32_t *value)
+NOT_STATIC esp_err_t nvs_load_value(const char *key, int32_t *value)
 {
     nvs_handle_t handle = 0U;
     esp_err_t ret = ESP_FAIL;
@@ -165,7 +172,7 @@ static esp_err_t nvs_load_value(const char *key, int32_t *value)
  *               updated with the actual string length (including null terminator).
  * @return esp_err_t ESP_OK on success, otherwise an error code.
  */
-static esp_err_t nvs_load_str(const char * key, char * value, size_t * length)
+NOT_STATIC esp_err_t nvs_load_str(const char * key, char * value, size_t * length)
 {
     nvs_handle_t handle = 0U;
     esp_err_t err = ESP_FAIL;
@@ -182,10 +189,9 @@ static esp_err_t nvs_load_str(const char * key, char * value, size_t * length)
             ESP_LOGE(NVS_TAG, "Read error: %s", esp_err_to_name(ret));
         }
 
-        (void)nvs_close(handle);
+        nvs_close(handle);
     }
-    else
-    {
+    else {
         ret = err;
         ESP_LOGE(NVS_TAG, "Open error: %s", esp_err_to_name(err));
     }
