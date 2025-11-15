@@ -5,6 +5,7 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include "esp_err.h"
+#include "../clock/clock.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -22,9 +23,9 @@ typedef struct
 {
     char ssid[CONFIG_SSID_BUF_SZ];
     char wpa_passphrase[CONFIG_WPA_PASSPHRASE_BUF_SZ];
-    int32_t mode;
-    int32_t ntp;
-    int32_t param2;
+    uint8_t mode;
+    uint8_t ntp;
+    myclock_t time;
 } config_t;
 
 /******************************************************************

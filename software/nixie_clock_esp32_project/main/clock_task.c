@@ -15,10 +15,13 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define MENU_CLOCK              0
-#define MENU_CONFIGURE_MINUTES  1
-#define MENU_CONFIGURE_HOURS    2
-#define PATTERN_MAX_STEP        (9U)
+#define CLOCK_MENU_CLOCK                (0U)
+#define CLOCK_MENU_CONFIGURE_MINUTES    (1U)
+#define CLOCK_MENU_CONFIGURE_HOURS      (2U)
+#define CLOCK_PATTERN_MAX_STEP          (9U)
+#define CLOCK_DEFAULT_HOURS             (12U)
+#define CLOCK_DEFAULT_MINUTES           (0U)
+#define CLOCK_DEFAULT_SECONDS           (0U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -47,7 +50,7 @@ static void clock_task(void *arg) {
     uint8_t pattern_step = 0;
     (void)arg; 
 
-    clock_init(&clk, 0, 0, 0);
+    clock_init(&clk, CLOCK_DEFAULT_HOURS, CLOCK_DEFAULT_MINUTES, CLOCK_DEFAULT_SECONDS);
 
     TickType_t lastTick = xTaskGetTickCount();
     const TickType_t tickPeriod    = pdMS_TO_TICKS(1000); // 1s
@@ -62,7 +65,7 @@ static void clock_task(void *arg) {
         // Every second
         if ((now - lastTick) >= tickPeriod) {
 
-            /* Update with NTP */
+            /* Update with NTP or webserver config */
             myclock_t upd;
             if (xQueueReceive(clockUpdateQueue, &upd, 0) == pdPASS)
             {
@@ -84,7 +87,7 @@ static void clock_task(void *arg) {
             display_set_pattern_1(pattern_step);
             pattern_step++;
 
-            if (pattern_step > PATTERN_MAX_STEP) {
+            if (pattern_step > CLOCK_PATTERN_MAX_STEP) {
                 pattern_step = 0;
                 in_pattern = false;
             }
@@ -99,66 +102,66 @@ static void clock_task(void *arg) {
 // Menu
 void clock_menu(myclock_t *clk, button_event_t *event)
 {
-    static int state = MENU_CLOCK;
+    static uint8_t state = CLOCK_MENU_CLOCK;
     void *buffer = NULL;
 
     switch (state)
     {
-        case MENU_CLOCK:
+        case CLOCK_MENU_CLOCK:
             buffer = (void *)event;
             if (xQueueReceive(buttonQueue, buffer, 0) == pdTRUE) {
                 if ((event->id == (buttons_type_t)BUTTON_ROTARY_SWITCH_1) && (event->pressed == (uint8_t)BUTTON_LONG_PRESS))
                 {
-                    state = MENU_CONFIGURE_MINUTES;
+                    state = CLOCK_MENU_CONFIGURE_MINUTES;
                 }
             }
             break;
-        case MENU_CONFIGURE_MINUTES:
+        case CLOCK_MENU_CONFIGURE_MINUTES:
             buffer = (void *)event;
             if (xQueueReceive(buttonQueue, buffer, 0) == pdTRUE) {
                 if ((event->id == (buttons_type_t)BUTTON_ROTARY_SWITCH_1) && (event->pressed == (uint8_t)BUTTON_LONG_PRESS))
                 {
-                    state = MENU_CONFIGURE_HOURS;
+                    state = CLOCK_MENU_CONFIGURE_HOURS;
                 }
                 else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT))
                 {
                     clock_increment_minutes(clk);
-                    state = MENU_CONFIGURE_MINUTES;
+                    state = CLOCK_MENU_CONFIGURE_MINUTES;
                 }
                 else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT))
                 {
                     clock_decrement_minutes(clk);
-                    state = MENU_CONFIGURE_MINUTES;
+                    state = CLOCK_MENU_CONFIGURE_MINUTES;
                 }
                 else {
-                    state = MENU_CONFIGURE_MINUTES;
+                    state = CLOCK_MENU_CONFIGURE_MINUTES;
                 }
             }
             break;
-        case MENU_CONFIGURE_HOURS:
+        case CLOCK_MENU_CONFIGURE_HOURS:
             buffer = (void *)event;
             if (xQueueReceive(buttonQueue, buffer, 0) == pdTRUE) {
                 if ((event->id == (buttons_type_t)BUTTON_ROTARY_SWITCH_1) && (event->pressed == (uint8_t)BUTTON_LONG_PRESS))
                 {
-                    state = MENU_CLOCK;
+                    state = CLOCK_MENU_CLOCK;
                 }
                 else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT))
                 {
                     clock_increment_hours(clk);
-                    state = MENU_CONFIGURE_HOURS;
+                    state = CLOCK_MENU_CONFIGURE_HOURS;
                 }
                 else if ((event->id == (buttons_type_t)BUTTON_ROTARY_ENCODER) && (event->updateValue == (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT))
                 {
                     clock_decrement_hours(clk);
-                    state = MENU_CONFIGURE_HOURS;
+                    state = CLOCK_MENU_CONFIGURE_HOURS;
                 }
                 else {
-                    state = MENU_CONFIGURE_HOURS;
+                    state = CLOCK_MENU_CONFIGURE_HOURS;
                 }
             }
             break;
         default:
-            state = MENU_CLOCK;
+            state = CLOCK_MENU_CLOCK;
             break;
     }
 

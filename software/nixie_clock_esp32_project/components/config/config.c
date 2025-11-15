@@ -86,10 +86,10 @@ esp_err_t config_init(void)
                     cfg.ntp = 0;
                 }
 
-                ret_load = nvs_load_cathode(&cfg.param2);
+                ret_load = nvs_load_hours(&cfg.time.hours);
                 if (ret_load != ESP_OK)
                 {
-                    cfg.param2 = 0;
+                    cfg.time.hours = 0;
                 }
 
                 cfg_last = cfg;
@@ -156,9 +156,9 @@ esp_err_t config_save(void)
                 ret = ESP_OK;
             }
         }
-        if (cfg.param2 != cfg_last.param2)
+        if (cfg.time.hours != cfg_last.time.hours)
         {
-            ret_save = nvs_save_cathode(cfg.param2);
+            ret_save = nvs_save_hours(cfg.time.hours);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }

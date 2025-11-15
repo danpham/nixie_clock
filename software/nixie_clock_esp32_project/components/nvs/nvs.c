@@ -27,7 +27,7 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char *NVS_NAMESPACE = "storage";
+static const char NVS_NAMESPACE[] = "storage";
 static const char NVS_TAG[] = "NVS";
 
 /******************************************************************
@@ -71,7 +71,7 @@ esp_err_t nvs_init(void)
  * @param value The int32_t value to save.
  * @return esp_err_t ESP_OK on success, otherwise an error code.
  */
-NOT_STATIC esp_err_t nvs_save_value(const char *key, int32_t value)
+NOT_STATIC esp_err_t nvs_save_value(const char *key, uint8_t value)
 {
     nvs_handle_t handle = 0U;
     esp_err_t err = ESP_FAIL;
@@ -79,7 +79,7 @@ NOT_STATIC esp_err_t nvs_save_value(const char *key, int32_t value)
 
     err = nvs_open(NVS_NAMESPACE, NVS_READWRITE, &handle);
     if (err == ESP_OK) {
-        ret = nvs_set_i32(handle, key, value);
+        ret = nvs_set_u8(handle, key, value);
         if (ret == ESP_OK) {
             ret = nvs_commit(handle);
         }
@@ -139,7 +139,7 @@ NOT_STATIC esp_err_t nvs_save_str(const char * key, const char * value)
  * @param value Pointer to an int32_t variable where the result will be stored.
  * @return esp_err_t ESP_OK on success, otherwise an error code.
  */
-NOT_STATIC esp_err_t nvs_load_value(const char *key, int32_t *value)
+NOT_STATIC esp_err_t nvs_load_value(const char *key, uint8_t *value)
 {
     nvs_handle_t handle = 0U;
     esp_err_t ret = ESP_FAIL;
@@ -147,7 +147,7 @@ NOT_STATIC esp_err_t nvs_load_value(const char *key, int32_t *value)
     if (NULL != value) {
         esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READONLY, &handle);
         if (err == ESP_OK) {
-            ret = nvs_get_i32(handle, key, value);
+            ret = nvs_get_u8(handle, key, value);
             nvs_close(handle);
         }
         else {
@@ -199,14 +199,14 @@ NOT_STATIC esp_err_t nvs_load_str(const char * key, char * value, size_t * lengt
     return ret;
 }
 
-esp_err_t nvs_save_ntp(int32_t enabled)             { return nvs_save_value("ntp", enabled); }
-esp_err_t nvs_load_ntp(int32_t *enabled)            { return nvs_load_value("ntp", enabled); }
+esp_err_t nvs_save_ntp(uint8_t enabled)             { return nvs_save_value("ntp", enabled); }
+esp_err_t nvs_load_ntp(uint8_t *enabled)            { return nvs_load_value("ntp", enabled); }
 
-esp_err_t nvs_save_cathode(int32_t enabled)         { return nvs_save_value("cathode", enabled); }
-esp_err_t nvs_load_cathode(int32_t *enabled)        { return nvs_load_value("cathode", enabled); }
+esp_err_t nvs_save_hours(uint8_t value)             { return nvs_save_value("hours", value); }
+esp_err_t nvs_load_hours(uint8_t *value)            { return nvs_load_value("hours", value); }
 
-esp_err_t nvs_save_mode(int32_t value)              { return nvs_save_value("mode", value); }
-esp_err_t nvs_load_mode(int32_t *value)             { return nvs_load_value("mode", value); }
+esp_err_t nvs_save_mode(uint8_t value)              { return nvs_save_value("mode", value); }
+esp_err_t nvs_load_mode(uint8_t *value)             { return nvs_load_value("mode", value); }
 
 esp_err_t nvs_save_ssid(const char *value)                         { return nvs_save_str("ssid", value); }
 esp_err_t nvs_load_ssid(char *value, size_t *length)               { return nvs_load_str("ssid", value, length); }

@@ -15,7 +15,8 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define WEBSERVER_HTML_PAGE_SIZE     3500
+#define WEBSERVER_HTML_PAGE_SIZE                 (3500U)
+#define WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE     (200U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -56,7 +57,7 @@ static esp_err_t root_handler(httpd_req_t *req)
     ret = config_get_copy(&config);
     if (ESP_OK == ret) {
         int ret_modify_html = snprintf(buffer_page, sizeof(buffer_page), html_format,
-        12, 0, 0,
+        config.time.hours, config.time.minutes, config.time.seconds,
         config.ssid, config.wpa_passphrase,
         (config.ntp == 1) ? "checked" : "",
         (config.mode == 0) ? "checked" : "",
@@ -85,14 +86,14 @@ static esp_err_t root_handler(httpd_req_t *req)
  */
 static esp_err_t update_handler(httpd_req_t *req)
 {
-    char buf[200];
+    char req_recv_buf[WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE];
     config_t new_config;
     esp_err_t ret = ESP_OK;
 
     /* Start from a copy of the current configuration */
     config_get_copy(&new_config);
 
-    ssize_t len = httpd_req_recv(req, buf, (size_t)(sizeof(buf) - 1U));
+    ssize_t len = httpd_req_recv(req, req_recv_buf, (size_t)(sizeof(req_recv_buf) - 1U));
     if (len <= 0) {
         if (len == HTTPD_SOCK_ERR_TIMEOUT) {
             httpd_resp_send_408(req);
@@ -104,10 +105,10 @@ static esp_err_t update_handler(httpd_req_t *req)
         esp_err_t query_res;
         char tmp[64];
 
-        buf[(size_t)len] = 0; /* Null-terminate received data */
+        req_recv_buf[(size_t)len] = 0; /* Null-terminate received data */
 
         /* Read "ssid" parameter */
-        query_res = httpd_query_key_value(buf, "ssid", tmp, sizeof(tmp));
+        query_res = httpd_query_key_value(req_recv_buf, "ssid", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
             (void)strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1U);
@@ -115,7 +116,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         }
 
         /* Read "wpa-passphrase" parameter */
-        query_res = httpd_query_key_value(buf, "wpa-passphrase", tmp, sizeof(tmp));
+        query_res = httpd_query_key_value(req_recv_buf, "wpa-passphrase", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
             (void)strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1U);
@@ -123,7 +124,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         }
 
         /* Read "mode" parameter */
-        query_res = httpd_query_key_value(buf, "mode", tmp, sizeof(tmp));
+        query_res = httpd_query_key_value(req_recv_buf, "mode", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
             char *local_endptr = NULL;
@@ -137,7 +138,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         }
 
         /* Read "ntp" parameter */
-        query_res = httpd_query_key_value(buf, "ntp", tmp, sizeof(tmp));
+        query_res = httpd_query_key_value(req_recv_buf, "ntp", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
             char *local_endptr = NULL;
@@ -150,8 +151,8 @@ static esp_err_t update_handler(httpd_req_t *req)
             }
         }
 
-        /* Read "param2" parameter */
-        query_res = httpd_query_key_value(buf, "param2", tmp, sizeof(tmp));
+        /* Read "hours" parameter */
+        query_res = httpd_query_key_value(req_recv_buf, "hours", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
             char *local_endptr = NULL;
@@ -160,7 +161,35 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.param2 = (int)tmp_val;
+                new_config.time.hours = (int)tmp_val;
+            }
+        }
+
+        /* Read "minutes" parameter */
+        query_res = httpd_query_key_value(req_recv_buf, "minutes", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            char *local_endptr = NULL;
+            errno = 0;  /* Reset errno before calling strtol */
+            const long tmp_val = strtol(tmp, &local_endptr, 10);
+            /* Check for successful numeric conversion */
+            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
+            {
+                new_config.time.hours = (int)tmp_val;
+            }
+        }
+
+        /* Read "seconds" parameter */
+        query_res = httpd_query_key_value(req_recv_buf, "seconds", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            char *local_endptr = NULL;
+            errno = 0;  /* Reset errno before calling strtol */
+            const long tmp_val = strtol(tmp, &local_endptr, 10);
+            /* Check for successful numeric conversion */
+            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
+            {
+                new_config.time.seconds = (int)tmp_val;
             }
         }
 
@@ -335,9 +364,9 @@ static const char* get_html_page(void) {
     "<form action=\"/set_time\" method=\"GET\">\n"
     "<h2>Set time</h2>\n"
     "<div class=\"input-row\">\n"
-    "  <input type=\"number\" name=\"h\" min=\"0\" max=\"23\" placeholder=\"HH\" value=\"%d\"> :\n"
-    "  <input type=\"number\" name=\"m\" min=\"0\" max=\"59\" placeholder=\"MM\" value=\"%d\"> :\n"
-    "  <input type=\"number\" name=\"s\" min=\"0\" max=\"59\" placeholder=\"SS\" value=\"%d\">\n"
+    "  <input type=\"number\" name=\"hours\" min=\"0\" max=\"23\" placeholder=\"HH\" value=\"%d\"> :\n"
+    "  <input type=\"number\" name=\"minutes\" min=\"0\" max=\"59\" placeholder=\"MM\" value=\"%d\"> :\n"
+    "  <input type=\"number\" name=\"seconds\" min=\"0\" max=\"59\" placeholder=\"SS\" value=\"%d\">\n"
     "</div>\n"
     "<h2>Wi-Fi</h2>\n"
     "<div class=\"input-group\">\n"
