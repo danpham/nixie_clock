@@ -101,8 +101,8 @@ static void time_sync_task(void *arg)
     esp_sntp_init();
 
     /* Signal task is finished */
-    if (xSemaphoreGive(time_sync_done_sem) != pdTRUE)
-    {
+    BaseType_t given = xSemaphoreGive(time_sync_done_sem)
+    if (given != pdTRUE) {
         ESP_LOGW(TAG, "Failed to give done semaphore");
     }
 
