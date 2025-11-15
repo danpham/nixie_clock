@@ -140,10 +140,11 @@ void stop_ntp(void)
 {
     /* Wait for the time_sync_task to finish */
     if (time_sync_task_handle != NULL) {
-
+        static const TickType_t NTP_SYNC_TASK_MUTEX_TIMEOUT = portMAX_DELAY;
         ESP_LOGI(NTP_SYNC_TASK_TAG, "Waiting for time_sync_task to finish...");
 
-        if (xSemaphoreTake(time_sync_done_sem, portMAX_DELAY) == pdTRUE) {
+        BaseType_t taken = xSemaphoreTake(time_sync_done_sem, NTP_SYNC_TASK_MUTEX_TIMEOUT);
+        if (taken == pdTRUE) {
             ESP_LOGI(NTP_SYNC_TASK_TAG, "time_sync_task finished");
         } else {
             ESP_LOGE(NTP_SYNC_TASK_TAG, "Semaphore wait failed (should never happen)");
