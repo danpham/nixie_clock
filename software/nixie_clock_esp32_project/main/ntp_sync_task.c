@@ -11,7 +11,7 @@
 #include "ntp_sync_task.h"
 #include "esp_interface.h"
 #include "freertos/FreeRTOS.h"
-
+#include "freertos/semphr.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -51,11 +51,10 @@ static void timestamp_to_hms(uint32_t timestamp, myclock_t *clock)
 static void time_sync_notification_cb(struct timeval *tv)
 {
     myclock_t clockUpdate;
-    uint32_t now32;
 
     if ((tv != NULL) && (tv->tv_sec >= 0) && (tv->tv_sec <= UINT32_MAX))
     {
-        now32 = (uint32_t)tv->tv_sec;
+        uint32_t now32 = (uint32_t)tv->tv_sec;
         timestamp_to_hms(now32, &clockUpdate);
 
         /* Send clockUpdate to the queue (non-blocking) */
