@@ -9,7 +9,7 @@
 #include "nvs.h"
 #include "../wifi/wifi.h"
 #include "../../main/esp_stub.h"
-#include "../../main/ntp_sync_task.h"
+#include "ntp.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -290,13 +290,13 @@ esp_err_t config_apply(void)
         if (cfg.ntp == 1)
         {
             if (ntp_initialized == false) {
-                time_sync_task_start();
+                ntp_sync_task_start();
                 ntp_initialized = true;
             }
         }
         else {
             if (ntp_initialized == true) {
-                stop_ntp();
+                ntp_stop();
                 ntp_initialized = false;
             }
         }

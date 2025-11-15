@@ -5,7 +5,7 @@
 #include "driver/gpio.h"
 #include "gpio_task.h"
 #include "clock_task.h"
-#include "ntp_sync_task.h"
+#include "ntp.h"
 #include "esp_log.h"
 #include "esp_stub.h"
 #include "../components/uart/uart.h"

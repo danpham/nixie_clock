@@ -1,5 +1,5 @@
-#ifndef NTP_SYNC_TASK_H
-#define NTP_SYNC_TASK_H
+#ifndef NTP_H
+#define NTP_H
 
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
@@ -24,7 +24,7 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void time_sync_task_start(void);
-void stop_ntp(void);
+void ntp_sync_task_start(void);
+void ntp_stop(void);
 
-#endif // NTP_SYNC_TASK_H
+#endif // NTP_H
