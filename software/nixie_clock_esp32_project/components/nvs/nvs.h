@@ -9,7 +9,6 @@
 #else
 #include "nvs_mock.h"
 #endif
-#include <stdint.h>
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

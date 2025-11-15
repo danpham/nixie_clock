@@ -5,9 +5,6 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include <stdint.h>
-#include "driver/spi_master.h"
-#include "driver/gpio.h"
-
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -20,21 +17,17 @@
 #define HV5622_PIN_LE     2    /* GPIO2 */
 #define HV5622_PIN_BL     1    /* GPIO1 */
 
-
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
-
 
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
 
-
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
-
 
 /******************************************************************
  * 6. Functions definitions (public API in .c)

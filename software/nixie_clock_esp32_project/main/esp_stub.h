@@ -2,8 +2,6 @@
 #ifndef ESP_IDF_STUB_H
 #define ESP_IDF_STUB_H
 
-#include <stdint.h>
-#include <stdbool.h>
 
 /* FreeRTOS boolean macros */
 #define pdTRUE  1

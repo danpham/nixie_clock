@@ -4,8 +4,6 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
-#include <stdint.h>
-#include "freertos/semphr.h"
 #include "esp_err.h"
 
 /******************************************************************

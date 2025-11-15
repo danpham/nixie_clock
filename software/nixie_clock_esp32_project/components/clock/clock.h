@@ -5,7 +5,6 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include <stdint.h>
-#include <stdbool.h>
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

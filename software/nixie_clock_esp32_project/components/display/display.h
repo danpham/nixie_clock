@@ -25,10 +25,7 @@
 /******************************************************************
  * 6. Functions definitions (public API in .c)
 ******************************************************************/
-// Initialize the display
 void display_init(void);
-
-// Display the time (hh:mm:ss) and dot1, dot2
 void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2);
 void display_set_pattern_1(uint8_t step);
 
