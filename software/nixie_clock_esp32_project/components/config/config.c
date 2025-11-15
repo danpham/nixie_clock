@@ -287,7 +287,7 @@ esp_err_t config_apply(void)
         }
 
         /* NTP sync */
-        if (cfg.ntp == 1)
+        if (cfg.ntp == 1U)
         {
             if (ntp_initialized == false) {
                 ntp_sync_task_start();
