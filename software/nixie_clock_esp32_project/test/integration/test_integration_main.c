@@ -11,7 +11,7 @@
 extern uint64_t last_sent_data;
 
 // ------------------- Test variables -------------------
-static clock_t clk;
+static myclock_t clk;
 
 // ------------------- SetUp / TearDown -------------------
 void setUp(void) {
