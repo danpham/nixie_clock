@@ -17,13 +17,13 @@ esp_err_t nvs_set_str(nvs_handle_t handle, const char* key, const char* value) {
     return ESP_OK; 
 }
 esp_err_t nvs_get_str(nvs_handle_t handle, const char* key, char* value, size_t* length) {
-    size_t len = strlen(str_stored_value) + 1; // taille réelle de la chaîne
+    size_t len = strlen(str_stored_value) + 1;
 
     if (value && length && *length >= len) {
-        strcpy_s(value, *length, str_stored_value); // copier dans buffer fourni
+        strcpy_s(value, *length, str_stored_value);
     }
 
-    if (length) *length = len; // retourner la taille réelle
+    if (length) *length = len;
     return ESP_OK;
 }
 esp_err_t nvs_commit(nvs_handle_t handle) { return ESP_OK; }
