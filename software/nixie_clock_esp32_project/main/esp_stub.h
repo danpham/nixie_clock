@@ -27,10 +27,6 @@
 /* HTTP Server */
 #define HTTPD_SOCK_ERR_TIMEOUT   -3
 
-/* Tasks */
-#define eDeleted 1
-eTaskState eTaskGetState(TaskHandle_t xTask);
-
 typedef int esp_err_t;
 
 BaseType_t xQueueReceive( QueueHandle_t xQueue,

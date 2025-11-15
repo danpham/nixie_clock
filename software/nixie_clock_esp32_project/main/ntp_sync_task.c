@@ -11,13 +11,13 @@
 #include "ntp_sync_task.h"
 #include "esp_interface.h"
 #include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
 #define NTP_SYNC_INTERVAL_MS    (30U * 60U * 1000U)
-#define NTP_WAIT_WIFI_MS        1000U
+#define NTP_WAIT_WIFI_MS        (1000U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -26,7 +26,9 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static TaskHandle_t time_sync_task_handle;
+static SemaphoreHandle_t time_sync_done_sem = NULL;
+static TaskHandle_t time_sync_task_handle = NULL;
+static const char NTP_SYNC_TASK_TAG[] = "NTP_SYNC_TASK";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -48,16 +50,25 @@ static void timestamp_to_hms(uint32_t timestamp, myclock_t *clock)
 
 static void time_sync_notification_cb(struct timeval *tv)
 {
-    time_t now;
-    (void)tv;
-
-    /* Use the NTP-synced timestamp */
-    now = tv->tv_sec;
-
     myclock_t clockUpdate;
-    timestamp_to_hms(now, &clockUpdate);
+    uint32_t now32;
 
-    xQueueSend(clockUpdateQueue, &clockUpdate, 0);
+    if ((tv != NULL) && (tv->tv_sec >= 0) && (tv->tv_sec <= UINT32_MAX))
+    {
+        now32 = (uint32_t)tv->tv_sec;
+        timestamp_to_hms(now32, &clockUpdate);
+
+        /* Send clockUpdate to the queue (non-blocking) */
+        BaseType_t queue_ret;
+        queue_ret = xQueueSend(clockUpdateQueue, &clockUpdate, 0U);
+        if (queue_ret != pdTRUE)
+        {
+            ESP_LOGW(NTP_SYNC_TASK_TAG, "Failed to send clock update to queue");
+        }
+    }
+    else {
+        ESP_LOGE(NTP_SYNC_TASK_TAG, "Invalid SNTP timestamp or NULL pointer");
+    }
 }
 
 static void time_sync_task(void *arg)
@@ -71,7 +82,10 @@ static void time_sync_task(void *arg)
     while (!wifi_ready)
     {
         esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-        bool is_if_up = (netif != NULL) && esp_netif_is_netif_up(netif);
+        bool is_if_up = false;
+        if (netif != NULL){
+            is_if_up = esp_netif_is_netif_up(netif);
+        } 
 
         if (is_if_up) {
             wifi_ready = true;
@@ -87,36 +101,72 @@ static void time_sync_task(void *arg)
     sntp_set_time_sync_notification_cb(time_sync_notification_cb);
     esp_sntp_init();
 
+    /* Signal task is finished */
+    if (xSemaphoreGive(time_sync_done_sem) != pdTRUE)
+    {
+        ESP_LOGW(TAG, "Failed to give done semaphore");
+    }
+
     /* Free task */
     vTaskDelete(NULL);
 }
 
 void time_sync_task_start(void)
 {
-    xTaskCreate(time_sync_task,
-                "time_sync_task",
-                4096,
-                NULL,
-                2U,
-                &time_sync_task_handle);
+    if ((time_sync_done_sem != NULL) || (time_sync_task_handle != NULL)) {
+        time_sync_done_sem = xSemaphoreCreateBinary();
+        if (time_sync_done_sem == NULL) {
+            ESP_LOGE(NTP_SYNC_TASK_TAG, "Failed to create done semaphore");
+        } 
+        else {
+            BaseType_t ret = xTaskCreate(time_sync_task,
+                        "time_sync_task",
+                        4096,
+                        NULL,
+                        2U,
+                        &time_sync_task_handle);
+            
+            
+            if (ret != pdPASS) {
+                ESP_LOGE(NTP_SYNC_TASK_TAG, "Failed to create time_sync_task");
+            }
+        }
+    } 
+    else {
+        ESP_LOGE(NTP_SYNC_TASK_TAG, "time_sync_task already started or semaphore exists; cannot start again");
+    }
 }
 
 void stop_ntp(void)
 {
     /* Wait for the time_sync_task to finish */
     if (time_sync_task_handle != NULL) {
-        ESP_LOGI("time_sync", "Waiting for time_sync_task to finish...");
-        while (eTaskGetState(time_sync_task_handle) != eDeleted) {
-            vTaskDelay(pdMS_TO_TICKS(50));
+
+        ESP_LOGI(NTP_SYNC_TASK_TAG, "Waiting for time_sync_task to finish...");
+
+        if (xSemaphoreTake(time_sync_done_sem, portMAX_DELAY) == pdTRUE) {
+            ESP_LOGI(NTP_SYNC_TASK_TAG, "time_sync_task finished");
+        } else {
+            ESP_LOGE(NTP_SYNC_TASK_TAG, "Semaphore wait failed (should never happen)");
         }
+
+        /* Cleanup */
+        if (time_sync_done_sem != NULL) {
+            vSemaphoreDelete(time_sync_done_sem);
+            time_sync_done_sem = NULL;
+        }
+
         time_sync_task_handle = NULL;
+
+        /* Stop SNTP */
+        esp_sntp_stop();
+
+        /* Disable callback */
+        sntp_set_time_sync_notification_cb(NULL);
+
+        ESP_LOGI(NTP_SYNC_TASK_TAG, "NTP stopped");
     }
-
-    /* Stop SNTP */
-    esp_sntp_stop();
-
-    /* Disable callback */
-    sntp_set_time_sync_notification_cb(NULL);
-
-    ESP_LOGI("time_sync", "NTP stopped");
+    else {
+        ESP_LOGI(NTP_SYNC_TASK_TAG, "time_sync_task is not running");
+    }
 }

@@ -10,6 +10,7 @@
 #include "../components/gpio_driver/gpio_driver.h"
 #include "../components/rotary_encoder/rotary_encoder.h"
 #include "esp_stub.h"
+#include "esp_log.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -164,9 +165,14 @@ void clock_menu(myclock_t *clk, button_event_t *event)
     return;
 }
 
-// Function to start the clock task
 void clock_task_start(void)
 {
-    // Create clock task
-    xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
+    static const char CLOCK_TASK_TAG[] = "CLOCK_TASK";
+
+    /* Create clock task */
+    BaseType_t ret = xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
+
+    if (ret != pdPASS) {
+        ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clock_task");
+    }
 }
