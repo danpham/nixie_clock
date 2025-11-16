@@ -100,7 +100,7 @@ esp_err_t config_init(void)
                     cfg.time.minutes = CLOCK_DEFAULT_MINUTES;
                 }
 
-                ret_load = nvs_load_minutes(&cfg.time.seconds);
+                ret_load = nvs_load_seconds(&cfg.time.seconds);
                 if (ret_load != ESP_OK)
                 {
                     cfg.time.seconds = CLOCK_DEFAULT_SECONDS;
@@ -177,7 +177,21 @@ esp_err_t config_save(void)
                 ret = ESP_OK;
             }
         }
-
+        if (cfg.time.minutes != cfg_last.time.minutes)
+        {
+            ret_save = nvs_save_minutes(cfg.time.minutes);
+            if (ret_save == ESP_OK) {
+                ret = ESP_OK;
+            }
+        }
+        if (cfg.time.seconds != cfg_last.time.seconds)
+        {
+            ret_save = nvs_save_seconds(cfg.time.seconds);
+            if (ret_save == ESP_OK) {
+                ret = ESP_OK;
+            }
+        }
+    
         cfg_last = cfg;
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
         if (give_ret != pdTRUE)
