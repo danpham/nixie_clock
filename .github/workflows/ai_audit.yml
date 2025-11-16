@@ -1,4 +1,4 @@
-name: AI Global Project Audit
+name: AI project audit
 
 on:
   workflow_dispatch:
