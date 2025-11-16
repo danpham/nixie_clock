@@ -6,6 +6,8 @@
 ******************************************************************/
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
+#include "gpio_driver.h"
+#include "rotary_encoder.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -22,15 +24,14 @@ typedef enum buttons_type_e {
 
 // Event struct shared between tasks
 typedef struct {
-    buttons_type_t id;    // Button number (1, 2, etc.)
-    uint8_t pressed;      // 1 = pressed, 0 = released
-    uint8_t updateValue;  // 1 = increment, 0 = decrement
+    buttons_type_t id;
+    button_press_t pressed;
+    rotary_encoder_event_t updateValue;
 } button_event_t;
 
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-// Declaration of the queue used for communication between tasks
 extern QueueHandle_t buttonQueue;
 
 /******************************************************************
