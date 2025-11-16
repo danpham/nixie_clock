@@ -32,6 +32,16 @@ static void gpio_task(void *arg);
  * 6. Functions definitions
 ******************************************************************/
 
+/**
+ * @brief Main GPIO task.
+ *
+ * Initializes buttons and rotary encoder GPIOs, then loops:
+ * - Reads rotary switch and encoder pins
+ * - Detects state changes and sends events to buttonQueue
+ * - Logs actions for debugging
+ *
+ * @param[in] arg Task argument (unused)
+ */
 static void gpio_task(void *arg)
 {
     (void)arg;
@@ -111,9 +121,17 @@ static void gpio_task(void *arg)
     }
 }
 
+/**
+ * @brief Start the GPIO task and create the button queue.
+ *
+ * Creates a FreeRTOS queue to send button and rotary encoder events,
+ * then starts the `gpio_task`.
+ *
+ * @note If queue creation fails, the task is not started.
+ */
 void gpio_task_start(void)
 {
-    // Create queue: 10 events max, each of size button_event_t
+    /* Create queue: 10 events max, each of size button_event_t */
     buttonQueue = xQueueCreate(10, sizeof(button_event_t));
     if (buttonQueue == NULL) {
         ESP_LOGE(GPIO_TASK_TAG, "Failed to create button queue!");

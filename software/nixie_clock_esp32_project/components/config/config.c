@@ -9,7 +9,9 @@
 #include "nvs.h"
 #include "../wifi/wifi.h"
 #include "../../main/esp_stub.h"
+#include "../../main/clock_task.h"
 #include "ntp.h"
+#include "../clock/clock.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -284,6 +286,18 @@ esp_err_t config_apply(void)
                 ESP_LOGE(CONFIG_TAG, "Failed to update STA Wi-Fi");
                 result = ESP_FAIL;
             }
+        }
+
+        /* Send clockUpdate to the queue (non-blocking) */
+        if (clockUpdateQueue != NULL) {
+            myclock_t clockUpdate = cfg.time;
+            BaseType_t queue_ret = xQueueSend(clockUpdateQueue, &clockUpdate, 0U);
+            if (queue_ret != pdTRUE)
+            {
+                ESP_LOGW(CONFIG_TAG, "Failed to send clock update to queue");
+            }
+        } else {
+            ESP_LOGE(CONFIG_TAG, "Clock update queue is not initialized");
         }
 
         /* NTP sync */
