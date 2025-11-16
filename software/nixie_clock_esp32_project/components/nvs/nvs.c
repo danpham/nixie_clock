@@ -205,6 +205,12 @@ esp_err_t nvs_load_ntp(uint8_t *enabled)            { return nvs_load_value("ntp
 esp_err_t nvs_save_hours(uint8_t value)             { return nvs_save_value("hours", value); }
 esp_err_t nvs_load_hours(uint8_t *value)            { return nvs_load_value("hours", value); }
 
+esp_err_t nvs_save_minutes(uint8_t value)           { return nvs_save_value("minutes", value); }
+esp_err_t nvs_load_minutes(uint8_t *value)          { return nvs_load_value("minutes", value); }
+
+esp_err_t nvs_save_seconds(uint8_t value)           { return nvs_save_value("seconds", value); }
+esp_err_t nvs_load_seconds(uint8_t *value)          { return nvs_load_value("seconds", value); }
+
 esp_err_t nvs_save_mode(uint8_t value)              { return nvs_save_value("mode", value); }
 esp_err_t nvs_load_mode(uint8_t *value)             { return nvs_load_value("mode", value); }
 

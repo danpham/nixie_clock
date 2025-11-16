@@ -95,11 +95,16 @@ static void gpio_task(void *arg)
         if (state_last_rotarySwitch != state_rotarySwitch){
             event.id = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
             event.pressed = rotaryEncoderSwitch.press_type;
-            xQueueSend(buttonQueue, &event, 0);
-            if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
-                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
-            } else {
-                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
+            if (buttonQueue != NULL) {
+                xQueueSend(buttonQueue, &event, 0);
+                if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
+                    ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
+                } else {
+                    ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
+                }
+            } 
+            else {
+                ESP_LOGW(GPIO_TASK_TAG, "buttonQueue not initialized");
             }
             state_last_rotarySwitch = state_rotarySwitch;
         }
@@ -110,10 +115,15 @@ static void gpio_task(void *arg)
         if (ev != ROTARY_ENCODER_EVENT_NONE) {
             event.id = (buttons_type_t)BUTTON_ROTARY_ENCODER;
             event.updateValue = (uint8_t)ev;
-            xQueueSend(buttonQueue, &event, 0);
+            if (buttonQueue != NULL) {
+                xQueueSend(buttonQueue, &event, 0);
+            }
+            else {
+               ESP_LOGW(GPIO_TASK_TAG, "buttonQueue not initialized");
+            }
+
             ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
         }
-
         state_last_rotaryChanA = state_rotaryChanA;
         state_last_rotaryChanB = state_rotaryChanB;
 
@@ -137,12 +147,12 @@ void gpio_task_start(void)
         ESP_LOGE(GPIO_TASK_TAG, "Failed to create button queue!");
     } else {
         xTaskCreate(
-            gpio_task,     // Task function
-            "gpio_task",   // Task name (for debugging)
-            configMINIMAL_STACK_SIZE, // Stack size in bytes
-            NULL,          // Parameter passed to the task
-            3U,            // Task priority
-            NULL           // Task handle (optional)
+            gpio_task,     /* Task function */
+            "gpio_task",   /* Task name (for debugging) */
+            configMINIMAL_STACK_SIZE, /* Stack size in bytes */
+            NULL,          /* Parameter passed to the task */
+            3U,            /* Task priority */
+            NULL           /* Task handle (optional) */
         );
     }
 }

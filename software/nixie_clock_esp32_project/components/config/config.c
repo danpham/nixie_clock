@@ -91,7 +91,19 @@ esp_err_t config_init(void)
                 ret_load = nvs_load_hours(&cfg.time.hours);
                 if (ret_load != ESP_OK)
                 {
-                    cfg.time.hours = 0;
+                    cfg.time.hours = CLOCK_DEFAULT_HOURS;
+                }
+
+                ret_load = nvs_load_minutes(&cfg.time.minutes);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.time.minutes = CLOCK_DEFAULT_MINUTES;
+                }
+
+                ret_load = nvs_load_minutes(&cfg.time.seconds);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.time.seconds = CLOCK_DEFAULT_SECONDS;
                 }
 
                 cfg_last = cfg;

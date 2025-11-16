@@ -19,9 +19,6 @@
 #define CLOCK_MENU_CONFIGURE_MINUTES    (1U)
 #define CLOCK_MENU_CONFIGURE_HOURS      (2U)
 #define CLOCK_PATTERN_MAX_STEP          (9U)
-#define CLOCK_DEFAULT_HOURS             (12U)
-#define CLOCK_DEFAULT_MINUTES           (0U)
-#define CLOCK_DEFAULT_SECONDS           (0U)
 #define CLOCK_QUEUE_SIZE                (10U)
 
 /******************************************************************

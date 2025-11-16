@@ -19,7 +19,7 @@ jobs:
         working-directory: software/nixie_clock_esp32_project
         run: |
           cppcheck \
-            --enable=all,style \
+            --enable=all \
             --std=c99 \
             --language=c \
             --addon=misra \
