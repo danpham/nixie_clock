@@ -28,6 +28,11 @@ A **Nixie tube clock project** based on the **ESP32-C3**, using **IN14** and **I
 - Internal clock management
 - **Anti–cathode poisoning routine:** periodic cycling and cathode management to prevent oxide buildup and extend tube lifespan
 - Wi-Fi connectivity with NTP time synchronization
+- Web interface for configuration
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/dceda60c-5b19-417d-9c3a-7f29bd20b374" width="50%" height="50%" />
+</p>
 
 ## Future Features
 
@@ -55,15 +60,15 @@ software/nixie_clock_esp32_project/
 - The firmware is developed in compliance with MISRA C:2012 guidelines to ensure reliability and safety in embedded systems.
 - Modular driver-based architecture for maintainability and scalability.
 
-## Building
+## Usage
 
 ### Wi-Fi Configuration
 
-Before building the project, configure your Wi-Fi credentials in `main.c`:
+To connect to the Nixie clock, use the following credentials:
 
 ```c
-#define WIFI_SSID     "YourSSID"
-#define WIFI_PASSWORD "MyPassword"
+WIFI_SSID     "NixieClock-Setup"
+WIFI_PASSWORD "12345678"
 ```
 
 ### Compilation
