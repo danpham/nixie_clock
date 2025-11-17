@@ -158,7 +158,6 @@ void clock_menu(myclock_t *clk)
                 if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
                     state = CLOCK_MENU_CONFIGURE_MINUTES;
                 }
-        
                 break;
             case CLOCK_MENU_CONFIGURE_MINUTES:
                 if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
@@ -175,6 +174,9 @@ void clock_menu(myclock_t *clk)
                         /* ROTARY_ENCODER_EVENT_NONE */    
                     }
                 }
+                else {
+                    /* BUTTON_ROTARY_SWITCH_1 && BUTTON_SHORT_PRESS */
+                }
                 break;
             case CLOCK_MENU_CONFIGURE_HOURS:
                 if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
@@ -190,6 +192,9 @@ void clock_menu(myclock_t *clk)
                     else {
                         /* ROTARY_ENCODER_EVENT_NONE */    
                     }
+                }
+                else {
+                    /* BUTTON_ROTARY_SWITCH_1 && BUTTON_SHORT_PRESS */
                 }
                 break;
             default:
