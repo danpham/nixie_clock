@@ -95,24 +95,25 @@ static void clock_task(void *arg) {
             clock_tick(&clk);
             dots = !dots;
 
-            if ((clk.seconds == 0) && (in_pattern_mode == false)) {
+            if (clk.seconds == 0) {
                 in_pattern_mode = true;
                 pattern_step = 0;
             }
         }
 
-        /* Mode selection */
-        if (config.mode == (uint8_t)CONFIG_MODE_ANTIPOISONING){
-            in_pattern_mode = true;
-            in_test_mode = false;
-        }
-        else if (config.mode == (uint8_t)CONFIG_MODE_TEST){
-            in_pattern_mode = false;
-            in_test_mode = true;
-        }
-        else { /* Clock mode */
-            in_pattern_mode = false;
-            in_test_mode = false;
+        if (in_pattern_mode == false) {
+            if (config.mode == (uint8_t)CONFIG_MODE_ANTIPOISONING){
+                in_pattern_mode = true;
+                in_test_mode = false;
+            }
+            else if (config.mode == (uint8_t)CONFIG_MODE_TEST){
+                in_pattern_mode = false;
+                in_test_mode = true;
+            }
+            else { /* Clock mode */
+                in_pattern_mode = false;
+                in_test_mode = false;
+            }
         }
 
         if (in_test_mode) {
