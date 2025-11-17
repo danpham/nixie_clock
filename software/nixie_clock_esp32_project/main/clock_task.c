@@ -59,6 +59,8 @@ static void clock_task(void *arg) {
     uint8_t pattern_step = 0U;
     (void)arg; 
     config_t config;
+    bool in_pattern_mode = false;
+    bool in_test_mode = false;
 
     clock_init(&clk, CLOCK_DEFAULT_HOURS, CLOCK_DEFAULT_MINUTES, CLOCK_DEFAULT_SECONDS);
 
@@ -67,8 +69,6 @@ static void clock_task(void *arg) {
     const TickType_t displayPeriod = pdMS_TO_TICKS(50);   // 50ms
 
     while (1) {
-        bool in_pattern_mode = false;
-        bool in_test_mode = false;
         TickType_t now = xTaskGetTickCount();
         
         /* Get latest configuration */
