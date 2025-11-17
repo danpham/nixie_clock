@@ -14,7 +14,6 @@
 #define CONFIG_SSID_BUF_SZ               (CONFIG_SSID_SIZE + 1U)
 #define CONFIG_WPA_PASSPHRASE_SIZE       (63U)
 #define CONFIG_WPA_PASSPHRASE_BUF_SZ     (CONFIG_WPA_PASSPHRASE_SIZE + 1U)
-#define CONFIG_MODE_CLOCK                (0U)
 #define CONFIG_MODE_ANTIPOISONING        (1U)
 #define CONFIG_MODE_TEST                 (2U)
 

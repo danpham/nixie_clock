@@ -56,8 +56,6 @@ static void clock_task(void *arg);
 static void clock_task(void *arg) { 
     myclock_t clk;
     bool dots = true;
-    bool in_pattern_mode = false;
-    bool in_test_mode = false;
     uint8_t pattern_step = 0;
     (void)arg; 
     config_t config;
@@ -69,10 +67,12 @@ static void clock_task(void *arg) {
     const TickType_t displayPeriod = pdMS_TO_TICKS(50);   // 50ms
 
     while (1) {
+        bool in_pattern_mode = false;
+        bool in_test_mode;
         TickType_t now = xTaskGetTickCount();
-
+        
         /* Get latest configuration */
-        config_set_config(&config);
+        (void)config_get_copy(&config);
 
         /* Clock configuration menu */
         clock_menu(&clk);
@@ -95,7 +95,7 @@ static void clock_task(void *arg) {
             clock_tick(&clk);
             dots = !dots;
 
-            if (clk.seconds == 0) {
+            if ((clk.seconds == 0) && (in_pattern_mode == false)) {
                 in_pattern_mode = true;
                 pattern_step = 0;
             }
