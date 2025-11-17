@@ -68,7 +68,7 @@ static void clock_task(void *arg) {
 
     while (1) {
         bool in_pattern_mode = false;
-        bool in_test_mode;
+        bool in_test_mode = false;
         TickType_t now = xTaskGetTickCount();
         
         /* Get latest configuration */
