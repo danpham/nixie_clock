@@ -56,7 +56,7 @@ static void clock_task(void *arg);
 static void clock_task(void *arg) { 
     myclock_t clk;
     bool dots = true;
-    uint8_t pattern_step = 0;
+    uint8_t pattern_step = 0U;
     (void)arg; 
     config_t config;
 
@@ -95,7 +95,7 @@ static void clock_task(void *arg) {
             clock_tick(&clk);
             dots = !dots;
 
-            if (clk.seconds == 0) {
+            if (clk.seconds == 0U) {
                 in_pattern_mode = true;
                 pattern_step = 0;
             }
@@ -116,10 +116,10 @@ static void clock_task(void *arg) {
             }
         }
 
-        if (in_test_mode) {
+        if (in_test_mode == true) {
             display_set_time(12, 34, 56, 1, 1);
         }
-        else if (in_pattern_mode) {
+        else if (in_pattern_mode == true) {
             display_set_pattern_1(pattern_step);
             pattern_step++;
 
