@@ -10,11 +10,13 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define CONFIG_SSID_SIZE 32U
-#define CONFIG_SSID_BUF_SZ (CONFIG_SSID_SIZE + 1U)
-
-#define CONFIG_WPA_PASSPHRASE_SIZE 63U
-#define CONFIG_WPA_PASSPHRASE_BUF_SZ (CONFIG_WPA_PASSPHRASE_SIZE + 1U)
+#define CONFIG_SSID_SIZE                 (32U)
+#define CONFIG_SSID_BUF_SZ               (CONFIG_SSID_SIZE + 1U)
+#define CONFIG_WPA_PASSPHRASE_SIZE       (63U)
+#define CONFIG_WPA_PASSPHRASE_BUF_SZ     (CONFIG_WPA_PASSPHRASE_SIZE + 1U)
+#define CONFIG_MODE_CLOCK                (0U)
+#define CONFIG_MODE_ANTIPOISONING        (1U)
+#define CONFIG_MODE_TEST                 (2U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -26,13 +28,6 @@ typedef struct {
     uint8_t ntp;
     myclock_t time;
 } config_t;
-
-typedef enum {
-    CONFIG_MODE_CLOCK = 0U,
-    CONFIG_MODE_ANTIPOISONING = 1U,
-    CONFIG_MODE_TEST = 2U,
-    CONFIG_MODE_COUNT = 3U
-} config_mode_t;
 
 /******************************************************************
  * 4. Variable definitions (static then global)

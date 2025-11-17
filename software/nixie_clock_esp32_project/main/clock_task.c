@@ -11,7 +11,7 @@
 #include "../components/rotary_encoder/rotary_encoder.h"
 #include "esp_stub.h"
 #include "esp_log.h"
-#include "config.h"
+#include "../components/config/config.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -149,10 +149,10 @@ static void clock_task(void *arg) {
  */
 void clock_menu(myclock_t *clk)
 {
-    static uint8_t state = CLOCK_MENU_CLOCK;
     button_event_t event;
 
     if (xQueueReceive(buttonQueue, &event, 0) == pdTRUE) {
+        static uint8_t state = CLOCK_MENU_CLOCK;
         switch (state) {
             case CLOCK_MENU_CLOCK:
                 if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
