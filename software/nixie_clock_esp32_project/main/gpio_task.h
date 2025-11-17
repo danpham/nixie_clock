@@ -17,12 +17,12 @@
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
 typedef enum buttons_type_e {
-    BUTTON_ROTARY_SWITCH_1 = 0,
-    BUTTON_ROTARY_ENCODER = 1,
-    BUTTON_COUNT = 2
+    BUTTON_ROTARY_SWITCH_1 = 0U,
+    BUTTON_ROTARY_ENCODER = 1U,
+    BUTTON_COUNT = 2U
 } buttons_type_t;
 
-// Event struct shared between tasks
+/* Event struct shared between tasks */
 typedef struct {
     buttons_type_t id;
     button_press_t pressed;

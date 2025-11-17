@@ -50,7 +50,6 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
 {
     (void)arg;
 
-
     if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_STA_START)) {
         ESP_LOGI(WIFI_TAG, "Wi‑Fi STA started, connecting...");
         esp_wifi_connect();

@@ -11,6 +11,7 @@
 #include "../components/rotary_encoder/rotary_encoder.h"
 #include "esp_stub.h"
 #include "esp_log.h"
+#include "config.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -55,9 +56,11 @@ static void clock_task(void *arg);
 static void clock_task(void *arg) { 
     myclock_t clk;
     bool dots = true;
-    bool in_pattern = false;
+    bool in_pattern_mode = false;
+    bool in_test_mode = false;
     uint8_t pattern_step = 0;
     (void)arg; 
+    config_t config;
 
     clock_init(&clk, CLOCK_DEFAULT_HOURS, CLOCK_DEFAULT_MINUTES, CLOCK_DEFAULT_SECONDS);
 
@@ -67,6 +70,9 @@ static void clock_task(void *arg) {
 
     while (1) {
         TickType_t now = xTaskGetTickCount();
+
+        /* Get latest configuration */
+        config_set_config(&config);
 
         /* Clock configuration menu */
         clock_menu(&clk);
@@ -90,19 +96,35 @@ static void clock_task(void *arg) {
             dots = !dots;
 
             if (clk.seconds == 0) {
-                in_pattern = true;
+                in_pattern_mode = true;
                 pattern_step = 0;
             }
         }
 
-        /* Triggered every minute */
-        if (in_pattern) {
+        /* Mode selection */
+        if (config.mode == (uint8_t)CONFIG_MODE_ANTIPOISONING){
+            in_pattern_mode = true;
+            in_test_mode = false;
+        }
+        else if (config.mode == (uint8_t)CONFIG_MODE_TEST){
+            in_pattern_mode = false;
+            in_test_mode = true;
+        }
+        else { /* Clock mode */
+            in_pattern_mode = false;
+            in_test_mode = false;
+        }
+
+        if (in_test_mode) {
+            display_set_time(12, 34, 56, 1, 1);
+        }
+        else if (in_pattern_mode) {
             display_set_pattern_1(pattern_step);
             pattern_step++;
 
             if (pattern_step > CLOCK_PATTERN_MAX_STEP) {
                 pattern_step = 0;
-                in_pattern = false;
+                in_pattern_mode = false;
             }
         } else {
             display_set_time(clk.hours, clk.minutes, clk.seconds, dots, dots);
@@ -130,61 +152,44 @@ void clock_menu(myclock_t *clk)
     static uint8_t state = CLOCK_MENU_CLOCK;
     button_event_t event;
 
-    switch (state)
-    {
-        case CLOCK_MENU_CLOCK:
-            if (xQueueReceive(buttonQueue, &event, 0) == pdTRUE) {
-                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS))
-                {
+    if (xQueueReceive(buttonQueue, &event, 0) == pdTRUE) {
+        switch (state) {
+            case CLOCK_MENU_CLOCK:
+                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
                     state = CLOCK_MENU_CONFIGURE_MINUTES;
                 }
-            }
-            break;
-        case CLOCK_MENU_CONFIGURE_MINUTES:
-            if (xQueueReceive(buttonQueue, &event, 0) == pdTRUE) {
-                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS))
-                {
+        
+                break;
+            case CLOCK_MENU_CONFIGURE_MINUTES:
+                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
                     state = CLOCK_MENU_CONFIGURE_HOURS;
                 }
-                else if ((event.id == BUTTON_ROTARY_ENCODER) && (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT))
-                {
-                    clock_increment_minutes(clk);
-                    state = CLOCK_MENU_CONFIGURE_MINUTES;
+                else if (event.id == BUTTON_ROTARY_ENCODER) {
+                    if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
+                        clock_increment_minutes(clk);
+                    }
+                    else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
+                        clock_decrement_minutes(clk);
+                    }
                 }
-                else if ((event.id == BUTTON_ROTARY_ENCODER) && (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT))
-                {
-                    clock_decrement_minutes(clk);
-                    state = CLOCK_MENU_CONFIGURE_MINUTES;
-                }
-                else {
-                    state = CLOCK_MENU_CONFIGURE_MINUTES;
-                }
-            }
-            break;
-        case CLOCK_MENU_CONFIGURE_HOURS:
-            if (xQueueReceive(buttonQueue, &event, 0) == pdTRUE) {
-                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS))
-                {
+                break;
+            case CLOCK_MENU_CONFIGURE_HOURS:
+                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
                     state = CLOCK_MENU_CLOCK;
                 }
-                else if ((event.id == BUTTON_ROTARY_ENCODER) && (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT))
-                {
-                    clock_increment_hours(clk);
-                    state = CLOCK_MENU_CONFIGURE_HOURS;
+                else if (event.id == BUTTON_ROTARY_ENCODER) {
+                    if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
+                        clock_increment_hours(clk);
+                    }
+                    else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
+                        clock_decrement_hours(clk);
+                    }
                 }
-                else if ((event.id == BUTTON_ROTARY_ENCODER) && (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT))
-                {
-                    clock_decrement_hours(clk);
-                    state = CLOCK_MENU_CONFIGURE_HOURS;
-                }
-                else {
-                    state = CLOCK_MENU_CONFIGURE_HOURS;
-                }
-            }
-            break;
-        default:
-            state = CLOCK_MENU_CLOCK;
-            break;
+                break;
+            default:
+                state = CLOCK_MENU_CLOCK;
+                break;
+        }
     }
 }
 

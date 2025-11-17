@@ -19,14 +19,20 @@
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
-typedef struct
-{
+typedef struct {
     char ssid[CONFIG_SSID_BUF_SZ];
     char wpa_passphrase[CONFIG_WPA_PASSPHRASE_BUF_SZ];
     uint8_t mode;
     uint8_t ntp;
     myclock_t time;
 } config_t;
+
+typedef enum {
+    CONFIG_MODE_CLOCK = 0U,
+    CONFIG_MODE_ANTIPOISONING = 1U,
+    CONFIG_MODE_TEST = 2U,
+    CONFIG_MODE_COUNT = 3U
+} config_mode_t;
 
 /******************************************************************
  * 4. Variable definitions (static then global)
@@ -39,7 +45,6 @@ typedef struct
 /******************************************************************
  * 6. Functions definitions (public API in .c)
 ******************************************************************/
-
 esp_err_t config_init(void);
 esp_err_t config_save(void);
 esp_err_t config_get_copy(config_t *copy);
