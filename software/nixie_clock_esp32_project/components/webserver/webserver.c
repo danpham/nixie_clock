@@ -46,17 +46,12 @@ static esp_err_t root_handler(httpd_req_t *req)
 {
     esp_err_t ret = ESP_FAIL;
     config_t config;
-    char buffer_page[WEBSERVER_HTML_PAGE_SIZE];
     char html_format[WEBSERVER_HTML_PAGE_SIZE];
     const char *html_page_orig = get_html_page();
 
-    /* Copy original HTML page to local buffer (safe because size is bounded) */
-    (void)strncpy(html_format, html_page_orig, sizeof(html_format) - 1U);
-    html_format[sizeof(html_format) - 1U] = '\0';
-
     ret = config_get_copy(&config);
     if (ESP_OK == ret) {
-        int ret_modify_html = snprintf(buffer_page, sizeof(buffer_page), html_format,
+        int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
         config.time.hours, config.time.minutes, config.time.seconds,
         config.ssid, config.wpa_passphrase,
         (config.ntp == 1) ? "checked" : "",
@@ -69,7 +64,7 @@ static esp_err_t root_handler(httpd_req_t *req)
         }
     }
 
-    httpd_resp_send(req, buffer_page, HTTPD_RESP_USE_STRLEN);
+    httpd_resp_send(req, html_format, HTTPD_RESP_USE_STRLEN);
 
     return ret;
 }
