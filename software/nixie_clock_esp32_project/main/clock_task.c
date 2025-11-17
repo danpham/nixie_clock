@@ -171,6 +171,9 @@ void clock_menu(myclock_t *clk)
                     else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
                         clock_decrement_minutes(clk);
                     }
+                    else {
+                        /* ROTARY_ENCODER_EVENT_NONE */    
+                    }
                 }
                 break;
             case CLOCK_MENU_CONFIGURE_HOURS:
@@ -183,6 +186,9 @@ void clock_menu(myclock_t *clk)
                     }
                     else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
                         clock_decrement_hours(clk);
+                    }
+                    else {
+                        /* ROTARY_ENCODER_EVENT_NONE */    
                     }
                 }
                 break;
