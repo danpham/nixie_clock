@@ -1,3 +1,6 @@
+/******************************************************************
+ * 1. Included files (microcontroller ones then user defined ones)
+******************************************************************/
 #include "gpio_driver.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
@@ -5,9 +8,40 @@
 #include "esp_timer.h"
 #include "../../main/esp_stub.h"
 
+/******************************************************************
+ * 2. Define declarations (macros then function macros)
+******************************************************************/
+#define BUTTON_LONG_PRESS_MS    2000U
 
-esp_err_t my_gpio_init(my_gpio_btn_t *btn)
-{
+/******************************************************************
+ * 3. Typedef definitions (simple typedef, then enum and structs)
+******************************************************************/
+
+/******************************************************************
+ * 4. Variable definitions (static then global)
+******************************************************************/
+
+/******************************************************************
+ * 5. Functions prototypes (static only)
+******************************************************************/
+
+/******************************************************************
+ * 6. Functions definitions
+******************************************************************/
+
+/**
+ * @brief Initialize a GPIO button
+ *
+ * Configures the GPIO pin as input with pull-up or pull-down according
+ * to the button configuration and initializes its runtime state.
+ *
+ * @param[in,out] btn Pointer to the button structure to initialize
+ * @return
+ *      - ESP_OK: Initialization successful
+ *      - ESP_ERR_INVALID_ARG: NULL pointer passed
+ *      - Other ESP_ERR_XXX codes if GPIO API fails
+ */
+esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
     esp_err_t err = ESP_OK;
     gpio_config_t io_conf = {0};
 
@@ -31,6 +65,21 @@ esp_err_t my_gpio_init(my_gpio_btn_t *btn)
     return err;
 }
 
+/**
+ * @brief Read the current state of a button and detect press type
+ *
+ * Reads the physical GPIO state, applies debounce filtering,
+ * and determines whether the press is short or long.
+ *
+ * @param[in,out] btn Pointer to the button structure
+ * @return
+ *      - BUTTON_STATE_RELEASE: button released
+ *      - BUTTON_STATE_PRESS: button pressed
+ *
+ * Updates the button structure:
+ *      - last_state: last physical state
+ *      - press_type: detected press type (short or long)
+ */
 int my_gpio_read_btn(my_gpio_btn_t *btn) {
     button_state_t state = BUTTON_STATE_RELEASE;
     uint32_t now = esp_timer_get_time() / 1000;
