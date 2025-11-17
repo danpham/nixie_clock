@@ -97,7 +97,7 @@ static void clock_task(void *arg) {
 
             if (clk.seconds == 0U) {
                 in_pattern_mode = true;
-                pattern_step = 0;
+                pattern_step = 0U;
             }
         }
 
@@ -117,14 +117,14 @@ static void clock_task(void *arg) {
         }
 
         if (in_test_mode == true) {
-            display_set_time(12, 34, 56, 1, 1);
+            display_set_time(12U, 34U, 56U, 1U, 1U);
         }
         else if (in_pattern_mode == true) {
             display_set_pattern_1(pattern_step);
             pattern_step++;
 
             if (pattern_step > CLOCK_PATTERN_MAX_STEP) {
-                pattern_step = 0;
+                pattern_step = 0U;
                 in_pattern_mode = false;
             }
         } else {
