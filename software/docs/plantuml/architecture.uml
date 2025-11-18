@@ -7,7 +7,7 @@ package "Service Manager" {
     }
 }
 
-package "Clock Module" {
+package "Clock Subsystem" {
     class Clock {
         + clock_init(clk, h, m, s)
         + clock_tick(clk)
@@ -19,24 +19,18 @@ package "Clock Module" {
     class ClockTask {
         + clock_task_start()
     }
-}
-
-package "Display Module" {
     class Display {
         + display_init()
         + display_set_time(h, m, s, dot1, dot2)
         + display_set_pattern_1(step)
     }
-}
-
-package "HV5622 Module" {
     class HV5622 {
         + hv5622_init()
         + hv5622_send64(data)
     }
 }
 
-package "GPIO Module" {
+package "Input Subsystem" {
     class GPIO {
         + my_gpio_init(btn)
         + my_gpio_read_btn(btn)
@@ -44,29 +38,22 @@ package "GPIO Module" {
     class GPIO_Task {
         + gpio_task_start()
     }
-}
-
-package "Rotary Encoder Module" {
     class RotaryEncoder {
         + process_rotary_encoder(lastA,lastB,currentA,currentB)
     }
 }
 
-package "UART Module" {
-    class UART {
-        + uart_init()
-        + uart_write(str,len)
-    }
-}
-
-package "WiFi Module" {
+package "Connectivity" {
     class WiFi {
         + wifi_init_apsta(sta_ssid,sta_pass,ap_ssid,ap_pass)
         + wifi_change_sta(ssid,pass)
     }
+    class Webserver {
+        + start_webserver()
+    }
 }
 
-package "NVS Module" {
+package "Persistence" {
     class NVS {
         + nvs_init()
         + nvs_save_ntp(enabled)
@@ -84,16 +71,6 @@ package "NVS Module" {
         + nvs_save_wpa_passphrase(value)
         + nvs_load_wpa_passphrase(value,length)
     }
-}
-
-package "NTP Module" {
-    class NTP {
-        + ntp_sync_task_start()
-        + ntp_stop()
-    }
-}
-
-package "Config Module" {
     class Config {
         + config_init()
         + config_save()
@@ -103,13 +80,14 @@ package "Config Module" {
     }
 }
 
-package "Webserver Module" {
-    class Webserver {
-        + start_webserver()
+package "Time" {
+    class NTP {
+        + ntp_sync_task_start()
+        + ntp_stop()
     }
 }
 
-' === Relationships ===
+' === Relationships (essentielles pour comprendre l'archi) ===
 
 ServiceManager --> Clock : manages / apply_config
 ServiceManager --> WiFi : manages / apply_config
