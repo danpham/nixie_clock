@@ -36,7 +36,6 @@
  *
  * This function configures the LEDC timer and channel to generate
  * a PWM signal on the pin defined by `PWM_GPIO`.
- * By default, the duty cycle is set to 50% (128/255 for 8-bit resolution).
  *
  * @note The PWM frequency is defined by `PWM_FREQ_HZ`.
  * @note Uses timer `LEDC_TIMER_0` and channel `LEDC_CHANNEL_0`.
