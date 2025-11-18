@@ -214,6 +214,9 @@ esp_err_t nvs_load_seconds(uint8_t *value)          { return nvs_load_value("sec
 esp_err_t nvs_save_mode(uint8_t value)              { return nvs_save_value("mode", value); }
 esp_err_t nvs_load_mode(uint8_t *value)             { return nvs_load_value("mode", value); }
 
+esp_err_t nvs_save_dutycycle(uint8_t value)              { return nvs_save_value("dutycycle", value); }
+esp_err_t nvs_load_dutycycle(uint8_t *value)             { return nvs_load_value("dutycycle", value); }
+
 esp_err_t nvs_save_ssid(const char *value)                         { return nvs_save_str("ssid", value); }
 esp_err_t nvs_load_ssid(char *value, size_t *length)               { return nvs_load_str("ssid", value, length); }
 

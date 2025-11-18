@@ -65,7 +65,8 @@
         "nvs_mock.h": "c",
         "string.h": "c",
         "ntp.h": "c",
-        "format": "c"
+        "format": "c",
+        "pwm.h": "c"
     },
     "idf.flashType": "UART"
 }

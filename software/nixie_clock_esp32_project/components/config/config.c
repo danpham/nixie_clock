@@ -12,6 +12,7 @@
 #include "../../main/clock_task.h"
 #include "ntp.h"
 #include "../clock/clock.h"
+#include "../pwm/pwm.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -106,6 +107,12 @@ esp_err_t config_init(void)
                     cfg.time.seconds = CLOCK_DEFAULT_SECONDS;
                 }
 
+                ret_load = nvs_load_dutycycle(&cfg.time.seconds);
+                if (ret_load != ESP_OK)
+                {
+                    cfg.dutycycle = PWM_DEFAULT_DUTYCYCLE;
+                }
+
                 cfg_last = cfg;
             }
 
@@ -191,7 +198,14 @@ esp_err_t config_save(void)
                 ret = ESP_OK;
             }
         }
-    
+        if (cfg.dutycycle != cfg_last.dutycycle)
+        {
+            ret_save = nvs_save_dutycycle(cfg.dutycycle);
+            if (ret_save == ESP_OK) {
+                ret = ESP_OK;
+            }
+        }
+
         cfg_last = cfg;
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
         if (give_ret != pdTRUE)
@@ -340,6 +354,9 @@ esp_err_t config_apply(void)
                 ntp_initialized = false;
             }
         }
+
+        /* Update PWM duty cycle */
+        pwm_set(cfg.dutycycle);
 
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
         if (give_ret != pdTRUE)

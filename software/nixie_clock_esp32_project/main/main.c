@@ -14,6 +14,7 @@
 #include "../components/clock/clock.h"
 #include "../components/webserver/webserver.h"
 #include "../components/config/config.h"
+#include "../components/pwm/pwm.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -59,6 +60,8 @@ void app_main(void)
 
     clock_task_start();
     gpio_task_start();
+
+    pwm_init();
 
     ret = config_apply();
     if (ret != ESP_OK) {

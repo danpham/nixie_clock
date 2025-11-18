@@ -102,7 +102,7 @@ static void gpio_task(void *arg)
                 } else {
                     ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
                 }
-            } 
+            }
             else {
                 ESP_LOGW(GPIO_TASK_TAG, "buttonQueue not initialized");
             }

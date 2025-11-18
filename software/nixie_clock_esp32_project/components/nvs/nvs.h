@@ -46,6 +46,9 @@ esp_err_t nvs_load_seconds(uint8_t *enabled);
 esp_err_t nvs_save_mode(uint8_t value);
 esp_err_t nvs_load_mode(uint8_t *value);
 
+esp_err_t nvs_save_dutycycle(uint8_t value);
+esp_err_t nvs_load_dutycycle(uint8_t *value);
+
 esp_err_t nvs_save_ssid(const char *value);
 esp_err_t nvs_load_ssid(char *value, size_t *length);
 

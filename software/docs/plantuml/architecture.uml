@@ -96,8 +96,8 @@ ServiceManager --> HV5622 : manages / apply_config
 ServiceManager --> Display : manages / apply_config
 ServiceManager --> Config : reads/applies
 
-ClockTask --> Clock : uses
-ClockTask --> Display : updates
+ClockTask --> Clock : gets current time
+ClockTask --> Display : provides digits and patterns
 ClockTask --> GPIO_Task : reads input
 ClockTask --> Config : reads config
 ClockTask --> NTP : receives time
@@ -108,5 +108,6 @@ GPIO_Task --> RotaryEncoder : reads rotary events
 Webserver --> Config : reads/writes
 WiFi --> Config : may read credentials
 Config --> NVS : persist/load configuration
+Display --> HV5622 : sends formatted 64-bit frames
 
 @enduml

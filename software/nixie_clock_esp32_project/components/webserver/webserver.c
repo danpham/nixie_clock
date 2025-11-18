@@ -57,7 +57,8 @@ static esp_err_t root_handler(httpd_req_t *req)
         (config.ntp == 1) ? "checked" : "",
         (config.mode == 0) ? "checked" : "",
         (config.mode == 1) ? "checked" : "",
-        (config.mode == 2) ? "checked" : "");
+        (config.mode == 2) ? "checked" : "",
+        config.dutycycle, config.dutycycle);
 
         if (ret_modify_html < 0) {
             ret = ESP_FAIL;
@@ -188,6 +189,20 @@ static esp_err_t update_handler(httpd_req_t *req)
             }
         }
 
+        /* Read "dutycycle" parameter */
+        query_res = httpd_query_key_value(req_recv_buf, "dutycycle", tmp, sizeof(tmp));
+        if (query_res == ESP_OK)
+        {
+            char *local_endptr = NULL;
+            errno = 0;  /* Reset errno before calling strtol */
+            const long tmp_val = strtol(tmp, &local_endptr, 10);
+            /* Check for successful numeric conversion */
+            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
+            {
+                new_config.dutycycle = (int)tmp_val;
+            }
+        }
+
         /* Update global configuration (currently commented out for test safety) */
         ret = config_set_config(&new_config);
 
@@ -206,7 +221,6 @@ static esp_err_t update_handler(httpd_req_t *req)
     
     return ret;
 }
-
 
 /**
  * @brief Starts the HTTP web server and registers URI handlers.
@@ -267,92 +281,30 @@ static const char* get_html_page(void) {
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
     "<title>Nixie clock settings</title>\n"
     "<style>\n"
-    "body {\n"
-    "  font-family: 'Roboto', sans-serif;\n"
-    "  background: #0d0d0d;\n"
-    "  color: #e0e0e0;\n"
-    "  margin: 0;\n"
-    "  display: flex;\n"
-    "  justify-content: center;\n"
-    "  align-items: flex-start;\n"
-    "  min-height: 100vh;\n"
-    "  padding: 50px 20px;\n"
-    "}\n"
-    ".card {\n"
-    "  background: #1e1e1e;\n"
-    "  border-radius: 16px;\n"
-    "  padding: 40px 30px;\n"
-    "  width: 380px;\n"
-    "  max-width: 100%%;\n"
-    "  box-shadow: 0 8px 25px rgba(0,0,0,0.7);\n"
-    "  border: 1px solid #2c2c2c;\n"
-    "}\n"
+    "body { font-family: 'Roboto', sans-serif; background: #0d0d0d; color: #e0e0e0; margin: 0; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 50px 20px; }\n"
+    ".card { background: #1e1e1e; border-radius: 16px; padding: 40px 30px; width: 380px; max-width: 100%; box-shadow: 0 8px 25px rgba(0,0,0,0.7); border: 1px solid #2c2c2c; }\n"
     "h1 { font-size: 2.2em; margin-bottom: 10px; color: #ffffff; text-align: center; letter-spacing: 1px; }\n"
     "h2 { font-size: 1.4em; margin: 25px 0 10px 0; color: #cccccc; border-bottom: 1px solid #333; padding-bottom: 5px; }\n"
-    ".input-row {\n"
-    "  display: flex;\n"
-    "  justify-content: center;\n"
-    "  align-items: center;\n"
-    "  margin-bottom: 15px;\n"
-    "}\n"
-    ".input-row input[type=number] {\n"
-    "  width: 60px;\n"
-    "  padding: 10px;\n"
-    "  margin: 0 5px;\n"
-    "  font-size: 18px;\n"
-    "  text-align: center;\n"
-    "  border-radius: 6px;\n"
-    "  border: 1px solid #333;\n"
-    "  background: #111;\n"
-    "  color: #fff;\n"
-    "  outline: none;\n"
-    "  transition: 0.2s;\n"
-    "}\n"
+    ".input-row { display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }\n"
+    ".input-row input[type=number] { width: 60px; padding: 10px; margin: 0 5px; font-size: 18px; text-align: center; border-radius: 6px; border: 1px solid #333; background: #111; color: #fff; outline: none; transition: 0.2s; }\n"
     ".input-row input[type=number]:focus { border-color: #888; box-shadow: 0 0 5px #555; }\n"
     ".input-row input[type=number]:disabled { background: #333; color: #777; }\n"
     ".input-group { display: flex; align-items: center; margin-bottom: 10px; }\n"
     ".input-group label { width: 100px; }\n"
-    ".input-group input {\n"
-    "  padding: 10px;\n"
-    "  font-size: 16px;\n"
-    "  border-radius: 6px;\n"
-    "  border: 1px solid #333;\n"
-    "  background: #111;\n"
-    "  color: #fff;\n"
-    "  outline: none;\n"
-    "  box-sizing: border-box;\n"
-    "}\n"
+    ".input-group input { padding: 10px; font-size: 16px; border-radius: 6px; border: 1px solid #333; background: #111; color: #fff; outline: none; box-sizing: border-box; }\n"
     ".input-group input[type=text], .input-group input[type=password] { flex: 1; }\n"
     ".input-group input:focus { border-color: #888; box-shadow: 0 0 5px #555; }\n"
-    ".input-group input:disabled, .input-row input:disabled { background: #333; color: #777; }\n"
+    ".input-group input:disabled { background: #333; color: #777; }\n"
     ".checkbox-container { margin: 20px 0; }\n"
-    ".checkbox-container label {\n"
-    "  display: flex;\n"
-    "  align-items: center;\n"
-    "  font-size: 16px;\n"
-    "  margin-bottom: 10px;\n"
-    "  cursor: pointer;\n"
-    "  user-select: none;\n"
-    "}\n"
-    ".checkbox-container input[type=checkbox], .checkbox-container input[type=radio] {\n"
-    "  width: 20px;\n"
-    "  height: 20px;\n"
-    "  margin-right: 12px;\n"
-    "}\n"
-    "button {\n"
-    "  width: 100%%;\n"
-    "  padding: 14px;\n"
-    "  font-size: 18px;\n"
-    "  background: #555;\n"
-    "  color: #fff;\n"
-    "  border: none;\n"
-    "  border-radius: 8px;\n"
-    "  cursor: pointer;\n"
-    "  transition: 0.25s;\n"
-    "  font-weight: bold;\n"
-    "}\n"
+    ".checkbox-container label { display: flex; align-items: center; font-size: 16px; margin-bottom: 10px; cursor: pointer; user-select: none; }\n"
+    ".checkbox-container input[type=checkbox], .checkbox-container input[type=radio] { width: 20px; height: 20px; margin-right: 12px; }\n"
+    "button { width: 100%; padding: 14px; font-size: 18px; background: #555; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: 0.25s; font-weight: bold; }\n"
     "button:hover { background: #777; }\n"
     "hr { border: 0; border-top: 1px solid #333; margin: 20px 0; }\n"
+    ".brightness-container { display: flex; flex-direction: column; margin-bottom: 20px; }\n"
+    ".brightness-label-row { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }\n"
+    "#brightness { width: 100%; margin-top: 0; }\n"
+    "#brightnessValue { font-size: 18px; }\n"
     "</style>\n"
     "</head>\n"
     "<body>\n"
@@ -384,6 +336,15 @@ static const char* get_html_page(void) {
     "  <label><input type=\"radio\" name=\"mode\" value=\"1\" %s> Cathode antipoisoning mode</label>\n"
     "  <label><input type=\"radio\" name=\"mode\" value=\"2\" %s> Counter mode</label>\n"
     "</div>\n"
+    "<h2>Brightness control</h2>\n"
+    "<div class=\"brightness-container\">\n"
+    "  <div class=\"brightness-label-row\">\n"
+    "      <label for=\"brightness\">Brightness:</label>\n"
+    "      <span id=\"brightnessValue\">%d</span>\n"
+    "  </div>\n"
+    "  <input type=\"range\" id=\"brightness\" name=\"brightness\" min=\"0\" max=\"255\" value=\"%d\">\n"
+    "</div>\n"
+    "<hr>\n"
     "<button type=\"submit\">Apply</button>\n"
     "</form>\n"
     "</div>\n"
@@ -396,9 +357,11 @@ static const char* get_html_page(void) {
     "}\n"
     "updateTimeInputs();\n"
     "ntpCheckbox.addEventListener('change', updateTimeInputs);\n"
+    "const brightnessSlider = document.getElementById('brightness');\n"
+    "const brightnessValue = document.getElementById('brightnessValue');\n"
+    "brightnessSlider.addEventListener('input', () => { brightnessValue.textContent = brightnessSlider.value; });\n"
     "</script>\n"
     "</body>\n"
     "</html>\n";
-
     return html_page_data;
 }
