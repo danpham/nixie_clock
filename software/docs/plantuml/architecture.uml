@@ -1,0 +1,134 @@
+@startuml
+' === Packages / Components ===
+
+package "Service Manager" {
+    class ServiceManager {
+        + apply_config()
+    }
+}
+
+package "Clock Module" {
+    class Clock {
+        + clock_init(clk, h, m, s)
+        + clock_tick(clk)
+        + clock_increment_hours(clk)
+        + clock_decrement_hours(clk)
+        + clock_increment_minutes(clk)
+        + clock_decrement_minutes(clk)
+    }
+    class ClockTask {
+        + clock_task_start()
+    }
+}
+
+package "Display Module" {
+    class Display {
+        + display_init()
+        + display_set_time(h, m, s, dot1, dot2)
+        + display_set_pattern_1(step)
+    }
+}
+
+package "HV5622 Module" {
+    class HV5622 {
+        + hv5622_init()
+        + hv5622_send64(data)
+    }
+}
+
+package "GPIO Module" {
+    class GPIO {
+        + my_gpio_init(btn)
+        + my_gpio_read_btn(btn)
+    }
+    class GPIO_Task {
+        + gpio_task_start()
+    }
+}
+
+package "Rotary Encoder Module" {
+    class RotaryEncoder {
+        + process_rotary_encoder(lastA,lastB,currentA,currentB)
+    }
+}
+
+package "UART Module" {
+    class UART {
+        + uart_init()
+        + uart_write(str,len)
+    }
+}
+
+package "WiFi Module" {
+    class WiFi {
+        + wifi_init_apsta(sta_ssid,sta_pass,ap_ssid,ap_pass)
+        + wifi_change_sta(ssid,pass)
+    }
+}
+
+package "NVS Module" {
+    class NVS {
+        + nvs_init()
+        + nvs_save_ntp(enabled)
+        + nvs_load_ntp(ptr)
+        + nvs_save_hours(enabled)
+        + nvs_load_hours(ptr)
+        + nvs_save_minutes(enabled)
+        + nvs_load_minutes(ptr)
+        + nvs_save_seconds(enabled)
+        + nvs_load_seconds(ptr)
+        + nvs_save_mode(value)
+        + nvs_load_mode(ptr)
+        + nvs_save_ssid(value)
+        + nvs_load_ssid(value,length)
+        + nvs_save_wpa_passphrase(value)
+        + nvs_load_wpa_passphrase(value,length)
+    }
+}
+
+package "NTP Module" {
+    class NTP {
+        + ntp_sync_task_start()
+        + ntp_stop()
+    }
+}
+
+package "Config Module" {
+    class Config {
+        + config_init()
+        + config_save()
+        + config_get_copy(copy)
+        + config_set_config(config)
+        + config_apply()
+    }
+}
+
+package "Webserver Module" {
+    class Webserver {
+        + start_webserver()
+    }
+}
+
+' === Relationships ===
+
+ServiceManager --> Clock : manages / apply_config
+ServiceManager --> WiFi : manages / apply_config
+ServiceManager --> NTP : manages / apply_config
+ServiceManager --> HV5622 : manages / apply_config
+ServiceManager --> Display : manages / apply_config
+ServiceManager --> Config : reads/applies
+
+ClockTask --> Clock : uses
+ClockTask --> Display : updates
+ClockTask --> GPIO_Task : reads input
+ClockTask --> Config : reads config
+ClockTask --> NTP : receives time
+
+GPIO_Task --> GPIO : reads buttons
+GPIO_Task --> RotaryEncoder : reads rotary events
+
+Webserver --> Config : reads/writes
+WiFi --> Config : may read credentials
+Config --> NVS : persist/load configuration
+
+@enduml
