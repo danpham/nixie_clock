@@ -73,7 +73,7 @@ static void clock_task(void *arg) {
         TickType_t now = xTaskGetTickCount();
         
         /* Get latest configuration */
-        esp_err_t ret = config_get_copy(&config);
+        ret = config_get_copy(&config);
         if (ret == ESP_OK) {
             /* Clock configuration menu */
             clock_menu(&clk);
