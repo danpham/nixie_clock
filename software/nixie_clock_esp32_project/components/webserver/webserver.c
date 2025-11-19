@@ -212,7 +212,7 @@ static esp_err_t update_handler(httpd_req_t *req)
         }
 
         /* Apply changes from RAM config */
-        service_manager_update();
+        (void)service_manager_update();
 
         /* Redirect client back to the root page */
         httpd_resp_set_status(req, "303 See Other");
