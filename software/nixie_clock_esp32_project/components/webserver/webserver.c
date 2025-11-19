@@ -11,6 +11,7 @@
 #include "webserver.h"
 #include "config.h"
 #include "../../main/esp_stub.h"
+#include "../service_manager/service_manager.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -210,8 +211,8 @@ static esp_err_t update_handler(httpd_req_t *req)
             ret = config_save();
         }
 
-        /* Read config on RAM and apply changes */
-        config_apply();
+        /* Apply changes from RAM config */
+        service_manager_update();
 
         /* Redirect client back to the root page */
         httpd_resp_set_status(req, "303 See Other");
@@ -334,7 +335,7 @@ static const char* get_html_page(void) {
     "<div class=\"checkbox-container\">\n"
     "  <label><input type=\"radio\" name=\"mode\" value=\"0\" %s> Hour mode</label>\n"
     "  <label><input type=\"radio\" name=\"mode\" value=\"1\" %s> Cathode antipoisoning mode</label>\n"
-    "  <label><input type=\"radio\" name=\"mode\" value=\"2\" %s> Counter mode</label>\n"
+    "  <label><input type=\"radio\" name=\"mode\" value=\"2\" %s> Test mode</label>\n"
     "</div>\n"
     "<h2>Brightness control</h2>\n"
     "<div class=\"brightness-container\">\n"

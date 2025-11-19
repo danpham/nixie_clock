@@ -61,6 +61,7 @@ static void clock_task(void *arg) {
     config_t config;
     bool in_pattern_mode = false;
     bool in_test_mode = false;
+    esp_err_t ret = ESP_OK;
 
     clock_init(&clk, CLOCK_DEFAULT_HOURS, CLOCK_DEFAULT_MINUTES, CLOCK_DEFAULT_SECONDS);
 
@@ -68,71 +69,77 @@ static void clock_task(void *arg) {
     const TickType_t tickPeriod = pdMS_TO_TICKS(1000);    // 1s
     const TickType_t displayPeriod = pdMS_TO_TICKS(50);   // 50ms
 
-    while (1) {
+    while (ret == ESP_OK) {
         TickType_t now = xTaskGetTickCount();
         
         /* Get latest configuration */
-        (void)config_get_copy(&config);
+        esp_err_t ret = config_get_copy(&config);
+        if (ret == ESP_OK) {
+            /* Clock configuration menu */
+            clock_menu(&clk);
 
-        /* Clock configuration menu */
-        clock_menu(&clk);
+            /* Every second */
+            if ((now - lastTick) >= tickPeriod) {
 
-        /* Every second */
-        if ((now - lastTick) >= tickPeriod) {
+                /* Update with NTP or webserver config */
+                if (clockUpdateQueue != NULL) {
+                    myclock_t upd;
+                    if (xQueueReceive(clockUpdateQueue, &upd, 0) == pdPASS) {
+                        clock_init(&clk, upd.hours, upd.minutes, upd.seconds);
+                    }
+                }
+                else {
+                    ESP_LOGW(CLOCK_TASK_TAG, "clockUpdateQueue not initialized");
+                }
 
-            /* Update with NTP or webserver config */
-            if (clockUpdateQueue != NULL) {
-                myclock_t upd;
-                if (xQueueReceive(clockUpdateQueue, &upd, 0) == pdPASS) {
-                    clock_init(&clk, upd.hours, upd.minutes, upd.seconds);
+                lastTick += tickPeriod;
+                clock_tick(&clk);
+                dots = !dots;
+
+                if (clk.seconds == 0U) {
+                    in_pattern_mode = true;
+                    pattern_step = 0U;
                 }
             }
-            else {
-                ESP_LOGW(CLOCK_TASK_TAG, "clockUpdateQueue not initialized");
+
+            if (in_pattern_mode == false) {
+                if (config.mode == (uint8_t)CONFIG_MODE_ANTIPOISONING){
+                    in_pattern_mode = true;
+                    in_test_mode = false;
+                }
+                else if (config.mode == (uint8_t)CONFIG_MODE_TEST){
+                    in_pattern_mode = false;
+                    in_test_mode = true;
+                }
+                else { /* Clock mode */
+                    in_pattern_mode = false;
+                    in_test_mode = false;
+                }
             }
 
-            lastTick += tickPeriod;
-            clock_tick(&clk);
-            dots = !dots;
+            if (in_test_mode == true) {
+                display_set_time(12U, 34U, 56U, 1U, 1U);
+            }
+            else if (in_pattern_mode == true) {
+                display_set_pattern_1(pattern_step);
+                pattern_step++;
 
-            if (clk.seconds == 0U) {
-                in_pattern_mode = true;
-                pattern_step = 0U;
+                if (pattern_step > CLOCK_PATTERN_MAX_STEP) {
+                    pattern_step = 0U;
+                    in_pattern_mode = false;
+                }
+            } else {
+                display_set_time(clk.hours, clk.minutes, clk.seconds, dots, dots);
             }
-        }
 
-        if (in_pattern_mode == false) {
-            if (config.mode == (uint8_t)CONFIG_MODE_ANTIPOISONING){
-                in_pattern_mode = true;
-                in_test_mode = false;
-            }
-            else if (config.mode == (uint8_t)CONFIG_MODE_TEST){
-                in_pattern_mode = false;
-                in_test_mode = true;
-            }
-            else { /* Clock mode */
-                in_pattern_mode = false;
-                in_test_mode = false;
-            }
-        }
-
-        if (in_test_mode == true) {
-            display_set_time(12U, 34U, 56U, 1U, 1U);
-        }
-        else if (in_pattern_mode == true) {
-            display_set_pattern_1(pattern_step);
-            pattern_step++;
-
-            if (pattern_step > CLOCK_PATTERN_MAX_STEP) {
-                pattern_step = 0U;
-                in_pattern_mode = false;
-            }
+            vTaskDelay(displayPeriod);
         } else {
-            display_set_time(clk.hours, clk.minutes, clk.seconds, dots, dots);
+            ESP_LOGE(CLOCK_TASK_TAG, "Unable to get configuration");
         }
-
-        vTaskDelay(displayPeriod);
     }
+
+    /* Free task */
+    vTaskDelete(NULL);
 }
 
 /**

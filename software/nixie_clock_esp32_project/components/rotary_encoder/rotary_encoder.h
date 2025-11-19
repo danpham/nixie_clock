@@ -32,4 +32,4 @@ typedef enum {
 ******************************************************************/
 rotary_encoder_event_t process_rotary_encoder(uint8_t lastA, uint8_t lastB, uint8_t currentA, uint8_t currentB);
 
-#endif
+#endif // ROTARY_ENCODER_H
