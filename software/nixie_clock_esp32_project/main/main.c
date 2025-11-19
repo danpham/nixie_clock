@@ -72,7 +72,7 @@ void app_main(void)
     start_webserver();
 
     /* Combine both results */
-    if (cfg_ret != ESP_OK || svc_ret != ESP_OK) {
+    if ((cfg_ret != ESP_OK) || (svc_ret != ESP_OK)) {
         ret = ESP_FAIL;
     } else {
         ret = ESP_OK;
