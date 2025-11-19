@@ -12,6 +12,7 @@
 #include "../clock/clock.h"
 #include "../pwm/pwm.h"
 #include "../config/config.h"
+#include "service_manager.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
