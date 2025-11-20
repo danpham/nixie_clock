@@ -1,0 +1,17 @@
+<map id="software/nixie_clock_esp32_project/components/wifi/wifi.c" name="software/nixie_clock_esp32_project/components/wifi/wifi.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="217,5,421,60"/>
+<area shape="rect" id="Node000002" href="$wifi_8h.html" title=" " alt="" coords="17,108,75,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,63,89,109,87,104,235,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="99,108,185,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,62,179,104,177,100,264,58"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="210,108,311,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="304,62,278,98,274,95,299,59"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="336,108,420,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="339,59,365,95,360,98,335,62"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="445,108,538,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="373,58,457,99,455,104,371,62"/>
+<area shape="rect" id="Node000008" href="$esp__stub_8h.html" title=" " alt="" coords="563,108,716,133"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="418,57,585,102,583,107,416,63"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,181,87,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,134,49,168,43,168,43,134"/>
+</map>

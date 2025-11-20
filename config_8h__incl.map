@@ -1,0 +1,13 @@
+<map id="software/nixie_clock_esp32_project/components/config/config.h" name="software/nixie_clock_esp32_project/components/config/config.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="147,5,351,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,87,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,63,87,105,85,100,186,58"/>
+<area shape="rect" id="Node000003" href="$clock_8h.html" title=" " alt="" coords="111,108,229,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,62,192,99,188,96,223,58"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="253,108,404,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="275,58,310,96,306,99,271,62"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="428,108,565,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="325,58,451,101,450,106,324,63"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="135,181,205,207"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="173,134,173,168,167,168,167,134"/>
+</map>

@@ -1,0 +1,25 @@
+<map id="software/nixie_clock_esp32_project/components/service_manager" name="software/nixie_clock_esp32_project/components/service_manager">
+<area shape="rect" id="node1" href="dir_27a09bb4329d836898ad2e41b0fca487.html" title="wifi" alt="" coords="27,125,72,151"/>
+<area shape="rect" id="node2" href="dir_6591a8ca0b1ec78afa747e232353e174.html" title="config" alt="" coords="96,125,157,151"/>
+<area shape="rect" id="node3" href="dir_8938040af9d266be553d1135477b804d.html" title="ntp" alt="" coords="181,125,224,151"/>
+<area shape="rect" id="node4" href="dir_a13c4c485bb1701984d244429ad4ded1.html" title="clock" alt="" coords="248,125,304,151"/>
+<area shape="rect" id="node5" href="dir_af00538107c5bb6312b4379f7c6a7915.html" title="pwm" alt="" coords="329,125,383,151"/>
+<area shape="rect" id="node6" href="dir_d593a792f6d68ad3cd00089cda4c9fbf.html" title="nvs" alt="" coords="408,125,453,151"/>
+<area shape="rect" id="node7" href="dir_ec6cb34ec652cff6437f903aefeae430.html" title="service_manager" alt="" coords="209,52,343,77"/>
+<area shape="poly" id="edge1" href="dir_000012_000016.html" alt="" coords="239,80,86,128,84,122,238,75"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000012_000016.html" title="1" alt="" coords="87,124,97,139"/>
+<area shape="poly" id="edge2" href="dir_000012_000002.html" alt="" coords="253,80,165,122,162,117,251,75"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000012_000002.html" title="1" alt="" coords="166,118,176,132"/>
+<area shape="poly" id="edge3" href="dir_000012_000008.html" alt="" coords="266,80,226,118,223,114,262,76"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000012_000008.html" title="1" alt="" coords="229,111,238,126"/>
+<area shape="poly" id="edge5" href="dir_000012_000000.html" alt="" coords="279,78,279,112,273,112,273,78"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000012_000000.html" title="1" alt="" coords="280,100,289,114"/>
+<area shape="poly" id="edge6" href="dir_000012_000010.html" alt="" coords="291,75,335,114,331,118,287,79"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000012_000010.html" title="1" alt="" coords="330,99,340,114"/>
+<area shape="poly" id="edge7" href="dir_000012_000009.html" alt="" coords="302,75,397,118,394,123,300,80"/>
+<area shape="rect" id="edge7-headlabel" href="dir_000012_000009.html" title="1" alt="" coords="390,104,400,118"/>
+<area shape="rect" id="node8" href="dir_9893f083cf503bf028f3909b7ee1aca3.html" title="main" alt="" coords="478,125,533,151"/>
+<area shape="poly" id="edge4" href="dir_000012_000006.html" alt="" coords="314,75,466,121,464,127,313,80"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000012_000006.html" title="2" alt="" coords="458,107,468,122"/>
+<area shape="rect" id="clust1" href="dir_b181baf956279f894a730e459ce47bc5.html" title="components" alt="" coords="16,16,464,161"/>
+</map>

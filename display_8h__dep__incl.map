@@ -1,0 +1,9 @@
+<map id="software/nixie_clock_esp32_project/components/display/display.h" name="software/nixie_clock_esp32_project/components/display/display.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="229,5,433,60"/>
+<area shape="rect" id="Node000002" href="$display_8c.html" title=" " alt="" coords="5,108,209,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="262,68,167,110,165,106,260,63"/>
+<area shape="rect" id="Node000003" href="$clock__task_8c.html" title=" " alt="" coords="234,108,429,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="334,74,334,108,329,108,329,74"/>
+<area shape="rect" id="Node000004" href="$main_8c.html" title=" " alt="" coords="453,115,658,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="403,63,514,113,512,118,401,68"/>
+</map>
