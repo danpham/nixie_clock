@@ -12,13 +12,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Install Doxygen
-      - name: Install Doxygen 
+      # 2. Install Doxygen and Graphviz
+      - name: Install Doxygen and Graphviz
         run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
 
       # 3. Build Doxygen documentation
       - name: Generate Doxygen docs
         run: doxygen software/nixie_clock_esp32_project/docs/Doxyfile
+
+      # 3.1 List generated HTML files (debug)
+      - name: List generated HTML
+        run: ls -R software/nixie_clock_esp32_project/docs/html
 
       # 4. Deploy HTML documentation to GitHub Pages
       - name: Deploy to GitHub Pages
@@ -26,3 +30,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: software/nixie_clock_esp32_project/docs/html
+          publish_branch: gh-pages
+          allow_empty_commit: false
+          keep_files: false
+          force_orphan: false
+          enable_jekyll: false
