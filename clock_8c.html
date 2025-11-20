@@ -104,16 +104,22 @@ Include dependency graph for clock.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af66c8c6853a1eec8b785469a540996b0" id="r_af66c8c6853a1eec8b785469a540996b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8c.html#af66c8c6853a1eec8b785469a540996b0">clock_init</a> (<a class="el" href="structmyclock__t.html">myclock_t</a> *clk, uint8_t h, uint8_t m, uint8_t s)</td></tr>
+<tr class="memdesc:af66c8c6853a1eec8b785469a540996b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the clock structure with given hours, minutes, and seconds.  <br /></td></tr>
 <tr class="separator:af66c8c6853a1eec8b785469a540996b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37a494b1ddf1c3444d8be8c74c8627cf" id="r_a37a494b1ddf1c3444d8be8c74c8627cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8c.html#a37a494b1ddf1c3444d8be8c74c8627cf">clock_tick</a> (<a class="el" href="structmyclock__t.html">myclock_t</a> *clk)</td></tr>
+<tr class="memdesc:a37a494b1ddf1c3444d8be8c74c8627cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the clock by one second, rolling over minutes and hours.  <br /></td></tr>
 <tr class="separator:a37a494b1ddf1c3444d8be8c74c8627cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ef8a679523fa525d6dcd8f94b7fa603" id="r_a7ef8a679523fa525d6dcd8f94b7fa603"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8c.html#a7ef8a679523fa525d6dcd8f94b7fa603">clock_increment_hours</a> (<a class="el" href="structmyclock__t.html">myclock_t</a> *clk)</td></tr>
+<tr class="memdesc:a7ef8a679523fa525d6dcd8f94b7fa603"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the hours by 1.  <br /></td></tr>
 <tr class="separator:a7ef8a679523fa525d6dcd8f94b7fa603"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c6fc5420e8a80ac6bb5dcb6c4c6277c" id="r_a0c6fc5420e8a80ac6bb5dcb6c4c6277c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8c.html#a0c6fc5420e8a80ac6bb5dcb6c4c6277c">clock_decrement_hours</a> (<a class="el" href="structmyclock__t.html">myclock_t</a> *clk)</td></tr>
+<tr class="memdesc:a0c6fc5420e8a80ac6bb5dcb6c4c6277c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrement the hours by 1.  <br /></td></tr>
 <tr class="separator:a0c6fc5420e8a80ac6bb5dcb6c4c6277c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49619b5f0370cfacd84b3809b5bde8ab" id="r_a49619b5f0370cfacd84b3809b5bde8ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8c.html#a49619b5f0370cfacd84b3809b5bde8ab">clock_increment_minutes</a> (<a class="el" href="structmyclock__t.html">myclock_t</a> *clk)</td></tr>
+<tr class="memdesc:a49619b5f0370cfacd84b3809b5bde8ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the minutes by 1.  <br /></td></tr>
 <tr class="separator:a49619b5f0370cfacd84b3809b5bde8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c611ea640382e4fe12c8306bae8c94c" id="r_a5c611ea640382e4fe12c8306bae8c94c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8c.html#a5c611ea640382e4fe12c8306bae8c94c">clock_decrement_minutes</a> (<a class="el" href="structmyclock__t.html">myclock_t</a> *clk)</td></tr>
+<tr class="memdesc:a5c611ea640382e4fe12c8306bae8c94c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrement the minutes by 1.  <br /></td></tr>
 <tr class="separator:a5c611ea640382e4fe12c8306bae8c94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -133,6 +139,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Decrement the hours by 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clk</td><td>Pointer to the clock structure. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a5c611ea640382e4fe12c8306bae8c94c" name="a5c611ea640382e4fe12c8306bae8c94c"></a>
@@ -150,6 +164,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Decrement the minutes by 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clk</td><td>Pointer to the clock structure. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -169,6 +191,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Increment the hours by 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clk</td><td>Pointer to the clock structure. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a49619b5f0370cfacd84b3809b5bde8ab" name="a49619b5f0370cfacd84b3809b5bde8ab"></a>
@@ -186,6 +216,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Increment the minutes by 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clk</td><td>Pointer to the clock structure. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -227,6 +265,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize the clock structure with given hours, minutes, and seconds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clk</td><td>Pointer to the clock structure to initialize. </td></tr>
+    <tr><td class="paramname">h</td><td>Hours value (0-23) </td></tr>
+    <tr><td class="paramname">m</td><td>Minutes value (0-59) </td></tr>
+    <tr><td class="paramname">s</td><td>Seconds value (0-59) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a37a494b1ddf1c3444d8be8c74c8627cf" name="a37a494b1ddf1c3444d8be8c74c8627cf"></a>
@@ -244,6 +293,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Increment the clock by one second, rolling over minutes and hours. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clk</td><td>Pointer to the clock structure to tick. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
