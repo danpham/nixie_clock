@@ -41,8 +41,6 @@ static const char UART_TAG[] = "UART";
  * - Parity: Disabled
  * - Stop bits: 1
  * - Flow control: Disabled
- *
- * @return None
  */
 void uart_init(void)
 {
@@ -81,7 +79,7 @@ void uart_init(void)
 /**
  * @brief Thread-safe UART byte buffer transmission.
  *
- * @param data Pointer to the data buffer to send.
+ * @param str Pointer to the data buffer to send.
  * @param len Number of bytes to send.
  */
 void uart_write(const char *str, size_t len)

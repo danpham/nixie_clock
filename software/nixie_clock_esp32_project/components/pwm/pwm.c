@@ -39,8 +39,6 @@
  *
  * @note The PWM frequency is defined by `PWM_FREQ_HZ`.
  * @note Uses timer `LEDC_TIMER_0` and channel `LEDC_CHANNEL_0`.
- *
- * @return void
  */
 void pwm_init(void) {
     /* Configure PWM timer */
@@ -72,8 +70,6 @@ void pwm_init(void) {
  * This function updates the PWM output duty cycle.
  *
  * @param duty Duty cycle value (0-255 for 8-bit resolution).
- *
- * @return void
  */
 void pwm_set(uint32_t duty)
 {
