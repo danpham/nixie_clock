@@ -103,6 +103,10 @@ cmake --build build --config Release
 .\build\Release\native_integration_tests.exe
 ```
 
+## Documentation
+
+The generated documentation for this project is available [here](https://danpham.github.io/nixie_clock/).
+
 ## License
 
 This project is released under the **GPL v3** license.
