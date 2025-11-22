@@ -5,6 +5,8 @@
 #include "driver/ledc.h"
 #include "esp_err.h"
 #include "pwm.h"
+#include "../config/config.h"
+#include "esp_log.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -65,15 +67,25 @@ void pwm_init(void) {
 }
 
 /**
- * @brief Set the PWM duty cycle.
+ * @brief PWM update callback.
  *
- * This function updates the PWM output duty cycle.
- *
- * @param duty Duty cycle value (0-255 for 8-bit resolution).
+ * This function retrieves the current configuration and applies
+ * the configured PWM duty cycle to the LEDC channel. If the
+ * configuration cannot be read, an error is logged.
  */
-void pwm_set(uint32_t duty)
-{
-    /* Apply duty cycle */
-    ledc_set_duty(LEDC_LOW_SPEED_MODE, PWM_CHANNEL, duty);
-    ledc_update_duty(LEDC_LOW_SPEED_MODE, PWM_CHANNEL);
+void pwm_callback(void) {
+    esp_err_t result = ESP_OK;
+    config_t config;
+    static const char PWM_TAG[] = "PWM";
+
+    /* Get latest configuration */
+    result = config_get_copy(&config);
+    if (result == ESP_OK) {
+        /* Apply duty cycle */
+        ledc_set_duty(LEDC_LOW_SPEED_MODE, PWM_CHANNEL, config.dutycycle);
+        ledc_update_duty(LEDC_LOW_SPEED_MODE, PWM_CHANNEL);
+    }
+    else {
+        ESP_LOGE(PWM_TAG, "Failed to get configuration");
+    }
 }

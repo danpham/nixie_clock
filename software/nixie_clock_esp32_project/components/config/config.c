@@ -11,6 +11,7 @@
 #include "ntp.h"
 #include "../clock/clock.h"
 #include "../pwm/pwm.h"
+#include "../event_bus/event_bus.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -87,23 +88,9 @@ esp_err_t config_init(void)
                     cfg.ntp = 0;
                 }
 
-                ret_load = nvs_load_hours(&cfg.time.hours);
-                if (ret_load != ESP_OK)
-                {
-                    cfg.time.hours = CLOCK_DEFAULT_HOURS;
-                }
-
-                ret_load = nvs_load_minutes(&cfg.time.minutes);
-                if (ret_load != ESP_OK)
-                {
-                    cfg.time.minutes = CLOCK_DEFAULT_MINUTES;
-                }
-
-                ret_load = nvs_load_seconds(&cfg.time.seconds);
-                if (ret_load != ESP_OK)
-                {
-                    cfg.time.seconds = CLOCK_DEFAULT_SECONDS;
-                }
+                cfg.time.hours = CLOCK_DEFAULT_HOURS;
+                cfg.time.minutes = CLOCK_DEFAULT_MINUTES;
+                cfg.time.seconds = CLOCK_DEFAULT_SECONDS;
 
                 ret_load = nvs_load_dutycycle(&cfg.time.seconds);
                 if (ret_load != ESP_OK)
@@ -141,6 +128,7 @@ esp_err_t config_init(void)
 esp_err_t config_save(void)
 {
     esp_err_t ret = ESP_FAIL;
+    bool wifi_update = false;
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE)
@@ -153,6 +141,7 @@ esp_err_t config_save(void)
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
+            wifi_update = true;
         }
         if (strcmp(cfg.wpa_passphrase, cfg_last.wpa_passphrase) != 0)
         {
@@ -160,6 +149,7 @@ esp_err_t config_save(void)
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
+            wifi_update = true;
         }
         if (cfg.mode != cfg_last.mode)
         {
@@ -168,43 +158,37 @@ esp_err_t config_save(void)
                 ret = ESP_OK;
             }
         }
+
         if (cfg.ntp != cfg_last.ntp)
         {
             ret_save = nvs_save_ntp(cfg.ntp);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
+            event_bus_publish(EVT_NTP_CONFIG);
         }
-        if (cfg.time.hours != cfg_last.time.hours)
-        {
-            ret_save = nvs_save_hours(cfg.time.hours);
-            if (ret_save == ESP_OK) {
-                ret = ESP_OK;
-            }
-        }
-        if (cfg.time.minutes != cfg_last.time.minutes)
-        {
-            ret_save = nvs_save_minutes(cfg.time.minutes);
-            if (ret_save == ESP_OK) {
-                ret = ESP_OK;
-            }
-        }
-        if (cfg.time.seconds != cfg_last.time.seconds)
-        {
-            ret_save = nvs_save_seconds(cfg.time.seconds);
-            if (ret_save == ESP_OK) {
-                ret = ESP_OK;
-            }
-        }
+
         if (cfg.dutycycle != cfg_last.dutycycle)
         {
             ret_save = nvs_save_dutycycle(cfg.dutycycle);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
+            event_bus_publish(EVT_PWM_CONFIG);
         }
 
+        /* If ssid or passphrase has changed */
+        if (wifi_update == true) {
+            event_bus_publish(EVT_WIFI_CONFIG);
+        }
+        /* If no ntp sync, use clock from web ui */
+        if (cfg.ntp == 0) {
+            event_bus_publish(EVT_CLOCK_WEB_CONFIG);
+        }
+
+        /* Update previous config */
         cfg_last = cfg;
+
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
         if (give_ret != pdTRUE)
         {

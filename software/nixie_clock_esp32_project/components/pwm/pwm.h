@@ -26,6 +26,6 @@
  * 6. Functions definitions
 ******************************************************************/
 void pwm_init(void);
-void pwm_set(uint32_t duty);
+void pwm_callback(void);
 
 #endif // PWM_H

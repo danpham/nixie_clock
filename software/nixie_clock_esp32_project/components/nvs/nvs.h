@@ -34,15 +34,6 @@ esp_err_t nvs_init(void);
 esp_err_t nvs_save_ntp(uint8_t enabled);
 esp_err_t nvs_load_ntp(uint8_t *enabled);
 
-esp_err_t nvs_save_hours(uint8_t enabled);
-esp_err_t nvs_load_hours(uint8_t *enabled);
-
-esp_err_t nvs_save_minutes(uint8_t enabled);
-esp_err_t nvs_load_minutes(uint8_t *enabled);
-
-esp_err_t nvs_save_seconds(uint8_t enabled);
-esp_err_t nvs_load_seconds(uint8_t *enabled);
-
 esp_err_t nvs_save_mode(uint8_t value);
 esp_err_t nvs_load_mode(uint8_t *value);
 

@@ -15,7 +15,10 @@
 #include "../components/webserver/webserver.h"
 #include "../components/config/config.h"
 #include "../components/pwm/pwm.h"
-#include "../components/service_manager/service_manager.h"
+#include "../components/dispatcher/dispatcher.h"
+#include "../components/event_bus/event_bus.h"
+#include "../components/wifi/wifi.h"
+#include "clock_task.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -48,11 +51,20 @@ void app_main(void)
     size_t len = sizeof(hello) - 1U;
     esp_err_t ret = ESP_OK;
 
+    event_bus_init();
+    dispatcher_subscribe(EVT_NTP_CONFIG, ntp_callback);
+    dispatcher_subscribe(EVT_WIFI_CONFIG, wifi_callback);
+    dispatcher_subscribe(EVT_PWM_CONFIG, pwm_callback);
+    dispatcher_subscribe(EVT_CLOCK_NTP_CONFIG, clock_ntp_config_callback);
+    dispatcher_subscribe(EVT_CLOCK_GPIO_CONFIG, clock_update_with_menu_callback);
+    dispatcher_subscribe(EVT_CLOCK_WEB_CONFIG, clock_update_from_config_callback);
+    dispatcher_task_start();
+
     uart_init();
     uart_write(hello, len);
 
-    esp_err_t cfg_ret = config_init();
-    if (cfg_ret != ESP_OK) {
+    ret = config_init();
+    if (ret != ESP_OK) {
         ESP_LOGE(MAIN_TAG, "Config init failed");
     }
 
@@ -63,20 +75,12 @@ void app_main(void)
     gpio_task_start();
 
     pwm_init();
-
-    esp_err_t svc_ret = service_manager_update();
-    if (svc_ret != ESP_OK) {
-        ESP_LOGE(MAIN_TAG, "Service manager unable to apply config");
-    }
-
     start_webserver();
-
-    /* Combine both results */
-    if ((cfg_ret != ESP_OK) || (svc_ret != ESP_OK)) {
-        ret = ESP_FAIL;
-    } else {
-        ret = ESP_OK;
-    }
+    
+    /* Read and apply config with events */
+    event_bus_publish(EVT_NTP_CONFIG);
+    event_bus_publish(EVT_WIFI_CONFIG);
+    event_bus_publish(EVT_PWM_CONFIG);
 
     while(ret == ESP_OK) {
         vTaskDelay(pdMS_TO_TICKS(portMAX_DELAY));

@@ -31,6 +31,7 @@
 ******************************************************************/
 static const char CLOCK_TASK_TAG[] = "CLOCK_TASK";
 QueueHandle_t clockUpdateQueue;
+static myclock_t clk;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -54,7 +55,7 @@ static void clock_task(void *arg);
  * @param[in] arg Task argument (unused)
  */
 static void clock_task(void *arg) { 
-    myclock_t clk;
+
     bool dots = true;
     uint8_t pattern_step = 0U;
     (void)arg; 
@@ -75,23 +76,9 @@ static void clock_task(void *arg) {
         /* Get latest configuration */
         ret = config_get_copy(&config);
         if (ret == ESP_OK) {
-            /* Clock configuration menu */
-            clock_menu(&clk);
 
             /* Every second */
             if ((now - lastTick) >= tickPeriod) {
-
-                /* Update with NTP or webserver config */
-                if (clockUpdateQueue != NULL) {
-                    myclock_t upd;
-                    if (xQueueReceive(clockUpdateQueue, &upd, 0) == pdPASS) {
-                        clock_init(&clk, upd.hours, upd.minutes, upd.seconds);
-                    }
-                }
-                else {
-                    ESP_LOGW(CLOCK_TASK_TAG, "clockUpdateQueue not initialized");
-                }
-
                 lastTick += tickPeriod;
                 clock_tick(&clk);
                 dots = !dots;
@@ -234,5 +221,78 @@ void clock_task_start(void)
         if (ret != pdPASS) {
             ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clock_task");
         }
+    }
+}
+
+/**
+ * @brief Apply time update from NTP.
+ *
+ * Reads one pending update from `clockUpdateQueue` and updates
+ * the clock state.
+ */
+void clock_ntp_config_callback(void)
+{
+    /* Update with NTP */
+    if (clockUpdateQueue != NULL)
+    {
+        myclock_t upd;
+        if (xQueueReceive(clockUpdateQueue, &upd, 0) == pdPASS) {
+            clock_init(&clk, upd.hours, upd.minutes, upd.seconds);
+        }
+    }
+    else {
+        ESP_LOGW(CLOCK_TASK_TAG, "clockUpdateQueue not initialized");
+    }
+}
+
+/**
+ * @brief Update clock menu/UI on user input.
+ *
+ * Reads the latest GPIOs and refreshes the clock menu if
+ * NTP is disabled. Intended to be triggered by user input events
+ * (rotary encoder, buttons).
+ */
+void clock_update_with_menu_callback(void)
+{
+    esp_err_t result = ESP_OK;
+    config_t config;
+
+    /* Get latest configuration */
+    result = config_get_copy(&config);
+    if (result == ESP_OK) {
+        
+        /* If no NTP sync */
+        if (config.ntp == 0U) {
+            clock_menu(&clk);
+        }
+    }
+    else {
+        ESP_LOGE(CLOCK_TASK_TAG, "Failed to get configuration");
+    }
+}
+
+/**
+ * @brief Update clock state from configuration.
+ *
+ * Reads the latest configuration and updates the clock time if
+ * NTP is disabled. Intended to be triggered by configuration change
+ * events (boot, webserver update, etc.).
+ */
+void clock_update_from_config_callback(void)
+{
+    esp_err_t result = ESP_OK;
+    config_t config;
+
+    /* Get latest configuration */
+    result = config_get_copy(&config);
+    if (result == ESP_OK) {
+        
+        /* If no NTP sync */
+        if (config.ntp == 0U) {
+            clock_init(&clk, config.time.hours, config.time.minutes, config.time.seconds);
+        }
+    }
+    else {
+        ESP_LOGE(CLOCK_TASK_TAG, "Failed to get configuration");
     }
 }

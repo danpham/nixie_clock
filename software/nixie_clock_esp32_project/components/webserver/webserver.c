@@ -11,7 +11,6 @@
 #include "webserver.h"
 #include "config.h"
 #include "../../main/esp_stub.h"
-#include "../service_manager/service_manager.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -210,9 +209,6 @@ static esp_err_t update_handler(httpd_req_t *req)
         if (ret == ESP_OK) {
             ret = config_save();
         }
-
-        /* Apply changes from RAM config */
-        (void)service_manager_update();
 
         /* Redirect client back to the root page */
         httpd_resp_set_status(req, "303 See Other");

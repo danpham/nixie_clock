@@ -67,7 +67,9 @@
         "ntp.h": "c",
         "format": "c",
         "pwm.h": "c",
-        "service_manager.h": "c"
+        "service_manager.h": "c",
+        "dispatcher.h": "c",
+        "event_bus.h": "c"
     },
     "idf.flashType": "UART"
 }

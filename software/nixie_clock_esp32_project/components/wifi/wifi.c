@@ -8,6 +8,7 @@
 #include "esp_log.h"
 #include "esp_netif.h"
 #include "../../main/esp_stub.h"
+#include "../config/config.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -243,4 +244,47 @@ esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphrase)
     }
 
     return ret;
+}
+
+/**
+ * @brief Handles Wi-Fi initialization and configuration updates.
+ *
+ * This callback retrieves the latest Wi-Fi configuration and either initializes
+ * the Wi-Fi (AP+STA mode) or updates the STA connection if already initialized.
+ * Ensures thread-safe access to the configuration using a mutex.
+ *
+ * @note Logs an error if updating the STA Wi-Fi fails.
+ */
+void wifi_callback(void)
+{
+    esp_err_t result = ESP_OK;
+    config_t config;
+    static const char SERVICE_MANAGER_TAG[] = "SERVICE_MANAGER";
+
+    /* Get latest configuration */
+    result = config_get_copy(&config);
+    if (result != ESP_OK)
+    {
+
+        BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
+        if (taken == pdTRUE)
+        {
+            static bool wifi_initialized = false;
+
+            if (wifi_initialized == false)
+            {
+                wifi_init_apsta(config.ssid, config.wpa_passphrase, WIFI_AP_SSID, WIFI_AP_PASSWORD);
+                wifi_initialized = true;
+            }
+            else
+            {
+                esp_err_t wifi_ret = wifi_change_sta(config.ssid, config.wpa_passphrase);
+                if (wifi_ret != ESP_OK)
+                {
+                    ESP_LOGE(SERVICE_MANAGER_TAG, "Failed to update STA Wi-Fi");
+                    result = ESP_FAIL;
+                }
+            }
+        }
+    }
 }

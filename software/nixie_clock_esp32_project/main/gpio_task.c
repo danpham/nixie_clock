@@ -8,6 +8,7 @@
 #include "../components/rotary_encoder/rotary_encoder.h"
 #include "esp_log.h"
 #include "esp_stub.h"
+#include "../event_bus/event_bus.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -67,7 +68,8 @@ static void gpio_task(void *arg)
     int8_t state_last_rotaryChanA = 0;
     int8_t state_last_rotaryChanB = 0;
     button_state_t state_last_rotarySwitch = 0;
- 
+    bool gpio_update = false;
+
     if (my_gpio_init(&rotaryEncoderSwitch) != ESP_OK) {
         ESP_LOGE(GPIO_TASK_TAG, "Failed to initialize rotaryEncoderSwitch!");
     }
@@ -97,6 +99,7 @@ static void gpio_task(void *arg)
             event.pressed = rotaryEncoderSwitch.press_type;
             if (buttonQueue != NULL) {
                 xQueueSend(buttonQueue, &event, 0);
+                gpio_update = true;
                 if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
                     ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
                 } else {
@@ -117,6 +120,7 @@ static void gpio_task(void *arg)
             event.updateValue = (uint8_t)ev;
             if (buttonQueue != NULL) {
                 xQueueSend(buttonQueue, &event, 0);
+                gpio_update = true;
             }
             else {
                ESP_LOGW(GPIO_TASK_TAG, "buttonQueue not initialized");
@@ -126,6 +130,12 @@ static void gpio_task(void *arg)
         }
         state_last_rotaryChanA = state_rotaryChanA;
         state_last_rotaryChanB = state_rotaryChanB;
+
+        /* At least one io has been modified, send an event */
+        if (gpio_update == true) {
+            event_bus_publish(EVT_CLOCK_GPIO_CONFIG);
+            gpio_update = false;
+        }
 
         vTaskDelay(pdMS_TO_TICKS(5)); // Loop every 5 ms
     }
