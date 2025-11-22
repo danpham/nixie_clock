@@ -7,7 +7,6 @@
 #include "nvs.h"
 #include "../../main/esp_stub.h"
 #include "../../main/clock_task.h"
-#include "../pwm/pwm.h"
 #include "../event_bus/event_bus.h"
 
 /******************************************************************
