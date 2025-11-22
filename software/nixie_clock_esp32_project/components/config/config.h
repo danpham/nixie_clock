@@ -12,6 +12,10 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define CONFIG_PWM_DEFAULT_DUTYCYCLE     (255U)
+#define CONFIG_CLOCK_DEFAULT_HOURS       (12U)
+#define CONFIG_CLOCK_DEFAULT_MINUTES     (0U)
+#define CONFIG_CLOCK_DEFAULT_SECONDS     (0U)
 #define CONFIG_SSID_SIZE                 (32U)
 #define CONFIG_SSID_BUF_SZ               (CONFIG_SSID_SIZE + 1U)
 #define CONFIG_WPA_PASSPHRASE_SIZE       (63U)

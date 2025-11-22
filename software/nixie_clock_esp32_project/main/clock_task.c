@@ -64,7 +64,7 @@ static void clock_task(void *arg) {
     bool in_test_mode = false;
     esp_err_t ret = ESP_OK;
 
-    clock_init(&clk, CLOCK_DEFAULT_HOURS, CLOCK_DEFAULT_MINUTES, CLOCK_DEFAULT_SECONDS);
+    clock_init(&clk, CONFIG_CLOCK_DEFAULT_HOURS, CONFIG_CLOCK_DEFAULT_MINUTES, CONFIG_CLOCK_DEFAULT_SECONDS);
 
     TickType_t lastTick = xTaskGetTickCount();
     const TickType_t tickPeriod = pdMS_TO_TICKS(1000);    // 1s

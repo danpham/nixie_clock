@@ -10,9 +10,6 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define CLOCK_DEFAULT_HOURS             (12U)
-#define CLOCK_DEFAULT_MINUTES           (0U)
-#define CLOCK_DEFAULT_SECONDS           (0U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)

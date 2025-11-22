@@ -45,8 +45,7 @@ esp_err_t config_init(void)
 
     if (config_mutex == NULL) {
         config_mutex = xSemaphoreCreateMutex();
-        if (config_mutex == NULL)
-        {
+        if (config_mutex == NULL) {
             ESP_LOGE(CONFIG_TAG, "Failed to create config mutex");
             ret = ESP_FAIL;
         }
@@ -57,8 +56,7 @@ esp_err_t config_init(void)
         if (taken == pdTRUE)
         {
             ret = nvs_init();
-            if (ret == ESP_OK)
-            {
+            if (ret == ESP_OK) {
                 size_t len = CONFIG_SSID_BUF_SZ;
                 esp_err_t ret_load = nvs_load_ssid(cfg.ssid, &len);
                 if (ret_load != ESP_OK)
@@ -68,39 +66,34 @@ esp_err_t config_init(void)
 
                 len = CONFIG_WPA_PASSPHRASE_BUF_SZ;
                 ret_load = nvs_load_wpa_passphrase(cfg.wpa_passphrase, &len);
-                if (ret_load != ESP_OK)
-                {
+                if (ret_load != ESP_OK) {
                     cfg.wpa_passphrase[0] = '\0';
                 }       
                 
                 ret_load = nvs_load_mode(&cfg.mode);
-                if (ret_load != ESP_OK)
-                {
+                if (ret_load != ESP_OK) {
                     cfg.mode = 0;
                 }
 
                 ret_load = nvs_load_ntp(&cfg.ntp);
-                if (ret_load != ESP_OK)
-                {
+                if (ret_load != ESP_OK) {
                     cfg.ntp = 0;
                 }
 
-                cfg.time.hours = CLOCK_DEFAULT_HOURS;
-                cfg.time.minutes = CLOCK_DEFAULT_MINUTES;
-                cfg.time.seconds = CLOCK_DEFAULT_SECONDS;
+                cfg.time.hours = CONFIG_CLOCK_DEFAULT_HOURS;
+                cfg.time.minutes = CONFIG_CLOCK_DEFAULT_MINUTES;
+                cfg.time.seconds = CONFIG_CLOCK_DEFAULT_SECONDS;
 
                 ret_load = nvs_load_dutycycle(&cfg.time.seconds);
-                if (ret_load != ESP_OK)
-                {
-                    cfg.dutycycle = PWM_DEFAULT_DUTYCYCLE;
+                if (ret_load != ESP_OK) {
+                    cfg.dutycycle = CONFIG_PWM_DEFAULT_DUTYCYCLE;
                 }
 
                 cfg_last = cfg;
             }
 
             BaseType_t give_ret = xSemaphoreGive(config_mutex);
-            if (give_ret != pdTRUE)
-            {
+            if (give_ret != pdTRUE) {
                 ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
                 ret = ESP_FAIL;
             }
@@ -128,36 +121,31 @@ esp_err_t config_save(void)
     bool wifi_update = false;
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
-    if (taken == pdTRUE)
-    {
+    if (taken == pdTRUE) {
         esp_err_t ret_save;
 
-        if (strcmp(cfg.ssid, cfg_last.ssid) != 0)
-        {
+        if (strcmp(cfg.ssid, cfg_last.ssid) != 0) {
             ret_save = nvs_save_ssid(cfg.ssid);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
             wifi_update = true;
         }
-        if (strcmp(cfg.wpa_passphrase, cfg_last.wpa_passphrase) != 0)
-        {
+        if (strcmp(cfg.wpa_passphrase, cfg_last.wpa_passphrase) != 0) {
             ret_save = nvs_save_wpa_passphrase(cfg.wpa_passphrase);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
             wifi_update = true;
         }
-        if (cfg.mode != cfg_last.mode)
-        {
+        if (cfg.mode != cfg_last.mode) {
             ret_save = nvs_save_mode(cfg.mode);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
         }
 
-        if (cfg.ntp != cfg_last.ntp)
-        {
+        if (cfg.ntp != cfg_last.ntp) {
             ret_save = nvs_save_ntp(cfg.ntp);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
@@ -165,8 +153,7 @@ esp_err_t config_save(void)
             event_bus_publish(EVT_NTP_CONFIG);
         }
 
-        if (cfg.dutycycle != cfg_last.dutycycle)
-        {
+        if (cfg.dutycycle != cfg_last.dutycycle) {
             ret_save = nvs_save_dutycycle(cfg.dutycycle);
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
@@ -187,8 +174,7 @@ esp_err_t config_save(void)
         cfg_last = cfg;
 
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
-        if (give_ret != pdTRUE)
-        {
+        if (give_ret != pdTRUE) {
             ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
             ret = ESP_FAIL;
         }
@@ -215,8 +201,7 @@ esp_err_t config_get_copy(config_t *copy)
 {
     esp_err_t ret = ESP_OK;
 
-    if (copy == NULL)
-    {
+    if (copy == NULL) {
         ret = ESP_ERR_INVALID_ARG;
     }
 
@@ -226,8 +211,7 @@ esp_err_t config_get_copy(config_t *copy)
         {
             *copy = cfg;
             BaseType_t give_ret = xSemaphoreGive(config_mutex);
-            if (give_ret != pdTRUE)
-            {
+            if (give_ret != pdTRUE) {
                 ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
                 ret = ESP_FAIL;
             }
@@ -259,12 +243,10 @@ esp_err_t config_set_config(const config_t *config)
     esp_err_t result = ESP_FAIL;
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
-    if (taken == pdTRUE)
-    {
+    if (taken == pdTRUE) {
         cfg = *config;
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
-        if (give_ret != pdTRUE)
-        {
+        if (give_ret != pdTRUE) {
             ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
             result = ESP_FAIL;
         }

@@ -8,7 +8,6 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define PWM_DEFAULT_DUTYCYCLE         (255U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
