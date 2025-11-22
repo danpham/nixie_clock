@@ -9,7 +9,6 @@
 #include "../clock/clock.h"
 #include "../../main/clock_task.h"
 #include "ntp.h"
-#include "esp_interface.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "../config/config.h"
