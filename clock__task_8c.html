@@ -131,6 +131,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a8349428656791032e2e00dd13cc5bacc" id="r_a8349428656791032e2e00dd13cc5bacc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a8349428656791032e2e00dd13cc5bacc">clock_task_start</a> (void)</td></tr>
 <tr class="memdesc:a8349428656791032e2e00dd13cc5bacc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the clock task and initialize the update queue.  <br /></td></tr>
 <tr class="separator:a8349428656791032e2e00dd13cc5bacc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10a05bbfb3403bbdc41cc313b271d3d9" id="r_a10a05bbfb3403bbdc41cc313b271d3d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a10a05bbfb3403bbdc41cc313b271d3d9">clock_ntp_config_callback</a> (void)</td></tr>
+<tr class="memdesc:a10a05bbfb3403bbdc41cc313b271d3d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply time update from NTP.  <br /></td></tr>
+<tr class="separator:a10a05bbfb3403bbdc41cc313b271d3d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a300c8c8bbdade4cd145ab28a8a68c69c" id="r_a300c8c8bbdade4cd145ab28a8a68c69c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a300c8c8bbdade4cd145ab28a8a68c69c">clock_update_with_menu_callback</a> (void)</td></tr>
+<tr class="memdesc:a300c8c8bbdade4cd145ab28a8a68c69c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update clock menu/UI on user input.  <br /></td></tr>
+<tr class="separator:a300c8c8bbdade4cd145ab28a8a68c69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892bba71ed375b6bd9a120d93aaf7079" id="r_a892bba71ed375b6bd9a120d93aaf7079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a892bba71ed375b6bd9a120d93aaf7079">clock_update_from_config_callback</a> (void)</td></tr>
+<tr class="memdesc:a892bba71ed375b6bd9a120d93aaf7079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update clock state from configuration.  <br /></td></tr>
+<tr class="separator:a892bba71ed375b6bd9a120d93aaf7079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -209,6 +218,27 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a10a05bbfb3403bbdc41cc313b271d3d9" name="a10a05bbfb3403bbdc41cc313b271d3d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10a05bbfb3403bbdc41cc313b271d3d9">&#9670;&#160;</a></span>clock_ntp_config_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clock_ntp_config_callback </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply time update from NTP. </p>
+<p>Reads one pending update from <code>clockUpdateQueue</code> and updates the clock state. </p>
+
+</div>
+</div>
 <a id="a8349428656791032e2e00dd13cc5bacc" name="a8349428656791032e2e00dd13cc5bacc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8349428656791032e2e00dd13cc5bacc">&#9670;&#160;</a></span>clock_task_start()</h2>
 
@@ -228,6 +258,48 @@ Variables</h2></td></tr>
 <p>Start the clock task and initialize the update queue. </p>
 <p>Creates the FreeRTOS queue <code>clockUpdateQueue</code> for receiving clock updates (from NTP or other tasks), then creates the <code>clock_task</code> FreeRTOS task.</p>
 <dl class="section note"><dt>Note</dt><dd>If the queue creation fails, the task is not started. </dd></dl>
+
+</div>
+</div>
+<a id="a892bba71ed375b6bd9a120d93aaf7079" name="a892bba71ed375b6bd9a120d93aaf7079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892bba71ed375b6bd9a120d93aaf7079">&#9670;&#160;</a></span>clock_update_from_config_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clock_update_from_config_callback </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update clock state from configuration. </p>
+<p>Reads the latest configuration and updates the clock time if NTP is disabled. Intended to be triggered by configuration change events (boot, webserver update, etc.). </p>
+
+</div>
+</div>
+<a id="a300c8c8bbdade4cd145ab28a8a68c69c" name="a300c8c8bbdade4cd145ab28a8a68c69c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a300c8c8bbdade4cd145ab28a8a68c69c">&#9670;&#160;</a></span>clock_update_with_menu_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clock_update_with_menu_callback </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update clock menu/UI on user input. </p>
+<p>Reads the latest GPIOs and refreshes the clock menu if NTP is disabled. Intended to be triggered by user input events (rotary encoder, buttons). </p>
 
 </div>
 </div>

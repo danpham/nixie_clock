@@ -1,9 +1,7 @@
 <map id="software/nixie_clock_esp32_project/components/nvs/nvs.h" name="software/nixie_clock_esp32_project/components/nvs/nvs.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="233,5,437,60"/>
-<area shape="rect" id="Node000002" href="$config_8c.html" title=" " alt="" coords="5,115,209,170"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,69,164,118,162,113,266,64"/>
-<area shape="rect" id="Node000003" href="$nvs_8c.html" title=" " alt="" coords="233,115,437,170"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="338,74,338,115,333,115,333,74"/>
-<area shape="rect" id="Node000004" href="$service__manager_8c.html" title=" " alt="" coords="461,108,665,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="404,64,493,105,491,110,402,68"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="119,5,323,60"/>
+<area shape="rect" id="Node000002" href="$config_8c.html" title=" " alt="" coords="5,108,209,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,71,139,110,135,106,179,67"/>
+<area shape="rect" id="Node000003" href="$nvs_8c.html" title=" " alt="" coords="233,108,437,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="263,67,307,106,304,110,259,71"/>
 </map>

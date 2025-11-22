@@ -1,26 +1,28 @@
 <map id="software/nixie_clock_esp32_project/main/gpio_task.c" name="software/nixie_clock_esp32_project/main/gpio_task.c">
-<area shape="rect" id="Node000001" title=" " alt="" coords="343,5,533,60"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,181,156,207"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="362,63,240,110,172,144,113,177,111,172,169,140,238,106,360,58"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="475,108,593,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="469,58,513,97,509,101,466,62"/>
-<area shape="rect" id="Node000004" href="$gpio__task_8h.html" title=" " alt="" coords="252,108,349,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="397,62,332,103,329,98,395,58"/>
-<area shape="rect" id="Node000006" href="$gpio__driver_8h.html" title=" " alt="" coords="334,181,441,207"/>
-<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="432,61,398,169,393,167,427,59"/>
-<area shape="rect" id="Node000009" href="$rotary__encoder_8h.html" title=" " alt="" coords="465,181,595,207"/>
-<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="443,60,450,95,466,132,483,153,503,171,499,175,479,157,461,135,445,97,438,61"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="617,108,701,133"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="507,58,618,100,616,105,505,63"/>
-<area shape="rect" id="Node000011" href="$esp__stub_8h.html" title=" " alt="" coords="725,108,817,133"/>
-<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="534,56,714,102,713,107,532,61"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="266,136,130,180,128,175,265,131"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="180,181,309,207"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="294,135,264,172,260,169,289,132"/>
-<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="316,131,364,170,361,175,313,135"/>
-<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="338,131,480,175,479,180,337,136"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="277,255,381,280"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="380,209,349,246,345,243,376,205"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="405,255,487,280"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="399,205,430,243,426,246,395,209"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="391,5,581,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,196,156,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="392,59,317,81,240,110,167,150,109,190,106,186,165,146,238,106,315,76,391,53"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="475,115,593,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="502,59,524,102,519,104,497,62"/>
+<area shape="rect" id="Node000004" href="$gpio__task_8h.html" title=" " alt="" coords="252,115,349,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="435,62,337,112,334,107,433,58"/>
+<area shape="rect" id="Node000006" href="$gpio__driver_8h.html" title=" " alt="" coords="334,196,441,221"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="473,62,403,186,398,183,469,59"/>
+<area shape="rect" id="Node000009" href="$rotary__encoder_8h.html" title=" " alt="" coords="465,196,595,221"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="475,61,462,103,460,125,466,147,481,169,500,186,497,190,477,172,461,149,455,126,456,102,469,60"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="617,115,701,141"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="536,58,628,107,625,111,533,62"/>
+<area shape="rect" id="Node000011" href="$esp__stub_8h.html" title=" " alt="" coords="725,115,817,141"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="567,57,715,105,724,108,722,114,713,111,565,63"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="841,108,984,148"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="582,52,828,105,827,110,580,57"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="270,143,127,194,125,189,268,138"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="180,196,309,221"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="295,142,263,186,259,183,290,139"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="315,139,366,185,362,188,312,143"/>
+<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="335,138,484,189,483,194,333,143"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="277,269,381,295"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="380,223,349,261,345,257,376,220"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="405,269,487,295"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="399,220,430,257,426,261,395,223"/>
 </map>

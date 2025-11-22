@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['updatevalue_0',['updateValue',['../structbutton__event__t.html#a3b4a7f2abafd6762475be90c1db2f14c',1,'button_event_t']]]
+  ['time_0',['time',['../structconfig__t.html#abd4cac5ba54221a0d6e374e1df9f5e50',1,'config_t']]]
 ];

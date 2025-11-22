@@ -1,0 +1,17 @@
+<map id="software/nixie_clock_esp32_project/components/event_bus/event_bus.h" name="software/nixie_clock_esp32_project/components/event_bus/event_bus.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="355,5,559,60"/>
+<area shape="rect" id="Node000002" href="$config_8c.html" title=" " alt="" coords="5,108,209,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="354,66,199,111,198,105,352,61"/>
+<area shape="rect" id="Node000003" href="$dispatcher_8c.html" title=" " alt="" coords="171,211,375,265"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="343,59,305,79,288,93,275,109,264,134,261,160,267,210,262,211,256,160,259,132,270,107,285,89,302,75,341,54"/>
+<area shape="rect" id="Node000004" href="$dispatcher_8h.html" title=" " alt="" coords="285,108,489,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="433,73,408,109,403,106,428,70"/>
+<area shape="rect" id="Node000005" href="$main_8c.html" title=" " alt="" coords="411,218,617,258"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="487,71,505,107,516,167,518,218,512,218,511,168,499,109,482,73"/>
+<area shape="rect" id="Node000006" href="$event__bus_8c.html" title=" " alt="" coords="565,108,769,163"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="525,63,614,106,611,110,523,68"/>
+<area shape="rect" id="Node000007" href="$ntp_8c.html" title=" " alt="" coords="793,108,997,163"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="573,58,783,105,793,108,792,113,781,111,571,63"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="349,174,304,213,301,209,345,170"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="433,169,492,216,488,220,430,173"/>
+</map>

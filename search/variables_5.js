@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['last_5fchange_5fms_0',['last_change_ms',['../structmy__gpio__btn__t.html#ab01af6af705c12f5a6b248ef1cb04ead',1,'my_gpio_btn_t']]],
-  ['last_5fstate_1',['last_state',['../structmy__gpio__btn__t.html#a436dff033c9671aa179ba4b72f0cf971',1,'my_gpio_btn_t']]]
+  ['id_0',['id',['../structbutton__event__t.html#aeb4350a4d00f18ec2d4a4ee35d65e1b9',1,'button_event_t']]]
 ];
