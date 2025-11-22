@@ -1,8 +1,12 @@
 var config_8h =
 [
     [ "config_t", "structconfig__t.html", "structconfig__t" ],
+    [ "CONFIG_CLOCK_DEFAULT_HOURS", "config_8h.html#af01a117b54c49427dc02175813f10021", null ],
+    [ "CONFIG_CLOCK_DEFAULT_MINUTES", "config_8h.html#a4b84ffaa30e9ccaac9a66437a0c72eab", null ],
+    [ "CONFIG_CLOCK_DEFAULT_SECONDS", "config_8h.html#a99524ad03080c6cf19384531209868d8", null ],
     [ "CONFIG_MODE_ANTIPOISONING", "config_8h.html#af082e215b9ce4d7bf81a330e3da637f9", null ],
     [ "CONFIG_MODE_TEST", "config_8h.html#a120f73868153abb7ab0addb6a5170ab7", null ],
+    [ "CONFIG_PWM_DEFAULT_DUTYCYCLE", "config_8h.html#ab1d8fa90b96eb0cd0deddab4672086b1", null ],
     [ "CONFIG_SSID_BUF_SZ", "config_8h.html#af0e17a4fae0cf9481addb2e216bfba7d", null ],
     [ "CONFIG_SSID_SIZE", "config_8h.html#ac555e1f7df3cf1cee5f1ab266ebdeb4c", null ],
     [ "CONFIG_WPA_PASSPHRASE_BUF_SZ", "config_8h.html#ac0967dea543a91ac8447152df98b2b11", null ],
