@@ -119,11 +119,12 @@ esp_err_t config_init(void)
 esp_err_t config_save(void)
 {
     esp_err_t ret = ESP_FAIL;
-    bool wifi_update = false;
+
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE) {
         esp_err_t ret_save;
+        bool wifi_update = false;
 
         if (strcmp(cfg.ssid, cfg_last.ssid) != 0) {
             ret_save = nvs_save_ssid(cfg.ssid);

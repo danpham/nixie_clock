@@ -143,7 +143,7 @@ static void time_sync_task(void *arg)
  * Creates the semaphore and FreeRTOS task to initialize SNTP.
  * Logs error if the task is already running or creation fails.
  */
-void ntp_sync_task_start(void)
+static void ntp_sync_task_start(void)
 {
     if ((time_sync_done_sem != NULL) || (time_sync_task_handle != NULL)) {
         time_sync_done_sem = xSemaphoreCreateBinary();
@@ -219,14 +219,14 @@ static void ntp_stop(void)
  * Ensures NTP is not re-started or re-stopped unnecessarily.
  */
 void ntp_callback(void) {
-    static bool ntp_initialized = false;
     esp_err_t result = ESP_OK;
     config_t config;
     
     /* Get latest configuration */
     result = config_get_copy(&config);
     if (result == ESP_OK) {
-        
+        static bool ntp_initialized = false;
+
         /* NTP sync */
         if (config.ntp == 1U) {
             if (ntp_initialized == false) {

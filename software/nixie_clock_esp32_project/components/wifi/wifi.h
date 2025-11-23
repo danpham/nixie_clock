@@ -27,9 +27,6 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
-                     const char *ap_ssid, const char *ap_password);
-esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphrase);
 void wifi_callback(void);
 
 #endif // WIFI_H

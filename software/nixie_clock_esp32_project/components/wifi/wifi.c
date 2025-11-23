@@ -120,7 +120,7 @@ static esp_err_t wifi_register_event_handlers(void)
  * @param ap_ssid SSID of the local access point
  * @param ap_password Password of the local access point
  */
-void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
+static void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
                      const char *ap_ssid, const char *ap_password)
 {
     esp_err_t ret = ESP_OK;
@@ -212,7 +212,7 @@ void wifi_init_apsta(const char *sta_ssid, const char *sta_password,
  *
  * @return ESP_OK on success, or an ESP-IDF error code.
  */
-esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphrase)
+static esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphrase)
 {
     esp_err_t ret = ESP_OK;
 
@@ -284,7 +284,6 @@ void wifi_callback(void)
                 if (wifi_ret != ESP_OK)
                 {
                     ESP_LOGE(SERVICE_MANAGER_TAG, "Failed to update STA Wi-Fi");
-                    result = ESP_FAIL;
                 }
             }
         }

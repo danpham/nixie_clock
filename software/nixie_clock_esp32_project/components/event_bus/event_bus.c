@@ -60,25 +60,6 @@ void event_bus_publish(event_bus_event_t evt)
 }
 
 /**
- * @brief Publish an event to the Event Bus with a timeout.
- *
- * This function allows publishing an event without blocking indefinitely.
- * It is useful for ISR-safe contexts (when using the ISR variant), or when
- * preventing long stalls is important.
- *
- * @param evt The event to publish.
- * @param timeout Maximum time to wait in FreeRTOS ticks (0 for non-blocking).
- *
- * @return true if the event was successfully added to the queue, false otherwise
- *         (queue full or uninitialized).
- */
-bool event_bus_try_publish(event_bus_event_t evt, TickType_t timeout)
-{
-    if (s_event_queue == NULL) return false;
-    return xQueueSend(s_event_queue, &evt, timeout) == pdTRUE;
-}
-
-/**
  * @brief Wait for the next event from the Event Bus.
  *
  * Blocks until an event is available in the queue, unless a timeout is specified.

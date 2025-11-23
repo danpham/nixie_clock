@@ -24,7 +24,6 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void ntp_sync_task_start(void);
 void ntp_callback(void);
 
 #endif // NTP_H
