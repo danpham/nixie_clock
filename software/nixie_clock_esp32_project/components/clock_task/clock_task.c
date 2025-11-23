@@ -1,17 +1,19 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "clock_task.h"
-#include "display.h"
-#include "clock.h"
-#include "gpio_task.h"
-#include "../components/gpio_driver/gpio_driver.h"
-#include "../components/rotary_encoder/rotary_encoder.h"
-#include "esp_stub.h"
+#include "../display/display.h"
+#include "../clock/clock.h"
+#include "../gpio_task/gpio_task.h"
+#include "../gpio_driver/gpio_driver.h"
+#include "../rotary_encoder/rotary_encoder.h"
 #include "esp_log.h"
-#include "../components/config/config.h"
+#include "../config/config.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

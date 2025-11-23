@@ -6,8 +6,8 @@
 ******************************************************************/
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
-#include "gpio_driver.h"
-#include "rotary_encoder.h"
+#include "../gpio_driver/gpio_driver.h"
+#include "../rotary_encoder/rotary_encoder.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

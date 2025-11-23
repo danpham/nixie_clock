@@ -1,13 +1,13 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include <string.h>
 #include "driver/gpio.h"
-#include "gpio_task.h"
-#include "clock_task.h"
-#include "ntp.h"
+#include "../components/ntp/ntp.h"
 #include "esp_log.h"
-#include "esp_stub.h"
 #include "../components/uart/uart.h"
 #include "../components/hv5622/hv5622.h"
 #include "../components/display/display.h"
@@ -18,7 +18,8 @@
 #include "../components/dispatcher/dispatcher.h"
 #include "../components/event_bus/event_bus.h"
 #include "../components/wifi/wifi.h"
-#include "clock_task.h"
+#include "../components/clock_task/clock_task.h"
+#include "../components/gpio_task/gpio_task.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

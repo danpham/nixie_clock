@@ -1,13 +1,15 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "gpio_task.h"
-#include "../components/gpio_driver/gpio_driver.h"
-#include "../components/rotary_encoder/rotary_encoder.h"
+#include "../gpio_driver/gpio_driver.h"
+#include "../rotary_encoder/rotary_encoder.h"
 #include "esp_log.h"
-#include "esp_stub.h"
 #include "../event_bus/event_bus.h"
 
 /******************************************************************

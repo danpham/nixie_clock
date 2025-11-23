@@ -1,7 +1,9 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
-#include "../../main/esp_stub.h"
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include "driver/ledc.h"
 #include "esp_err.h"
 #include "pwm.h"

@@ -1,6 +1,9 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include <errno.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -10,7 +13,6 @@
 #include "esp_netif.h"
 #include "webserver.h"
 #include "config.h"
-#include "../../main/esp_stub.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

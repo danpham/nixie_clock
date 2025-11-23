@@ -1,6 +1,9 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #ifdef UNITY_TESTING
 #include "nvs_mock.h"
 #else
@@ -8,8 +11,6 @@
 #include "nvs_flash.h"
 #endif
 #include "nvs.h"
-
-#include "../../main/esp_stub.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

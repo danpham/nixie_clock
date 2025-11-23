@@ -1,13 +1,15 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include "esp_sntp.h"
 #include "esp_netif.h"
 #include "esp_netif_sntp.h"
 #include "esp_log.h"
-#include "../../main/esp_stub.h"
 #include "../clock/clock.h"
-#include "../../main/clock_task.h"
+#include "../clock_task/clock_task.h"
 #include "ntp.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"

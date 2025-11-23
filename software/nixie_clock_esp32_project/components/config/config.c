@@ -1,12 +1,14 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include "esp_err.h"
 #include "esp_log.h"
 #include "config.h"
 #include "nvs.h"
-#include "../../main/esp_stub.h"
-#include "../../main/clock_task.h"
+#include "../clock_task/clock_task.h"
 #include "../event_bus/event_bus.h"
 
 /******************************************************************
