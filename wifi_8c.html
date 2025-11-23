@@ -108,12 +108,6 @@ Include dependency graph for wifi.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae7c271d8b687dd4f58d78913dcf44d92" id="r_ae7c271d8b687dd4f58d78913dcf44d92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wifi_8c.html#ae7c271d8b687dd4f58d78913dcf44d92">wifi_init_apsta</a> (const char *sta_ssid, const char *sta_password, const char *ap_ssid, const char *ap_password)</td></tr>
-<tr class="memdesc:ae7c271d8b687dd4f58d78913dcf44d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes Wi-Fi in AP+STA mode.  <br /></td></tr>
-<tr class="separator:ae7c271d8b687dd4f58d78913dcf44d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac031e9a13d59bee18791826c081e73ba" id="r_ac031e9a13d59bee18791826c081e73ba"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wifi_8c.html#ac031e9a13d59bee18791826c081e73ba">wifi_change_sta</a> (const char *sta_ssid, const char *sta_passphrase)</td></tr>
-<tr class="memdesc:ac031e9a13d59bee18791826c081e73ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the STA Wi-Fi credentials and reconnect.  <br /></td></tr>
-<tr class="separator:ac031e9a13d59bee18791826c081e73ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b6e8f56b7e01cd829b0d810b49d19d9" id="r_a0b6e8f56b7e01cd829b0d810b49d19d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wifi_8c.html#a0b6e8f56b7e01cd829b0d810b49d19d9">wifi_callback</a> (void)</td></tr>
 <tr class="memdesc:a0b6e8f56b7e01cd829b0d810b49d19d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles Wi-Fi initialization and configuration updates.  <br /></td></tr>
 <tr class="separator:a0b6e8f56b7e01cd829b0d810b49d19d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,100 +132,6 @@ Functions</h2></td></tr>
 <p>Handles Wi-Fi initialization and configuration updates. </p>
 <p>This callback retrieves the latest Wi-Fi configuration and either initializes the Wi-Fi (AP+STA mode) or updates the STA connection if already initialized. Ensures thread-safe access to the configuration using a mutex.</p>
 <dl class="section note"><dt>Note</dt><dd>Logs an error if updating the STA Wi-Fi fails. </dd></dl>
-
-</div>
-</div>
-<a id="ac031e9a13d59bee18791826c081e73ba" name="ac031e9a13d59bee18791826c081e73ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac031e9a13d59bee18791826c081e73ba">&#9670;&#160;</a></span>wifi_change_sta()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">esp_err_t wifi_change_sta </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>sta_ssid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>sta_passphrase</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Change the STA Wi-Fi credentials and reconnect. </p>
-<p>Disconnects the current STA, applies a new SSID/password, and reconnects using the updated configuration. Does not affect AP mode.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sta_ssid</td><td>New STA SSID (null-terminated) </td></tr>
-    <tr><td class="paramname">sta_passphrase</td><td>New STA password (null-terminated)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success, or an ESP-IDF error code. </dd></dl>
-
-</div>
-</div>
-<a id="ae7c271d8b687dd4f58d78913dcf44d92" name="ae7c271d8b687dd4f58d78913dcf44d92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c271d8b687dd4f58d78913dcf44d92">&#9670;&#160;</a></span>wifi_init_apsta()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void wifi_init_apsta </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>sta_ssid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>sta_password</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ap_ssid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ap_password</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initializes Wi-Fi in AP+STA mode. </p>
-<p>Configures and starts Wi-Fi with:</p><ul>
-<li>Station (STA) mode to connect to an existing network</li>
-<li>Access Point (AP) mode for direct connections</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sta_ssid</td><td>SSID of the station Wi-Fi network </td></tr>
-    <tr><td class="paramname">sta_password</td><td>Password of the station Wi-Fi network </td></tr>
-    <tr><td class="paramname">ap_ssid</td><td>SSID of the local access point </td></tr>
-    <tr><td class="paramname">ap_password</td><td>Password of the local access point </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

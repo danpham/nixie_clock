@@ -111,9 +111,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a680be9097ab3c4a501efe8eb4ad14420" id="r_a680be9097ab3c4a501efe8eb4ad14420"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a680be9097ab3c4a501efe8eb4ad14420">event_bus_publish</a> (<a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a> evt)</td></tr>
 <tr class="memdesc:a680be9097ab3c4a501efe8eb4ad14420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish an event to the Event Bus (blocking).  <br /></td></tr>
 <tr class="separator:a680be9097ab3c4a501efe8eb4ad14420"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c62a02ea5ccfa1ceca2b9e3871eff00" id="r_a4c62a02ea5ccfa1ceca2b9e3871eff00"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a4c62a02ea5ccfa1ceca2b9e3871eff00">event_bus_try_publish</a> (<a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a> evt, TickType_t timeout)</td></tr>
-<tr class="memdesc:a4c62a02ea5ccfa1ceca2b9e3871eff00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish an event to the Event Bus with a timeout.  <br /></td></tr>
-<tr class="separator:a4c62a02ea5ccfa1ceca2b9e3871eff00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1315b1f391a81a900811925941777517" id="r_a1315b1f391a81a900811925941777517"><td class="memItemLeft" align="right" valign="top"><a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a1315b1f391a81a900811925941777517">event_bus_wait</a> (TickType_t timeout)</td></tr>
 <tr class="memdesc:a1315b1f391a81a900811925941777517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the next event from the Event Bus.  <br /></td></tr>
 <tr class="separator:a1315b1f391a81a900811925941777517"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,45 +162,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a4c62a02ea5ccfa1ceca2b9e3871eff00" name="a4c62a02ea5ccfa1ceca2b9e3871eff00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c62a02ea5ccfa1ceca2b9e3871eff00">&#9670;&#160;</a></span>event_bus_try_publish()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool event_bus_try_publish </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a>&#160;</td>
-          <td class="paramname"><em>evt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TickType_t&#160;</td>
-          <td class="paramname"><em>timeout</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Publish an event to the Event Bus with a timeout. </p>
-<p>This function allows publishing an event without blocking indefinitely. It is useful for ISR-safe contexts (when using the ISR variant), or when preventing long stalls is important.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">evt</td><td>The event to publish. </td></tr>
-    <tr><td class="paramname">timeout</td><td>Maximum time to wait in FreeRTOS ticks (0 for non-blocking).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the event was successfully added to the queue, false otherwise (queue full or uninitialized). </dd></dl>
 
 </div>
 </div>

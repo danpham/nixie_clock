@@ -1,8 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"structconfig__t.html#ad23275d4e5211f553b59e8ec0e1468ba":[0,0,1,5],
-"structmy__gpio__btn__t.html":[0,0,2],
-"structmy__gpio__btn__t.html#a026d423340e6e9bd42af6fd20d8f6df0":[0,0,2,5],
 "structmy__gpio__btn__t.html#a10b3ac012e2348f7afb9ecbf44f5afb5":[0,0,2,3],
 "structmy__gpio__btn__t.html#a2dcf914b81c7f04acc534a462eaa8af2":[0,0,2,6],
 "structmy__gpio__btn__t.html#a436dff033c9671aa179ba4b72f0cf971":[0,0,2,2],
@@ -37,13 +34,9 @@ var NAVTREEINDEX1 =
 "webserver_8h_source.html":[1,0,0,0,0,14,1],
 "wifi_8c.html":[1,0,0,0,0,15,0],
 "wifi_8c.html#a0b6e8f56b7e01cd829b0d810b49d19d9":[1,0,0,0,0,15,0,0],
-"wifi_8c.html#ac031e9a13d59bee18791826c081e73ba":[1,0,0,0,0,15,0,1],
-"wifi_8c.html#ae7c271d8b687dd4f58d78913dcf44d92":[1,0,0,0,0,15,0,2],
 "wifi_8h.html":[1,0,0,0,0,15,1],
 "wifi_8h.html#a0b6e8f56b7e01cd829b0d810b49d19d9":[1,0,0,0,0,15,1,2],
 "wifi_8h.html#a8e19d13af09f7ed0afad391730f1e3e7":[1,0,0,0,0,15,1,1],
-"wifi_8h.html#ac031e9a13d59bee18791826c081e73ba":[1,0,0,0,0,15,1,3],
 "wifi_8h.html#ac80c92af8bf29cfe0442a28b6a7ec5a3":[1,0,0,0,0,15,1,0],
-"wifi_8h.html#ae7c271d8b687dd4f58d78913dcf44d92":[1,0,0,0,0,15,1,4],
 "wifi_8h_source.html":[1,0,0,0,0,15,1]
 };

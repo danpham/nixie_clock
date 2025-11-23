@@ -104,9 +104,6 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5f62109c452c0f6ccdd1a84aaf451270" id="r_a5f62109c452c0f6ccdd1a84aaf451270"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ntp_8h.html#a5f62109c452c0f6ccdd1a84aaf451270">ntp_sync_task_start</a> (void)</td></tr>
-<tr class="memdesc:a5f62109c452c0f6ccdd1a84aaf451270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the NTP synchronization task.  <br /></td></tr>
-<tr class="separator:a5f62109c452c0f6ccdd1a84aaf451270"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa503c23e6154eed5daf4e103179cc8f" id="r_aaa503c23e6154eed5daf4e103179cc8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ntp_8h.html#aaa503c23e6154eed5daf4e103179cc8f">ntp_callback</a> (void)</td></tr>
 <tr class="memdesc:aaa503c23e6154eed5daf4e103179cc8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">NTP config callback.  <br /></td></tr>
 <tr class="separator:aaa503c23e6154eed5daf4e103179cc8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,27 +127,6 @@ Functions</h2></td></tr>
 
 <p>NTP config callback. </p>
 <p>Reads the latest configuration and starts or stops the NTP synchronization task depending on the <code>ntp</code> parameter. Ensures NTP is not re-started or re-stopped unnecessarily. </p>
-
-</div>
-</div>
-<a id="a5f62109c452c0f6ccdd1a84aaf451270" name="a5f62109c452c0f6ccdd1a84aaf451270"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f62109c452c0f6ccdd1a84aaf451270">&#9670;&#160;</a></span>ntp_sync_task_start()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ntp_sync_task_start </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Start the NTP synchronization task. </p>
-<p>Creates the semaphore and FreeRTOS task to initialize SNTP. Logs error if the task is already running or creation fails. </p>
 
 </div>
 </div>
