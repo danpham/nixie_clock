@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nixie clock: software/nixie_clock_esp32_project/main/clock_task.h Source File</title>
+<title>Nixie clock: software/nixie_clock_esp32_project/components/clock_task/clock_task.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -133,17 +133,17 @@ $(document).ready(function(){initNavTree('clock__task_8h_source.html',''); initR
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="clock__task_8h.html#a892bba71ed375b6bd9a120d93aaf7079">clock_update_from_config_callback</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif </span><span class="comment">// CLOCK_TASK_H</span></div>
-<div class="ttc" id="aclock__task_8h_html_a04081f52f2f0b15397b8ad3164904217"><div class="ttname"><a href="clock__task_8h.html#a04081f52f2f0b15397b8ad3164904217">clockUpdateQueue</a></div><div class="ttdeci">QueueHandle_t clockUpdateQueue</div><div class="ttdef"><b>Definition</b> clock_task.c:33</div></div>
-<div class="ttc" id="aclock__task_8h_html_a10a05bbfb3403bbdc41cc313b271d3d9"><div class="ttname"><a href="clock__task_8h.html#a10a05bbfb3403bbdc41cc313b271d3d9">clock_ntp_config_callback</a></div><div class="ttdeci">void clock_ntp_config_callback(void)</div><div class="ttdoc">Apply time update from NTP.</div><div class="ttdef"><b>Definition</b> clock_task.c:233</div></div>
-<div class="ttc" id="aclock__task_8h_html_a300c8c8bbdade4cd145ab28a8a68c69c"><div class="ttname"><a href="clock__task_8h.html#a300c8c8bbdade4cd145ab28a8a68c69c">clock_update_with_menu_callback</a></div><div class="ttdeci">void clock_update_with_menu_callback(void)</div><div class="ttdoc">Update clock menu/UI on user input.</div><div class="ttdef"><b>Definition</b> clock_task.c:255</div></div>
-<div class="ttc" id="aclock__task_8h_html_a8349428656791032e2e00dd13cc5bacc"><div class="ttname"><a href="clock__task_8h.html#a8349428656791032e2e00dd13cc5bacc">clock_task_start</a></div><div class="ttdeci">void clock_task_start(void)</div><div class="ttdoc">Start the clock task and initialize the update queue.</div><div class="ttdef"><b>Definition</b> clock_task.c:211</div></div>
-<div class="ttc" id="aclock__task_8h_html_a892bba71ed375b6bd9a120d93aaf7079"><div class="ttname"><a href="clock__task_8h.html#a892bba71ed375b6bd9a120d93aaf7079">clock_update_from_config_callback</a></div><div class="ttdeci">void clock_update_from_config_callback(void)</div><div class="ttdoc">Update clock state from configuration.</div><div class="ttdef"><b>Definition</b> clock_task.c:281</div></div>
+<div class="ttc" id="aclock__task_8h_html_a04081f52f2f0b15397b8ad3164904217"><div class="ttname"><a href="clock__task_8h.html#a04081f52f2f0b15397b8ad3164904217">clockUpdateQueue</a></div><div class="ttdeci">QueueHandle_t clockUpdateQueue</div><div class="ttdef"><b>Definition</b> clock_task.c:35</div></div>
+<div class="ttc" id="aclock__task_8h_html_a10a05bbfb3403bbdc41cc313b271d3d9"><div class="ttname"><a href="clock__task_8h.html#a10a05bbfb3403bbdc41cc313b271d3d9">clock_ntp_config_callback</a></div><div class="ttdeci">void clock_ntp_config_callback(void)</div><div class="ttdoc">Apply time update from NTP.</div><div class="ttdef"><b>Definition</b> clock_task.c:235</div></div>
+<div class="ttc" id="aclock__task_8h_html_a300c8c8bbdade4cd145ab28a8a68c69c"><div class="ttname"><a href="clock__task_8h.html#a300c8c8bbdade4cd145ab28a8a68c69c">clock_update_with_menu_callback</a></div><div class="ttdeci">void clock_update_with_menu_callback(void)</div><div class="ttdoc">Update clock menu/UI on user input.</div><div class="ttdef"><b>Definition</b> clock_task.c:257</div></div>
+<div class="ttc" id="aclock__task_8h_html_a8349428656791032e2e00dd13cc5bacc"><div class="ttname"><a href="clock__task_8h.html#a8349428656791032e2e00dd13cc5bacc">clock_task_start</a></div><div class="ttdeci">void clock_task_start(void)</div><div class="ttdoc">Start the clock task and initialize the update queue.</div><div class="ttdef"><b>Definition</b> clock_task.c:213</div></div>
+<div class="ttc" id="aclock__task_8h_html_a892bba71ed375b6bd9a120d93aaf7079"><div class="ttname"><a href="clock__task_8h.html#a892bba71ed375b6bd9a120d93aaf7079">clock_update_from_config_callback</a></div><div class="ttdeci">void clock_update_from_config_callback(void)</div><div class="ttdoc">Update clock state from configuration.</div><div class="ttdef"><b>Definition</b> clock_task.c:283</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_c8fa76d8dc1b9e06ff8aeb3121608b1b.html">software</a></li><li class="navelem"><a class="el" href="dir_4e80761515fcd0d8a8682b4ebda49685.html">nixie_clock_esp32_project</a></li><li class="navelem"><a class="el" href="dir_9893f083cf503bf028f3909b7ee1aca3.html">main</a></li><li class="navelem"><a class="el" href="clock__task_8h.html">clock_task.h</a></li>
+    <li class="navelem"><a class="el" href="dir_c8fa76d8dc1b9e06ff8aeb3121608b1b.html">software</a></li><li class="navelem"><a class="el" href="dir_4e80761515fcd0d8a8682b4ebda49685.html">nixie_clock_esp32_project</a></li><li class="navelem"><a class="el" href="dir_b181baf956279f894a730e459ce47bc5.html">components</a></li><li class="navelem"><a class="el" href="dir_2f8bb0b9567c99dc8a53f1db54ef1a1c.html">clock_task</a></li><li class="navelem"><a class="el" href="clock__task_8h.html">clock_task.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

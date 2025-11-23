@@ -1,13 +1,11 @@
 <map id="software/nixie_clock_esp32_project/components/nvs/nvs.c" name="software/nixie_clock_esp32_project/components/nvs/nvs.c">
-<area shape="rect" id="Node000001" title=" " alt="" coords="108,5,312,60"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="59,5,263,60"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,108,89,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,62,82,104,80,99,159,58"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,62,75,102,72,97,124,58"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="113,108,208,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,61,177,97,172,95,193,59"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,60,163,94,158,94,158,60"/>
 <area shape="rect" id="Node000004" href="$nvs_8h.html" title=" " alt="" coords="232,108,289,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="228,59,249,95,244,97,223,61"/>
-<area shape="rect" id="Node000006" href="$esp__stub_8h.html" title=" " alt="" coords="313,108,467,133"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="266,58,355,100,353,105,264,62"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="193,58,238,97,235,101,189,62"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="220,181,301,207"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="263,134,263,168,258,168,258,134"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="software/nixie_clock_esp32_project/components/display" name="software/nixie_clock_esp32_project/components/display">
 <area shape="rect" id="node1" href="dir_fb7d8fb2e7a81481fd306fa505fa505b.html" title="hv5622" alt="" coords="31,125,102,151"/>
 <area shape="rect" id="node2" href="dir_25afab11bb9cc6587024a85a8f095e2f.html" title="display" alt="" coords="32,52,101,77"/>
-<area shape="poly" id="edge1" href="dir_000004_000007.html" alt="" coords="69,78,69,112,64,112,64,78"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000004_000007.html" title="1" alt="" coords="70,100,80,114"/>
+<area shape="poly" id="edge1" href="dir_000005_000009.html" alt="" coords="69,78,69,112,64,112,64,78"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000005_000009.html" title="1" alt="" coords="70,100,80,114"/>
 <area shape="rect" id="clust1" href="dir_b181baf956279f894a730e459ce47bc5.html" title="components" alt="" coords="16,16,119,161"/>
 </map>
