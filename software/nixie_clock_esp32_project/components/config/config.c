@@ -168,7 +168,7 @@ esp_err_t config_save(void)
             event_bus_publish(EVT_WIFI_CONFIG);
         }
         /* If no ntp sync, use clock from web ui */
-        if (cfg.ntp == 0) {
+        if (cfg.ntp == 0U) {
             event_bus_publish(EVT_CLOCK_WEB_CONFIG);
         }
 
