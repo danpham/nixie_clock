@@ -8,7 +8,6 @@
 #include "esp_log.h"
 #include "config.h"
 #include "nvs.h"
-#include "../clock_task/clock_task.h"
 #include "../event_bus/event_bus.h"
 
 /******************************************************************
