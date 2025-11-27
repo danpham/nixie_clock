@@ -1,16 +1,13 @@
 <map id="software/nixie_clock_esp32_project/components/config" name="software/nixie_clock_esp32_project/components/config">
-<area shape="rect" id="node1" href="dir_2f8bb0b9567c99dc8a53f1db54ef1a1c.html" title="clock_task" alt="" coords="27,125,117,151"/>
-<area shape="rect" id="node2" href="dir_3df67f4185c8cd9c27353f35f3bf503b.html" title="event_bus" alt="" coords="142,125,231,151"/>
-<area shape="rect" id="node3" href="dir_a13c4c485bb1701984d244429ad4ded1.html" title="clock" alt="" coords="256,125,312,151"/>
-<area shape="rect" id="node4" href="dir_d593a792f6d68ad3cd00089cda4c9fbf.html" title="nvs" alt="" coords="336,125,381,151"/>
-<area shape="rect" id="node5" href="dir_6591a8ca0b1ec78afa747e232353e174.html" title="config" alt="" coords="204,52,265,77"/>
-<area shape="poly" id="edge1" href="dir_000003_000001.html" alt="" coords="210,80,112,122,110,117,207,75"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000003_000001.html" title="1" alt="" coords="114,118,123,133"/>
-<area shape="poly" id="edge2" href="dir_000003_000006.html" alt="" coords="229,79,204,116,200,113,225,76"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000003_000006.html" title="1" alt="" coords="207,108,216,122"/>
-<area shape="poly" id="edge3" href="dir_000003_000000.html" alt="" coords="245,76,270,113,266,116,241,79"/>
-<area shape="rect" id="edge3-headlabel" href="dir_000003_000000.html" title="1" alt="" coords="268,98,277,113"/>
-<area shape="poly" id="edge4" href="dir_000003_000013.html" alt="" coords="256,75,328,116,325,121,253,80"/>
-<area shape="rect" id="edge4-headlabel" href="dir_000003_000013.html" title="1" alt="" coords="322,101,331,116"/>
-<area shape="rect" id="clust1" href="dir_b181baf956279f894a730e459ce47bc5.html" title="components" alt="" coords="16,16,392,161"/>
+<area shape="rect" id="node1" href="dir_3df67f4185c8cd9c27353f35f3bf503b.html" title="event_bus" alt="" coords="27,125,117,151"/>
+<area shape="rect" id="node2" href="dir_a13c4c485bb1701984d244429ad4ded1.html" title="clock" alt="" coords="141,125,197,151"/>
+<area shape="rect" id="node3" href="dir_d593a792f6d68ad3cd00089cda4c9fbf.html" title="nvs" alt="" coords="221,125,267,151"/>
+<area shape="rect" id="node4" href="dir_6591a8ca0b1ec78afa747e232353e174.html" title="config" alt="" coords="139,52,200,77"/>
+<area shape="poly" id="edge1" href="dir_000003_000006.html" alt="" coords="155,80,101,119,98,115,152,75"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000003_000006.html" title="1" alt="" coords="103,114,112,129"/>
+<area shape="poly" id="edge2" href="dir_000003_000000.html" alt="" coords="172,78,172,112,167,112,167,78"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000003_000000.html" title="1" alt="" coords="173,100,182,114"/>
+<area shape="poly" id="edge3" href="dir_000003_000013.html" alt="" coords="183,75,224,114,220,118,179,79"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000003_000013.html" title="1" alt="" coords="220,99,229,114"/>
+<area shape="rect" id="clust1" href="dir_b181baf956279f894a730e459ce47bc5.html" title="components" alt="" coords="16,16,277,161"/>
 </map>
