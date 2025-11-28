@@ -1,10 +1,9 @@
 var gpio__driver_8h =
 [
     [ "my_gpio_btn_t", "structmy__gpio__btn__t.html", "structmy__gpio__btn__t" ],
-    [ "button_press_t", "gpio__driver_8h.html#a938ac2e87c26f32314b1e4a7dc93a405", [
-      [ "BUTTON_SHORT_PRESS", "gpio__driver_8h.html#a938ac2e87c26f32314b1e4a7dc93a405a36df9c74cf1f01e5e62f7b168d8eeefa", null ],
-      [ "BUTTON_LONG_PRESS", "gpio__driver_8h.html#a938ac2e87c26f32314b1e4a7dc93a405a715fc4cab7737790378e4c326ca499e7", null ]
-    ] ],
+    [ "BUTTON_LONG_PRESS", "gpio__driver_8h.html#acc7228308bca711ea7b42fcc82dc09ce", null ],
+    [ "BUTTON_SHORT_PRESS", "gpio__driver_8h.html#a82001652e9ac5ae4148b1c2ff659908b", null ],
+    [ "button_press_t", "gpio__driver_8h.html#a5cf995207feb3f3de79c0358bd491082", null ],
     [ "button_state_t", "gpio__driver_8h.html#a7bb8494816c8065ae6ff0eeb548a5896", [
       [ "BUTTON_STATE_RELEASE", "gpio__driver_8h.html#a7bb8494816c8065ae6ff0eeb548a5896a19459227756c468875383e570211e2e5", null ],
       [ "BUTTON_STATE_PRESS", "gpio__driver_8h.html#a7bb8494816c8065ae6ff0eeb548a5896aff3df3165a5f10516a8f0ee54b97befa", null ]

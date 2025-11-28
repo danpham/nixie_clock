@@ -90,7 +90,8 @@ $(document).ready(function(){initNavTree('rotary__encoder_8h.html',''); initResi
 
 <div class="header">
   <div class="summary">
-<a href="#enum-members">Enumerations</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">rotary_encoder.h File Reference</div></div>
 </div><!--header-->
@@ -103,39 +104,97 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="rotary__encoder_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a85dd5448c39a3bc16e5b24c50189c397" id="r_a85dd5448c39a3bc16e5b24c50189c397"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397">rotary_encoder_event_t</a> { <a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397ad39e2cdba64ccb1e06a637fb02019051">ROTARY_ENCODER_EVENT_INCREMENT</a> = 0U
-, <a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397ad03b37536a902b1b5a3e8b3a426b4ccb">ROTARY_ENCODER_EVENT_DECREMENT</a> = 1U
-, <a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397a159ecac97284d8f51f7236e5369c9672">ROTARY_ENCODER_EVENT_NONE</a> = 2U
-, <a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397aaf38277051c13b096d5b5545f2c54097">ROTARY_ENCODER_EVENT_COUNT</a> = 3U
- }</td></tr>
-<tr class="separator:a85dd5448c39a3bc16e5b24c50189c397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a8629f58ff7ce9210b72f556e2fd398cb" id="r_a8629f58ff7ce9210b72f556e2fd398cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#a8629f58ff7ce9210b72f556e2fd398cb">ROTARY_ENCODER_EVENT_INCREMENT</a>&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)0U)</td></tr>
+<tr class="separator:a8629f58ff7ce9210b72f556e2fd398cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46addfe3b651b3d6fc4bb4d5fe53dbbd" id="r_a46addfe3b651b3d6fc4bb4d5fe53dbbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#a46addfe3b651b3d6fc4bb4d5fe53dbbd">ROTARY_ENCODER_EVENT_DECREMENT</a>&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)1U)</td></tr>
+<tr class="separator:a46addfe3b651b3d6fc4bb4d5fe53dbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5580beb60e60d4928b663f071f8850c" id="r_ac5580beb60e60d4928b663f071f8850c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#ac5580beb60e60d4928b663f071f8850c">ROTARY_ENCODER_EVENT_NONE</a>&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)2U)</td></tr>
+<tr class="separator:ac5580beb60e60d4928b663f071f8850c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace78491e32b7eb5cb1a2a4efe17094bd" id="r_ace78491e32b7eb5cb1a2a4efe17094bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#ace78491e32b7eb5cb1a2a4efe17094bd">ROTARY_ENCODER_EVENT_COUNT</a>&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)3U)</td></tr>
+<tr class="separator:ace78491e32b7eb5cb1a2a4efe17094bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a2d7a4c16c7ac0a1ea6dff10bf88ae613" id="r_a2d7a4c16c7ac0a1ea6dff10bf88ae613"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a></td></tr>
+<tr class="separator:a2d7a4c16c7ac0a1ea6dff10bf88ae613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a62f77a5a27c557fd020aa6b14eea3ca0" id="r_a62f77a5a27c557fd020aa6b14eea3ca0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397">rotary_encoder_event_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#a62f77a5a27c557fd020aa6b14eea3ca0">process_rotary_encoder</a> (uint8_t lastA, uint8_t lastB, uint8_t currentA, uint8_t currentB)</td></tr>
+<tr class="memitem:a62f77a5a27c557fd020aa6b14eea3ca0" id="r_a62f77a5a27c557fd020aa6b14eea3ca0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotary__encoder_8h.html#a62f77a5a27c557fd020aa6b14eea3ca0">process_rotary_encoder</a> (uint8_t lastA, uint8_t lastB, uint8_t currentA, uint8_t currentB)</td></tr>
 <tr class="memdesc:a62f77a5a27c557fd020aa6b14eea3ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the rotary encoder event.  <br /></td></tr>
 <tr class="separator:a62f77a5a27c557fd020aa6b14eea3ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a85dd5448c39a3bc16e5b24c50189c397" name="a85dd5448c39a3bc16e5b24c50189c397"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85dd5448c39a3bc16e5b24c50189c397">&#9670;&#160;</a></span>rotary_encoder_event_t</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ace78491e32b7eb5cb1a2a4efe17094bd" name="ace78491e32b7eb5cb1a2a4efe17094bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace78491e32b7eb5cb1a2a4efe17094bd">&#9670;&#160;</a></span>ROTARY_ENCODER_EVENT_COUNT</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397">rotary_encoder_event_t</a></td>
+          <td class="memname">#define ROTARY_ENCODER_EVENT_COUNT&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)3U)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a85dd5448c39a3bc16e5b24c50189c397ad39e2cdba64ccb1e06a637fb02019051" name="a85dd5448c39a3bc16e5b24c50189c397ad39e2cdba64ccb1e06a637fb02019051"></a>ROTARY_ENCODER_EVENT_INCREMENT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a85dd5448c39a3bc16e5b24c50189c397ad03b37536a902b1b5a3e8b3a426b4ccb" name="a85dd5448c39a3bc16e5b24c50189c397ad03b37536a902b1b5a3e8b3a426b4ccb"></a>ROTARY_ENCODER_EVENT_DECREMENT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a85dd5448c39a3bc16e5b24c50189c397a159ecac97284d8f51f7236e5369c9672" name="a85dd5448c39a3bc16e5b24c50189c397a159ecac97284d8f51f7236e5369c9672"></a>ROTARY_ENCODER_EVENT_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a85dd5448c39a3bc16e5b24c50189c397aaf38277051c13b096d5b5545f2c54097" name="a85dd5448c39a3bc16e5b24c50189c397aaf38277051c13b096d5b5545f2c54097"></a>ROTARY_ENCODER_EVENT_COUNT&#160;</td><td class="fielddoc"></td></tr>
-</table>
+
+</div>
+</div>
+<a id="a46addfe3b651b3d6fc4bb4d5fe53dbbd" name="a46addfe3b651b3d6fc4bb4d5fe53dbbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46addfe3b651b3d6fc4bb4d5fe53dbbd">&#9670;&#160;</a></span>ROTARY_ENCODER_EVENT_DECREMENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ROTARY_ENCODER_EVENT_DECREMENT&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)1U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8629f58ff7ce9210b72f556e2fd398cb" name="a8629f58ff7ce9210b72f556e2fd398cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8629f58ff7ce9210b72f556e2fd398cb">&#9670;&#160;</a></span>ROTARY_ENCODER_EVENT_INCREMENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ROTARY_ENCODER_EVENT_INCREMENT&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)0U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5580beb60e60d4928b663f071f8850c" name="ac5580beb60e60d4928b663f071f8850c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5580beb60e60d4928b663f071f8850c">&#9670;&#160;</a></span>ROTARY_ENCODER_EVENT_NONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ROTARY_ENCODER_EVENT_NONE&#160;&#160;&#160;((<a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a>)2U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a2d7a4c16c7ac0a1ea6dff10bf88ae613" name="a2d7a4c16c7ac0a1ea6dff10bf88ae613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d7a4c16c7ac0a1ea6dff10bf88ae613">&#9670;&#160;</a></span>rotary_encoder_event_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t <a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -147,7 +206,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="rotary__encoder_8h.html#a85dd5448c39a3bc16e5b24c50189c397">rotary_encoder_event_t</a> process_rotary_encoder </td>
+          <td class="memname"><a class="el" href="rotary__encoder_8h.html#a2d7a4c16c7ac0a1ea6dff10bf88ae613">rotary_encoder_event_t</a> process_rotary_encoder </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>lastA</em>, </td>

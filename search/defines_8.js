@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['uart_5fbaud_5frate_0',['UART_BAUD_RATE',['../uart_8h.html#a615aed21aa6825462b7c17b0c238ffe2',1,'uart.h']]],
-  ['uart_5fbuf_5fsize_1',['UART_BUF_SIZE',['../uart_8h.html#ab0249d81dd53336b7810ebcf29511210',1,'uart.h']]],
-  ['uart_5fport_2',['UART_PORT',['../uart_8h.html#aa7a5950d998e44d87137de0780bd0af3',1,'uart.h']]],
-  ['uart_5frx_5fpin_3',['UART_RX_PIN',['../uart_8h.html#aa37eca6fe61f6938d925975dff27c8fd',1,'uart.h']]],
-  ['uart_5ftx_5fpin_4',['UART_TX_PIN',['../uart_8h.html#a6c82a6844388a551e8f06d249598989e',1,'uart.h']]]
+  ['rotary_5fencoder_5fevent_5fcount_0',['ROTARY_ENCODER_EVENT_COUNT',['../rotary__encoder_8h.html#ace78491e32b7eb5cb1a2a4efe17094bd',1,'rotary_encoder.h']]],
+  ['rotary_5fencoder_5fevent_5fdecrement_1',['ROTARY_ENCODER_EVENT_DECREMENT',['../rotary__encoder_8h.html#a46addfe3b651b3d6fc4bb4d5fe53dbbd',1,'rotary_encoder.h']]],
+  ['rotary_5fencoder_5fevent_5fincrement_2',['ROTARY_ENCODER_EVENT_INCREMENT',['../rotary__encoder_8h.html#a8629f58ff7ce9210b72f556e2fd398cb',1,'rotary_encoder.h']]],
+  ['rotary_5fencoder_5fevent_5fnone_3',['ROTARY_ENCODER_EVENT_NONE',['../rotary__encoder_8h.html#ac5580beb60e60d4928b663f071f8850c',1,'rotary_encoder.h']]]
 ];
