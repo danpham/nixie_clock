@@ -36,7 +36,7 @@ static myclock_t clk;
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
-static void clock_menu(myclock_t *clk);
+static void clock_menu(myclock_t *clk, uint8_t* payload, uint8_t size);
 static void clock_task(void *arg);
 
 /******************************************************************
@@ -131,7 +131,7 @@ static void clock_task(void *arg) {
 /**
  * @brief Handle clock configuration menu.
  *
- * Reads button and rotary encoder events from buttonQueue and
+ * Reads button and rotary encoder events from event bus and
  * updates the clock structure accordingly.
  *
  * Menu states:
@@ -140,13 +140,19 @@ static void clock_task(void *arg) {
  * - CLOCK_MENU_CONFIGURE_HOURS: adjust hours
  *
  * @param[in,out] clk Pointer to the clock structure.
+ * @param[in] payload Pointer to event data buffer.
+ * @param[in] size Size of the payload in bytes.
  */
-void clock_menu(myclock_t *clk)
+void clock_menu(myclock_t *clk, uint8_t* payload, uint8_t size)
 {
     button_event_t event;
 
-    if (xQueueReceive(buttonQueue, &event, 0) == pdTRUE) {
+    if ((payload != NULL) && (size == sizeof(event))) {
         static uint8_t state = CLOCK_MENU_CLOCK;
+        event.id = payload[0];
+        event.pressed = payload[1];
+        event.updateValue = payload[2];
+
         switch (state) {
             case CLOCK_MENU_CLOCK:
                 if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
@@ -233,7 +239,7 @@ void clock_ntp_config_callback(uint8_t* payload, uint8_t size)
         clock_init(&clk, clockUpdate.hours, clockUpdate.minutes, clockUpdate.seconds);
     }
     else {
-        ESP_LOGW(CLOCK_TASK_TAG, "Invalid NTP payload or queue not initialized");
+        ESP_LOGW(CLOCK_TASK_TAG, "Invalid NTP payload");
     }
 }
 
@@ -246,8 +252,6 @@ void clock_ntp_config_callback(uint8_t* payload, uint8_t size)
  */
 void clock_update_with_menu_callback(uint8_t* payload, uint8_t size)
 {
-    (void)payload;
-    (void)size;
     esp_err_t result = ESP_OK;
     config_t config;
 
@@ -257,7 +261,7 @@ void clock_update_with_menu_callback(uint8_t* payload, uint8_t size)
         
         /* If no NTP sync */
         if (config.ntp == 0U) {
-            clock_menu(&clk);
+            clock_menu(&clk, payload, size);
         }
     }
     else {

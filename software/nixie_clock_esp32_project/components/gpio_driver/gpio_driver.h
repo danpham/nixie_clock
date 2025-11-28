@@ -10,6 +10,9 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+typedef uint8_t button_press_t;
+#define BUTTON_SHORT_PRESS   ((button_press_t)0U)
+#define BUTTON_LONG_PRESS    ((button_press_t)1U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -18,11 +21,6 @@ typedef enum {
     BUTTON_STATE_RELEASE  = 0,
     BUTTON_STATE_PRESS = 1
 } button_state_t;
-
-typedef enum {
-    BUTTON_SHORT_PRESS = 0,
-    BUTTON_LONG_PRESS  = 1
-} button_press_t;
 
 // Pull-up / Pull-down enum
 typedef enum {

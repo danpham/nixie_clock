@@ -63,7 +63,7 @@ static void timestamp_to_hms(uint32_t timestamp, myclock_t *clock)
  * @brief Callback invoked on SNTP time update.
  *
  * Converts the SNTP timestamp to hours, minutes, and seconds,
- * then sends it to the `clockUpdateQueue`. Logs warning if queue is full.
+ * then sends it to the event bus.
  *
  * @param tv Pointer to timeval struct containing the synchronized time.
  */

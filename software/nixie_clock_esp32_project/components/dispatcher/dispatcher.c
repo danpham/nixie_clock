@@ -62,7 +62,7 @@ static void dispatcher_task(void *arg)
       /* Call all callbacks subscribed to this event */
       for(int i = 0; i < subscriber_count; i++)
       {
-          if(subscribers[i].evt_type == evt_message.type)
+          if (subscribers[i].evt_type == evt_message.type)
           {
               if(subscribers[i].cb != NULL) {
                   subscribers[i].cb(evt_message.payload, evt_message.payload_size);

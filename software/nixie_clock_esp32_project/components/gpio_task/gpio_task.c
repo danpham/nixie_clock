@@ -23,7 +23,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-QueueHandle_t buttonQueue;
 static const char GPIO_TASK_TAG[] = "GPIO_TASK";
 
 /******************************************************************
@@ -40,7 +39,7 @@ static void gpio_task(void *arg);
  *
  * Initializes buttons and rotary encoder GPIOs, then loops:
  * - Reads rotary switch and encoder pins
- * - Detects state changes and sends events to buttonQueue
+ * - Detects state changes and sends events to event bus
  * - Logs actions for debugging
  *
  * @param[in] arg Task argument (unused)
@@ -66,11 +65,10 @@ static void gpio_task(void *arg)
         .pull = MY_GPIO_PULL_NONE,
         .debounce_ms = 50
     };
-    button_event_t event;
+
     int8_t state_last_rotaryChanA = 0;
     int8_t state_last_rotaryChanB = 0;
     button_state_t state_last_rotarySwitch = 0;
-    bool gpio_update = false;
 
     if (my_gpio_init(&rotaryEncoderSwitch) != ESP_OK) {
         ESP_LOGE(GPIO_TASK_TAG, "Failed to initialize rotaryEncoderSwitch!");
@@ -96,21 +94,22 @@ static void gpio_task(void *arg)
         state_rotarySwitch = (int8_t)my_gpio_read_btn(&rotaryEncoderSwitch);
 
         /* Avoid sending event when no changes */
-        if (state_last_rotarySwitch != state_rotarySwitch){
-            event.id = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
-            event.pressed = rotaryEncoderSwitch.press_type;
-            if (buttonQueue != NULL) {
-                xQueueSend(buttonQueue, &event, 0);
-                gpio_update = true;
-                if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
-                    ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
-                } else {
-                    ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
-                }
+        if (state_last_rotarySwitch != state_rotarySwitch) {
+
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_CLOCK_GPIO_CONFIG;
+            evt_message.payload_size = 3U;
+            evt_message.payload[0] = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
+            evt_message.payload[1] = rotaryEncoderSwitch.press_type;
+            evt_message.payload[2] = 0U;
+            event_bus_publish(evt_message);
+
+            if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
+                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
+            } else {
+                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
             }
-            else {
-                ESP_LOGW(GPIO_TASK_TAG, "buttonQueue not initialized");
-            }
+
             state_last_rotarySwitch = state_rotarySwitch;
         }
 
@@ -118,56 +117,36 @@ static void gpio_task(void *arg)
         int8_t state_rotaryChanB = (int8_t)my_gpio_read_btn(&rotaryEncoderChanB);
         rotary_encoder_event_t ev = process_rotary_encoder(state_last_rotaryChanA, state_last_rotaryChanB, state_rotaryChanA, state_rotaryChanB);
         if (ev != ROTARY_ENCODER_EVENT_NONE) {
-            event.id = (buttons_type_t)BUTTON_ROTARY_ENCODER;
-            event.updateValue = (uint8_t)ev;
-            if (buttonQueue != NULL) {
-                xQueueSend(buttonQueue, &event, 0);
-                gpio_update = true;
-            }
-            else {
-               ESP_LOGW(GPIO_TASK_TAG, "buttonQueue not initialized");
-            }
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_CLOCK_GPIO_CONFIG;
+            evt_message.payload_size = 3U;
+            evt_message.payload[0] = (buttons_type_t)BUTTON_ROTARY_ENCODER;
+            evt_message.payload[1] = 0U;
+            evt_message.payload[2] = (uint8_t)ev;
+            event_bus_publish(evt_message);
 
             ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
         }
         state_last_rotaryChanA = state_rotaryChanA;
         state_last_rotaryChanB = state_rotaryChanB;
 
-        /* At least one io has been modified, send an event */
-        if (gpio_update == true) {
-            event_bus_message_t evt_message;
-            evt_message.type = EVT_CLOCK_GPIO_CONFIG;
-            evt_message.payload_size = 0U;
-            event_bus_publish(evt_message);
-            gpio_update = false;
-        }
-
-        vTaskDelay(pdMS_TO_TICKS(5)); // Loop every 5 ms
+        vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
 
 /**
- * @brief Start the GPIO task and create the button queue.
+ * @brief Start the GPIO task.
  *
- * Creates a FreeRTOS queue to send button and rotary encoder events,
- * then starts the `gpio_task`.
- *
- * @note If queue creation fails, the task is not started.
+ * Starts the `gpio_task`.
  */
 void gpio_task_start(void)
 {
-    /* Create queue: 10 events max, each of size button_event_t */
-    buttonQueue = xQueueCreate(10, sizeof(button_event_t));
-    if (buttonQueue == NULL) {
-        ESP_LOGE(GPIO_TASK_TAG, "Failed to create button queue!");
-    } else {
-        xTaskCreate(
-            gpio_task,     /* Task function */
-            "gpio_task",   /* Task name (for debugging) */
-            configMINIMAL_STACK_SIZE, /* Stack size in bytes */
-            NULL,          /* Parameter passed to the task */
-            3U,            /* Task priority */
-            NULL           /* Task handle (optional) */
-        );
-    }
+    xTaskCreate(
+        gpio_task,     /* Task function */
+        "gpio_task",   /* Task name (for debugging) */
+        configMINIMAL_STACK_SIZE, /* Stack size in bytes */
+        NULL,          /* Parameter passed to the task */
+        3U,            /* Task priority */
+        NULL           /* Task handle (optional) */
+    );
 }

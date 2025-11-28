@@ -12,16 +12,14 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+typedef uint8_t buttons_type_t;
+#define BUTTON_ROTARY_SWITCH_1   ((buttons_type_t)0U)
+#define BUTTON_ROTARY_ENCODER    ((buttons_type_t)1U)
+#define BUTTON_COUNT             ((buttons_type_t)2U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
-typedef enum buttons_type_e {
-    BUTTON_ROTARY_SWITCH_1 = 0U,
-    BUTTON_ROTARY_ENCODER = 1U,
-    BUTTON_COUNT = 2U
-} buttons_type_t;
-
 /* Event struct shared between tasks */
 typedef struct {
     buttons_type_t id;
