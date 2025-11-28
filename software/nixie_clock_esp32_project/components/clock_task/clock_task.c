@@ -225,9 +225,9 @@ void clock_ntp_config_callback(uint8_t* payload, uint8_t size)
     (void)size;
 
     /* Update with NTP */
-    if ((payload != NULL) && (size == sizeof(myclock_t)))
-    {
-        myclock_t *upd = (myclock_t *)payload;
+    const myclock_t *upd = NULL;
+    if ((payload != NULL) && (size == sizeof(upd))) {
+        upd = (myclock_t *)payload;
         clock_init(&clk, upd->hours, upd->minutes, upd->seconds);
     }
     else {

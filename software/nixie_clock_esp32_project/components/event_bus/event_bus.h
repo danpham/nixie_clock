@@ -10,7 +10,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define EVENT_BUS_MAX_PAYLOAD_SIZE   32
+#define EVENT_BUS_MAX_PAYLOAD_SIZE   32U
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)

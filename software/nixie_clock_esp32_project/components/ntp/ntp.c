@@ -9,7 +9,6 @@
 #include "esp_netif_sntp.h"
 #include "esp_log.h"
 #include "../clock/clock.h"
-#include "../clock_task/clock_task.h"
 #include "ntp.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
@@ -84,7 +83,7 @@ static void time_sync_notification_cb(struct timeval *tv)
         if(copy_size > EVENT_BUS_MAX_PAYLOAD_SIZE) {
             copy_size = EVENT_BUS_MAX_PAYLOAD_SIZE;
         }
-        memcpy(evt_message.payload, &clockUpdate, copy_size);
+        (void)memcpy(evt_message.payload, &clockUpdate, copy_size);
 
         evt_message.type = EVT_CLOCK_NTP_CONFIG;
         evt_message.payload_size = 0U;
