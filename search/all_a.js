@@ -4,7 +4,7 @@ var searchData=
   ['ntp_1',['ntp',['../structconfig__t.html#a0b2f40648c9fcb1c09c64ee831985eb2',1,'config_t']]],
   ['ntp_2ec_2',['ntp.c',['../ntp_8c.html',1,'']]],
   ['ntp_2eh_3',['ntp.h',['../ntp_8h.html',1,'']]],
-  ['ntp_5fcallback_4',['ntp_callback',['../ntp_8c.html#aaa503c23e6154eed5daf4e103179cc8f',1,'ntp_callback(void):&#160;ntp.c'],['../ntp_8h.html#aaa503c23e6154eed5daf4e103179cc8f',1,'ntp_callback(void):&#160;ntp.c']]],
+  ['ntp_5fcallback_4',['ntp_callback',['../ntp_8c.html#a398aa1f1efb104064f9982ad5827d236',1,'ntp_callback(uint8_t *payload, uint8_t size):&#160;ntp.c'],['../ntp_8h.html#a398aa1f1efb104064f9982ad5827d236',1,'ntp_callback(uint8_t *payload, uint8_t size):&#160;ntp.c']]],
   ['ntp_5finterval_5fms_5',['NTP_INTERVAL_MS',['../ntp_8c.html#af2b19ce63cfc1d64870309cd60103e6d',1,'ntp.c']]],
   ['ntp_5fwait_5fwifi_5fms_6',['NTP_WAIT_WIFI_MS',['../ntp_8c.html#acb415b5af967afd681b9413a60fb4d63',1,'ntp.c']]],
   ['nvs_2ec_7',['nvs.c',['../nvs_8c.html',1,'']]],

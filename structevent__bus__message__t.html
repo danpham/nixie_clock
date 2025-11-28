@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nixie clock: software/nixie_clock_esp32_project/components/ntp/ntp.h File Reference</title>
+<title>Nixie clock: event_bus_message_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('ntp_8h.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structevent__bus__message__t.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,62 +90,75 @@ $(document).ready(function(){initNavTree('ntp_8h.html',''); initResizable(); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">ntp.h File Reference</div></div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structevent__bus__message__t-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">event_bus_message_t Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="ntp_8h__dep__incl.svg" width="446" height="168"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
-<p><a href="ntp_8h_source.html">Go to the source code of this file.</a></p>
+
+<p><code>#include &lt;<a class="el" href="event__bus_8h_source.html">event_bus.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a398aa1f1efb104064f9982ad5827d236" id="r_a398aa1f1efb104064f9982ad5827d236"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ntp_8h.html#a398aa1f1efb104064f9982ad5827d236">ntp_callback</a> (uint8_t *payload, uint8_t size)</td></tr>
-<tr class="memdesc:a398aa1f1efb104064f9982ad5827d236"><td class="mdescLeft">&#160;</td><td class="mdescRight">NTP config callback.  <br /></td></tr>
-<tr class="separator:a398aa1f1efb104064f9982ad5827d236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:af31a3b5d924eed9aa1b118a26d73eba9" id="r_af31a3b5d924eed9aa1b118a26d73eba9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structevent__bus__message__t.html#af31a3b5d924eed9aa1b118a26d73eba9">type</a></td></tr>
+<tr class="separator:af31a3b5d924eed9aa1b118a26d73eba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7ed9ecd1fa8617bbd30618eaf8d62f1" id="r_ac7ed9ecd1fa8617bbd30618eaf8d62f1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structevent__bus__message__t.html#ac7ed9ecd1fa8617bbd30618eaf8d62f1">payload</a> [<a class="el" href="event__bus_8h.html#af615a1228bc7f4e9e5a38aca43da4f8e">EVENT_BUS_MAX_PAYLOAD_SIZE</a>]</td></tr>
+<tr class="separator:ac7ed9ecd1fa8617bbd30618eaf8d62f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa57bd3243ab06a4ad6daa7c77843c66f" id="r_aa57bd3243ab06a4ad6daa7c77843c66f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structevent__bus__message__t.html#aa57bd3243ab06a4ad6daa7c77843c66f">payload_size</a></td></tr>
+<tr class="separator:aa57bd3243ab06a4ad6daa7c77843c66f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a398aa1f1efb104064f9982ad5827d236" name="a398aa1f1efb104064f9982ad5827d236"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a398aa1f1efb104064f9982ad5827d236">&#9670;&#160;</a></span>ntp_callback()</h2>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac7ed9ecd1fa8617bbd30618eaf8d62f1" name="ac7ed9ecd1fa8617bbd30618eaf8d62f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ed9ecd1fa8617bbd30618eaf8d62f1">&#9670;&#160;</a></span>payload</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ntp_callback </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>payload</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">uint8_t event_bus_message_t::payload[<a class="el" href="event__bus_8h.html#af615a1228bc7f4e9e5a38aca43da4f8e">EVENT_BUS_MAX_PAYLOAD_SIZE</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>NTP config callback. </p>
-<p>Reads the latest configuration and starts or stops the NTP synchronization task depending on the <code>ntp</code> parameter. Ensures NTP is not re-started or re-stopped unnecessarily. </p>
+</div>
+</div>
+<a id="aa57bd3243ab06a4ad6daa7c77843c66f" name="aa57bd3243ab06a4ad6daa7c77843c66f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa57bd3243ab06a4ad6daa7c77843c66f">&#9670;&#160;</a></span>payload_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t event_bus_message_t::payload_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
+<a id="af31a3b5d924eed9aa1b118a26d73eba9" name="af31a3b5d924eed9aa1b118a26d73eba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af31a3b5d924eed9aa1b118a26d73eba9">&#9670;&#160;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a> event_bus_message_t::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>software/nixie_clock_esp32_project/components/event_bus/<a class="el" href="event__bus_8h_source.html">event_bus.h</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_c8fa76d8dc1b9e06ff8aeb3121608b1b.html">software</a></li><li class="navelem"><a class="el" href="dir_4e80761515fcd0d8a8682b4ebda49685.html">nixie_clock_esp32_project</a></li><li class="navelem"><a class="el" href="dir_b181baf956279f894a730e459ce47bc5.html">components</a></li><li class="navelem"><a class="el" href="dir_8938040af9d266be553d1135477b804d.html">ntp</a></li><li class="navelem"><a class="el" href="ntp_8h.html">ntp.h</a></li>
+    <li class="navelem"><a class="el" href="structevent__bus__message__t.html">event_bus_message_t</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

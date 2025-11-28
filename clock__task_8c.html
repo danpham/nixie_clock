@@ -91,8 +91,7 @@ $(document).ready(function(){initNavTree('clock__task_8c.html',''); initResizabl
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">clock_task.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -122,28 +121,21 @@ Macros</h2></td></tr>
 <tr class="separator:ae294e4d9e2a61dcd335698c6615ae803"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a060bbc4238ac8a44c1529404a5d8fd73" id="r_a060bbc4238ac8a44c1529404a5d8fd73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a060bbc4238ac8a44c1529404a5d8fd73">CLOCK_PATTERN_MAX_STEP</a>&#160;&#160;&#160;(9U)</td></tr>
 <tr class="separator:a060bbc4238ac8a44c1529404a5d8fd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab727e19338328afc8f89695c8a5f192c" id="r_ab727e19338328afc8f89695c8a5f192c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#ab727e19338328afc8f89695c8a5f192c">CLOCK_QUEUE_SIZE</a>&#160;&#160;&#160;(10U)</td></tr>
-<tr class="separator:ab727e19338328afc8f89695c8a5f192c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8349428656791032e2e00dd13cc5bacc" id="r_a8349428656791032e2e00dd13cc5bacc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a8349428656791032e2e00dd13cc5bacc">clock_task_start</a> (void)</td></tr>
-<tr class="memdesc:a8349428656791032e2e00dd13cc5bacc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the clock task and initialize the update queue.  <br /></td></tr>
+<tr class="memdesc:a8349428656791032e2e00dd13cc5bacc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the clock task.  <br /></td></tr>
 <tr class="separator:a8349428656791032e2e00dd13cc5bacc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a05bbfb3403bbdc41cc313b271d3d9" id="r_a10a05bbfb3403bbdc41cc313b271d3d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a10a05bbfb3403bbdc41cc313b271d3d9">clock_ntp_config_callback</a> (void)</td></tr>
-<tr class="memdesc:a10a05bbfb3403bbdc41cc313b271d3d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply time update from NTP.  <br /></td></tr>
-<tr class="separator:a10a05bbfb3403bbdc41cc313b271d3d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a300c8c8bbdade4cd145ab28a8a68c69c" id="r_a300c8c8bbdade4cd145ab28a8a68c69c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a300c8c8bbdade4cd145ab28a8a68c69c">clock_update_with_menu_callback</a> (void)</td></tr>
-<tr class="memdesc:a300c8c8bbdade4cd145ab28a8a68c69c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update clock menu/UI on user input.  <br /></td></tr>
-<tr class="separator:a300c8c8bbdade4cd145ab28a8a68c69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a892bba71ed375b6bd9a120d93aaf7079" id="r_a892bba71ed375b6bd9a120d93aaf7079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a892bba71ed375b6bd9a120d93aaf7079">clock_update_from_config_callback</a> (void)</td></tr>
-<tr class="memdesc:a892bba71ed375b6bd9a120d93aaf7079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update clock state from configuration.  <br /></td></tr>
-<tr class="separator:a892bba71ed375b6bd9a120d93aaf7079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a04081f52f2f0b15397b8ad3164904217" id="r_a04081f52f2f0b15397b8ad3164904217"><td class="memItemLeft" align="right" valign="top">QueueHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a04081f52f2f0b15397b8ad3164904217">clockUpdateQueue</a></td></tr>
-<tr class="separator:a04081f52f2f0b15397b8ad3164904217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dbe216f4c3a52414b5e237ef533e891" id="r_a0dbe216f4c3a52414b5e237ef533e891"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a0dbe216f4c3a52414b5e237ef533e891">clock_ntp_config_callback</a> (uint8_t *payload, uint8_t size)</td></tr>
+<tr class="memdesc:a0dbe216f4c3a52414b5e237ef533e891"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply time update from NTP.  <br /></td></tr>
+<tr class="separator:a0dbe216f4c3a52414b5e237ef533e891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20c289bdde28a6948d6faf2bda44450b" id="r_a20c289bdde28a6948d6faf2bda44450b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#a20c289bdde28a6948d6faf2bda44450b">clock_update_with_menu_callback</a> (uint8_t *payload, uint8_t size)</td></tr>
+<tr class="memdesc:a20c289bdde28a6948d6faf2bda44450b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update clock menu/UI on user input.  <br /></td></tr>
+<tr class="separator:a20c289bdde28a6948d6faf2bda44450b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5dae05432bd08122d02917dcd263d85" id="r_ad5dae05432bd08122d02917dcd263d85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#ad5dae05432bd08122d02917dcd263d85">clock_update_from_config_callback</a> (uint8_t *payload, uint8_t size)</td></tr>
+<tr class="memdesc:ad5dae05432bd08122d02917dcd263d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update clock state from configuration.  <br /></td></tr>
+<tr class="separator:ad5dae05432bd08122d02917dcd263d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="af728f959f3192ed40a0abfc8661001c4" name="af728f959f3192ed40a0abfc8661001c4"></a>
@@ -202,23 +194,9 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ab727e19338328afc8f89695c8a5f192c" name="ab727e19338328afc8f89695c8a5f192c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab727e19338328afc8f89695c8a5f192c">&#9670;&#160;</a></span>CLOCK_QUEUE_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CLOCK_QUEUE_SIZE&#160;&#160;&#160;(10U)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a10a05bbfb3403bbdc41cc313b271d3d9" name="a10a05bbfb3403bbdc41cc313b271d3d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10a05bbfb3403bbdc41cc313b271d3d9">&#9670;&#160;</a></span>clock_ntp_config_callback()</h2>
+<a id="a0dbe216f4c3a52414b5e237ef533e891" name="a0dbe216f4c3a52414b5e237ef533e891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dbe216f4c3a52414b5e237ef533e891">&#9670;&#160;</a></span>clock_ntp_config_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,15 +204,25 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void clock_ntp_config_callback </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>payload</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Apply time update from NTP. </p>
-<p>Reads one pending update from <code>clockUpdateQueue</code> and updates the clock state. </p>
+<p>Reads payload and updates the clock state. </p>
 
 </div>
 </div>
@@ -254,14 +242,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Start the clock task and initialize the update queue. </p>
-<p>Creates the FreeRTOS queue <code>clockUpdateQueue</code> for receiving clock updates (from NTP or other tasks), then creates the <code>clock_task</code> FreeRTOS task.</p>
-<dl class="section note"><dt>Note</dt><dd>If the queue creation fails, the task is not started. </dd></dl>
+<p>Start the clock task. </p>
+<p>Creates the FreeRTOS task <code>clock_task</code> to handle clock updates, display refresh, and user input. Logs an error if task creation fails. </p>
 
 </div>
 </div>
-<a id="a892bba71ed375b6bd9a120d93aaf7079" name="a892bba71ed375b6bd9a120d93aaf7079"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a892bba71ed375b6bd9a120d93aaf7079">&#9670;&#160;</a></span>clock_update_from_config_callback()</h2>
+<a id="ad5dae05432bd08122d02917dcd263d85" name="ad5dae05432bd08122d02917dcd263d85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5dae05432bd08122d02917dcd263d85">&#9670;&#160;</a></span>clock_update_from_config_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -269,9 +256,19 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void clock_update_from_config_callback </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>payload</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -281,8 +278,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a300c8c8bbdade4cd145ab28a8a68c69c" name="a300c8c8bbdade4cd145ab28a8a68c69c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a300c8c8bbdade4cd145ab28a8a68c69c">&#9670;&#160;</a></span>clock_update_with_menu_callback()</h2>
+<a id="a20c289bdde28a6948d6faf2bda44450b" name="a20c289bdde28a6948d6faf2bda44450b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20c289bdde28a6948d6faf2bda44450b">&#9670;&#160;</a></span>clock_update_with_menu_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,30 +287,25 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void clock_update_with_menu_callback </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>payload</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Update clock menu/UI on user input. </p>
 <p>Reads the latest GPIOs and refreshes the clock menu if NTP is disabled. Intended to be triggered by user input events (rotary encoder, buttons). </p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a04081f52f2f0b15397b8ad3164904217" name="a04081f52f2f0b15397b8ad3164904217"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04081f52f2f0b15397b8ad3164904217">&#9670;&#160;</a></span>clockUpdateQueue</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QueueHandle_t clockUpdateQueue</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>

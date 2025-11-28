@@ -5,6 +5,6 @@ var pwm_8c =
     [ "PWM_GPIO", "pwm_8c.html#a7905077bb6cb0ce86fad25d4db2e884d", null ],
     [ "PWM_RESOLUTION", "pwm_8c.html#ad53655e6cac4dfd2c67ecda5eea77a4e", null ],
     [ "PWM_TIMER", "pwm_8c.html#aa5696c49e88a24e3144fd1433c7d20e5", null ],
-    [ "pwm_callback", "pwm_8c.html#a5088cf3dfdf5d20992f32321b86e1380", null ],
+    [ "pwm_callback", "pwm_8c.html#aa892deb868535b8ce49f50396e964fb8", null ],
     [ "pwm_init", "pwm_8c.html#a1e8fdae3fd7118582ffa427dad05b6e1", null ]
 ];

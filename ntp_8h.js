@@ -1,4 +1,4 @@
 var ntp_8h =
 [
-    [ "ntp_callback", "ntp_8h.html#aaa503c23e6154eed5daf4e103179cc8f", null ]
+    [ "ntp_callback", "ntp_8h.html#a398aa1f1efb104064f9982ad5827d236", null ]
 ];

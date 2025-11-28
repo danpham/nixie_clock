@@ -51,7 +51,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structmy__gpio__btn__t.html#a10b3ac012e2348f7afb9ecbf44f5afb5"
+"structmy__gpio__btn__t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

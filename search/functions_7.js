@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ntp_5fcallback_0',['ntp_callback',['../ntp_8h.html#aaa503c23e6154eed5daf4e103179cc8f',1,'ntp_callback(void):&#160;ntp.c'],['../ntp_8c.html#aaa503c23e6154eed5daf4e103179cc8f',1,'ntp_callback(void):&#160;ntp.c']]],
+  ['ntp_5fcallback_0',['ntp_callback',['../ntp_8h.html#a398aa1f1efb104064f9982ad5827d236',1,'ntp_callback(uint8_t *payload, uint8_t size):&#160;ntp.c'],['../ntp_8c.html#a398aa1f1efb104064f9982ad5827d236',1,'ntp_callback(uint8_t *payload, uint8_t size):&#160;ntp.c']]],
   ['nvs_5finit_1',['nvs_init',['../nvs_8c.html#ab03b911dd4296933c03792401419e762',1,'nvs_init(void):&#160;nvs.c'],['../nvs_8h.html#ab03b911dd4296933c03792401419e762',1,'nvs_init(void):&#160;nvs.c']]],
   ['nvs_5fload_5fdutycycle_2',['nvs_load_dutycycle',['../nvs_8c.html#ac869ffa550b31d79544ec5658a3900c5',1,'nvs_load_dutycycle(uint8_t *value):&#160;nvs.c'],['../nvs_8h.html#ac869ffa550b31d79544ec5658a3900c5',1,'nvs_load_dutycycle(uint8_t *value):&#160;nvs.c']]],
   ['nvs_5fload_5fmode_3',['nvs_load_mode',['../nvs_8c.html#a66afd585c3b195966e453c6a2f80ceb9',1,'nvs_load_mode(uint8_t *value):&#160;nvs.c'],['../nvs_8h.html#a66afd585c3b195966e453c6a2f80ceb9',1,'nvs_load_mode(uint8_t *value):&#160;nvs.c']]],

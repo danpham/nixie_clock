@@ -107,13 +107,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a1e8fdae3fd7118582ffa427dad05b6e1" id="r_a1e8fdae3fd7118582ffa427dad05b6e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pwm_8h.html#a1e8fdae3fd7118582ffa427dad05b6e1">pwm_init</a> (void)</td></tr>
 <tr class="memdesc:a1e8fdae3fd7118582ffa427dad05b6e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the PWM peripheral.  <br /></td></tr>
 <tr class="separator:a1e8fdae3fd7118582ffa427dad05b6e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5088cf3dfdf5d20992f32321b86e1380" id="r_a5088cf3dfdf5d20992f32321b86e1380"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pwm_8h.html#a5088cf3dfdf5d20992f32321b86e1380">pwm_callback</a> (void)</td></tr>
-<tr class="memdesc:a5088cf3dfdf5d20992f32321b86e1380"><td class="mdescLeft">&#160;</td><td class="mdescRight">PWM update callback.  <br /></td></tr>
-<tr class="separator:a5088cf3dfdf5d20992f32321b86e1380"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa892deb868535b8ce49f50396e964fb8" id="r_aa892deb868535b8ce49f50396e964fb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pwm_8h.html#aa892deb868535b8ce49f50396e964fb8">pwm_callback</a> (uint8_t *payload, uint8_t size)</td></tr>
+<tr class="memdesc:aa892deb868535b8ce49f50396e964fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">PWM update callback.  <br /></td></tr>
+<tr class="separator:aa892deb868535b8ce49f50396e964fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a5088cf3dfdf5d20992f32321b86e1380" name="a5088cf3dfdf5d20992f32321b86e1380"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5088cf3dfdf5d20992f32321b86e1380">&#9670;&#160;</a></span>pwm_callback()</h2>
+<a id="aa892deb868535b8ce49f50396e964fb8" name="aa892deb868535b8ce49f50396e964fb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa892deb868535b8ce49f50396e964fb8">&#9670;&#160;</a></span>pwm_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,9 +121,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void pwm_callback </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>payload</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

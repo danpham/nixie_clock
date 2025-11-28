@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['uart_5fbaud_5frate_0',['UART_BAUD_RATE',['../uart_8h.html#a615aed21aa6825462b7c17b0c238ffe2',1,'uart.h']]],
-  ['uart_5fbuf_5fsize_1',['UART_BUF_SIZE',['../uart_8h.html#ab0249d81dd53336b7810ebcf29511210',1,'uart.h']]],
-  ['uart_5fport_2',['UART_PORT',['../uart_8h.html#aa7a5950d998e44d87137de0780bd0af3',1,'uart.h']]],
-  ['uart_5frx_5fpin_3',['UART_RX_PIN',['../uart_8h.html#aa37eca6fe61f6938d925975dff27c8fd',1,'uart.h']]],
-  ['uart_5ftx_5fpin_4',['UART_TX_PIN',['../uart_8h.html#a6c82a6844388a551e8f06d249598989e',1,'uart.h']]]
+  ['pwm_5fchannel_0',['PWM_CHANNEL',['../pwm_8c.html#acd1dba11989277eab79a76f9f2731bf9',1,'pwm.c']]],
+  ['pwm_5ffreq_5fhz_1',['PWM_FREQ_HZ',['../pwm_8c.html#a56e165627f596c2f42f843ae6571de0e',1,'pwm.c']]],
+  ['pwm_5fgpio_2',['PWM_GPIO',['../pwm_8c.html#a7905077bb6cb0ce86fad25d4db2e884d',1,'pwm.c']]],
+  ['pwm_5fresolution_3',['PWM_RESOLUTION',['../pwm_8c.html#ad53655e6cac4dfd2c67ecda5eea77a4e',1,'pwm.c']]],
+  ['pwm_5ftimer_4',['PWM_TIMER',['../pwm_8c.html#aa5696c49e88a24e3144fd1433c7d20e5',1,'pwm.c']]]
 ];

@@ -111,12 +111,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aa2c8852eda8c37f3fa71c2630190af1e" id="r_aa2c8852eda8c37f3fa71c2630190af1e"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#aa2c8852eda8c37f3fa71c2630190af1e">event_callback_t</a>) (void)</td></tr>
-<tr class="separator:aa2c8852eda8c37f3fa71c2630190af1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd2005222e7b631bf4b34e4aaca284aa" id="r_abd2005222e7b631bf4b34e4aaca284aa"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a>) (uint8_t *payload, uint8_t size)</td></tr>
+<tr class="separator:abd2005222e7b631bf4b34e4aaca284aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a40702206429c86d637b5fd6cbd023769" id="r_a40702206429c86d637b5fd6cbd023769"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#a40702206429c86d637b5fd6cbd023769">dispatcher_subscribe</a> (<a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a> evt_type, <a class="el" href="dispatcher_8h.html#aa2c8852eda8c37f3fa71c2630190af1e">event_callback_t</a> cb)</td></tr>
+<tr class="memitem:a40702206429c86d637b5fd6cbd023769" id="r_a40702206429c86d637b5fd6cbd023769"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#a40702206429c86d637b5fd6cbd023769">dispatcher_subscribe</a> (<a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a> evt_type, <a class="el" href="dispatcher_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a> cb)</td></tr>
 <tr class="memdesc:a40702206429c86d637b5fd6cbd023769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe a callback to a specific event.  <br /></td></tr>
 <tr class="separator:a40702206429c86d637b5fd6cbd023769"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1c674e985f382be4e480d39f0b3da9f" id="r_ac1c674e985f382be4e480d39f0b3da9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#ac1c674e985f382be4e480d39f0b3da9f">dispatcher_task_start</a> (void)</td></tr>
@@ -124,14 +124,14 @@ Functions</h2></td></tr>
 <tr class="separator:ac1c674e985f382be4e480d39f0b3da9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="aa2c8852eda8c37f3fa71c2630190af1e" name="aa2c8852eda8c37f3fa71c2630190af1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2c8852eda8c37f3fa71c2630190af1e">&#9670;&#160;</a></span>event_callback_t</h2>
+<a id="abd2005222e7b631bf4b34e4aaca284aa" name="abd2005222e7b631bf4b34e4aaca284aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd2005222e7b631bf4b34e4aaca284aa">&#9670;&#160;</a></span>event_callback_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* event_callback_t) (void)</td>
+          <td class="memname">typedef void(* event_callback_t) (uint8_t *payload, uint8_t size)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -154,7 +154,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="dispatcher_8h.html#aa2c8852eda8c37f3fa71c2630190af1e">event_callback_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="dispatcher_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a>&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
