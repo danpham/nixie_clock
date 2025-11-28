@@ -261,7 +261,7 @@ void clock_update_with_menu_callback(uint8_t* payload, uint8_t size)
         
         /* If no NTP sync */
         if (config.ntp == 0U) {
-            clock_menu(&clk, payload, size);
+            clock_menu(&clk, (const uint8_t*)payload, size);
         }
     }
     else {
