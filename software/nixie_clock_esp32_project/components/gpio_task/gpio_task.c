@@ -135,7 +135,10 @@ static void gpio_task(void *arg)
 
         /* At least one io has been modified, send an event */
         if (gpio_update == true) {
-            event_bus_publish(EVT_CLOCK_GPIO_CONFIG);
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_CLOCK_GPIO_CONFIG;
+            evt_message.payload_size = 0U;
+            event_bus_publish(evt_message);
             gpio_update = false;
         }
 

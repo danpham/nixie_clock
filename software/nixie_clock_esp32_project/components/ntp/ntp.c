@@ -78,14 +78,17 @@ static void time_sync_notification_cb(struct timeval *tv)
         timestamp_to_hms(now32, &clockUpdate);
 
         /* Send clockUpdate to the queue (non-blocking) */
-        BaseType_t queue_ret;
-        queue_ret = xQueueSend(clockUpdateQueue, &clockUpdate, 0U);
-        if (queue_ret != pdTRUE) {
-            ESP_LOGW(NTP_TAG, "Failed to send clock update to queue");
+        event_bus_message_t evt_message;
+
+        size_t copy_size = sizeof(clockUpdate);
+        if(copy_size > EVENT_BUS_MAX_PAYLOAD_SIZE) {
+            copy_size = EVENT_BUS_MAX_PAYLOAD_SIZE;
         }
-        else {
-            event_bus_publish(EVT_CLOCK_NTP_CONFIG);
-        }
+        memcpy(evt_message.payload, &clockUpdate, copy_size);
+
+        evt_message.type = EVT_CLOCK_NTP_CONFIG;
+        evt_message.payload_size = 0U;
+        event_bus_publish(evt_message);
     }
     else {
         ESP_LOGE(NTP_TAG, "Invalid SNTP timestamp or NULL pointer");
@@ -218,7 +221,9 @@ static void ntp_stop(void)
  * synchronization task depending on the `ntp` parameter.
  * Ensures NTP is not re-started or re-stopped unnecessarily.
  */
-void ntp_callback(void) {
+void ntp_callback(uint8_t* payload, uint8_t size) {
+    (void)payload;
+    (void)size;
     esp_err_t result = ESP_OK;
     config_t config;
     

@@ -79,9 +79,14 @@ void app_main(void)
     start_webserver();
     
     /* Read and apply config with events */
-    event_bus_publish(EVT_NTP_CONFIG);
-    event_bus_publish(EVT_WIFI_CONFIG);
-    event_bus_publish(EVT_PWM_CONFIG);
+    event_bus_message_t evt_message;
+    evt_message.type = EVT_NTP_CONFIG;
+    evt_message.payload_size = 0U;
+    event_bus_publish(evt_message);
+    evt_message.type = EVT_WIFI_CONFIG;
+    event_bus_publish(evt_message);
+    evt_message.type = EVT_PWM_CONFIG;
+    event_bus_publish(evt_message);
 
     while(ret == ESP_OK) {
         vTaskDelay(pdMS_TO_TICKS(portMAX_DELAY));

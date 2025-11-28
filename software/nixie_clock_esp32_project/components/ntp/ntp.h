@@ -24,6 +24,6 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void ntp_callback(void);
+void ntp_callback(uint8_t* payload, uint8_t size);
 
 #endif // NTP_H

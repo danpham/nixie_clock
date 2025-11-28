@@ -10,6 +10,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define EVENT_BUS_MAX_PAYLOAD_SIZE   32
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -24,6 +25,12 @@ typedef enum {
     EVT_PWM_CONFIG,
 } event_bus_event_t;
 
+typedef struct {
+    event_bus_event_t type;
+    uint8_t payload[EVENT_BUS_MAX_PAYLOAD_SIZE];
+    size_t payload_size;
+} event_bus_message_t;
+
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
@@ -36,8 +43,8 @@ typedef enum {
  * 6. Functions definitions
 ******************************************************************/
 void event_bus_init(void);
-void event_bus_publish(event_bus_event_t evt);
-bool event_bus_try_publish(event_bus_event_t evt, TickType_t timeout);
-event_bus_event_t event_bus_wait(TickType_t timeout);
+void event_bus_publish(event_bus_message_t evt_message);
+bool event_bus_try_publish(event_bus_message_t evt_message, TickType_t timeout);
+event_bus_message_t event_bus_wait(TickType_t timeout);
 
 #endif // EVENT_BUS_H

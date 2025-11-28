@@ -27,6 +27,6 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void wifi_callback(void);
+void wifi_callback(uint8_t* payload, uint8_t size);
 
 #endif // WIFI_H

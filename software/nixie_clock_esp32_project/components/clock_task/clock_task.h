@@ -18,8 +18,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-// Declaration of the queue used for communication between tasks
-extern QueueHandle_t clockUpdateQueue;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -29,8 +27,8 @@ extern QueueHandle_t clockUpdateQueue;
  * 6. Functions definitions
 ******************************************************************/
 void clock_task_start(void);
-void clock_ntp_config_callback(void);
-void clock_update_with_menu_callback(void);
-void clock_update_from_config_callback(void);
+void clock_ntp_config_callback(uint8_t* payload, uint8_t size);
+void clock_update_with_menu_callback(uint8_t* payload, uint8_t size);
+void clock_update_from_config_callback(uint8_t* payload, uint8_t size);
 
 #endif // CLOCK_TASK_H

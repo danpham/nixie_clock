@@ -119,7 +119,6 @@ esp_err_t config_save(void)
 {
     esp_err_t ret = ESP_FAIL;
 
-
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE) {
         esp_err_t ret_save;
@@ -151,7 +150,10 @@ esp_err_t config_save(void)
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
-            event_bus_publish(EVT_NTP_CONFIG);
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_NTP_CONFIG;
+            evt_message.payload_size = 0U;
+            event_bus_publish(evt_message);
         }
 
         if (cfg.dutycycle != cfg_last.dutycycle) {
@@ -159,16 +161,25 @@ esp_err_t config_save(void)
             if (ret_save == ESP_OK) {
                 ret = ESP_OK;
             }
-            event_bus_publish(EVT_PWM_CONFIG);
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_NTP_CONFIG;
+            evt_message.payload_size = 0U;
+            event_bus_publish(evt_message);
         }
 
         /* If ssid or passphrase has changed */
         if (wifi_update == true) {
-            event_bus_publish(EVT_WIFI_CONFIG);
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_NTP_CONFIG;
+            evt_message.payload_size = 0U;
+            event_bus_publish(evt_message);
         }
         /* If no ntp sync, use clock from web ui */
         if (cfg.ntp == 0U) {
-            event_bus_publish(EVT_CLOCK_WEB_CONFIG);
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_NTP_CONFIG;
+            evt_message.payload_size = 0U;
+            event_bus_publish(evt_message);
         }
 
         /* Update previous config */

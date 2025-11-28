@@ -22,7 +22,6 @@
 #define CLOCK_MENU_CONFIGURE_MINUTES    (1U)
 #define CLOCK_MENU_CONFIGURE_HOURS      (2U)
 #define CLOCK_PATTERN_MAX_STEP          (9U)
-#define CLOCK_QUEUE_SIZE                (10U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -32,7 +31,6 @@
  * 4. Variable definitions (static then global)
 ******************************************************************/
 static const char CLOCK_TASK_TAG[] = "CLOCK_TASK";
-QueueHandle_t clockUpdateQueue;
 static myclock_t clk;
 
 /******************************************************************
@@ -52,7 +50,6 @@ static void clock_task(void *arg);
  * - Clock ticking every second
  * - Display updates
  * - User input via clock_menu()
- * - Receiving updated time from clockUpdateQueue
  *
  * @param[in] arg Task argument (unused)
  */
@@ -202,48 +199,39 @@ void clock_menu(myclock_t *clk)
 }
 
 /**
- * @brief Start the clock task and initialize the update queue.
+ * @brief Start the clock task.
  *
- * Creates the FreeRTOS queue `clockUpdateQueue` for receiving
- * clock updates (from NTP or other tasks), then creates
- * the `clock_task` FreeRTOS task.
- *
- * @note If the queue creation fails, the task is not started.
+ * Creates the FreeRTOS task `clock_task` to handle clock updates,
+ * display refresh, and user input. Logs an error if task creation fails.
  */
 void clock_task_start(void)
 {
-    /* Create queue: 10 events max, each of size myclock_t */
-    clockUpdateQueue = xQueueCreate(CLOCK_QUEUE_SIZE, sizeof(myclock_t));
-    if (clockUpdateQueue == NULL) {
-        ESP_LOGE(CLOCK_TASK_TAG, "Failed to create myclock queue!");
-    } else {
-        /* Create clock task */
-        BaseType_t ret = xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
+    /* Create clock task */
+    BaseType_t ret = xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
 
-        if (ret != pdPASS) {
-            ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clock_task");
-        }
+    if (ret != pdPASS) {
+        ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clock_task");
     }
 }
 
 /**
  * @brief Apply time update from NTP.
  *
- * Reads one pending update from `clockUpdateQueue` and updates
- * the clock state.
+ * Reads payload and updates the clock state.
  */
-void clock_ntp_config_callback(void)
+void clock_ntp_config_callback(uint8_t* payload, uint8_t size)
 {
+    (void)payload;
+    (void)size;
+
     /* Update with NTP */
-    if (clockUpdateQueue != NULL)
+    if ((payload != NULL) && (size == sizeof(myclock_t)))
     {
-        myclock_t upd;
-        if (xQueueReceive(clockUpdateQueue, &upd, 0) == pdPASS) {
-            clock_init(&clk, upd.hours, upd.minutes, upd.seconds);
-        }
+        myclock_t *upd = (myclock_t *)payload;
+        clock_init(&clk, upd->hours, upd->minutes, upd->seconds);
     }
     else {
-        ESP_LOGW(CLOCK_TASK_TAG, "clockUpdateQueue not initialized");
+        ESP_LOGW(CLOCK_TASK_TAG, "Invalid NTP payload or queue not initialized");
     }
 }
 
@@ -254,8 +242,10 @@ void clock_ntp_config_callback(void)
  * NTP is disabled. Intended to be triggered by user input events
  * (rotary encoder, buttons).
  */
-void clock_update_with_menu_callback(void)
+void clock_update_with_menu_callback(uint8_t* payload, uint8_t size)
 {
+    (void)payload;
+    (void)size;
     esp_err_t result = ESP_OK;
     config_t config;
 
@@ -280,8 +270,10 @@ void clock_update_with_menu_callback(void)
  * NTP is disabled. Intended to be triggered by configuration change
  * events (boot, webserver update, etc.).
  */
-void clock_update_from_config_callback(void)
+void clock_update_from_config_callback(uint8_t* payload, uint8_t size)
 {
+    (void)payload;
+    (void)size;
     esp_err_t result = ESP_OK;
     config_t config;
 

@@ -30,7 +30,7 @@ static QueueHandle_t s_event_queue = NULL;
  * @brief Initialize the Event Bus queue.
  *
  * This function must be called before any event publication or consumption.
- * It allocates a FreeRTOS queue capable of storing multiple event_bus_event_t
+ * It allocates a FreeRTOS queue capable of storing multiple event_bus_message_t
  * messages. Subsequent calls have no effect (idempotent).
  *
  * @note If this function is not called before event_bus_publish(), events
@@ -39,7 +39,7 @@ static QueueHandle_t s_event_queue = NULL;
 void event_bus_init(void)
 {
     if (s_event_queue == NULL) {
-        s_event_queue = xQueueCreate(32, sizeof(event_bus_event_t));
+        s_event_queue = xQueueCreate(32, sizeof(event_bus_message_t));
     }
 }
 
@@ -52,10 +52,10 @@ void event_bus_init(void)
  *
  * @param evt The event to publish.
  */
-void event_bus_publish(event_bus_event_t evt)
+void event_bus_publish(event_bus_message_t evt_message)
 {
     if (s_event_queue) {
-        xQueueSend(s_event_queue, &evt, portMAX_DELAY);
+        xQueueSend(s_event_queue, &evt_message, portMAX_DELAY);
     }
 }
 
@@ -72,11 +72,13 @@ void event_bus_publish(event_bus_event_t evt)
  * @return The received event, or EVT_NONE if a timeout occurs or if the queue
  *         is not initialized.
  */
-event_bus_event_t event_bus_wait(TickType_t timeout)
+event_bus_message_t event_bus_wait(TickType_t timeout)
 {
-    event_bus_event_t evt = EVT_NONE;
+    event_bus_message_t evt_message;
+    evt_message.type = EVT_NONE;
+    evt_message.payload_size = 0U;
     if (s_event_queue) {
-        xQueueReceive(s_event_queue, &evt, timeout);
+        xQueueReceive(s_event_queue, &evt_message, timeout);
     }
-    return evt;
+    return evt_message;
 }

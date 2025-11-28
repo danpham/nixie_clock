@@ -257,8 +257,10 @@ static esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphras
  *
  * @note Logs an error if updating the STA Wi-Fi fails.
  */
-void wifi_callback(void)
+void wifi_callback(uint8_t* payload, uint8_t size)
 {
+    (void)payload;
+    (void)size;
     esp_err_t result = ESP_OK;
     config_t config;
     static const char SERVICE_MANAGER_TAG[] = "SERVICE_MANAGER";

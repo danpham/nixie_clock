@@ -69,7 +69,21 @@
         "pwm.h": "c",
         "service_manager.h": "c",
         "dispatcher.h": "c",
-        "event_bus.h": "c"
+        "event_bus.h": "c",
+        "atomic": "c",
+        "bit": "c",
+        "compare": "c",
+        "cstddef": "c",
+        "future": "c",
+        "iterator": "c",
+        "limits": "c",
+        "memory": "c",
+        "mutex": "c",
+        "sstream": "c",
+        "xhash": "c",
+        "xloctime": "c",
+        "xmemory": "c",
+        "xtree": "c"
     },
     "idf.flashType": "UART"
 }

@@ -57,16 +57,16 @@ static void dispatcher_task(void *arg)
   while(1)
   {
       /* Wait for the next event*/
-      event_bus_event_t evt = event_bus_wait(portMAX_DELAY);
+      event_bus_message_t evt_message = event_bus_wait(portMAX_DELAY);
 
       /* Call all callbacks subscribed to this event */
       for(int i = 0; i < subscriber_count; i++)
       {
-          if(subscribers[i].evt_type == evt)
+          if(subscribers[i].evt_type == evt_message.type)
           {
               if(subscribers[i].cb != NULL) {
-                  subscribers[i].cb();
-               }
+                  subscribers[i].cb(evt_message.payload, evt_message.payload_size);
+              }
           }
       }
   }

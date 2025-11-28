@@ -13,7 +13,7 @@
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
-typedef void (*event_callback_t)(void);
+typedef void (*event_callback_t)(uint8_t* payload, uint8_t size);
 
 /******************************************************************
  * 4. Variable definitions (static then global)

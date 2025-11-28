@@ -75,7 +75,9 @@ void pwm_init(void) {
  * the configured PWM duty cycle to the LEDC channel. If the
  * configuration cannot be read, an error is logged.
  */
-void pwm_callback(void) {
+void pwm_callback(uint8_t* payload, uint8_t size) {
+    (void)payload;
+    (void)size;
     esp_err_t result = ESP_OK;
     config_t config;
     static const char PWM_TAG[] = "PWM";

@@ -25,6 +25,6 @@
  * 6. Functions definitions
 ******************************************************************/
 void pwm_init(void);
-void pwm_callback(void);
+void pwm_callback(uint8_t* payload, uint8_t size);
 
 #endif // PWM_H
