@@ -1,7 +1,6 @@
 var gpio__task_8h =
 [
     [ "button_event_t", "structbutton__event__t.html", "structbutton__event__t" ],
-    [ "BUTTON_COUNT", "gpio__task_8h.html#a687f94d4d3be4db86a833082ecdf980a", null ],
     [ "BUTTON_ROTARY_ENCODER", "gpio__task_8h.html#a052ad2f44cf91330ede5cadb80725900", null ],
     [ "BUTTON_ROTARY_SWITCH_1", "gpio__task_8h.html#a4b5833e37e7ee8d809bb9063b674dd5d", null ],
     [ "buttons_type_t", "gpio__task_8h.html#a5cb622873c8d5997f52e1502a04c8e63", null ],
