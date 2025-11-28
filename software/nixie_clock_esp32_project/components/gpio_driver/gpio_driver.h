@@ -14,22 +14,21 @@ typedef uint8_t button_press_t;
 #define BUTTON_SHORT_PRESS   ((button_press_t)0U)
 #define BUTTON_LONG_PRESS    ((button_press_t)1U)
 
+typedef uint8_t button_state_t;
+#define BUTTON_STATE_RELEASE   ((button_press_t)0U)
+#define BUTTON_STATE_PRESS     ((button_press_t)1U)
+
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
-typedef enum {
-    BUTTON_STATE_RELEASE  = 0,
-    BUTTON_STATE_PRESS = 1
-} button_state_t;
-
-// Pull-up / Pull-down enum
+/* Pull-up / Pull-down enum */
 typedef enum {
     MY_GPIO_PULL_NONE,
     MY_GPIO_PULL_UP,
     MY_GPIO_PULL_DOWN
 } my_gpio_pull_t;
 
-// Button structure with debounce
+/* Button structure with debounce */
 typedef struct {
     gpio_num_t pin;
     my_gpio_pull_t pull;
@@ -52,6 +51,6 @@ typedef struct {
  * 6. Functions definitions
 ******************************************************************/
 esp_err_t my_gpio_init(my_gpio_btn_t *btn);
-int my_gpio_read_btn(my_gpio_btn_t *btn);
+button_state_t my_gpio_read_btn(my_gpio_btn_t *btn);
 
 #endif // GPIO_DRIVER_H

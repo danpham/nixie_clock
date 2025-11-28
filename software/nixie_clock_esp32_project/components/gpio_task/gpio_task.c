@@ -66,10 +66,6 @@ static void gpio_task(void *arg)
         .debounce_ms = 50
     };
 
-    int8_t state_last_rotaryChanA = 0;
-    int8_t state_last_rotaryChanB = 0;
-    button_state_t state_last_rotarySwitch = 0;
-
     if (my_gpio_init(&rotaryEncoderSwitch) != ESP_OK) {
         ESP_LOGE(GPIO_TASK_TAG, "Failed to initialize rotaryEncoderSwitch!");
     }
@@ -83,15 +79,12 @@ static void gpio_task(void *arg)
     }
 
     /* Initialize state_last_ variables */
-    state_last_rotaryChanA = (int8_t)my_gpio_read_btn(&rotaryEncoderChanA);
-    state_last_rotaryChanB = (int8_t)my_gpio_read_btn(&rotaryEncoderChanB);
-    state_last_rotarySwitch = (int8_t)my_gpio_read_btn(&rotaryEncoderSwitch);
+    button_state_t state_last_rotaryChanA = my_gpio_read_btn(&rotaryEncoderChanA);
+    button_state_t state_last_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
+    button_state_t state_last_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
     while(1) {
-        button_state_t state_rotarySwitch = 0;
-        int8_t state_rotaryChanA = 0;
-   
-        state_rotarySwitch = (int8_t)my_gpio_read_btn(&rotaryEncoderSwitch);
+        button_state_t state_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
         /* Avoid sending event when no changes */
         if (state_last_rotarySwitch != state_rotarySwitch) {
@@ -113,8 +106,8 @@ static void gpio_task(void *arg)
             state_last_rotarySwitch = state_rotarySwitch;
         }
 
-        state_rotaryChanA = (int8_t)my_gpio_read_btn(&rotaryEncoderChanA);
-        int8_t state_rotaryChanB = (int8_t)my_gpio_read_btn(&rotaryEncoderChanB);
+        button_state_t state_rotaryChanA = my_gpio_read_btn(&rotaryEncoderChanA);
+        button_state_t state_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
         rotary_encoder_event_t ev = process_rotary_encoder(state_last_rotaryChanA, state_last_rotaryChanB, state_rotaryChanA, state_rotaryChanB);
         if (ev != ROTARY_ENCODER_EVENT_NONE) {
             event_bus_message_t evt_message;

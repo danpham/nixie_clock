@@ -32,6 +32,7 @@
 ******************************************************************/
 static const char CLOCK_TASK_TAG[] = "CLOCK_TASK";
 static myclock_t clk;
+static SemaphoreHandle_t clk_mutex = NULL;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -79,7 +80,10 @@ static void clock_task(void *arg) {
             /* Every second */
             if ((now - lastTick) >= tickPeriod) {
                 lastTick += tickPeriod;
+                xSemaphoreTake(clk_mutex, portMAX_DELAY);
                 clock_tick(&clk);
+                xSemaphoreGive(clk_mutex);
+
                 dots = !dots;
 
                 if (clk.seconds == 0U) {
@@ -165,10 +169,14 @@ void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
                 }
                 else if (event.id == BUTTON_ROTARY_ENCODER) {
                     if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
+                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
                         clock_increment_minutes(clk);
+                        xSemaphoreGive(clk_mutex);
                     }
                     else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
+                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
                         clock_decrement_minutes(clk);
+                        xSemaphoreGive(clk_mutex);
                     }
                     else {
                         /* ROTARY_ENCODER_EVENT_NONE */    
@@ -184,10 +192,14 @@ void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
                 }
                 else if (event.id == BUTTON_ROTARY_ENCODER) {
                     if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
+                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
                         clock_increment_hours(clk);
+                        xSemaphoreGive(clk_mutex);
                     }
                     else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
+                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
                         clock_decrement_hours(clk);
+                        xSemaphoreGive(clk_mutex);
                     }
                     else {
                         /* ROTARY_ENCODER_EVENT_NONE */    
@@ -212,11 +224,19 @@ void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
  */
 void clock_task_start(void)
 {
-    /* Create clock task */
-    BaseType_t ret = xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
+    if (clk_mutex == NULL) {
+        clk_mutex = xSemaphoreCreateMutex();
+        if (clk_mutex == NULL) {
+            ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clk_mutex");
+        }
+        else {
+            /* Create clock task */
+            BaseType_t ret = xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
 
-    if (ret != pdPASS) {
-        ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clock_task");
+            if (ret != pdPASS) {
+                ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clock_task");
+            }
+        }
     }
 }
 
@@ -236,7 +256,9 @@ void clock_ntp_config_callback(uint8_t* payload, uint8_t size)
         clockUpdate.hours = payload[0];
         clockUpdate.minutes = payload[1];
         clockUpdate.seconds = payload[2];
+        xSemaphoreTake(clk_mutex, portMAX_DELAY);
         clock_init(&clk, clockUpdate.hours, clockUpdate.minutes, clockUpdate.seconds);
+        xSemaphoreGive(clk_mutex);
     }
     else {
         ESP_LOGW(CLOCK_TASK_TAG, "Invalid NTP payload");
@@ -289,7 +311,9 @@ void clock_update_from_config_callback(uint8_t* payload, uint8_t size)
         
         /* If no NTP sync */
         if (config.ntp == 0U) {
+            xSemaphoreTake(clk_mutex, portMAX_DELAY);
             clock_init(&clk, config.time.hours, config.time.minutes, config.time.seconds);
+            xSemaphoreGive(clk_mutex);
         }
     }
     else {

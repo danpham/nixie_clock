@@ -82,7 +82,7 @@ esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
  *      - last_state: last physical state
  *      - press_type: detected press type (short or long)
  */
-int my_gpio_read_btn(my_gpio_btn_t *btn) {
+button_state_t my_gpio_read_btn(my_gpio_btn_t *btn) {
     button_state_t state = BUTTON_STATE_RELEASE;
     uint32_t now = esp_timer_get_time() / 1000;
 
