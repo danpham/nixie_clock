@@ -227,8 +227,11 @@ void clock_ntp_config_callback(uint8_t* payload, uint8_t size)
     /* Update with NTP */
     const myclock_t *upd = NULL;
     if ((payload != NULL) && (size == sizeof(upd))) {
-        upd = (myclock_t *)payload;
-        clock_init(&clk, upd->hours, upd->minutes, upd->seconds);
+        myclock_t upd;
+        upd.hours = payload[0];
+        upd.minutes = payload[1];
+        upd.seconds = payload[2];
+        clock_init(&clk, upd.hours, upd.minutes, upd.seconds);
     }
     else {
         ESP_LOGW(CLOCK_TASK_TAG, "Invalid NTP payload or queue not initialized");

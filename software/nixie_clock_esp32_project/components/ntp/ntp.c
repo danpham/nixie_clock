@@ -76,17 +76,14 @@ static void time_sync_notification_cb(struct timeval *tv)
         uint32_t now32 = (uint32_t)tv->tv_sec;
         timestamp_to_hms(now32, &clockUpdate);
 
-        /* Send clockUpdate to the queue (non-blocking) */
+        /* Send clock data to evt_bus */
         event_bus_message_t evt_message;
-
-        size_t copy_size = sizeof(clockUpdate);
-        if(copy_size > EVENT_BUS_MAX_PAYLOAD_SIZE) {
-            copy_size = EVENT_BUS_MAX_PAYLOAD_SIZE;
-        }
-        (void)memcpy(evt_message.payload, &clockUpdate, copy_size);
-
+        evt_message.payload[0] = clockUpdate.hours;
+        evt_message.payload[1] = clockUpdate.minutes;
+        evt_message.payload[2] = clockUpdate.seconds;
         evt_message.type = EVT_CLOCK_NTP_CONFIG;
-        evt_message.payload_size = 0U;
+        evt_message.payload_size = 3U;
+
         event_bus_publish(evt_message);
     }
     else {
