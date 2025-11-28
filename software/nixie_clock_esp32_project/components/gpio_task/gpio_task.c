@@ -23,7 +23,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static const char GPIO_TASK_TAG[] = "GPIO_TASK";
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -46,6 +45,7 @@ static void gpio_task(void *arg);
  */
 static void gpio_task(void *arg)
 {
+    static const char GPIO_TASK_TAG[] = "GPIO_TASK";
     (void)arg;
 
     my_gpio_btn_t rotaryEncoderSwitch = {

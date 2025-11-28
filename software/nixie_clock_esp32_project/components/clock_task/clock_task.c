@@ -36,7 +36,7 @@ static myclock_t clk;
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
-static void clock_menu(myclock_t *clk, uint8_t* payload, uint8_t size);
+static void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size);
 static void clock_task(void *arg);
 
 /******************************************************************
@@ -143,7 +143,7 @@ static void clock_task(void *arg) {
  * @param[in] payload Pointer to event data buffer.
  * @param[in] size Size of the payload in bytes.
  */
-void clock_menu(myclock_t *clk, uint8_t* payload, uint8_t size)
+void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
 {
     button_event_t event;
 

@@ -12,7 +12,6 @@ typedef uint8_t rotary_encoder_event_t;
 #define ROTARY_ENCODER_EVENT_INCREMENT   ((rotary_encoder_event_t)0U)
 #define ROTARY_ENCODER_EVENT_DECREMENT   ((rotary_encoder_event_t)1U)
 #define ROTARY_ENCODER_EVENT_NONE        ((rotary_encoder_event_t)2U)
-#define ROTARY_ENCODER_EVENT_COUNT       ((rotary_encoder_event_t)3U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
