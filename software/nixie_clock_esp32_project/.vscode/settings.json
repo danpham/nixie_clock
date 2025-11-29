@@ -83,7 +83,9 @@
         "xhash": "c",
         "xloctime": "c",
         "xmemory": "c",
-        "xtree": "c"
+        "xtree": "c",
+        "esp_task_wdt.h": "c",
+        "esp_int_wdt.h": "c"
     },
     "idf.flashType": "UART"
 }

@@ -5,9 +5,10 @@
 #include "../test/common/esp_stub.h"
 #endif
 #include <string.h>
+#include "esp_task_wdt.h"
+#include "esp_log.h"
 #include "driver/gpio.h"
 #include "../components/ntp/ntp.h"
-#include "esp_log.h"
 #include "../components/uart/uart.h"
 #include "../components/hv5622/hv5622.h"
 #include "../components/display/display.h"
@@ -24,6 +25,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define MAIN_TASK_WDT_TIMEOUT_S     5U
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -51,6 +53,15 @@ void app_main(void)
     const char hello[] = "Nixie clock v1.0: Starting...";
     size_t len = sizeof(hello) - 1U;
     esp_err_t ret = ESP_OK;
+    esp_task_wdt_config_t wdt_config = {
+        .timeout_ms = MAIN_TASK_WDT_TIMEOUT_S,
+        .idle_core_mask = 0x01,   /* Only Core 0 */
+        .trigger_panic  = true
+    };
+
+    /* Setup task watchdog */
+    esp_task_wdt_init(&wdt_config);
+    esp_task_wdt_add(NULL);
 
     event_bus_init();
     dispatcher_subscribe(EVT_NTP_CONFIG, ntp_callback);
@@ -89,7 +100,8 @@ void app_main(void)
     event_bus_publish(evt_message);
 
     while(ret == ESP_OK) {
-        vTaskDelay(pdMS_TO_TICKS(portMAX_DELAY));
+        esp_task_wdt_reset();
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
     /* Free task */
