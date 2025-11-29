@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('event__bus_8h.html',''); initResizable
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">event_bus.h File Reference</div></div>
 </div><!--header-->
@@ -121,21 +121,25 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:af615a1228bc7f4e9e5a38aca43da4f8e" id="r_af615a1228bc7f4e9e5a38aca43da4f8e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#af615a1228bc7f4e9e5a38aca43da4f8e">EVENT_BUS_MAX_PAYLOAD_SIZE</a>&#160;&#160;&#160;(32U)</td></tr>
 <tr class="separator:af615a1228bc7f4e9e5a38aca43da4f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9947227fadcc9634dfb998ed6d80a363" id="r_a9947227fadcc9634dfb998ed6d80a363"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#a9947227fadcc9634dfb998ed6d80a363">EVT_NONE</a>&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)0U)</td></tr>
+<tr class="separator:a9947227fadcc9634dfb998ed6d80a363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f7f497fd8bce0acaa2d4779bf2ad6c" id="r_a84f7f497fd8bce0acaa2d4779bf2ad6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#a84f7f497fd8bce0acaa2d4779bf2ad6c">EVT_CLOCK_NTP_CONFIG</a>&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)1U)</td></tr>
+<tr class="separator:a84f7f497fd8bce0acaa2d4779bf2ad6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41310faef525f05eb0d47afd9087503" id="r_ab41310faef525f05eb0d47afd9087503"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#ab41310faef525f05eb0d47afd9087503">EVT_CLOCK_GPIO_CONFIG</a>&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)2U)</td></tr>
+<tr class="separator:ab41310faef525f05eb0d47afd9087503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3dd40717795f18f8aad968b93c9d8f" id="r_a4f3dd40717795f18f8aad968b93c9d8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#a4f3dd40717795f18f8aad968b93c9d8f">EVT_CLOCK_WEB_CONFIG</a>&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)3U)</td></tr>
+<tr class="separator:a4f3dd40717795f18f8aad968b93c9d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a997a08dd75e8c1304b72994f35c4edd6" id="r_a997a08dd75e8c1304b72994f35c4edd6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#a997a08dd75e8c1304b72994f35c4edd6">EVT_NTP_CONFIG</a>&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)4U)</td></tr>
+<tr class="separator:a997a08dd75e8c1304b72994f35c4edd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54a9f11a2a69b665be02eefd258fe67e" id="r_a54a9f11a2a69b665be02eefd258fe67e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#a54a9f11a2a69b665be02eefd258fe67e">EVT_WIFI_CONFIG</a>&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)5U)</td></tr>
+<tr class="separator:a54a9f11a2a69b665be02eefd258fe67e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33e1c4333c1003c0df9f1e4a51e4f244" id="r_a33e1c4333c1003c0df9f1e4a51e4f244"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#a33e1c4333c1003c0df9f1e4a51e4f244">EVT_PWM_CONFIG</a>&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)6U)</td></tr>
+<tr class="separator:a33e1c4333c1003c0df9f1e4a51e4f244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:ae8b6c8adf534325094a49505941c9f1a" id="r_ae8b6c8adf534325094a49505941c9f1a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a> { <br />
-&#160;&#160;<a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1aadefecdecde5f34de4a724e87d5a851ed">EVT_NONE</a> = 0
-, <a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1aaf29c2772a91888148d3f1bc0db1453fd">EVT_CLOCK_NTP_CONFIG</a>
-, <a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1aa61b4edce34b2cd8eddc358c7378d571a">EVT_CLOCK_GPIO_CONFIG</a>
-, <a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1aa3c2b9617adcf2c014f70421d79bffd0c">EVT_CLOCK_WEB_CONFIG</a>
-, <br />
-&#160;&#160;<a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1aa85d31e9e92e7f4ffead5f608bb5d4dd0">EVT_NTP_CONFIG</a>
-, <a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1aa38ab286bb56c6021e252ae9966eea3ff">EVT_WIFI_CONFIG</a>
-, <a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1aad766290460e6c44a5f52bd011d0e7058">EVT_PWM_CONFIG</a>
-<br />
- }</td></tr>
-<tr class="separator:ae8b6c8adf534325094a49505941c9f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ad03c610060289a565378332e0f6ebb36" id="r_ad03c610060289a565378332e0f6ebb36"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a></td></tr>
+<tr class="separator:ad03c610060289a565378332e0f6ebb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -166,27 +170,116 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="ae8b6c8adf534325094a49505941c9f1a" name="ae8b6c8adf534325094a49505941c9f1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8b6c8adf534325094a49505941c9f1a">&#9670;&#160;</a></span>event_bus_event_t</h2>
+<a id="ab41310faef525f05eb0d47afd9087503" name="ab41310faef525f05eb0d47afd9087503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab41310faef525f05eb0d47afd9087503">&#9670;&#160;</a></span>EVT_CLOCK_GPIO_CONFIG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="event__bus_8h.html#ae8b6c8adf534325094a49505941c9f1a">event_bus_event_t</a></td>
+          <td class="memname">#define EVT_CLOCK_GPIO_CONFIG&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)2U)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae8b6c8adf534325094a49505941c9f1aadefecdecde5f34de4a724e87d5a851ed" name="ae8b6c8adf534325094a49505941c9f1aadefecdecde5f34de4a724e87d5a851ed"></a>EVT_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae8b6c8adf534325094a49505941c9f1aaf29c2772a91888148d3f1bc0db1453fd" name="ae8b6c8adf534325094a49505941c9f1aaf29c2772a91888148d3f1bc0db1453fd"></a>EVT_CLOCK_NTP_CONFIG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae8b6c8adf534325094a49505941c9f1aa61b4edce34b2cd8eddc358c7378d571a" name="ae8b6c8adf534325094a49505941c9f1aa61b4edce34b2cd8eddc358c7378d571a"></a>EVT_CLOCK_GPIO_CONFIG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae8b6c8adf534325094a49505941c9f1aa3c2b9617adcf2c014f70421d79bffd0c" name="ae8b6c8adf534325094a49505941c9f1aa3c2b9617adcf2c014f70421d79bffd0c"></a>EVT_CLOCK_WEB_CONFIG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae8b6c8adf534325094a49505941c9f1aa85d31e9e92e7f4ffead5f608bb5d4dd0" name="ae8b6c8adf534325094a49505941c9f1aa85d31e9e92e7f4ffead5f608bb5d4dd0"></a>EVT_NTP_CONFIG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae8b6c8adf534325094a49505941c9f1aa38ab286bb56c6021e252ae9966eea3ff" name="ae8b6c8adf534325094a49505941c9f1aa38ab286bb56c6021e252ae9966eea3ff"></a>EVT_WIFI_CONFIG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae8b6c8adf534325094a49505941c9f1aad766290460e6c44a5f52bd011d0e7058" name="ae8b6c8adf534325094a49505941c9f1aad766290460e6c44a5f52bd011d0e7058"></a>EVT_PWM_CONFIG&#160;</td><td class="fielddoc"></td></tr>
-</table>
+
+</div>
+</div>
+<a id="a84f7f497fd8bce0acaa2d4779bf2ad6c" name="a84f7f497fd8bce0acaa2d4779bf2ad6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84f7f497fd8bce0acaa2d4779bf2ad6c">&#9670;&#160;</a></span>EVT_CLOCK_NTP_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVT_CLOCK_NTP_CONFIG&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)1U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f3dd40717795f18f8aad968b93c9d8f" name="a4f3dd40717795f18f8aad968b93c9d8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f3dd40717795f18f8aad968b93c9d8f">&#9670;&#160;</a></span>EVT_CLOCK_WEB_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVT_CLOCK_WEB_CONFIG&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)3U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9947227fadcc9634dfb998ed6d80a363" name="a9947227fadcc9634dfb998ed6d80a363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9947227fadcc9634dfb998ed6d80a363">&#9670;&#160;</a></span>EVT_NONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVT_NONE&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)0U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a997a08dd75e8c1304b72994f35c4edd6" name="a997a08dd75e8c1304b72994f35c4edd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a997a08dd75e8c1304b72994f35c4edd6">&#9670;&#160;</a></span>EVT_NTP_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVT_NTP_CONFIG&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)4U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33e1c4333c1003c0df9f1e4a51e4f244" name="a33e1c4333c1003c0df9f1e4a51e4f244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33e1c4333c1003c0df9f1e4a51e4f244">&#9670;&#160;</a></span>EVT_PWM_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVT_PWM_CONFIG&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)6U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a54a9f11a2a69b665be02eefd258fe67e" name="a54a9f11a2a69b665be02eefd258fe67e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54a9f11a2a69b665be02eefd258fe67e">&#9670;&#160;</a></span>EVT_WIFI_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVT_WIFI_CONFIG&#160;&#160;&#160;((<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a>)5U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ad03c610060289a565378332e0f6ebb36" name="ad03c610060289a565378332e0f6ebb36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad03c610060289a565378332e0f6ebb36">&#9670;&#160;</a></span>event_bus_event_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t <a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

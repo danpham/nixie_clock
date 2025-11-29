@@ -93,7 +93,6 @@ $(document).ready(function(){initNavTree('gpio__driver_8h.html',''); initResizab
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">gpio_driver.h File Reference</div></div>
 </div><!--header-->
@@ -128,6 +127,12 @@ Macros</h2></td></tr>
 <tr class="separator:a3b6279b01349d1dfb91370a4b374bf72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a623c435f02ebdf62fae39739a4c1fb07" id="r_a623c435f02ebdf62fae39739a4c1fb07"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__driver_8h.html#a623c435f02ebdf62fae39739a4c1fb07">BUTTON_STATE_PRESS</a>&#160;&#160;&#160;((<a class="el" href="gpio__driver_8h.html#a5cf995207feb3f3de79c0358bd491082">button_press_t</a>)1U)</td></tr>
 <tr class="separator:a623c435f02ebdf62fae39739a4c1fb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb905c3d93f045fb3426aea9f99ef2d8" id="r_acb905c3d93f045fb3426aea9f99ef2d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__driver_8h.html#acb905c3d93f045fb3426aea9f99ef2d8">MY_GPIO_PULL_NONE</a>&#160;&#160;&#160;((<a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a>)0U)</td></tr>
+<tr class="separator:acb905c3d93f045fb3426aea9f99ef2d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc1d302a6d3870bfb574c0a5e7bdea3" id="r_a6cc1d302a6d3870bfb574c0a5e7bdea3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__driver_8h.html#a6cc1d302a6d3870bfb574c0a5e7bdea3">MY_GPIO_PULL_UP</a>&#160;&#160;&#160;((<a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a>)1U)</td></tr>
+<tr class="separator:a6cc1d302a6d3870bfb574c0a5e7bdea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39b4f2910a0bc7e2336063523d488c9d" id="r_a39b4f2910a0bc7e2336063523d488c9d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__driver_8h.html#a39b4f2910a0bc7e2336063523d488c9d">MY_GPIO_PULL_DOWN</a>&#160;&#160;&#160;((<a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a>)2U)</td></tr>
+<tr class="separator:a39b4f2910a0bc7e2336063523d488c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -135,14 +140,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:a5cf995207feb3f3de79c0358bd491082"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5cf1c7aed7fa14284c355aa13ecccbd" id="r_ac5cf1c7aed7fa14284c355aa13ecccbd"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__driver_8h.html#ac5cf1c7aed7fa14284c355aa13ecccbd">button_state_t</a></td></tr>
 <tr class="separator:ac5cf1c7aed7fa14284c355aa13ecccbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aed33854949a167dbac512bdfac9ccfde" id="r_aed33854949a167dbac512bdfac9ccfde"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__driver_8h.html#aed33854949a167dbac512bdfac9ccfde">my_gpio_pull_t</a> { <a class="el" href="gpio__driver_8h.html#aed33854949a167dbac512bdfac9ccfdeadfd819d9d271c19095914f36f7ed0663">MY_GPIO_PULL_NONE</a>
-, <a class="el" href="gpio__driver_8h.html#aed33854949a167dbac512bdfac9ccfdeaa32901ca859d0f6f51347303755dc4a6">MY_GPIO_PULL_UP</a>
-, <a class="el" href="gpio__driver_8h.html#aed33854949a167dbac512bdfac9ccfdea887db199d5943bfba06e454e34cbdfbf">MY_GPIO_PULL_DOWN</a>
- }</td></tr>
-<tr class="separator:aed33854949a167dbac512bdfac9ccfde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c610c217f384afe50b5c6a033efb77d" id="r_a6c610c217f384afe50b5c6a033efb77d"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a></td></tr>
+<tr class="separator:a6c610c217f384afe50b5c6a033efb77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -210,6 +209,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a39b4f2910a0bc7e2336063523d488c9d" name="a39b4f2910a0bc7e2336063523d488c9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39b4f2910a0bc7e2336063523d488c9d">&#9670;&#160;</a></span>MY_GPIO_PULL_DOWN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MY_GPIO_PULL_DOWN&#160;&#160;&#160;((<a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a>)2U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acb905c3d93f045fb3426aea9f99ef2d8" name="acb905c3d93f045fb3426aea9f99ef2d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb905c3d93f045fb3426aea9f99ef2d8">&#9670;&#160;</a></span>MY_GPIO_PULL_NONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MY_GPIO_PULL_NONE&#160;&#160;&#160;((<a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a>)0U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6cc1d302a6d3870bfb574c0a5e7bdea3" name="a6cc1d302a6d3870bfb574c0a5e7bdea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc1d302a6d3870bfb574c0a5e7bdea3">&#9670;&#160;</a></span>MY_GPIO_PULL_UP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MY_GPIO_PULL_UP&#160;&#160;&#160;((<a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a>)1U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a5cf995207feb3f3de79c0358bd491082" name="a5cf995207feb3f3de79c0358bd491082"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5cf995207feb3f3de79c0358bd491082">&#9670;&#160;</a></span>button_press_t</h2>
@@ -239,23 +280,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="aed33854949a167dbac512bdfac9ccfde" name="aed33854949a167dbac512bdfac9ccfde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed33854949a167dbac512bdfac9ccfde">&#9670;&#160;</a></span>my_gpio_pull_t</h2>
+<a id="a6c610c217f384afe50b5c6a033efb77d" name="a6c610c217f384afe50b5c6a033efb77d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c610c217f384afe50b5c6a033efb77d">&#9670;&#160;</a></span>my_gpio_pull_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="gpio__driver_8h.html#aed33854949a167dbac512bdfac9ccfde">my_gpio_pull_t</a></td>
+          <td class="memname">typedef uint8_t <a class="el" href="gpio__driver_8h.html#a6c610c217f384afe50b5c6a033efb77d">my_gpio_pull_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aed33854949a167dbac512bdfac9ccfdeadfd819d9d271c19095914f36f7ed0663" name="aed33854949a167dbac512bdfac9ccfdeadfd819d9d271c19095914f36f7ed0663"></a>MY_GPIO_PULL_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aed33854949a167dbac512bdfac9ccfdeaa32901ca859d0f6f51347303755dc4a6" name="aed33854949a167dbac512bdfac9ccfdeaa32901ca859d0f6f51347303755dc4a6"></a>MY_GPIO_PULL_UP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aed33854949a167dbac512bdfac9ccfdea887db199d5943bfba06e454e34cbdfbf" name="aed33854949a167dbac512bdfac9ccfdea887db199d5943bfba06e454e34cbdfbf"></a>MY_GPIO_PULL_DOWN&#160;</td><td class="fielddoc"></td></tr>
-</table>
 
 </div>
 </div>
