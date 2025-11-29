@@ -42,8 +42,6 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
-void app_main(void);
-
 /* MISRA C:2012 Rule 8.9 deviation:
    app_main() is called externally by FreeRTOS/ESP-IDF runtime */
 // cppcheck-suppress unusedFunction
@@ -99,7 +97,7 @@ void app_main(void)
     evt_message.type = EVT_PWM_CONFIG;
     event_bus_publish(evt_message);
 
-    while(ret == ESP_OK) {
+    while (ret == ESP_OK) {
         esp_task_wdt_reset();
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
