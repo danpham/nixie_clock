@@ -12,19 +12,18 @@
 ******************************************************************/
 #define EVENT_BUS_MAX_PAYLOAD_SIZE   (32U)
 
+typedef uint8_t event_bus_event_t;
+#define EVT_NONE              ((event_bus_event_t)0U)
+#define EVT_CLOCK_NTP_CONFIG  ((event_bus_event_t)1U)
+#define EVT_CLOCK_GPIO_CONFIG ((event_bus_event_t)2U)
+#define EVT_CLOCK_WEB_CONFIG  ((event_bus_event_t)3U)
+#define EVT_NTP_CONFIG        ((event_bus_event_t)4U)
+#define EVT_WIFI_CONFIG       ((event_bus_event_t)5U)
+#define EVT_PWM_CONFIG        ((event_bus_event_t)6U)
+
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
-typedef enum {
-    EVT_NONE = 0,
-    EVT_CLOCK_NTP_CONFIG,
-    EVT_CLOCK_GPIO_CONFIG,
-    EVT_CLOCK_WEB_CONFIG,
-    EVT_NTP_CONFIG,
-    EVT_WIFI_CONFIG,
-    EVT_PWM_CONFIG,
-} event_bus_event_t;
-
 typedef struct {
     event_bus_event_t type;
     uint8_t payload[EVENT_BUS_MAX_PAYLOAD_SIZE];

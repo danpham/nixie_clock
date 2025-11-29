@@ -18,15 +18,14 @@ typedef uint8_t button_state_t;
 #define BUTTON_STATE_RELEASE   ((button_press_t)0U)
 #define BUTTON_STATE_PRESS     ((button_press_t)1U)
 
+typedef uint8_t my_gpio_pull_t;
+#define MY_GPIO_PULL_NONE   ((my_gpio_pull_t)0U)
+#define MY_GPIO_PULL_UP     ((my_gpio_pull_t)1U)
+#define MY_GPIO_PULL_DOWN   ((my_gpio_pull_t)2U)
+
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
 ******************************************************************/
-/* Pull-up / Pull-down enum */
-typedef enum {
-    MY_GPIO_PULL_NONE,
-    MY_GPIO_PULL_UP,
-    MY_GPIO_PULL_DOWN
-} my_gpio_pull_t;
 
 /* Button structure with debounce */
 typedef struct {

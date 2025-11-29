@@ -13,7 +13,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define BUTTON_LONG_PRESS_MS    2000U
+#define BUTTON_LONG_PRESS_MS    (2000U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
