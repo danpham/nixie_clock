@@ -171,7 +171,8 @@ var NAVTREEINDEX0 =
 "hv5622_8h_source.html":[1,0,0,0,0,8,1],
 "index.html":[],
 "main_8c.html":[1,0,0,0,1,0],
-"main_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70":[1,0,0,0,1,0,0],
+"main_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70":[1,0,0,0,1,0,1],
+"main_8c.html#aaf42084bec6a616804da8746da94daf5":[1,0,0,0,1,0,0],
 "ntp_8c.html":[1,0,0,0,0,9,0],
 "ntp_8c.html#a398aa1f1efb104064f9982ad5827d236":[1,0,0,0,0,9,0,2],
 "ntp_8c.html#acb415b5af967afd681b9413a60fb4d63":[1,0,0,0,0,9,0,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "structevent__bus__message__t.html#af31a3b5d924eed9aa1b118a26d73eba9":[0,0,2,2],
 "structmy__gpio__btn__t.html":[0,0,3],
 "structmy__gpio__btn__t.html#a026d423340e6e9bd42af6fd20d8f6df0":[0,0,3,5],
-"structmy__gpio__btn__t.html#a10b3ac012e2348f7afb9ecbf44f5afb5":[0,0,3,3],
-"structmy__gpio__btn__t.html#a2dcf914b81c7f04acc534a462eaa8af2":[0,0,3,6]
+"structmy__gpio__btn__t.html#a10b3ac012e2348f7afb9ecbf44f5afb5":[0,0,3,3]
 };

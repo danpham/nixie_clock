@@ -90,14 +90,16 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">main.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;esp_task_wdt.h&quot;</code><br />
+<code>#include &quot;esp_log.h&quot;</code><br />
 <code>#include &quot;driver/gpio.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="ntp_8h_source.html">../components/ntp/ntp.h</a>&quot;</code><br />
-<code>#include &quot;esp_log.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="uart_8h_source.html">../components/uart/uart.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="hv5622_8h_source.html">../components/hv5622/hv5622.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="display_8h_source.html">../components/display/display.h</a>&quot;</code><br />
@@ -113,14 +115,34 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="main_8c__incl.svg" width="2648" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8c__incl.svg" width="2404" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aaf42084bec6a616804da8746da94daf5" id="r_aaf42084bec6a616804da8746da94daf5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aaf42084bec6a616804da8746da94daf5">MAIN_TASK_WDT_TIMEOUT_S</a>&#160;&#160;&#160;5U</td></tr>
+<tr class="separator:aaf42084bec6a616804da8746da94daf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a630544a7f0a2cc40d8a7fefab7e2fe70" id="r_a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a> (void)</td></tr>
 <tr class="separator:a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aaf42084bec6a616804da8746da94daf5" name="aaf42084bec6a616804da8746da94daf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf42084bec6a616804da8746da94daf5">&#9670;&#160;</a></span>MAIN_TASK_WDT_TIMEOUT_S</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAIN_TASK_WDT_TIMEOUT_S&#160;&#160;&#160;5U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a630544a7f0a2cc40d8a7fefab7e2fe70" name="a630544a7f0a2cc40d8a7fefab7e2fe70"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a630544a7f0a2cc40d8a7fefab7e2fe70">&#9670;&#160;</a></span>app_main()</h2>
