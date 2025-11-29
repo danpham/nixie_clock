@@ -42,6 +42,8 @@
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
+void app_main(void);
+
 /* MISRA C:2012 Rule 8.9 deviation:
    app_main() is called externally by FreeRTOS/ESP-IDF runtime */
 // cppcheck-suppress unusedFunction
