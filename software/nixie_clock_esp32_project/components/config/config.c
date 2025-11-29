@@ -171,7 +171,6 @@ esp_err_t config_save(void)
             evt_message.type = EVT_WIFI_CONFIG;
             evt_message.payload_size = 0U;
             event_bus_publish(evt_message);
-            wifi_update = false;
         }
 
         /* Update previous config */
