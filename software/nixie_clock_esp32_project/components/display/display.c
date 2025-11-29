@@ -45,7 +45,7 @@ NOT_STATIC uint64_t display_pattern_1_get(uint8_t step);
  * @return Calculated shift value.
  */
 NOT_STATIC uint8_t shift_compute(uint8_t number) {
-    uint8_t shift_number = 0;
+    uint8_t shift_number = 0U;
 
     if  ((number > 0U) && (number <= (uint8_t)10U))
     {
@@ -92,7 +92,7 @@ NOT_STATIC uint64_t encode_time(uint8_t hours, uint8_t minutes, uint8_t seconds,
  * @return Encoded 64-bit data
  */
 NOT_STATIC uint64_t encode_time_digits(const uint8_t * nixies, uint8_t dot1, uint8_t dot2, uint8_t nixie3_dot, uint8_t nixie6_dot) {
-    uint64_t data = 0;
+    uint64_t data = 0U;
  
     data |= ((uint64_t)dot1 & (uint64_t)0x01U) << 11;
     data |= ((uint64_t)dot2 & (uint64_t)0x01U) << 53;
@@ -118,11 +118,11 @@ NOT_STATIC uint64_t display_pattern_1_get(uint8_t step) {
     uint8_t nixies[DISPLAY_NIXIE_COUNT];
     uint8_t tmp = (uint8_t)(step % (uint8_t)10U);
     
-    for (uint8_t i = 0; i < DISPLAY_NIXIE_COUNT; ++i) {
+    for (uint8_t i = 0U; i < DISPLAY_NIXIE_COUNT; ++i) {
         nixies[i] = tmp;
     }
 
-    return encode_time_digits(nixies, 1, 1, 1, 1);
+    return encode_time_digits(nixies, 1U, 1U, 1U, 1U);
 }
 
 /**
@@ -142,7 +142,7 @@ void display_init(void) {
  * @param dot2 Second dot
  */
 void display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2) {
-    hv5622_send64(encode_time(hours, minutes, seconds, dot1, dot2, 0, 0));
+    hv5622_send64(encode_time(hours, minutes, seconds, dot1, dot2, 0U, 0U));
 }
 
 /**
