@@ -12,7 +12,7 @@ var searchData=
   ['event_5fbus_5fqueue_5fsize_9',['EVENT_BUS_QUEUE_SIZE',['../event__bus_8c.html#ae2bfd215d64a21c508245bfd498f91e1',1,'event_bus.c']]],
   ['event_5fbus_5ftry_5fpublish_10',['event_bus_try_publish',['../event__bus_8h.html#abe3e99dfebe392de6462bc2ea30d7b62',1,'event_bus.h']]],
   ['event_5fbus_5fwait_11',['event_bus_wait',['../event__bus_8c.html#a4b8ef223aef7d300da0a6d1bbd493424',1,'event_bus_wait(TickType_t timeout):&#160;event_bus.c'],['../event__bus_8h.html#a4b8ef223aef7d300da0a6d1bbd493424',1,'event_bus_wait(TickType_t timeout):&#160;event_bus.c']]],
-  ['event_5fcallback_5ft_12',['event_callback_t',['../dispatcher_8h.html#abd2005222e7b631bf4b34e4aaca284aa',1,'dispatcher.h']]],
+  ['event_5fcallback_5ft_12',['event_callback_t',['../dispatcher__task_8h.html#abd2005222e7b631bf4b34e4aaca284aa',1,'dispatcher_task.h']]],
   ['evt_5fclock_5fgpio_5fconfig_13',['EVT_CLOCK_GPIO_CONFIG',['../event__bus_8h.html#ab41310faef525f05eb0d47afd9087503',1,'event_bus.h']]],
   ['evt_5fclock_5fntp_5fconfig_14',['EVT_CLOCK_NTP_CONFIG',['../event__bus_8h.html#a84f7f497fd8bce0acaa2d4779bf2ad6c',1,'event_bus.h']]],
   ['evt_5fclock_5fweb_5fconfig_15',['EVT_CLOCK_WEB_CONFIG',['../event__bus_8h.html#a4f3dd40717795f18f8aad968b93c9d8f',1,'event_bus.h']]],

@@ -243,10 +243,10 @@
 <!-- Node20 -->
 <g id="Node000020" class="node">
 <title>Node20</title>
-<g id="a_Node000020"><a xlink:href="dispatcher_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000020"><a xlink:href="dispatcher__task_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="1193.5,-151 1053.5,-151 1053.5,-121 1193.5,-121 1193.5,-151"/>
 <text text-anchor="start" x="1061.5" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">../components/dispatcher</text>
-<text text-anchor="middle" x="1123.5" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">/dispatcher.h</text>
+<text text-anchor="middle" x="1123.5" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">_task/dispatcher_task.h</text>
 </a>
 </g>
 </g>

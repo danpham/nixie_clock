@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Nixie clock: software/nixie_clock_esp32_project/components/dispatcher/dispatcher.h File Reference</title>
+<title>Nixie clock: software/nixie_clock_esp32_project/components/dispatcher_task/dispatcher_task.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dispatcher_8h.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('dispatcher__task_8c.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,48 +90,52 @@ $(document).ready(function(){initNavTree('dispatcher_8h.html',''); initResizable
 
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">dispatcher.h File Reference</div></div>
+  <div class="headertitle"><div class="title">dispatcher_task.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="event__bus_8h_source.html">../event_bus/event_bus.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;esp_task_wdt.h&quot;</code><br />
+<code>#include &quot;esp_log.h&quot;</code><br />
+<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
+<code>#include &quot;freertos/semphr.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="event__bus_8h_source.html">event_bus.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="dispatcher__task_8h_source.html">dispatcher_task.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for dispatcher.h:</div>
+Include dependency graph for dispatcher_task.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="dispatcher_8h__incl.svg" width="315" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="dispatcher__task_8c__incl.svg" width="670" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="dispatcher_8h__dep__incl.svg" width="446" height="168"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
-<p><a href="dispatcher_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:abd2005222e7b631bf4b34e4aaca284aa" id="r_abd2005222e7b631bf4b34e4aaca284aa"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a>) (uint8_t *payload, uint8_t size)</td></tr>
-<tr class="separator:abd2005222e7b631bf4b34e4aaca284aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsubscriber__t.html">subscriber_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ace926d2a7c63c15f7b7fa0b1ae8ca717" id="r_ace926d2a7c63c15f7b7fa0b1ae8ca717"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher__task_8c.html#ace926d2a7c63c15f7b7fa0b1ae8ca717">MAX_SUBSCRIBERS</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:ace926d2a7c63c15f7b7fa0b1ae8ca717"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a40702206429c86d637b5fd6cbd023769" id="r_a40702206429c86d637b5fd6cbd023769"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#a40702206429c86d637b5fd6cbd023769">dispatcher_subscribe</a> (<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a> evt_type, <a class="el" href="dispatcher_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a> cb)</td></tr>
+<tr class="memitem:a40702206429c86d637b5fd6cbd023769" id="r_a40702206429c86d637b5fd6cbd023769"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher__task_8c.html#a40702206429c86d637b5fd6cbd023769">dispatcher_subscribe</a> (<a class="el" href="event__bus_8h.html#ad03c610060289a565378332e0f6ebb36">event_bus_event_t</a> evt_type, <a class="el" href="dispatcher__task_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a> cb)</td></tr>
 <tr class="memdesc:a40702206429c86d637b5fd6cbd023769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe a callback to a specific event.  <br /></td></tr>
 <tr class="separator:a40702206429c86d637b5fd6cbd023769"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1c674e985f382be4e480d39f0b3da9f" id="r_ac1c674e985f382be4e480d39f0b3da9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher_8h.html#ac1c674e985f382be4e480d39f0b3da9f">dispatcher_task_start</a> (void)</td></tr>
+<tr class="memitem:ac1c674e985f382be4e480d39f0b3da9f" id="r_ac1c674e985f382be4e480d39f0b3da9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dispatcher__task_8c.html#ac1c674e985f382be4e480d39f0b3da9f">dispatcher_task_start</a> (void)</td></tr>
 <tr class="memdesc:ac1c674e985f382be4e480d39f0b3da9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the dispatcher task.  <br /></td></tr>
 <tr class="separator:ac1c674e985f382be4e480d39f0b3da9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="abd2005222e7b631bf4b34e4aaca284aa" name="abd2005222e7b631bf4b34e4aaca284aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd2005222e7b631bf4b34e4aaca284aa">&#9670;&#160;</a></span>event_callback_t</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ace926d2a7c63c15f7b7fa0b1ae8ca717" name="ace926d2a7c63c15f7b7fa0b1ae8ca717"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace926d2a7c63c15f7b7fa0b1ae8ca717">&#9670;&#160;</a></span>MAX_SUBSCRIBERS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* event_callback_t) (uint8_t *payload, uint8_t size)</td>
+          <td class="memname">#define MAX_SUBSCRIBERS&#160;&#160;&#160;16</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -154,7 +158,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="dispatcher_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="dispatcher__task_8h.html#abd2005222e7b631bf4b34e4aaca284aa">event_callback_t</a>&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -194,7 +198,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_c8fa76d8dc1b9e06ff8aeb3121608b1b.html">software</a></li><li class="navelem"><a class="el" href="dir_4e80761515fcd0d8a8682b4ebda49685.html">nixie_clock_esp32_project</a></li><li class="navelem"><a class="el" href="dir_b181baf956279f894a730e459ce47bc5.html">components</a></li><li class="navelem"><a class="el" href="dir_bfdcce58a23cc395bda28f665cadf99d.html">dispatcher</a></li><li class="navelem"><a class="el" href="dispatcher_8h.html">dispatcher.h</a></li>
+    <li class="navelem"><a class="el" href="dir_c8fa76d8dc1b9e06ff8aeb3121608b1b.html">software</a></li><li class="navelem"><a class="el" href="dir_4e80761515fcd0d8a8682b4ebda49685.html">nixie_clock_esp32_project</a></li><li class="navelem"><a class="el" href="dir_b181baf956279f894a730e459ce47bc5.html">components</a></li><li class="navelem"><a class="el" href="dir_4b8e3d6e776ac08673ce436ae24ce3ad.html">dispatcher_task</a></li><li class="navelem"><a class="el" href="dispatcher__task_8c.html">dispatcher_task.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

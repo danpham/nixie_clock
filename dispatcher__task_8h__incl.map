@@ -1,5 +1,5 @@
-<map id="software/nixie_clock_esp32_project/components/dispatcher/dispatcher.h" name="software/nixie_clock_esp32_project/components/dispatcher/dispatcher.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="60,5,264,60"/>
+<map id="software/nixie_clock_esp32_project/components/dispatcher_task/dispatcher_task.h" name="software/nixie_clock_esp32_project/components/dispatcher_task/dispatcher_task.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="38,5,286,60"/>
 <area shape="rect" id="Node000002" href="$event__bus_8h.html" title=" " alt="" coords="91,108,233,148"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,60,165,94,159,94,159,60"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,196,156,221"/>

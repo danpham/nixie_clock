@@ -2,7 +2,7 @@ var searchData=
 [
   ['main_2ec_0',['main.c',['../main_8c.html',1,'']]],
   ['main_5ftask_5fwdt_5ftimeout_5fs_1',['MAIN_TASK_WDT_TIMEOUT_S',['../main_8c.html#aaf42084bec6a616804da8746da94daf5',1,'main.c']]],
-  ['max_5fsubscribers_2',['MAX_SUBSCRIBERS',['../dispatcher_8c.html#ace926d2a7c63c15f7b7fa0b1ae8ca717',1,'dispatcher.c']]],
+  ['max_5fsubscribers_2',['MAX_SUBSCRIBERS',['../dispatcher__task_8c.html#ace926d2a7c63c15f7b7fa0b1ae8ca717',1,'dispatcher_task.c']]],
   ['minutes_3',['minutes',['../structmyclock__t.html#a5726735bf66b54e9c8c5a3400f2b8094',1,'myclock_t']]],
   ['mode_4',['mode',['../structconfig__t.html#aa8b34067362e1666f7ab6ed6f49aa103',1,'config_t']]],
   ['my_5fgpio_5fbtn_5ft_5',['my_gpio_btn_t',['../structmy__gpio__btn__t.html',1,'']]],
