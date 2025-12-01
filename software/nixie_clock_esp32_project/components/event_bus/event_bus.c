@@ -8,6 +8,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define EVENT_BUS_QUEUE_SIZE    (32U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -39,7 +40,7 @@ static QueueHandle_t s_event_queue = NULL;
 void event_bus_init(void)
 {
     if (s_event_queue == NULL) {
-        s_event_queue = xQueueCreate(32, sizeof(event_bus_message_t));
+        s_event_queue = xQueueCreate(EVENT_BUS_QUEUE_SIZE, sizeof(event_bus_message_t));
     }
 }
 

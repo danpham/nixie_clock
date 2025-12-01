@@ -4,6 +4,8 @@
 #ifdef STATIC_ANALYSIS
 #include "../test/common/esp_stub.h"
 #endif
+#include "esp_task_wdt.h"
+#include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "clock_task.h"
@@ -12,7 +14,6 @@
 #include "../gpio_task/gpio_task.h"
 #include "../gpio_driver/gpio_driver.h"
 #include "../rotary_encoder/rotary_encoder.h"
-#include "esp_log.h"
 #include "../config/config.h"
 
 /******************************************************************
@@ -64,6 +65,9 @@ static void clock_task(void *arg) {
     bool in_test_mode = false;
     esp_err_t ret = ESP_OK;
 
+    /* Add task watchdog */
+    esp_task_wdt_add(NULL);
+
     clock_init(&clk, CONFIG_CLOCK_DEFAULT_HOURS, CONFIG_CLOCK_DEFAULT_MINUTES, CONFIG_CLOCK_DEFAULT_SECONDS);
 
     TickType_t lastTick = xTaskGetTickCount();
@@ -71,6 +75,9 @@ static void clock_task(void *arg) {
     const TickType_t displayPeriod = pdMS_TO_TICKS(50);   // 50ms
 
     while (ret == ESP_OK) {
+        /* Reset watchdog */
+        esp_task_wdt_reset();
+
         TickType_t now = xTaskGetTickCount();
         
         /* Get latest configuration */

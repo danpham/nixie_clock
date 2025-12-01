@@ -7,6 +7,7 @@
 #include "esp_sntp.h"
 #include "esp_netif.h"
 #include "esp_netif_sntp.h"
+#include "esp_task_wdt.h"
 #include "esp_log.h"
 #include "../clock/clock.h"
 #include "ntp.h"
@@ -100,6 +101,10 @@ static void time_sync_notification_cb(struct timeval *tv)
 static void time_sync_task(void *arg)
 {
     (void)arg;
+    
+    /* Add task watchdog */
+    esp_task_wdt_add(NULL);
+
     bool wifi_ready = false;
     ESP_LOGI(NTP_TAG, "Waiting for Wi-Fi connection...");
 
@@ -115,6 +120,9 @@ static void time_sync_task(void *arg)
             wifi_ready = true;
         }
         else {
+            /* Reset watchdog */
+            esp_task_wdt_reset();
+
             vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
         }
     }

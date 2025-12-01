@@ -6,10 +6,11 @@
 #endif
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_task_wdt.h"
+#include "esp_log.h"
 #include "gpio_task.h"
 #include "../gpio_driver/gpio_driver.h"
 #include "../rotary_encoder/rotary_encoder.h"
-#include "esp_log.h"
 #include "../event_bus/event_bus.h"
 
 /******************************************************************
@@ -48,6 +49,9 @@ static void gpio_task(void *arg)
     static const char GPIO_TASK_TAG[] = "GPIO_TASK";
     (void)arg;
 
+    /* Add task watchdog */
+    esp_task_wdt_add(NULL);
+
     my_gpio_btn_t rotaryEncoderSwitch = {
         .pin = GPIO_NUM_3,
         .pull = MY_GPIO_PULL_NONE,
@@ -84,6 +88,9 @@ static void gpio_task(void *arg)
     button_state_t state_last_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
     while(1) {
+        /* Reset watchdog */
+        esp_task_wdt_reset();
+
         button_state_t state_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
         /* Avoid sending event when no changes */
