@@ -85,7 +85,8 @@
         "xmemory": "c",
         "xtree": "c",
         "esp_task_wdt.h": "c",
-        "esp_int_wdt.h": "c"
+        "esp_int_wdt.h": "c",
+        "dispatcher_task.h": "c"
     },
     "idf.flashType": "UART"
 }

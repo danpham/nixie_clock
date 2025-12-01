@@ -6,7 +6,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "event_bus.h"
-#include "dispatcher.h"
+#include "dispatcher_task.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)

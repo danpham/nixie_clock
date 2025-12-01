@@ -16,7 +16,7 @@
 #include "../components/webserver/webserver.h"
 #include "../components/config/config.h"
 #include "../components/pwm/pwm.h"
-#include "../components/dispatcher/dispatcher.h"
+#include "../components/dispatcher_task/dispatcher_task.h"
 #include "../components/event_bus/event_bus.h"
 #include "../components/wifi/wifi.h"
 #include "../components/clock_task/clock_task.h"
