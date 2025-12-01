@@ -1,17 +1,19 @@
 <map id="software/nixie_clock_esp32_project/components/dispatcher/dispatcher.c" name="software/nixie_clock_esp32_project/components/dispatcher/dispatcher.c">
-<area shape="rect" id="Node000001" title=" " alt="" coords="132,5,336,60"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,89,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,62,86,105,83,100,176,58"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="77,255,228,280"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="195,62,172,83,155,109,145,143,143,179,149,241,144,242,137,179,140,142,150,107,168,80,191,58"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="165,108,303,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="237,60,237,94,231,94,231,60"/>
-<area shape="rect" id="Node000005" href="$event__bus_8h.html" title=" " alt="" coords="290,181,391,207"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="272,58,295,80,316,107,331,137,339,167,334,168,326,139,312,109,291,84,268,62"/>
-<area shape="rect" id="Node000007" href="$dispatcher_8h.html" title=" " alt="" coords="378,108,479,133"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="295,58,391,100,389,105,292,63"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="311,209,197,252,195,247,310,204"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="276,255,405,280"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="343,207,343,241,338,241,338,207"/>
-<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="416,135,367,175,364,170,413,131"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="226,5,430,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,128,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,63,115,106,114,101,247,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="153,108,237,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="289,62,225,103,222,98,286,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="225,255,375,280"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="318,61,303,109,297,180,300,241,295,241,292,180,297,107,313,59"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="313,108,450,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="347,59,369,95,365,98,342,61"/>
+<area shape="rect" id="Node000006" href="$event__bus_8h.html" title=" " alt="" coords="437,181,539,207"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="399,58,433,79,463,106,480,136,488,167,483,168,475,138,459,110,430,83,396,62"/>
+<area shape="rect" id="Node000008" href="$dispatcher_8h.html" title=" " alt="" coords="525,108,627,133"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="405,58,531,101,529,106,403,63"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="459,209,344,252,343,247,457,204"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="423,255,553,280"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="491,207,491,241,485,241,485,207"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="564,135,515,175,511,170,560,131"/>
 </map>

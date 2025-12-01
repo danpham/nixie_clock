@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"structmy__gpio__btn__t.html#a436dff033c9671aa179ba4b72f0cf971":[0,0,3,2],
 "structmy__gpio__btn__t.html#a86ec3908a02808d78d0d8b6def56283a":[0,0,3,0],
 "structmy__gpio__btn__t.html#a8dd95e7eda502b170a8b2f9fd332c8af":[0,0,3,4],
 "structmy__gpio__btn__t.html#ab01af6af705c12f5a6b248ef1cb04ead":[0,0,3,1],
