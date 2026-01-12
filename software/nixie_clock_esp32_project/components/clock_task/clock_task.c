@@ -315,12 +315,13 @@ void clock_update_from_config_callback(uint8_t* payload, uint8_t size)
     /* Get latest configuration */
     result = config_get_copy(&config);
     if (result == ESP_OK) {
-        
         /* If no NTP sync */
         if (config.ntp == 0U) {
-            xSemaphoreTake(clk_mutex, portMAX_DELAY);
-            clock_init(&clk, config.time.hours, config.time.minutes, config.time.seconds);
-            xSemaphoreGive(clk_mutex);
+            if (clk_mutex != NULL) {
+                xSemaphoreTake(clk_mutex, portMAX_DELAY);
+                clock_init(&clk, config.time.hours, config.time.minutes, config.time.seconds);
+                xSemaphoreGive(clk_mutex);
+            }
         }
     }
     else {

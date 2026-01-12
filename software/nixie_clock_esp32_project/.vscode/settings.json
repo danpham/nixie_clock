@@ -88,5 +88,6 @@
         "esp_int_wdt.h": "c",
         "dispatcher_task.h": "c"
     },
-    "idf.flashType": "UART"
+    "idf.flashType": "UART",
+    "idf.portWin": "COM19"
 }

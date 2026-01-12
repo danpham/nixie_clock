@@ -31,6 +31,9 @@
 ******************************************************************/
 esp_err_t nvs_init(void);
 
+esp_err_t nvs_save_init_flag(uint8_t enabled);
+esp_err_t nvs_load_init_flag(uint8_t *enabled);
+
 esp_err_t nvs_save_ntp(uint8_t enabled);
 esp_err_t nvs_load_ntp(uint8_t *enabled);
 

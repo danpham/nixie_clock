@@ -12,7 +12,8 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define CONFIG_PWM_DEFAULT_DUTYCYCLE     (255U)
+#define CONFIG_INIT_FLAG                 (1U)
+#define CONFIG_PWM_DEFAULT_DUTYCYCLE     (128U)
 #define CONFIG_CLOCK_DEFAULT_HOURS       (12U)
 #define CONFIG_CLOCK_DEFAULT_MINUTES     (0U)
 #define CONFIG_CLOCK_DEFAULT_SECONDS     (0U)
@@ -50,6 +51,7 @@ extern const TickType_t CONFIG_MUTEX_TIMEOUT;
 ******************************************************************/
 esp_err_t config_init(void);
 esp_err_t config_save(void);
+esp_err_t config_read(void);
 esp_err_t config_get_copy(config_t *copy);
 esp_err_t config_set_config(const config_t *config);
 

@@ -11,7 +11,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
  ******************************************************************/
-#define MAX_SUBSCRIBERS 16
+#define MAX_SUBSCRIBERS 16U
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -63,14 +63,16 @@ static void dispatcher_task(void *arg)
     /* Reset watchdog */
     esp_task_wdt_reset();
 
-    /* Wait for the next event*/
-    event_bus_message_t evt_message = event_bus_wait(portMAX_DELAY);
+    /* Wait for the next event, not blocking for watchdog */
+    event_bus_message_t evt_message = event_bus_wait(pdMS_TO_TICKS(500));
 
-    /* Call all callbacks subscribed to this event */
-    for (int i = 0; i < subscriber_count; i++) {
-      if (subscribers[i].evt_type == evt_message.type) {
-        if(subscribers[i].cb != NULL) {
-          subscribers[i].cb(evt_message.payload, evt_message.payload_size);
+    if (evt_message.type != EVT_NONE) {
+      /* Call all callbacks subscribed to this event */
+      for (int i = 0; i < subscriber_count; i++) {
+        if (subscribers[i].evt_type == evt_message.type) {
+          if(subscribers[i].cb != NULL) {
+            subscribers[i].cb(evt_message.payload, evt_message.payload_size);
+          }
         }
       }
     }

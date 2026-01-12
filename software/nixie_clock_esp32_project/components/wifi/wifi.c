@@ -15,6 +15,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define WIFI_MAX_RETRY        (5U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -24,6 +25,8 @@
  * 4. Variable definitions (static then global)
 ******************************************************************/
 static const char *WIFI_TAG = "wifi";
+static uint8_t wifi_sta_retry_count = 0U;
+static bool wifi_sta_cfg_update_pending = false;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -32,6 +35,7 @@ static const char *WIFI_TAG = "wifi";
 /******************************************************************
  * 6. Functions definitions
 ******************************************************************/
+static esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphrase);
 
 /**
  * @brief Wi-Fi and IP event handler
@@ -57,8 +61,33 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
         ESP_LOGI(WIFI_TAG, "Wi‑Fi STA started, connecting...");
         esp_wifi_connect();
     } else if ((event_base == WIFI_EVENT) && (event_id == WIFI_EVENT_STA_DISCONNECTED)) {
-        ESP_LOGI(WIFI_TAG, "Wi‑Fi STA disconnected, reconnecting…");
-        esp_wifi_connect();
+        if (wifi_sta_cfg_update_pending == true) {
+            config_t config;
+            esp_err_t cfg_ret;
+
+            /* Get latest configuration */
+            cfg_ret = config_get_copy(&config);
+            if (cfg_ret == ESP_OK) {
+                wifi_change_sta(config.ssid, config.wpa_passphrase);
+                esp_wifi_connect();
+                ESP_LOGI(WIFI_TAG, "Wi-Fi STA config updated, reconnecting...");
+            }
+            else{
+                ESP_LOGE(WIFI_TAG, "Failed to get configuration for Wi-Fi update");
+            }
+            wifi_sta_cfg_update_pending = false;
+        } else {
+
+            /* Regular disconnect handling */
+            if (wifi_sta_retry_count < WIFI_MAX_RETRY) {
+                esp_wifi_connect();
+                wifi_sta_retry_count++;
+                ESP_LOGI(WIFI_TAG, "Wi-Fi STA disconnected, retrying connection (%d/%d)",
+                        wifi_sta_retry_count, WIFI_MAX_RETRY);
+            } else {
+                ESP_LOGW(WIFI_TAG, "Wi-Fi STA disconnected, max retries reached");
+            }
+        }
     } else if ((event_base == IP_EVENT) && (event_id == IP_EVENT_STA_GOT_IP)) {
         ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
         ESP_LOGI(WIFI_TAG, "IP: " IPSTR, IP2STR(&event->ip_info.ip));
@@ -233,14 +262,7 @@ static esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphras
         if (ret != ESP_OK) {
             ESP_LOGE(WIFI_TAG, "esp_wifi_set_config failed: %s", esp_err_to_name(ret));
         }
-    }
-
-    /* Reconnect the STA */
-    if (ret == ESP_OK) {
-        ret = esp_wifi_connect();
-        if (ret != ESP_OK) {
-            ESP_LOGE(WIFI_TAG, "esp_wifi_connect failed: %s", esp_err_to_name(ret));
-        } else {
+        else {
             ESP_LOGI(WIFI_TAG, "STA updated: SSID=%s", sta_ssid);
         }
     }
@@ -257,37 +279,35 @@ static esp_err_t wifi_change_sta(const char* sta_ssid, const char* sta_passphras
  *
  * @note Logs an error if updating the STA Wi-Fi fails.
  */
-void wifi_callback(uint8_t* payload, uint8_t size)
-{
+void wifi_callback(uint8_t* payload, uint8_t size) {
     (void)payload;
     (void)size;
-    esp_err_t result = ESP_OK;
     config_t config;
-    static const char SERVICE_MANAGER_TAG[] = "SERVICE_MANAGER";
+    static bool wifi_initialized = false;
+    esp_err_t cfg_ret;
 
     /* Get latest configuration */
-    result = config_get_copy(&config);
-    if (result != ESP_OK)
-    {
-
-        BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
-        if (taken == pdTRUE)
-        {
-            static bool wifi_initialized = false;
-
-            if (wifi_initialized == false)
-            {
-                wifi_init_apsta(config.ssid, config.wpa_passphrase, WIFI_AP_SSID, WIFI_AP_PASSWORD);
-                wifi_initialized = true;
-            }
-            else
-            {
-                esp_err_t wifi_ret = wifi_change_sta(config.ssid, config.wpa_passphrase);
-                if (wifi_ret != ESP_OK)
-                {
-                    ESP_LOGE(SERVICE_MANAGER_TAG, "Failed to update STA Wi-Fi");
-                }
+    cfg_ret = config_get_copy(&config);
+    if (cfg_ret == ESP_OK) {
+        if (wifi_initialized == false) {
+            wifi_init_apsta(config.ssid, config.wpa_passphrase, WIFI_AP_SSID, WIFI_AP_PASSWORD);
+            wifi_initialized = true;
+        } else {
+            wifi_sta_retry_count = 0U;
+            wifi_ap_record_t info;
+            if (esp_wifi_sta_get_ap_info(&info) == ESP_OK) {
+                ESP_LOGI(WIFI_TAG, "STA connected, disconnecting...");
+                wifi_sta_cfg_update_pending = true;
+                esp_wifi_disconnect();
+            } else {
+                /* wifi:Haven't to connect to a suitable AP now!: is a regular warning coming from
+                esp_wifi_sta_get_ap_info when state is disconnected or connecting */
+                ESP_LOGI(WIFI_TAG, "STA not connected, updating config and reconnecting...");
+                wifi_change_sta(config.ssid, config.wpa_passphrase);
+                esp_wifi_connect();
             }
         }
+    } else {
+        ESP_LOGE(WIFI_TAG, "Failed to get configuration");
     }
 }

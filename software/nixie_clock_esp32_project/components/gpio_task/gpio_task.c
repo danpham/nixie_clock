@@ -99,16 +99,16 @@ static void gpio_task(void *arg)
             event_bus_message_t evt_message;
             evt_message.type = EVT_CLOCK_GPIO_CONFIG;
             evt_message.payload_size = 3U;
-            evt_message.payload[0] = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
-            evt_message.payload[1] = rotaryEncoderSwitch.press_type;
-            evt_message.payload[2] = 0U;
+            evt_message.payload[0U] = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
+            evt_message.payload[1U] = rotaryEncoderSwitch.press_type;
+            evt_message.payload[2U] = 0U;
             event_bus_publish(evt_message);
 
-            if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
+            /* if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
                 ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
             } else {
                 ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
-            }
+            } */
 
             state_last_rotarySwitch = state_rotarySwitch;
         }
@@ -120,17 +120,17 @@ static void gpio_task(void *arg)
             event_bus_message_t evt_message;
             evt_message.type = EVT_CLOCK_GPIO_CONFIG;
             evt_message.payload_size = 3U;
-            evt_message.payload[0] = (buttons_type_t)BUTTON_ROTARY_ENCODER;
-            evt_message.payload[1] = 0U;
-            evt_message.payload[2] = (uint8_t)ev;
+            evt_message.payload[0U] = (buttons_type_t)BUTTON_ROTARY_ENCODER;
+            evt_message.payload[1U] = 0U;
+            evt_message.payload[2U] = (uint8_t)ev;
             event_bus_publish(evt_message);
 
-            ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
+            //ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
         }
         state_last_rotaryChanA = state_rotaryChanA;
         state_last_rotaryChanB = state_rotaryChanB;
 
-        vTaskDelay(pdMS_TO_TICKS(5));
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
 
@@ -144,7 +144,7 @@ void gpio_task_start(void)
     xTaskCreate(
         gpio_task,     /* Task function */
         "gpio_task",   /* Task name (for debugging) */
-        configMINIMAL_STACK_SIZE, /* Stack size in bytes */
+        4096,          /* Stack size in bytes */
         NULL,          /* Parameter passed to the task */
         3U,            /* Task priority */
         NULL           /* Task handle (optional) */

@@ -13,12 +13,18 @@
 #include "esp_netif.h"
 #include "webserver.h"
 #include "config.h"
+#include "wifi.h"
+#include "../event_bus/event_bus.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
 #define WEBSERVER_HTML_PAGE_SIZE                 (8192U)
 #define WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE     (256U)
+#define WEBSERVER_URLDEC_OK                      ((uint8_t)0x00)
+#define WEBSERVER_URLDEC_WARN_TRUNCATED          ((uint8_t)0x01)
+#define WEBSERVER_URLDEC_WARN_INVALID_SEQ        ((uint8_t)0x02)
+#define WEBSERVER_URLDEC_ERR_BAD_PARAM           ((uint8_t)0x80)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -32,6 +38,8 @@
  * 5. Functions prototypes (static only)
 ******************************************************************/
 static const char* get_html_page(void);
+static int hex_to_uint8(uint8_t c);
+static uint8_t url_decode(uint8_t *dst, size_t dst_size, const uint8_t *src, size_t src_len, size_t *out_len);
 
 /**
  * @brief Handles the root page ("/") request.
@@ -54,13 +62,16 @@ static esp_err_t root_handler(httpd_req_t *req)
     ret = config_get_copy(&config);
     if (ESP_OK == ret) {
         int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
-        config.time.hours, config.time.minutes, config.time.seconds,
-        config.ssid, config.wpa_passphrase,
         (config.ntp == 1) ? "checked" : "",
+        config.time.hours,
+        config.time.minutes,
+        config.time.seconds,
+        config.ssid,
+        config.wpa_passphrase,
         (config.mode == 0) ? "checked" : "",
         (config.mode == 1) ? "checked" : "",
         (config.mode == 2) ? "checked" : "",
-        config.dutycycle, config.dutycycle);
+        config.dutycycle);
 
         if (ret_modify_html < 0) {
             ret = ESP_FAIL;
@@ -84,6 +95,8 @@ static esp_err_t root_handler(httpd_req_t *req)
  */
 static esp_err_t update_handler(httpd_req_t *req)
 {
+    static const char WEBSERVER_TAG[] = "WEBSERVER";
+
     char req_recv_buf[WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE];
     config_t new_config;
     esp_err_t ret = ESP_OK;
@@ -101,7 +114,7 @@ static esp_err_t update_handler(httpd_req_t *req)
 
     if (ret == ESP_OK) {
         esp_err_t query_res;
-        char tmp[64];
+        char tmp[64U];
 
         req_recv_buf[(size_t)len] = 0; /* Null-terminate received data */
 
@@ -109,16 +122,51 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(req_recv_buf, "ssid", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            (void)strncpy(new_config.ssid, tmp, sizeof(new_config.ssid)-1U);
-            new_config.ssid[sizeof(new_config.ssid)-1U] = '\0';
+            uint8_t decoded[64U];
+            size_t decoded_len;
+
+            uint8_t ret = url_decode(decoded, sizeof(decoded),
+                                       (uint8_t *)tmp, strlen(tmp),
+                                       &decoded_len);
+
+            if (ret == WEBSERVER_URLDEC_OK) {
+                /* Copy safely into new_config.ssid */
+                size_t copy_len = (decoded_len < sizeof(new_config.ssid) - 1U)
+                                ? decoded_len
+                                : sizeof(new_config.ssid) - 1U;
+
+                (void)strncpy(new_config.ssid, (char *)decoded, copy_len);
+                new_config.ssid[decoded_len] = '\0';
+            }
+            else {
+                ESP_LOGE(WEBSERVER_TAG, "URL decode error: 0x%02X", ret);
+            }
+
         }
 
         /* Read "wpa-passphrase" parameter */
         query_res = httpd_query_key_value(req_recv_buf, "wpa-passphrase", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            (void)strncpy(new_config.wpa_passphrase, tmp, sizeof(new_config.wpa_passphrase)-1U);
-            new_config.wpa_passphrase[sizeof(new_config.wpa_passphrase)-1U] = '\0';
+            uint8_t decoded[64U];
+            size_t decoded_len;
+
+            uint8_t ret = url_decode(decoded, sizeof(decoded),
+                                       (uint8_t *)tmp, strlen(tmp),
+                                       &decoded_len);
+
+            if (ret == WEBSERVER_URLDEC_OK) {
+                /* Copy safely into new_config.wpa_passphrase */
+                size_t copy_len = (decoded_len < sizeof(new_config.wpa_passphrase) - 1U)
+                                ? decoded_len
+                                : sizeof(new_config.wpa_passphrase) - 1U;
+
+                (void)strncpy(new_config.wpa_passphrase, (char *)decoded, copy_len);
+                new_config.wpa_passphrase[decoded_len] = '\0';
+            }
+            else {
+                ESP_LOGE(WEBSERVER_TAG, "URL decode error: 0x%02X", ret);
+            }
         }
 
         /* Read "mode" parameter */
@@ -143,10 +191,13 @@ static esp_err_t update_handler(httpd_req_t *req)
             errno = 0;  /* Reset errno before calling strtol */
             const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
-            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
-            {
-                new_config.ntp = (int)tmp_val;
+            if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0)) {
+                new_config.ntp = (uint8_t)tmp_val;
             }
+        }
+        else {
+            /* Field is not present if ntp is not checked */
+            new_config.ntp = 0U;
         }
 
         /* Read "hours" parameter */
@@ -173,7 +224,7 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.time.hours = (int)tmp_val;
+                new_config.time.minutes = (int)tmp_val;
             }
         }
 
@@ -205,11 +256,16 @@ static esp_err_t update_handler(httpd_req_t *req)
             }
         }
 
-        /* Update global configuration (currently commented out for test safety) */
+        /* Update global configuration */
         ret = config_set_config(&new_config);
-
         if (ret == ESP_OK) {
             ret = config_save();
+
+            /* Push events on bus */
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_WIFI_CONFIG;
+            evt_message.payload_size = 0U;
+            event_bus_publish(evt_message);
         }
 
         /* Redirect client back to the root page */
@@ -236,6 +292,9 @@ httpd_handle_t start_webserver(void)
     httpd_handle_t server = NULL;
     esp_err_t start_result = ESP_FAIL;
 
+    config.stack_size = 65535;    /* 16 KB */
+    config.task_priority = tskIDLE_PRIORITY + 5U;
+
     start_result = httpd_start(&server, &config);
     if (start_result == ESP_OK) {
 
@@ -256,6 +315,9 @@ httpd_handle_t start_webserver(void)
         httpd_register_uri_handler(server, &update);
     }
 
+    /* Small delay to ensure server is fully started */
+    vTaskDelay(pdMS_TO_TICKS(50));
+    
     return server;
 }
 
@@ -339,9 +401,9 @@ static const char* get_html_page(void) {
     "<div class=\"brightness-container\">\n"
     "  <div class=\"brightness-label-row\">\n"
     "      <label for=\"brightness\">Brightness:</label>\n"
-    "      <span id=\"brightnessValue\">%d</span>\n"
+    "      <span id=\"brightnessValue\"></span>\n"
     "  </div>\n"
-    "  <input type=\"range\" id=\"brightness\" name=\"brightness\" min=\"0\" max=\"255\" value=\"%d\">\n"
+    "  <input type=\"range\" id=\"dutycycle\" name=\"dutycycle\" min=\"0\" max=\"255\" value=\"%d\">\n"
     "</div>\n"
     "<hr>\n"
     "<button type=\"submit\">Apply</button>\n"
@@ -363,4 +425,93 @@ static const char* get_html_page(void) {
     "</body>\n"
     "</html>\n";
     return html_page_data;
+}
+
+/**
+ * @brief Converts a single hexadecimal character to its integer value.
+ *
+ * This function takes a hexadecimal character ('0'-'9', 'A'-'F', 'a'-'f') and
+ * returns its corresponding integer value (0-15). If the input character
+ * is not a valid hexadecimal digit, the function returns -1.
+ *
+ * @param c The hexadecimal character to convert.
+ * @return int The integer value of the hex character, or -1 if invalid.
+ */
+static int hex_to_uint8(uint8_t c)
+{
+    if (c >= (uint8_t)'0' && c <= (uint8_t)'9') return (int)(c - (uint8_t)'0');
+    if (c >= (uint8_t)'A' && c <= (uint8_t)'F') return (int)(c - (uint8_t)'A' + 10);
+    if (c >= (uint8_t)'a' && c <= (uint8_t)'f') return (int)(c - (uint8_t)'a' + 10);
+    return -1;
+}
+
+/**
+ * @brief Decodes a percent-encoded (URL-encoded) string.
+ *
+ * This function converts percent-encoded sequences (e.g., "%20") and plus signs
+ * ('+') in the input string to their corresponding ASCII characters.
+ * It is safe for use with embedded systems and buffers, using a length-limited
+ * approach.
+ *
+ * @param dst Pointer to the destination buffer to store the decoded string.
+ * @param dst_size Size of the destination buffer in bytes (must be > 0).
+ * @param src Pointer to the source buffer containing the URL-encoded string.
+ * @param src_len Length of the source buffer in bytes.
+ * @param out_len Pointer to a size_t variable to store the length of the decoded string
+ *                (excluding the null terminator). Can be NULL if not needed.
+ * @return uint8_t Status code of the decoding operation:
+ *         - WEBSERVER_URLDEC_OK: Decoding successful.
+ *         - WEBSERVER_URLDEC_WARN_INVALID_SEQ: Input contains invalid percent-encoded sequences.
+ *         - WEBSERVER_URLDEC_WARN_TRUNCATED: Destination buffer was too small; output truncated.
+ *         - WEBSERVER_URLDEC_ERR_BAD_PARAM: Invalid input parameters (NULL pointers or dst_size = 0).
+ */
+static uint8_t url_decode(uint8_t *dst, size_t dst_size,
+                             const uint8_t *src, size_t src_len,
+                             size_t *out_len)
+{
+    size_t i = 0;
+    size_t j = 0;
+    int hi, lo;
+    uint8_t status = WEBSERVER_URLDEC_OK;
+
+    if (dst == NULL || src == NULL || dst_size == 0) {
+        return WEBSERVER_URLDEC_ERR_BAD_PARAM;
+    }
+
+    while ((i < src_len) && (j < (dst_size - 1U))) {
+
+        if ((src[i] == (uint8_t)'%') && ((i + 2U) < src_len)) {
+
+            hi = hex_to_uint8(src[i + 1U]);
+            lo = hex_to_uint8(src[i + 2U]);
+
+            if ((hi >= 0) && (lo >= 0)) {
+                dst[j++] = (uint8_t)((hi << 4) | lo);
+                i += 3U;
+            }
+            else {
+                dst[j++] = src[i++];
+                status = WEBSERVER_URLDEC_WARN_INVALID_SEQ;
+            }
+        }
+        else if (src[i] == (uint8_t)'+') {
+            dst[j++] = (uint8_t)' ';
+            i++;
+        }
+        else {
+            dst[j++] = src[i++];
+        }
+    }
+
+    if (i < src_len) {
+        status = WEBSERVER_URLDEC_WARN_TRUNCATED;
+    }
+
+    dst[j] = (uint8_t)'\0';
+
+    if (out_len != NULL) {
+        *out_len = j;
+    }
+
+    return status;
 }

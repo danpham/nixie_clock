@@ -82,6 +82,8 @@ NOT_STATIC esp_err_t nvs_save_value(const char *key, uint8_t value)
     if (err == ESP_OK) {
         ret = nvs_set_u8(handle, key, value);
         if (ret == ESP_OK) {
+            ESP_LOGI(NVS_TAG, "Write: %s", key);
+            ESP_LOGI(NVS_TAG, "Write value: %i", value);
             ret = nvs_commit(handle);
         }
         nvs_close(handle);
@@ -116,6 +118,8 @@ NOT_STATIC esp_err_t nvs_save_str(const char * key, const char * value)
         ret = nvs_set_str(handle, key, value);
         if (ret == ESP_OK) {
             ret = nvs_commit(handle);
+            ESP_LOGI(NVS_TAG, "Write: %s", key);
+            ESP_LOGI(NVS_TAG, "Write value: %s", value);
         }
         else {
             ESP_LOGE(NVS_TAG, "Write error: %s", esp_err_to_name(ret));
@@ -187,7 +191,7 @@ NOT_STATIC esp_err_t nvs_load_str(const char * key, char * value, size_t * lengt
         ret = nvs_get_str(handle, key, value, length);
         if (ret != ESP_OK)
         {
-            ESP_LOGE(NVS_TAG, "Read error: %s", esp_err_to_name(ret));
+            ESP_LOGE(NVS_TAG, "Read error: %s on %s", esp_err_to_name(ret), key);
         }
 
         nvs_close(handle);
@@ -199,6 +203,9 @@ NOT_STATIC esp_err_t nvs_load_str(const char * key, char * value, size_t * lengt
 
     return ret;
 }
+
+esp_err_t nvs_save_init_flag(uint8_t enabled)       { return nvs_save_value("init_flag", enabled); }
+esp_err_t nvs_load_init_flag(uint8_t *enabled)      { return nvs_load_value("init_flag", enabled); }
 
 esp_err_t nvs_save_ntp(uint8_t enabled)             { return nvs_save_value("ntp", enabled); }
 esp_err_t nvs_load_ntp(uint8_t *enabled)            { return nvs_load_value("ntp", enabled); }

@@ -10,7 +10,6 @@
 #include "driver/gpio.h"
 #include "../components/ntp/ntp.h"
 #include "../components/uart/uart.h"
-#include "../components/hv5622/hv5622.h"
 #include "../components/display/display.h"
 #include "../components/clock/clock.h"
 #include "../components/webserver/webserver.h"
@@ -25,7 +24,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define MAIN_TASK_WDT_TIMEOUT_S     5U
+#define MAIN_TASK_WDT_TIMEOUT_MS     5000U
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -50,11 +49,11 @@ void app_main(void);
 void app_main(void)
 {
     static const char MAIN_TAG[] = "MAIN";
-    const char hello[] = "Nixie clock v1.0: Starting...";
-    size_t len = sizeof(hello) - 1U;
+    //const char hello[] = "Nixie clock v1.0: Starting...";
+    //size_t len = sizeof(hello) - 1U;
     esp_err_t ret = ESP_OK;
     esp_task_wdt_config_t wdt_config = {
-        .timeout_ms = MAIN_TASK_WDT_TIMEOUT_S,
+        .timeout_ms = MAIN_TASK_WDT_TIMEOUT_MS,
         .idle_core_mask = 0x01,   /* Only Core 0 */
         .trigger_panic  = true
     };
@@ -70,34 +69,21 @@ void app_main(void)
     dispatcher_subscribe(EVT_CLOCK_NTP_CONFIG, clock_ntp_config_callback);
     dispatcher_subscribe(EVT_CLOCK_GPIO_CONFIG, clock_update_with_menu_callback);
     dispatcher_subscribe(EVT_CLOCK_WEB_CONFIG, clock_update_from_config_callback);
+ 
+    //uart_init();
+    //uart_write(hello, len);
+    pwm_init();
     dispatcher_task_start();
-
-    uart_init();
-    uart_write(hello, len);
 
     ret = config_init();
     if (ret != ESP_OK) {
         ESP_LOGE(MAIN_TAG, "Config init failed");
     }
 
-    hv5622_init();
+    start_webserver();
     display_init();
-
     clock_task_start();
     gpio_task_start();
-
-    pwm_init();
-    start_webserver();
-    
-    /* Read and apply config with events */
-    event_bus_message_t evt_message;
-    evt_message.type = EVT_NTP_CONFIG;
-    evt_message.payload_size = 0U;
-    event_bus_publish(evt_message);
-    evt_message.type = EVT_WIFI_CONFIG;
-    event_bus_publish(evt_message);
-    evt_message.type = EVT_PWM_CONFIG;
-    event_bus_publish(evt_message);
 
     while (ret == ESP_OK) {
         esp_task_wdt_reset();
