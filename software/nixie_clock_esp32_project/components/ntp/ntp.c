@@ -101,46 +101,39 @@ static void time_sync_notification_cb(struct timeval *tv)
 static void time_sync_task(void *arg)
 {
     (void)arg;
-    
-    /* Add task watchdog */
+    bool sta_up = false;
+
     esp_task_wdt_add(NULL);
+    ESP_LOGI(NTP_TAG, "Monitoring network interfaces...");
 
-    bool wifi_ready = false;
-    ESP_LOGI(NTP_TAG, "Waiting for Wi-Fi connection...");
+    while (!sta_up) {
+        esp_netif_t *netif = esp_netif_next(NULL);
 
-    /* Wait Wi-Fi for first sync */
-    while (!wifi_ready) {
-        esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-        bool is_if_up = false;
-        if (netif != NULL) {
-            is_if_up = esp_netif_is_netif_up(netif);
+        while (netif) {
+            const char *key = esp_netif_get_ifkey(netif);
+            if (strcmp(key, "WIFI_STA_DEF") == 0 &&
+                esp_netif_is_netif_up(netif)) {
+                sta_up = true;
+            }
+            netif = esp_netif_next(netif);
         }
 
-        if (is_if_up) {
-            wifi_ready = true;
-        }
-        else {
-            /* Reset watchdog */
-            esp_task_wdt_reset();
-
-            vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
-        }
+        vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
+        esp_task_wdt_reset();
     }
 
-    ESP_LOGI(NTP_TAG, "Initialisation de SNTP...");
+    ESP_LOGI(NTP_TAG, "Launching SNTP");
     esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
     esp_sntp_setservername(0, "pool.ntp.org");
     sntp_set_sync_interval(NTP_INTERVAL_MS);
     sntp_set_time_sync_notification_cb(time_sync_notification_cb);
     esp_sntp_init();
 
-    /* Signal task is finished */
-    BaseType_t given = xSemaphoreGive(time_sync_done_sem);
-    if (given != pdTRUE) {
-        ESP_LOGW(NTP_TAG, "Failed to give done semaphore");
-    }
+    ESP_LOGI(NTP_TAG, "SNTP initialized");
 
-    /* Free task */
+    /* Remove watchdog */
+    esp_task_wdt_delete(NULL);
+    
     vTaskDelete(NULL);
 }
 
@@ -152,7 +145,7 @@ static void time_sync_task(void *arg)
  */
 static void ntp_sync_task_start(void)
 {
-    if ((time_sync_done_sem != NULL) || (time_sync_task_handle != NULL)) {
+    if ((time_sync_done_sem == NULL) && (time_sync_task_handle == NULL)) {
         time_sync_done_sem = xSemaphoreCreateBinary();
         if (time_sync_done_sem == NULL) {
             ESP_LOGE(NTP_TAG, "Failed to create done semaphore");

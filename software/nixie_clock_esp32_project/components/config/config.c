@@ -46,8 +46,8 @@ esp_err_t config_init(void) {
     config_t default_cfg = {
         .ssid = "",
         .wpa_passphrase = "",
-        .mode = 0,
-        .ntp = 0,
+        .mode = CONFIG_MODE_DEFAULT,
+        .ntp = CONFIG_NTP_DEFAULT,
         .time = {
             .hours = CONFIG_CLOCK_DEFAULT_HOURS,
             .minutes = CONFIG_CLOCK_DEFAULT_MINUTES,
@@ -77,7 +77,14 @@ esp_err_t config_init(void) {
                     ret = _config_save_nolock();
 
                     /* Save the initialization flag */
-                    (void)nvs_save_init_flag(1U);
+                    if (ret == ESP_OK) {
+                        ret = nvs_save_init_flag(1U);
+                        if (ret != ESP_OK) {
+                            ESP_LOGE(CONFIG_TAG, "Critical: Failed to save init flag to NVS");
+                        }
+                    } else {
+                        ESP_LOGE(CONFIG_TAG, "Critical: Failed to save config to NVS");
+                    }
                 }
                 else {
                     /* Incorrect init flag */

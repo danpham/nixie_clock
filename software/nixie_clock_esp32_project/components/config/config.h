@@ -14,6 +14,8 @@
 ******************************************************************/
 #define CONFIG_INIT_FLAG                 (1U)
 #define CONFIG_PWM_DEFAULT_DUTYCYCLE     (128U)
+#define CONFIG_MODE_DEFAULT              (0U)
+#define CONFIG_NTP_DEFAULT               (0U)
 #define CONFIG_CLOCK_DEFAULT_HOURS       (12U)
 #define CONFIG_CLOCK_DEFAULT_MINUTES     (0U)
 #define CONFIG_CLOCK_DEFAULT_SECONDS     (0U)
