@@ -100,6 +100,7 @@ $(document).ready(function(){initNavTree('config_8c.html',''); initResizable(); 
 <code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nvs_8h_source.html">nvs.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="event__bus_8h_source.html">../event_bus/event_bus.h</a>&quot;</code><br />
+<code>#include &quot;nvs_flash.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for config.c:</div>
 <div class="dyncontent">
@@ -114,6 +115,9 @@ Functions</h2></td></tr>
 <tr class="memitem:adbf182647ef90017c070ed7a4d0504fb" id="r_adbf182647ef90017c070ed7a4d0504fb"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8c.html#adbf182647ef90017c070ed7a4d0504fb">config_save</a> (void)</td></tr>
 <tr class="memdesc:adbf182647ef90017c070ed7a4d0504fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the configuration to NVS if it has changed.  <br /></td></tr>
 <tr class="separator:adbf182647ef90017c070ed7a4d0504fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fb5d5c5b55b283acc39104003047fc2" id="r_a0fb5d5c5b55b283acc39104003047fc2"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8c.html#a0fb5d5c5b55b283acc39104003047fc2">config_read</a> (void)</td></tr>
+<tr class="memdesc:a0fb5d5c5b55b283acc39104003047fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the configuration to NVS if it has changed.  <br /></td></tr>
+<tr class="separator:a0fb5d5c5b55b283acc39104003047fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69d38a23f87686ff93103dd50d30f0f6" id="r_a69d38a23f87686ff93103dd50d30f0f6"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8c.html#a69d38a23f87686ff93103dd50d30f0f6">config_get_copy</a> (<a class="el" href="structconfig__t.html">config_t</a> *copy)</td></tr>
 <tr class="memdesc:a69d38a23f87686ff93103dd50d30f0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a copy of the current configuration.  <br /></td></tr>
 <tr class="separator:a69d38a23f87686ff93103dd50d30f0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,6 +180,28 @@ Variables</h2></td></tr>
 <p>Initialize the configuration module. </p>
 <p>Creates the mutex if not already created and loads configuration from NVS. If a value is not found in NVS, it is set to default (0).</p>
 <dl class="section return"><dt>Returns</dt><dd>ESP_OK if initialization succeeded, ESP_FAIL otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a0fb5d5c5b55b283acc39104003047fc2" name="a0fb5d5c5b55b283acc39104003047fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fb5d5c5b55b283acc39104003047fc2">&#9670;&#160;</a></span>config_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t config_read </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save the configuration to NVS if it has changed. </p>
+<p>Compares current configuration with last saved one and writes only the modified fields to NVS. Access is protected by mutex.</p>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK if any value was saved, ESP_FAIL if nothing changed or mutex could not be acquired. </dd></dl>
 
 </div>
 </div>

@@ -104,10 +104,12 @@ $(document).ready(function(){initNavTree('webserver_8c.html',''); initResizable(
 <code>#include &quot;esp_netif.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="webserver_8h_source.html">webserver.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wifi_8h_source.html">wifi.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="event__bus_8h_source.html">../event_bus/event_bus.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for webserver.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="webserver_8c__incl.svg" width="1286" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="webserver_8c__incl.svg" width="1358" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -116,6 +118,14 @@ Macros</h2></td></tr>
 <tr class="separator:afe782e09b39199d8e8fb3c8d9a1789b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1abc88910def2a551233feec2e78795" id="r_ad1abc88910def2a551233feec2e78795"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webserver_8c.html#ad1abc88910def2a551233feec2e78795">WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE</a>&#160;&#160;&#160;(256U)</td></tr>
 <tr class="separator:ad1abc88910def2a551233feec2e78795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5176e463ca1bffe53a6c0e7693e0b4d" id="r_ae5176e463ca1bffe53a6c0e7693e0b4d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webserver_8c.html#ae5176e463ca1bffe53a6c0e7693e0b4d">WEBSERVER_URLDEC_OK</a>&#160;&#160;&#160;((uint8_t)0x00)</td></tr>
+<tr class="separator:ae5176e463ca1bffe53a6c0e7693e0b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72da26bd8c8b24c01b8b7bb6d16e33d9" id="r_a72da26bd8c8b24c01b8b7bb6d16e33d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webserver_8c.html#a72da26bd8c8b24c01b8b7bb6d16e33d9">WEBSERVER_URLDEC_WARN_TRUNCATED</a>&#160;&#160;&#160;((uint8_t)0x01)</td></tr>
+<tr class="separator:a72da26bd8c8b24c01b8b7bb6d16e33d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28f492c3819832cc5cdd33108c69b415" id="r_a28f492c3819832cc5cdd33108c69b415"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webserver_8c.html#a28f492c3819832cc5cdd33108c69b415">WEBSERVER_URLDEC_WARN_INVALID_SEQ</a>&#160;&#160;&#160;((uint8_t)0x02)</td></tr>
+<tr class="separator:a28f492c3819832cc5cdd33108c69b415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad27b5374aba14c544e6f2deab18763" id="r_a3ad27b5374aba14c544e6f2deab18763"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webserver_8c.html#a3ad27b5374aba14c544e6f2deab18763">WEBSERVER_URLDEC_ERR_BAD_PARAM</a>&#160;&#160;&#160;((uint8_t)0x80)</td></tr>
+<tr class="separator:a3ad27b5374aba14c544e6f2deab18763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -146,6 +156,62 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE&#160;&#160;&#160;(256U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ad27b5374aba14c544e6f2deab18763" name="a3ad27b5374aba14c544e6f2deab18763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ad27b5374aba14c544e6f2deab18763">&#9670;&#160;</a></span>WEBSERVER_URLDEC_ERR_BAD_PARAM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WEBSERVER_URLDEC_ERR_BAD_PARAM&#160;&#160;&#160;((uint8_t)0x80)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5176e463ca1bffe53a6c0e7693e0b4d" name="ae5176e463ca1bffe53a6c0e7693e0b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5176e463ca1bffe53a6c0e7693e0b4d">&#9670;&#160;</a></span>WEBSERVER_URLDEC_OK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WEBSERVER_URLDEC_OK&#160;&#160;&#160;((uint8_t)0x00)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28f492c3819832cc5cdd33108c69b415" name="a28f492c3819832cc5cdd33108c69b415"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28f492c3819832cc5cdd33108c69b415">&#9670;&#160;</a></span>WEBSERVER_URLDEC_WARN_INVALID_SEQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WEBSERVER_URLDEC_WARN_INVALID_SEQ&#160;&#160;&#160;((uint8_t)0x02)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72da26bd8c8b24c01b8b7bb6d16e33d9" name="a72da26bd8c8b24c01b8b7bb6d16e33d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72da26bd8c8b24c01b8b7bb6d16e33d9">&#9670;&#160;</a></span>WEBSERVER_URLDEC_WARN_TRUNCATED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WEBSERVER_URLDEC_WARN_TRUNCATED&#160;&#160;&#160;((uint8_t)0x01)</td>
         </tr>
       </table>
 </div><div class="memdoc">
