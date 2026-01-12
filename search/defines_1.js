@@ -9,10 +9,12 @@ var searchData=
   ['config_5fclock_5fdefault_5fseconds_6',['CONFIG_CLOCK_DEFAULT_SECONDS',['../config_8h.html#a99524ad03080c6cf19384531209868d8',1,'config.h']]],
   ['config_5finit_5fflag_7',['CONFIG_INIT_FLAG',['../config_8h.html#a55802a20617d42fc29dcffd9d00cc487',1,'config.h']]],
   ['config_5fmode_5fantipoisoning_8',['CONFIG_MODE_ANTIPOISONING',['../config_8h.html#af082e215b9ce4d7bf81a330e3da637f9',1,'config.h']]],
-  ['config_5fmode_5ftest_9',['CONFIG_MODE_TEST',['../config_8h.html#a120f73868153abb7ab0addb6a5170ab7',1,'config.h']]],
-  ['config_5fpwm_5fdefault_5fdutycycle_10',['CONFIG_PWM_DEFAULT_DUTYCYCLE',['../config_8h.html#ab1d8fa90b96eb0cd0deddab4672086b1',1,'config.h']]],
-  ['config_5fssid_5fbuf_5fsz_11',['CONFIG_SSID_BUF_SZ',['../config_8h.html#af0e17a4fae0cf9481addb2e216bfba7d',1,'config.h']]],
-  ['config_5fssid_5fsize_12',['CONFIG_SSID_SIZE',['../config_8h.html#ac555e1f7df3cf1cee5f1ab266ebdeb4c',1,'config.h']]],
-  ['config_5fwpa_5fpassphrase_5fbuf_5fsz_13',['CONFIG_WPA_PASSPHRASE_BUF_SZ',['../config_8h.html#ac0967dea543a91ac8447152df98b2b11',1,'config.h']]],
-  ['config_5fwpa_5fpassphrase_5fsize_14',['CONFIG_WPA_PASSPHRASE_SIZE',['../config_8h.html#a3620c2d87eb67778baf3978cd485e385',1,'config.h']]]
+  ['config_5fmode_5fdefault_9',['CONFIG_MODE_DEFAULT',['../config_8h.html#a4c523eeef7e60230598196ff7bebceeb',1,'config.h']]],
+  ['config_5fmode_5ftest_10',['CONFIG_MODE_TEST',['../config_8h.html#a120f73868153abb7ab0addb6a5170ab7',1,'config.h']]],
+  ['config_5fntp_5fdefault_11',['CONFIG_NTP_DEFAULT',['../config_8h.html#a2d750b59e5a56333a3dcc6c3f36dd1b9',1,'config.h']]],
+  ['config_5fpwm_5fdefault_5fdutycycle_12',['CONFIG_PWM_DEFAULT_DUTYCYCLE',['../config_8h.html#ab1d8fa90b96eb0cd0deddab4672086b1',1,'config.h']]],
+  ['config_5fssid_5fbuf_5fsz_13',['CONFIG_SSID_BUF_SZ',['../config_8h.html#af0e17a4fae0cf9481addb2e216bfba7d',1,'config.h']]],
+  ['config_5fssid_5fsize_14',['CONFIG_SSID_SIZE',['../config_8h.html#ac555e1f7df3cf1cee5f1ab266ebdeb4c',1,'config.h']]],
+  ['config_5fwpa_5fpassphrase_5fbuf_5fsz_15',['CONFIG_WPA_PASSPHRASE_BUF_SZ',['../config_8h.html#ac0967dea543a91ac8447152df98b2b11',1,'config.h']]],
+  ['config_5fwpa_5fpassphrase_5fsize_16',['CONFIG_WPA_PASSPHRASE_SIZE',['../config_8h.html#a3620c2d87eb67778baf3978cd485e385',1,'config.h']]]
 ];
