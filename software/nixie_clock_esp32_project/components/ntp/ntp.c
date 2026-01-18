@@ -19,7 +19,8 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define NTP_INTERVAL_MS         (30U * 60U * 1000U)
+/* NTP minimum interval in milliseconds is 15000ms */
+#define NTP_INTERVAL_MS         (30000U)
 #define NTP_WAIT_WIFI_MS        (1000U)
 
 /******************************************************************
@@ -86,10 +87,40 @@ static void time_sync_notification_cb(struct timeval *tv)
         evt_message.payload_size = 3U;
 
         event_bus_publish(evt_message);
+        ESP_LOGI(NTP_TAG, "NTP SYNC");
     }
     else {
         ESP_LOGE(NTP_TAG, "Invalid SNTP timestamp or NULL pointer");
     }
+}
+
+/**
+ * @brief Check if the Wi-Fi STA interface is UP.
+ *
+ * Iterates over network interfaces and sets the boolean pointed by ctx
+ * to true if "WIFI_STA_DEF" is active and up.
+ *
+ * @param ctx Pointer to a boolean that will be set to true if STA is UP.
+ *
+ * @return ESP_FAIL Returned by convention, used as a callback.
+ */
+static esp_err_t wifi_sta_check(void *ctx)
+{
+    bool *sta_up = (bool *)ctx;
+    esp_err_t ret = ESP_FAIL;
+    esp_netif_t *netif = esp_netif_next_unsafe(NULL);
+
+    while (netif != NULL) {
+        const char *key = esp_netif_get_ifkey(netif);
+        if ((strcmp(key, "WIFI_STA_DEF") == 0) && (esp_netif_is_netif_up(netif))) {
+            *sta_up = true;
+            ret = ESP_OK;
+            break;
+        }
+        netif = esp_netif_next_unsafe(netif);
+    }
+
+    return ret;
 }
 
 /**
@@ -107,17 +138,8 @@ static void time_sync_task(void *arg)
     ESP_LOGI(NTP_TAG, "Monitoring network interfaces...");
 
     while (!sta_up) {
-        esp_netif_t *netif = esp_netif_next(NULL);
-
-        while (netif) {
-            const char *key = esp_netif_get_ifkey(netif);
-            if (strcmp(key, "WIFI_STA_DEF") == 0 &&
-                esp_netif_is_netif_up(netif)) {
-                sta_up = true;
-            }
-            netif = esp_netif_next(netif);
-        }
-
+        /* Check if Wi-Fi STA is up in LWIP context (thread-safe) */
+        esp_netif_tcpip_exec(wifi_sta_check, &sta_up);
         vTaskDelay(pdMS_TO_TICKS(NTP_WAIT_WIFI_MS));
         esp_task_wdt_reset();
     }
@@ -184,6 +206,12 @@ static void ntp_stop(void)
         BaseType_t taken = xSemaphoreTake(time_sync_done_sem, NTP_SYNC_TASK_MUTEX_TIMEOUT);
         if (taken == pdTRUE) {
             ESP_LOGI(NTP_TAG, "time_sync_task finished");
+
+            /* Stop SNTP */
+            esp_sntp_stop();
+
+            /* Disable callback */
+            sntp_set_time_sync_notification_cb(NULL);
         }
         else {
             ESP_LOGE(NTP_TAG, "Semaphore wait failed (should never happen)");
@@ -196,13 +224,6 @@ static void ntp_stop(void)
         }
 
         time_sync_task_handle = NULL;
-
-        /* Stop SNTP */
-        esp_sntp_stop();
-
-        /* Disable callback */
-        sntp_set_time_sync_notification_cb(NULL);
-
         ESP_LOGI(NTP_TAG, "NTP stopped");
     }
     else

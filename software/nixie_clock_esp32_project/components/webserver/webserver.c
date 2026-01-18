@@ -260,12 +260,6 @@ static esp_err_t update_handler(httpd_req_t *req)
         ret = config_set_config(&new_config);
         if (ret == ESP_OK) {
             ret = config_save();
-
-            /* Push events on bus */
-            event_bus_message_t evt_message;
-            evt_message.type = EVT_WIFI_CONFIG;
-            evt_message.payload_size = 0U;
-            event_bus_publish(evt_message);
         }
 
         /* Redirect client back to the root page */

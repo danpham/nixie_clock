@@ -233,12 +233,14 @@ static esp_err_t _config_save_nolock(void)
 {
     esp_err_t ret = ESP_FAIL;
     esp_err_t ret_save;
+    bool wifi_changed = false;
 
     if (strcmp(cfg.ssid, cfg_last.ssid) != 0)
     {
         ret_save = nvs_save_ssid(cfg.ssid);
         if (ret_save == ESP_OK)
         {
+            wifi_changed = true;
             ret = ESP_OK;
         }
     }
@@ -248,9 +250,11 @@ static esp_err_t _config_save_nolock(void)
         ret_save = nvs_save_wpa_passphrase(cfg.wpa_passphrase);
         if (ret_save == ESP_OK)
         {
+            wifi_changed = true;
             ret = ESP_OK;
         }
     }
+
     if (cfg.mode != cfg_last.mode)
     {
         ret_save = nvs_save_mode(cfg.mode);
@@ -259,6 +263,7 @@ static esp_err_t _config_save_nolock(void)
             ret = ESP_OK;
         }
     }
+
     if (cfg.ntp != cfg_last.ntp)
     {
         ret_save = nvs_save_ntp(cfg.ntp);
@@ -267,6 +272,7 @@ static esp_err_t _config_save_nolock(void)
             ret = ESP_OK;
         }
     }
+
     if (cfg.dutycycle != cfg_last.dutycycle)
     {
         ret_save = nvs_save_dutycycle(cfg.dutycycle);
@@ -274,6 +280,15 @@ static esp_err_t _config_save_nolock(void)
         {
             ret = ESP_OK;
         }
+    }
+
+    if (wifi_changed == true)
+    {
+        /* Push event on bus */
+        event_bus_message_t evt_message;
+        evt_message.type = EVT_WIFI_CONFIG;
+        evt_message.payload_size = 0U;
+        event_bus_publish(evt_message);
     }
 
     /* Update previous config */

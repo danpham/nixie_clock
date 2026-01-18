@@ -89,6 +89,7 @@ static void clock_task(void *arg) {
                 lastTick += tickPeriod;
                 xSemaphoreTake(clk_mutex, portMAX_DELAY);
                 clock_tick(&clk);
+                ESP_LOGI(CLOCK_TASK_TAG, "The time is %02d:%02d:%02d", clk.hours, clk.minutes, clk.seconds);
                 xSemaphoreGive(clk_mutex);
 
                 dots = !dots;
@@ -238,7 +239,7 @@ void clock_task_start(void)
         }
         else {
             /* Create clock task */
-            BaseType_t ret = xTaskCreate(clock_task, "clock_task", configMINIMAL_STACK_SIZE, NULL, 2U, NULL);
+            BaseType_t ret = xTaskCreate(clock_task, "clock_task", 4096, NULL, 2U, NULL);
 
             if (ret != pdPASS) {
                 ESP_LOGE(CLOCK_TASK_TAG, "Failed to create clock_task");
