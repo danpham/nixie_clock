@@ -80,9 +80,9 @@ static void time_sync_notification_cb(struct timeval *tv)
 
         /* Send clock data to evt_bus */
         event_bus_message_t evt_message;
-        evt_message.payload[0] = clockUpdate.hours;
-        evt_message.payload[1] = clockUpdate.minutes;
-        evt_message.payload[2] = clockUpdate.seconds;
+        evt_message.payload[0U] = clockUpdate.hours;
+        evt_message.payload[1U] = clockUpdate.minutes;
+        evt_message.payload[2U] = clockUpdate.seconds;
         evt_message.type = EVT_CLOCK_NTP_CONFIG;
         evt_message.payload_size = 3U;
 
@@ -144,18 +144,20 @@ static void time_sync_task(void *arg)
         esp_task_wdt_reset();
     }
 
-    ESP_LOGI(NTP_TAG, "Launching SNTP");
+    ESP_LOGI(NTP_TAG, "Launching SNTP synchronization...");
     esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
     esp_sntp_setservername(0, "pool.ntp.org");
     sntp_set_sync_interval(NTP_INTERVAL_MS);
     sntp_set_time_sync_notification_cb(time_sync_notification_cb);
     esp_sntp_init();
-
     ESP_LOGI(NTP_TAG, "SNTP initialized");
 
     /* Remove watchdog */
     esp_task_wdt_delete(NULL);
-    
+
+    /* Give the semaphore (so ntp_stop() can finish) */
+    xSemaphoreGive(time_sync_done_sem);
+
     vTaskDelete(NULL);
 }
 
@@ -224,7 +226,7 @@ static void ntp_stop(void)
         }
 
         time_sync_task_handle = NULL;
-        ESP_LOGI(NTP_TAG, "NTP stopped");
+        ESP_LOGI(NTP_TAG, "NTP client stopped");
     }
     else
     {

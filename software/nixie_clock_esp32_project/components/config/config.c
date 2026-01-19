@@ -234,6 +234,7 @@ static esp_err_t _config_save_nolock(void)
     esp_err_t ret = ESP_FAIL;
     esp_err_t ret_save;
     bool wifi_changed = false;
+    bool ntp_changed = false;
 
     if (strcmp(cfg.ssid, cfg_last.ssid) != 0)
     {
@@ -269,6 +270,7 @@ static esp_err_t _config_save_nolock(void)
         ret_save = nvs_save_ntp(cfg.ntp);
         if (ret_save == ESP_OK)
         {
+            ntp_changed = true;
             ret = ESP_OK;
         }
     }
@@ -287,6 +289,15 @@ static esp_err_t _config_save_nolock(void)
         /* Push event on bus */
         event_bus_message_t evt_message;
         evt_message.type = EVT_WIFI_CONFIG;
+        evt_message.payload_size = 0U;
+        event_bus_publish(evt_message);
+    }
+
+    if (ntp_changed == true)
+    {
+        /* Push event on bus */
+        event_bus_message_t evt_message;
+        evt_message.type = EVT_NTP_CONFIG;
         evt_message.payload_size = 0U;
         event_bus_publish(evt_message);
     }
