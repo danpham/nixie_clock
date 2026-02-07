@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['rotary_5fencoder_5fevent_5fdecrement_0',['ROTARY_ENCODER_EVENT_DECREMENT',['../rotary__encoder_8h.html#a46addfe3b651b3d6fc4bb4d5fe53dbbd',1,'rotary_encoder.h']]],
-  ['rotary_5fencoder_5fevent_5fincrement_1',['ROTARY_ENCODER_EVENT_INCREMENT',['../rotary__encoder_8h.html#a8629f58ff7ce9210b72f556e2fd398cb',1,'rotary_encoder.h']]],
-  ['rotary_5fencoder_5fevent_5fnone_2',['ROTARY_ENCODER_EVENT_NONE',['../rotary__encoder_8h.html#ac5580beb60e60d4928b663f071f8850c',1,'rotary_encoder.h']]]
+  ['pwm_5fchannel_0',['PWM_CHANNEL',['../pwm_8c.html#acd1dba11989277eab79a76f9f2731bf9',1,'pwm.c']]],
+  ['pwm_5ffreq_5fhz_1',['PWM_FREQ_HZ',['../pwm_8c.html#a56e165627f596c2f42f843ae6571de0e',1,'pwm.c']]],
+  ['pwm_5fgpio_2',['PWM_GPIO',['../pwm_8c.html#a7905077bb6cb0ce86fad25d4db2e884d',1,'pwm.c']]],
+  ['pwm_5fresolution_3',['PWM_RESOLUTION',['../pwm_8c.html#ad53655e6cac4dfd2c67ecda5eea77a4e',1,'pwm.c']]],
+  ['pwm_5ftimer_4',['PWM_TIMER',['../pwm_8c.html#aa5696c49e88a24e3144fd1433c7d20e5',1,'pwm.c']]]
 ];

@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"structconfig__t.html#abf30ec4846f87d683d10929a8ec7a1e7":[0,0,1,3],
 "structconfig__t.html#ad23275d4e5211f553b59e8ec0e1468ba":[0,0,1,5],
 "structevent__bus__message__t.html":[0,0,2],
 "structevent__bus__message__t.html#aa57bd3243ab06a4ad6daa7c77843c66f":[0,0,2,1],

@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['pwm_5fchannel_0',['PWM_CHANNEL',['../pwm_8c.html#acd1dba11989277eab79a76f9f2731bf9',1,'pwm.c']]],
-  ['pwm_5ffreq_5fhz_1',['PWM_FREQ_HZ',['../pwm_8c.html#a56e165627f596c2f42f843ae6571de0e',1,'pwm.c']]],
-  ['pwm_5fgpio_2',['PWM_GPIO',['../pwm_8c.html#a7905077bb6cb0ce86fad25d4db2e884d',1,'pwm.c']]],
-  ['pwm_5fresolution_3',['PWM_RESOLUTION',['../pwm_8c.html#ad53655e6cac4dfd2c67ecda5eea77a4e',1,'pwm.c']]],
-  ['pwm_5ftimer_4',['PWM_TIMER',['../pwm_8c.html#aa5696c49e88a24e3144fd1433c7d20e5',1,'pwm.c']]]
+  ['not_5fstatic_0',['not_static',['../display_8c.html#aa558662d8b9986390ea07bd25e61d2a9',1,'NOT_STATIC:&#160;display.c'],['../nvs_8c.html#aa558662d8b9986390ea07bd25e61d2a9',1,'NOT_STATIC:&#160;nvs.c']]],
+  ['ntp_5finterval_5fms_1',['NTP_INTERVAL_MS',['../ntp_8c.html#af2b19ce63cfc1d64870309cd60103e6d',1,'ntp.c']]],
+  ['ntp_5fwait_5fwifi_5fms_2',['NTP_WAIT_WIFI_MS',['../ntp_8c.html#acb415b5af967afd681b9413a60fb4d63',1,'ntp.c']]]
 ];
