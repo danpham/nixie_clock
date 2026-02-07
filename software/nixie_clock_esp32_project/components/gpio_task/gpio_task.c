@@ -12,10 +12,12 @@
 #include "../gpio_driver/gpio_driver.h"
 #include "../rotary_encoder/rotary_encoder.h"
 #include "../event_bus/event_bus.h"
+#include "esp_timer.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
+#define GPIOTASK_LOG_THROTTLE_MS    50
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -54,20 +56,20 @@ static void gpio_task(void *arg)
 
     my_gpio_btn_t rotaryEncoderSwitch = {
         .pin = GPIO_NUM_3,
-        .pull = MY_GPIO_PULL_NONE,
+        .pull = MY_GPIO_PULL_UP,
         .debounce_ms = 50
     };
 
     my_gpio_btn_t rotaryEncoderChanB = {
         .pin = GPIO_NUM_4,
-        .pull = MY_GPIO_PULL_NONE,
-        .debounce_ms = 50
+        .pull = MY_GPIO_PULL_UP,
+        .debounce_ms = 10
     };
 
     my_gpio_btn_t rotaryEncoderChanA = {
         .pin = GPIO_NUM_5,
-        .pull = MY_GPIO_PULL_NONE,
-        .debounce_ms = 50
+        .pull = MY_GPIO_PULL_UP,
+        .debounce_ms = 10
     };
 
     if (my_gpio_init(&rotaryEncoderSwitch) != ESP_OK) {
@@ -87,7 +89,10 @@ static void gpio_task(void *arg)
     button_state_t state_last_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
     button_state_t state_last_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
 
+    uint32_t last_log_time = 0;
+
     while(1) {
+        uint32_t now = esp_timer_get_time() / 1000;
         /* Reset watchdog */
         esp_task_wdt_reset();
 
@@ -104,11 +109,11 @@ static void gpio_task(void *arg)
             evt_message.payload[2U] = 0U;
             event_bus_publish(evt_message);
 
-            /* if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
+            if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
                 ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
             } else {
                 ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
-            } */
+            }
 
             state_last_rotarySwitch = state_rotarySwitch;
         }
@@ -125,12 +130,16 @@ static void gpio_task(void *arg)
             evt_message.payload[2U] = (uint8_t)ev;
             event_bus_publish(evt_message);
 
-            //ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
+            /* Log throtte */
+            if(now - last_log_time >= GPIOTASK_LOG_THROTTLE_MS) {
+                ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
+                last_log_time = now;
+            }
         }
         state_last_rotaryChanA = state_rotaryChanA;
         state_last_rotaryChanB = state_rotaryChanB;
 
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 

@@ -15,8 +15,8 @@ typedef uint8_t button_press_t;
 #define BUTTON_LONG_PRESS    ((button_press_t)1U)
 
 typedef uint8_t button_state_t;
-#define BUTTON_STATE_RELEASE   ((button_press_t)0U)
-#define BUTTON_STATE_PRESS     ((button_press_t)1U)
+#define BUTTON_STATE_RELEASE   ((button_press_t)1U)
+#define BUTTON_STATE_PRESS     ((button_press_t)0U)
 
 typedef uint8_t my_gpio_pull_t;
 #define MY_GPIO_PULL_NONE   ((my_gpio_pull_t)0U)
