@@ -149,9 +149,14 @@ esp_err_t config_save(void){
 
     BaseType_t taken = xSemaphoreTake(config_mutex, CONFIG_MUTEX_TIMEOUT);
     if (taken == pdTRUE) {
+
         ret = _config_save_nolock();
+        if (ret != ESP_OK) {
+            ESP_LOGI(CONFIG_TAG, "No configuration changes to save");
+        }
 
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
+
         if (give_ret != pdTRUE) {
             ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
             ret = ESP_FAIL;

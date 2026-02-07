@@ -15,6 +15,7 @@
 #include "freertos/semphr.h"
 #include "../config/config.h"
 #include "../event_bus/event_bus.h"
+#include <string.h>
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -106,7 +107,7 @@ static void time_sync_notification_cb(struct timeval *tv)
  */
 static esp_err_t wifi_sta_check(void *ctx)
 {
-    bool *sta_up = (bool *)ctx;
+    bool *sta_up = ctx;
     esp_err_t ret = ESP_FAIL;
     esp_netif_t *netif = esp_netif_next_unsafe(NULL);
 

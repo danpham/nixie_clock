@@ -17,7 +17,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define GPIOTASK_LOG_THROTTLE_MS    50
+#define GPIOTASK_LOG_THROTTLE_MS    (50U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -131,7 +131,7 @@ static void gpio_task(void *arg)
             event_bus_publish(evt_message);
 
             /* Log throtte */
-            if(now - last_log_time >= GPIOTASK_LOG_THROTTLE_MS) {
+            if ((now - last_log_time) >= GPIOTASK_LOG_THROTTLE_MS) {
                 ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
                 last_log_time = now;
             }

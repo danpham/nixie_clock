@@ -11,7 +11,7 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
  ******************************************************************/
-#define MAX_SUBSCRIBERS 16U
+#define DISPATCHERTASK_MAX_SUBSCRIBERS    (16U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -25,8 +25,8 @@ typedef struct
 /******************************************************************
  * 4. Variable definitions (static then global)
  ******************************************************************/
-static subscriber_t subscribers[MAX_SUBSCRIBERS];
-static int subscriber_count = 0;
+static subscriber_t subscribers[DISPATCHERTASK_MAX_SUBSCRIBERS];
+static uint8_t subscriber_count = 0U;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -41,7 +41,7 @@ static int subscriber_count = 0;
  */
 void dispatcher_subscribe(event_bus_event_t evt_type, event_callback_t cb)
 {
-  if (subscriber_count < MAX_SUBSCRIBERS) {
+  if (subscriber_count < DISPATCHERTASK_MAX_SUBSCRIBERS) {
     subscribers[subscriber_count].evt_type = evt_type;
     subscribers[subscriber_count].cb = cb;
     subscriber_count++;
@@ -68,7 +68,7 @@ static void dispatcher_task(void *arg)
 
     if (evt_message.type != EVT_NONE) {
       /* Call all callbacks subscribed to this event */
-      for (int i = 0; i < subscriber_count; i++) {
+      for (uint8_t i = 0; i < subscriber_count; i++) {
         if (subscribers[i].evt_type == evt_message.type) {
           if(subscribers[i].cb != NULL) {
             subscribers[i].cb(evt_message.payload, evt_message.payload_size);

@@ -2,6 +2,7 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include "hv5622.h"
+#include "esp_err.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 
