@@ -107,8 +107,10 @@ static void time_sync_notification_cb(struct timeval *tv)
  */
 static esp_err_t wifi_sta_check(void *ctx)
 {
-    void *temp = ctx;
-    bool *sta_up = temp;
+    bool *sta_up = NULL;
+    /* MISRA compliance, no cast */
+    (void)memcpy(&sta_up, &ctx, sizeof(sta_up));
+
     esp_err_t ret = ESP_FAIL;
     esp_netif_t *netif = esp_netif_next_unsafe(NULL);
 
