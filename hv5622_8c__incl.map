@@ -1,13 +1,11 @@
 <map id="software/nixie_clock_esp32_project/components/hv5622/hv5622.c" name="software/nixie_clock_esp32_project/components/hv5622/hv5622.c">
-<area shape="rect" id="Node000001" title=" " alt="" coords="121,5,325,60"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="83,5,287,60"/>
 <area shape="rect" id="Node000002" href="$hv5622_8h.html" title=" " alt="" coords="5,108,88,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,62,84,104,81,100,168,58"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="113,108,194,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="204,62,174,99,169,95,199,58"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="219,108,365,133"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="246,58,276,95,272,99,242,62"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="389,108,493,133"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="290,58,400,100,398,105,288,63"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,62,78,103,76,98,142,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="112,108,259,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,60,188,94,183,94,183,60"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="283,108,387,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="232,58,304,99,301,103,230,62"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="11,181,82,207"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,134,49,168,44,168,44,134"/>
 </map>
