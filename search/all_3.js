@@ -5,12 +5,13 @@ var searchData=
   ['dispatcher_5ftask_2ec_2',['dispatcher_task.c',['../dispatcher__task_8c.html',1,'']]],
   ['dispatcher_5ftask_2eh_3',['dispatcher_task.h',['../dispatcher__task_8h.html',1,'']]],
   ['dispatcher_5ftask_5fstart_4',['dispatcher_task_start',['../dispatcher__task_8h.html#ac1c674e985f382be4e480d39f0b3da9f',1,'dispatcher_task_start(void):&#160;dispatcher_task.c'],['../dispatcher__task_8c.html#ac1c674e985f382be4e480d39f0b3da9f',1,'dispatcher_task_start(void):&#160;dispatcher_task.c']]],
-  ['display_2ec_5',['display.c',['../display_8c.html',1,'']]],
-  ['display_2eh_6',['display.h',['../display_8h.html',1,'']]],
-  ['display_5finit_7',['display_init',['../display_8c.html#a407d5033a6f0198221c8a9081d7e807e',1,'display_init(void):&#160;display.c'],['../display_8h.html#a407d5033a6f0198221c8a9081d7e807e',1,'display_init(void):&#160;display.c']]],
-  ['display_5fnixie_5fcount_8',['DISPLAY_NIXIE_COUNT',['../display_8c.html#ab92a5d26c245e6db454f8d19358f0064',1,'display.c']]],
-  ['display_5fpattern_5f1_5fget_9',['display_pattern_1_get',['../display_8c.html#a7046bf962a11482561b8cfac7b2e8f1f',1,'display.c']]],
-  ['display_5fset_5fpattern_5f1_10',['display_set_pattern_1',['../display_8c.html#aa03a0a72321fc3e79fa778634de371ec',1,'display_set_pattern_1(uint8_t step):&#160;display.c'],['../display_8h.html#aa03a0a72321fc3e79fa778634de371ec',1,'display_set_pattern_1(uint8_t step):&#160;display.c']]],
-  ['display_5fset_5ftime_11',['display_set_time',['../display_8c.html#a1c9f48bad9c684c5d856cfbba449a393',1,'display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2):&#160;display.c'],['../display_8h.html#a1c9f48bad9c684c5d856cfbba449a393',1,'display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2):&#160;display.c']]],
-  ['dutycycle_12',['dutycycle',['../structconfig__t.html#abc46a404ae3d232619a414f299a15fb8',1,'config_t']]]
+  ['dispatchertask_5fmax_5fsubscribers_5',['DISPATCHERTASK_MAX_SUBSCRIBERS',['../dispatcher__task_8c.html#a026b95c786aeacb7212ac4f0c6ee7e4b',1,'dispatcher_task.c']]],
+  ['display_2ec_6',['display.c',['../display_8c.html',1,'']]],
+  ['display_2eh_7',['display.h',['../display_8h.html',1,'']]],
+  ['display_5finit_8',['display_init',['../display_8c.html#a407d5033a6f0198221c8a9081d7e807e',1,'display_init(void):&#160;display.c'],['../display_8h.html#a407d5033a6f0198221c8a9081d7e807e',1,'display_init(void):&#160;display.c']]],
+  ['display_5fnixie_5fcount_9',['DISPLAY_NIXIE_COUNT',['../display_8c.html#ab92a5d26c245e6db454f8d19358f0064',1,'display.c']]],
+  ['display_5fpattern_5f1_5fget_10',['display_pattern_1_get',['../display_8c.html#a7046bf962a11482561b8cfac7b2e8f1f',1,'display.c']]],
+  ['display_5fset_5fpattern_5f1_11',['display_set_pattern_1',['../display_8c.html#aa03a0a72321fc3e79fa778634de371ec',1,'display_set_pattern_1(uint8_t step):&#160;display.c'],['../display_8h.html#aa03a0a72321fc3e79fa778634de371ec',1,'display_set_pattern_1(uint8_t step):&#160;display.c']]],
+  ['display_5fset_5ftime_12',['display_set_time',['../display_8c.html#a1c9f48bad9c684c5d856cfbba449a393',1,'display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2):&#160;display.c'],['../display_8h.html#a1c9f48bad9c684c5d856cfbba449a393',1,'display_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2):&#160;display.c']]],
+  ['dutycycle_13',['dutycycle',['../structconfig__t.html#abc46a404ae3d232619a414f299a15fb8',1,'config_t']]]
 ];
