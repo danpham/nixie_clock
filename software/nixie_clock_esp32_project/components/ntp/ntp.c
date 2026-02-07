@@ -108,6 +108,8 @@ static void time_sync_notification_cb(struct timeval *tv)
 static esp_err_t wifi_sta_check(void *ctx)
 {
     bool *sta_up = NULL;
+    /* MISRA compliance, use the pointer */
+    (void)ctx;
     /* MISRA compliance, no cast */
     (void)memcpy(&sta_up, &ctx, sizeof(sta_up));
 
