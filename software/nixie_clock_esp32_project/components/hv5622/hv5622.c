@@ -1,8 +1,10 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include "hv5622.h"
-#include "esp_err.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 

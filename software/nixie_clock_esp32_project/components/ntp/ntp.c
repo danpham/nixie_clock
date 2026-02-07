@@ -107,7 +107,8 @@ static void time_sync_notification_cb(struct timeval *tv)
  */
 static esp_err_t wifi_sta_check(void *ctx)
 {
-    bool *sta_up = ctx;
+    void *temp = ctx;
+    bool *sta_up = temp;
     esp_err_t ret = ESP_FAIL;
     esp_netif_t *netif = esp_netif_next_unsafe(NULL);
 
