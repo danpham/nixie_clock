@@ -68,7 +68,7 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
             /* Get latest configuration */
             cfg_ret = config_get_copy(&config);
             if (cfg_ret == ESP_OK) {
-                wifi_change_sta(config.ssid, config.wpa_passphrase);
+                (void)wifi_change_sta(config.ssid, config.wpa_passphrase);
                 esp_wifi_connect();
                 ESP_LOGI(WIFI_TAG, "Wi-Fi STA config updated, reconnecting...");
             }
@@ -283,19 +283,20 @@ void wifi_callback(uint8_t* payload, uint8_t size) {
     (void)payload;
     (void)size;
     config_t config;
-    static bool wifi_initialized = false;
     esp_err_t cfg_ret;
 
     /* Get latest configuration */
     cfg_ret = config_get_copy(&config);
     if (cfg_ret == ESP_OK) {
+        static bool wifi_initialized = false;
         if (wifi_initialized == false) {
             wifi_init_apsta(config.ssid, config.wpa_passphrase, WIFI_AP_SSID, WIFI_AP_PASSWORD);
             wifi_initialized = true;
         } else {
             wifi_sta_retry_count = 0U;
             wifi_ap_record_t info;
-            if (esp_wifi_sta_get_ap_info(&info) == ESP_OK) {
+            esp_err_t ret = esp_wifi_sta_get_ap_info(&info);
+            if (ret == ESP_OK) {
                 ESP_LOGI(WIFI_TAG, "STA connected, disconnecting...");
                 wifi_sta_cfg_update_pending = true;
                 esp_wifi_disconnect();
@@ -303,7 +304,7 @@ void wifi_callback(uint8_t* payload, uint8_t size) {
                 /* wifi:Haven't to connect to a suitable AP now!: is a regular warning coming from
                 esp_wifi_sta_get_ap_info when state is disconnected or connecting */
                 ESP_LOGI(WIFI_TAG, "STA not connected, updating config and reconnecting...");
-                wifi_change_sta(config.ssid, config.wpa_passphrase);
+                (void)wifi_change_sta(config.ssid, config.wpa_passphrase);
                 esp_wifi_connect();
             }
         }

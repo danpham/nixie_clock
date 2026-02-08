@@ -9,7 +9,6 @@
 #include "esp_log.h"
 #include "driver/gpio.h"
 #include "../components/ntp/ntp.h"
-#include "../components/uart/uart.h"
 #include "../components/display/display.h"
 #include "../components/clock/clock.h"
 #include "../components/webserver/webserver.h"
@@ -69,9 +68,7 @@ void app_main(void)
     dispatcher_subscribe(EVT_CLOCK_NTP_CONFIG, clock_ntp_config_callback);
     dispatcher_subscribe(EVT_CLOCK_GPIO_CONFIG, clock_update_with_menu_callback);
     dispatcher_subscribe(EVT_CLOCK_WEB_CONFIG, clock_update_from_config_callback);
- 
-    //uart_init();
-    //uart_write(hello, len);
+
     pwm_init();
     dispatcher_task_start();
 

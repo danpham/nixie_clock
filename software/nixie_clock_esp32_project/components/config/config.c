@@ -78,7 +78,7 @@ esp_err_t config_init(void) {
 
                     /* Save the initialization flag */
                     if (ret == ESP_OK) {
-                        ret = nvs_save_init_flag(1U);
+                        ret = nvs_save_init_flag(CONFIG_INIT_FLAG);
                         if (ret != ESP_OK) {
                             ESP_LOGE(CONFIG_TAG, "Critical: Failed to save init flag to NVS");
                         }
