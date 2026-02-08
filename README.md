@@ -13,8 +13,8 @@ A **Nixie tube clock project** based on the **ESP32-C3**, using **IN14** and **I
 - **3.3V regulator:** AP63203WU to power the ESP32-C3 and logic components  
 - **PCB design:** SMD (Surface-Mount) components
 
-> ⚠️ **Warning:** This project involves high voltage. Follow proper electrical safety procedures!
-> 
+> [!WARNING]
+> This project involves high voltage. Follow proper electrical safety procedures!
 
 ![PCB Back](https://github.com/danpham/nixie_clock/raw/master/pcb_view.png)
 
@@ -109,13 +109,14 @@ The generated documentation for this project is available [here](https://danpham
 
 ## License
 
-This project is released under the **GPL v3** license.
+This project is released under the **LGPL v3** license.
 A separate `LICENSE` file contains the complete text of the license.
 
 
 ## Safety
 
-⚠️ This project involves **high voltage (~170V for Nixie tubes)**.  
+> [!WARNING]
+> This project involves **high voltage (~170V for Nixie tubes)**.
+
 - Never touch the circuit while it is powered
 - Work carefully and only with proper knowledge of high-voltage electronics
-
