@@ -49,6 +49,7 @@ static const char UART_TAG[] = "UART";
  * - Stop bits: 1
  * - Flow control: Disabled
  */
+/* cppcheck-suppress unusedFunction */
 void uart_init(void)
 {
     esp_err_t ret;
@@ -89,6 +90,7 @@ void uart_init(void)
  * @param str Pointer to the data buffer to send.
  * @param len Number of bytes to send.
  */
+/* cppcheck-suppress unusedFunction */
 void uart_write(const char *str, size_t len)
 {
     if (uart_mutex != NULL) {

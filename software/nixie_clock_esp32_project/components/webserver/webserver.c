@@ -478,51 +478,50 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
     size_t i = 0;
     size_t j = 0;
     uint8_t status = WEBSERVER_URLDEC_OK;
-
     if ((dst == NULL) || (src == NULL) || (dst_size == 0U)) {
-        return WEBSERVER_URLDEC_ERR_BAD_PARAM;
+        status = WEBSERVER_URLDEC_ERR_BAD_PARAM;
     }
+    else {
 
-    while ((i < src_len) && (j < (dst_size - 1U))) {
+        while ((i < src_len) && (j < (dst_size - 1U))) {
 
-        if ((src[i] == (uint8_t)'%') && ((i + 2U) < src_len)) {
+            if ((src[i] == (uint8_t)'%') && ((i + 2U) < src_len)) {
 
-            uint8_t hi = hex_to_uint8(src[i + 1U]);
-            uint8_t lo = hex_to_uint8(src[i + 2U]);
-
-            if ((hi != 0xFFU) && (lo != 0xFFU)) {
-                dst[j] = (uint8_t)((hi << 4U) | lo);
+                uint8_t hi = hex_to_uint8(src[i + 1U]);
+                uint8_t lo = hex_to_uint8(src[i + 2U]);
+                
+                if ((hi != 0xFFU) && (lo != 0xFFU)) {
+                    dst[j] = (uint8_t)((hi << 4U) | lo);
+                    j++;
+                    i += 3U;
+                }
+                else {
+                    dst[j] = src[i];
+                    j++;
+                    i++;
+                    status = WEBSERVER_URLDEC_WARN_INVALID_SEQ;
+                }
+            }
+            else if (src[i] == (uint8_t)'+') {
+                dst[j] = (uint8_t)' ';
                 j++;
-                i += 3U;
+                i++;
             }
             else {
                 dst[j] = src[i];
                 j++;
                 i++;
-                status = WEBSERVER_URLDEC_WARN_INVALID_SEQ;
             }
         }
-        else if (src[i] == (uint8_t)'+') {
-            dst[j] = (uint8_t)' ';
-            j++;
-            i++;
+
+        if (i < src_len) {
+            status = WEBSERVER_URLDEC_WARN_TRUNCATED;
         }
-        else {
-            dst[j] = src[i];
-            j++;
-            i++;
+
+        dst[j] = (uint8_t)'\0';
+        if (out_len != NULL) {
+            *out_len = j;
         }
     }
-
-    if (i < src_len) {
-        status = WEBSERVER_URLDEC_WARN_TRUNCATED;
-    }
-
-    dst[j] = (uint8_t)'\0';
-
-    if (out_len != NULL) {
-        *out_len = j;
-    }
-
     return status;
 }
