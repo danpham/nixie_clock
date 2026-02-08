@@ -475,14 +475,15 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
                              const uint8_t *src, size_t src_len,
                              size_t *out_len)
 {
-    size_t i = 0;
-    size_t j = 0;
+
     uint8_t status = WEBSERVER_URLDEC_OK;
     if ((dst == NULL) || (src == NULL) || (dst_size == 0U)) {
         status = WEBSERVER_URLDEC_ERR_BAD_PARAM;
     }
     else {
-
+        size_t i = 0;
+        size_t j = 0;
+        
         while ((i < src_len) && (j < (dst_size - 1U))) {
 
             if ((src[i] == (uint8_t)'%') && ((i + 2U) < src_len)) {
