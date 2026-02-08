@@ -433,10 +433,22 @@ static const char* get_html_page(void) {
  */
 static uint8_t hex_to_uint8(uint8_t c)
 {
-    if ((c >= (uint8_t)'0') && (c <= (uint8_t)'9')) return (uint8_t)(c - (uint8_t)'0');
-    if ((c >= (uint8_t)'A') && (c <= (uint8_t)'F')) return (uint8_t)(c - (uint8_t)'A' + 10U);
-    if ((c >= (uint8_t)'a') && (c <= (uint8_t)'f')) return (uint8_t)(c - (uint8_t)'a' + 10U);
-    return 0xFFU;
+    uint8_t result = 0xFFU;
+    
+    if ((c >= (uint8_t)'0') && (c <= (uint8_t)'9')) {
+        result = (uint8_t)(c - (uint8_t)'0');
+    }
+    else if ((c >= (uint8_t)'A') && (c <= (uint8_t)'F')) {
+        result = (uint8_t)(c - (uint8_t)'A' + 10U);
+    }
+    else if ((c >= (uint8_t)'a') && (c <= (uint8_t)'f')) {
+        result = (uint8_t)(c - (uint8_t)'a' + 10U);
+    }
+    else {
+        /* result is 0xFFU */
+    }
+    
+    return result;
 }
 
 /**
@@ -467,7 +479,7 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
     size_t j = 0;
     uint8_t status = WEBSERVER_URLDEC_OK;
 
-    if (dst == NULL || src == NULL || dst_size == 0U) {
+    if ((dst == NULL) || (src == NULL) || (dst_size == 0U)) {
         return WEBSERVER_URLDEC_ERR_BAD_PARAM;
     }
 
