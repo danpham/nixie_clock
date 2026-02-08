@@ -38,7 +38,7 @@
  * 5. Functions prototypes (static only)
 ******************************************************************/
 static const char* get_html_page(void);
-static int hex_to_uint8(uint8_t c);
+static uint8_t hex_to_uint8(uint8_t c);
 static uint8_t url_decode(uint8_t *dst, size_t dst_size, const uint8_t *src, size_t src_len, size_t *out_len);
 
 /**
@@ -125,11 +125,11 @@ static esp_err_t update_handler(httpd_req_t *req)
             uint8_t decoded[64U];
             size_t decoded_len;
 
-            uint8_t ret = url_decode(decoded, sizeof(decoded),
+            uint8_t ret_decode = url_decode(decoded, sizeof(decoded),
                                        (uint8_t *)tmp, strlen(tmp),
                                        &decoded_len);
 
-            if (ret == WEBSERVER_URLDEC_OK) {
+            if (ret_decode == WEBSERVER_URLDEC_OK) {
                 /* Copy safely into new_config.ssid */
                 size_t copy_len = (decoded_len < sizeof(new_config.ssid) - 1U)
                                 ? decoded_len
@@ -151,11 +151,11 @@ static esp_err_t update_handler(httpd_req_t *req)
             uint8_t decoded[64U];
             size_t decoded_len;
 
-            uint8_t ret = url_decode(decoded, sizeof(decoded),
+            uint8_t ret_decode = url_decode(decoded, sizeof(decoded),
                                        (uint8_t *)tmp, strlen(tmp),
                                        &decoded_len);
 
-            if (ret == WEBSERVER_URLDEC_OK) {
+            if (ret_decode == WEBSERVER_URLDEC_OK) {
                 /* Copy safely into new_config.wpa_passphrase */
                 size_t copy_len = (decoded_len < sizeof(new_config.wpa_passphrase) - 1U)
                                 ? decoded_len
@@ -426,17 +426,17 @@ static const char* get_html_page(void) {
  *
  * This function takes a hexadecimal character ('0'-'9', 'A'-'F', 'a'-'f') and
  * returns its corresponding integer value (0-15). If the input character
- * is not a valid hexadecimal digit, the function returns -1.
+ * is not a valid hexadecimal digit, the function returns 0xFFU.
  *
  * @param c The hexadecimal character to convert.
- * @return int The integer value of the hex character, or -1 if invalid.
+ * @return uint8_t The integer value of the hex character, or 0xFFU if invalid.
  */
-static int hex_to_uint8(uint8_t c)
+static uint8_t hex_to_uint8(uint8_t c)
 {
-    if (c >= (uint8_t)'0' && c <= (uint8_t)'9') return (int)(c - (uint8_t)'0');
-    if (c >= (uint8_t)'A' && c <= (uint8_t)'F') return (int)(c - (uint8_t)'A' + 10);
-    if (c >= (uint8_t)'a' && c <= (uint8_t)'f') return (int)(c - (uint8_t)'a' + 10);
-    return -1;
+    if (c >= (uint8_t)'0' && c <= (uint8_t)'9') return (uint8_t)(c - (uint8_t)'0');
+    if (c >= (uint8_t)'A' && c <= (uint8_t)'F') return (uint8_t)(c - (uint8_t)'A' + 10U);
+    if (c >= (uint8_t)'a' && c <= (uint8_t)'f') return (uint8_t)(c - (uint8_t)'a' + 10U);
+    return 0xFFU;
 }
 
 /**
@@ -465,7 +465,8 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
 {
     size_t i = 0;
     size_t j = 0;
-    int hi, lo;
+    uint8_t hi = 0;
+    uint8_t lo = 0;
     uint8_t status = WEBSERVER_URLDEC_OK;
 
     if (dst == NULL || src == NULL || dst_size == 0) {
@@ -479,21 +480,27 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
             hi = hex_to_uint8(src[i + 1U]);
             lo = hex_to_uint8(src[i + 2U]);
 
-            if ((hi >= 0) && (lo >= 0)) {
-                dst[j++] = (uint8_t)((hi << 4) | lo);
+            if ((hi != 0xFFU) && (lo != 0xFFU)) {
+                dst[j] = (uint8_t)((hi << 4U) | lo);
+                j++;
                 i += 3U;
             }
             else {
-                dst[j++] = src[i++];
+                dst[j] = src[i];
+                j++;
+                i++;
                 status = WEBSERVER_URLDEC_WARN_INVALID_SEQ;
             }
         }
         else if (src[i] == (uint8_t)'+') {
-            dst[j++] = (uint8_t)' ';
+            dst[j] = (uint8_t)' ';
+            j++;
             i++;
         }
         else {
-            dst[j++] = src[i++];
+            dst[j] = src[i];
+            j++;
+            i++;
         }
     }
 
