@@ -53,7 +53,6 @@ extern const TickType_t CONFIG_MUTEX_TIMEOUT;
 ******************************************************************/
 esp_err_t config_init(void);
 esp_err_t config_save(void);
-esp_err_t config_read(void);
 esp_err_t config_get_copy(config_t *copy);
 esp_err_t config_set_config(const config_t *config);
 

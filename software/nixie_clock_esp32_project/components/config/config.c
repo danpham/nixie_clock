@@ -30,6 +30,7 @@ const TickType_t CONFIG_MUTEX_TIMEOUT = portMAX_DELAY;
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
+static esp_err_t _config_read(void);
 static esp_err_t _config_save_nolock(void);
 
 /**
@@ -100,7 +101,7 @@ esp_err_t config_init(void) {
                     }
                     else {
                         ESP_LOGI(CONFIG_TAG, "Loading config from NVS");
-                        if (config_read() != ESP_OK) {
+                        if (_config_read() != ESP_OK) {
                             ESP_LOGE(CONFIG_TAG, "Error loading configuration");
                         }
                     }
@@ -179,7 +180,7 @@ esp_err_t config_save(void){
  * @return ESP_OK if any value was saved, ESP_FAIL if nothing changed
  *         or mutex could not be acquired.
  */
-esp_err_t config_read(void)
+static esp_err_t _config_read(void)
 {
     /* Load existing configuration from NVS */
     size_t len = CONFIG_SSID_BUF_SZ;
