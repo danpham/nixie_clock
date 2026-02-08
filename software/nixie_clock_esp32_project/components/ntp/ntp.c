@@ -118,7 +118,9 @@ static esp_err_t wifi_sta_check(void *ctx)
 
     while (netif != NULL) {
         const char *key = esp_netif_get_ifkey(netif);
-        if ((strcmp(key, "WIFI_STA_DEF") == 0) && (esp_netif_is_netif_up(netif))) {
+        int cmp_result = strcmp(key, "WIFI_STA_DEF");
+        bool is_up = esp_netif_is_netif_up(netif);
+        if ((cmp_result == 0) && is_up) {
             *sta_up = true;
             ret = ESP_OK;
             break;

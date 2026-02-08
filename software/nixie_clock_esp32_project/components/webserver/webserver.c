@@ -465,8 +465,6 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
 {
     size_t i = 0;
     size_t j = 0;
-    uint8_t hi = 0;
-    uint8_t lo = 0;
     uint8_t status = WEBSERVER_URLDEC_OK;
 
     if (dst == NULL || src == NULL || dst_size == 0) {
@@ -477,8 +475,8 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
 
         if ((src[i] == (uint8_t)'%') && ((i + 2U) < src_len)) {
 
-            hi = hex_to_uint8(src[i + 1U]);
-            lo = hex_to_uint8(src[i + 2U]);
+            uint8_t hi = hex_to_uint8(src[i + 1U]);
+            uint8_t lo = hex_to_uint8(src[i + 2U]);
 
             if ((hi != 0xFFU) && (lo != 0xFFU)) {
                 dst[j] = (uint8_t)((hi << 4U) | lo);
