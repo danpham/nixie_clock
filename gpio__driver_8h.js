@@ -6,7 +6,6 @@ var gpio__driver_8h =
     [ "BUTTON_STATE_PRESS", "gpio__driver_8h.html#a623c435f02ebdf62fae39739a4c1fb07", null ],
     [ "BUTTON_STATE_RELEASE", "gpio__driver_8h.html#a3b6279b01349d1dfb91370a4b374bf72", null ],
     [ "MY_GPIO_PULL_DOWN", "gpio__driver_8h.html#a39b4f2910a0bc7e2336063523d488c9d", null ],
-    [ "MY_GPIO_PULL_NONE", "gpio__driver_8h.html#acb905c3d93f045fb3426aea9f99ef2d8", null ],
     [ "MY_GPIO_PULL_UP", "gpio__driver_8h.html#a6cc1d302a6d3870bfb574c0a5e7bdea3", null ],
     [ "button_press_t", "gpio__driver_8h.html#a5cf995207feb3f3de79c0358bd491082", null ],
     [ "button_state_t", "gpio__driver_8h.html#ac5cf1c7aed7fa14284c355aa13ecccbd", null ],
