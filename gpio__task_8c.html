@@ -90,8 +90,10 @@ $(document).ready(function(){initNavTree('gpio__task_8c.html',''); initResizable
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">gpio_task.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -110,18 +112,67 @@ Include dependency graph for gpio_task.c:</div>
 <div class="center"><iframe scrolling="no" frameborder="0" src="gpio__task_8c__incl.svg" width="1011" height="315"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgpio__event__t.html">gpio_event_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ab7ce5bf27337d34853e3d833d51c015f" id="r_ab7ce5bf27337d34853e3d833d51c015f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#ab7ce5bf27337d34853e3d833d51c015f">GPIOTASK_LOG_THROTTLE_MS</a>&#160;&#160;&#160;(50U)</td></tr>
+<tr class="memitem:ab7ce5bf27337d34853e3d833d51c015f" id="r_ab7ce5bf27337d34853e3d833d51c015f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#ab7ce5bf27337d34853e3d833d51c015f">GPIOTASK_LOG_THROTTLE_MS</a>&#160;&#160;&#160;(5U)</td></tr>
 <tr class="separator:ab7ce5bf27337d34853e3d833d51c015f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda49d44c45284e232f53859f6ca8a5d" id="r_adda49d44c45284e232f53859f6ca8a5d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#adda49d44c45284e232f53859f6ca8a5d">GPIOTASK_DEBOUNCE_US</a>&#160;&#160;&#160;(2000U)</td></tr>
+<tr class="separator:adda49d44c45284e232f53859f6ca8a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8d872bd0324b426fdd58caaa4fbf079" id="r_ab8d872bd0324b426fdd58caaa4fbf079"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#ab8d872bd0324b426fdd58caaa4fbf079">GPIOTASK_ENCODER_QUEUE_SIZE</a>&#160;&#160;&#160;(50U)</td></tr>
+<tr class="separator:ab8d872bd0324b426fdd58caaa4fbf079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ab2d3777d88090e7626f751901e3ada78" id="r_ab2d3777d88090e7626f751901e3ada78"><td class="memItemLeft" align="right" valign="top">void IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#ab2d3777d88090e7626f751901e3ada78">gpio_isr_handler</a> (void *arg)</td></tr>
+<tr class="memdesc:ab2d3777d88090e7626f751901e3ada78"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR for rotary encoder channels A and B.  <br /></td></tr>
+<tr class="separator:ab2d3777d88090e7626f751901e3ada78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97239d1d62c9449c11609f480109ea48" id="r_a97239d1d62c9449c11609f480109ea48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#a97239d1d62c9449c11609f480109ea48">gpio_task_start</a> (void)</td></tr>
 <tr class="memdesc:a97239d1d62c9449c11609f480109ea48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the GPIO task.  <br /></td></tr>
 <tr class="separator:a97239d1d62c9449c11609f480109ea48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8f4f82a3f7dce6d6d1809181b4f14e43" id="r_a8f4f82a3f7dce6d6d1809181b4f14e43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmy__gpio__btn__t.html">my_gpio_btn_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#a8f4f82a3f7dce6d6d1809181b4f14e43">rotaryEncoderChanA</a></td></tr>
+<tr class="separator:a8f4f82a3f7dce6d6d1809181b4f14e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c04c89b04453a00409ee66c7b629f2e" id="r_a5c04c89b04453a00409ee66c7b629f2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmy__gpio__btn__t.html">my_gpio_btn_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#a5c04c89b04453a00409ee66c7b629f2e">rotaryEncoderChanB</a></td></tr>
+<tr class="separator:a5c04c89b04453a00409ee66c7b629f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ea3ccccc73f817813fe2716a5d3b4f" id="r_ad5ea3ccccc73f817813fe2716a5d3b4f"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__task_8c.html#ad5ea3ccccc73f817813fe2716a5d3b4f">last_state</a> = 0xFF</td></tr>
+<tr class="separator:ad5ea3ccccc73f817813fe2716a5d3b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="adda49d44c45284e232f53859f6ca8a5d" name="adda49d44c45284e232f53859f6ca8a5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adda49d44c45284e232f53859f6ca8a5d">&#9670;&#160;</a></span>GPIOTASK_DEBOUNCE_US</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIOTASK_DEBOUNCE_US&#160;&#160;&#160;(2000U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8d872bd0324b426fdd58caaa4fbf079" name="ab8d872bd0324b426fdd58caaa4fbf079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8d872bd0324b426fdd58caaa4fbf079">&#9670;&#160;</a></span>GPIOTASK_ENCODER_QUEUE_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIOTASK_ENCODER_QUEUE_SIZE&#160;&#160;&#160;(50U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab7ce5bf27337d34853e3d833d51c015f" name="ab7ce5bf27337d34853e3d833d51c015f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab7ce5bf27337d34853e3d833d51c015f">&#9670;&#160;</a></span>GPIOTASK_LOG_THROTTLE_MS</h2>
 
@@ -129,7 +180,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define GPIOTASK_LOG_THROTTLE_MS&#160;&#160;&#160;(50U)</td>
+          <td class="memname">#define GPIOTASK_LOG_THROTTLE_MS&#160;&#160;&#160;(5U)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -137,6 +188,33 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ab2d3777d88090e7626f751901e3ada78" name="ab2d3777d88090e7626f751901e3ada78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2d3777d88090e7626f751901e3ada78">&#9670;&#160;</a></span>gpio_isr_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IRAM_ATTR gpio_isr_handler </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR for rotary encoder channels A and B. </p>
+<p>Debounces input, rejects duplicate states, and sends valid events to a queue.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>Unused argument. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a97239d1d62c9449c11609f480109ea48" name="a97239d1d62c9449c11609f480109ea48"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97239d1d62c9449c11609f480109ea48">&#9670;&#160;</a></span>gpio_task_start()</h2>
 
@@ -156,6 +234,64 @@ Functions</h2></td></tr>
 <p>Start the GPIO task. </p>
 <p>Starts the <code>gpio_task</code>. </p>
 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad5ea3ccccc73f817813fe2716a5d3b4f" name="ad5ea3ccccc73f817813fe2716a5d3b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ea3ccccc73f817813fe2716a5d3b4f">&#9670;&#160;</a></span>last_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t last_state = 0xFF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f4f82a3f7dce6d6d1809181b4f14e43" name="a8f4f82a3f7dce6d6d1809181b4f14e43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f4f82a3f7dce6d6d1809181b4f14e43">&#9670;&#160;</a></span>rotaryEncoderChanA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmy__gpio__btn__t.html">my_gpio_btn_t</a> rotaryEncoderChanA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    .pin = GPIO_NUM_5,</div>
+<div class="line">    .pull = <a class="code hl_define" href="gpio__driver_8h.html#acb905c3d93f045fb3426aea9f99ef2d8">MY_GPIO_PULL_NONE</a>,</div>
+<div class="line">    .debounce_ms = 10,</div>
+<div class="line">    .intr_type = GPIO_INTR_ANYEDGE,</div>
+<div class="line">    .isr_handler = NULL,</div>
+<div class="line"> }</div>
+<div class="ttc" id="agpio__driver_8h_html_acb905c3d93f045fb3426aea9f99ef2d8"><div class="ttname"><a href="gpio__driver_8h.html#acb905c3d93f045fb3426aea9f99ef2d8">MY_GPIO_PULL_NONE</a></div><div class="ttdeci">#define MY_GPIO_PULL_NONE</div><div class="ttdef"><b>Definition</b> gpio_driver.h:22</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5c04c89b04453a00409ee66c7b629f2e" name="a5c04c89b04453a00409ee66c7b629f2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c04c89b04453a00409ee66c7b629f2e">&#9670;&#160;</a></span>rotaryEncoderChanB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmy__gpio__btn__t.html">my_gpio_btn_t</a> rotaryEncoderChanB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    .pin = GPIO_NUM_4,</div>
+<div class="line">    .pull = <a class="code hl_define" href="gpio__driver_8h.html#acb905c3d93f045fb3426aea9f99ef2d8">MY_GPIO_PULL_NONE</a>,</div>
+<div class="line">    .debounce_ms = 10,</div>
+<div class="line">    .intr_type = GPIO_INTR_ANYEDGE,</div>
+<div class="line">    .isr_handler = NULL,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

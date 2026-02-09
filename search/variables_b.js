@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['time_0',['time',['../structconfig__t.html#abd4cac5ba54221a0d6e374e1df9f5e50',1,'config_t']]],
-  ['type_1',['type',['../structevent__bus__message__t.html#af31a3b5d924eed9aa1b118a26d73eba9',1,'event_bus_message_t']]]
+  ['rotaryencoderchana_0',['rotaryEncoderChanA',['../gpio__task_8c.html#a8f4f82a3f7dce6d6d1809181b4f14e43',1,'gpio_task.c']]],
+  ['rotaryencoderchanb_1',['rotaryEncoderChanB',['../gpio__task_8c.html#a5c04c89b04453a00409ee66c7b629f2e',1,'gpio_task.c']]]
 ];
