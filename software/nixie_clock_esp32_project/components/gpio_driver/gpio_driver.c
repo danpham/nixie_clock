@@ -22,6 +22,7 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
+static bool isr_service_installed = false;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -52,9 +53,22 @@ esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
         io_conf.mode = GPIO_MODE_INPUT;
         io_conf.pull_up_en = (btn->pull == MY_GPIO_PULL_UP) ? GPIO_PULLUP_ENABLE : GPIO_PULLUP_DISABLE;
         io_conf.pull_down_en = (btn->pull == MY_GPIO_PULL_DOWN) ? GPIO_PULLDOWN_ENABLE : GPIO_PULLDOWN_DISABLE;
-        io_conf.intr_type = GPIO_INTR_DISABLE;
+        io_conf.intr_type = btn->intr_type;
 
         err = gpio_config(&io_conf);
+
+        /* Install ISR service only once */
+        if (isr_service_installed == false) {
+            esp_err_t ret_isr_install = gpio_install_isr_service(0);
+            if ((ret_isr_install != ESP_OK) && (ret_isr_install != ESP_ERR_INVALID_STATE)) {
+                return ret_isr_install;
+            }
+            isr_service_installed = true;
+        }
+
+        if (btn->intr_type != GPIO_INTR_DISABLE) {
+            gpio_isr_handler_add(btn->pin, btn->isr_handler, (void*) btn->pin);
+        }
 
         if (err == ESP_OK) {
             btn->last_state = gpio_get_level(btn->pin);

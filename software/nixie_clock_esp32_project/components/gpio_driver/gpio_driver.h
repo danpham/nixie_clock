@@ -19,6 +19,7 @@ typedef uint8_t button_state_t;
 #define BUTTON_STATE_PRESS     ((button_press_t)0U)
 
 typedef uint8_t my_gpio_pull_t;
+#define MY_GPIO_PULL_NONE   ((my_gpio_pull_t)0U)
 #define MY_GPIO_PULL_UP     ((my_gpio_pull_t)1U)
 #define MY_GPIO_PULL_DOWN   ((my_gpio_pull_t)2U)
 
@@ -35,6 +36,8 @@ typedef struct {
     uint32_t last_change_ms;
     uint32_t press_start_ms;
     uint32_t debounce_ms;
+    gpio_int_type_t intr_type;
+    gpio_isr_t isr_handler;
 } my_gpio_btn_t;
 
 /******************************************************************
