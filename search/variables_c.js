@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['seconds_0',['seconds',['../structmyclock__t.html#a39adf3b3fd0cf4849d687cd441585ba0',1,'myclock_t']]],
-  ['ssid_1',['ssid',['../structconfig__t.html#abf30ec4846f87d683d10929a8ec7a1e7',1,'config_t']]]
+  ['time_0',['time',['../structconfig__t.html#abd4cac5ba54221a0d6e374e1df9f5e50',1,'config_t']]],
+  ['type_1',['type',['../structevent__bus__message__t.html#af31a3b5d924eed9aa1b118a26d73eba9',1,'event_bus_message_t']]]
 ];

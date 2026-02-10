@@ -6,5 +6,6 @@ var searchData=
   ['press_5fstart_5fms_3',['press_start_ms',['../structmy__gpio__btn__t.html#a8dd95e7eda502b170a8b2f9fd332c8af',1,'my_gpio_btn_t']]],
   ['press_5ftype_4',['press_type',['../structmy__gpio__btn__t.html#a026d423340e6e9bd42af6fd20d8f6df0',1,'my_gpio_btn_t']]],
   ['pressed_5',['pressed',['../structbutton__event__t.html#a1f9d8d33d4dd442a4a78f3530a74c3bc',1,'button_event_t']]],
-  ['pull_6',['pull',['../structmy__gpio__btn__t.html#a2dcf914b81c7f04acc534a462eaa8af2',1,'my_gpio_btn_t']]]
+  ['previous_5fstate_6',['previous_state',['../structmy__gpio__btn__t.html#a0aa0edacbe57255603a2f3e6aae6ae5a',1,'my_gpio_btn_t']]],
+  ['pull_7',['pull',['../structmy__gpio__btn__t.html#a2dcf914b81c7f04acc534a462eaa8af2',1,'my_gpio_btn_t']]]
 ];

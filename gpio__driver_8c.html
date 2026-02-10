@@ -100,10 +100,11 @@ $(document).ready(function(){initNavTree('gpio__driver_8c.html',''); initResizab
 <code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
 <code>#include &quot;freertos/task.h&quot;</code><br />
 <code>#include &quot;esp_timer.h&quot;</code><br />
+<code>#include &quot;hal/gpio_types.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for gpio_driver.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="gpio__driver_8c__incl.svg" width="723" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="gpio__driver_8c__incl.svg" width="878" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -199,7 +200,7 @@ Functions</h2></td></tr>
 </ul>
 </dd></dl>
 <p>Updates the button structure:</p><ul>
-<li>last_state: last physical state</li>
+<li>previous_state: last physical state</li>
 <li>press_type: detected press type (short or long) </li>
 </ul>
 

@@ -151,13 +151,9 @@ var NAVTREEINDEX0 =
 "gpio__driver_8h.html#acc7228308bca711ea7b42fcc82dc09ce":[1,0,0,0,0,6,1,1],
 "gpio__driver_8h_source.html":[1,0,0,0,0,6,1],
 "gpio__task_8c.html":[1,0,0,0,0,7,0],
-"gpio__task_8c.html#a5c04c89b04453a00409ee66c7b629f2e":[1,0,0,0,0,7,0,8],
-"gpio__task_8c.html#a8f4f82a3f7dce6d6d1809181b4f14e43":[1,0,0,0,0,7,0,7],
-"gpio__task_8c.html#a97239d1d62c9449c11609f480109ea48":[1,0,0,0,0,7,0,5],
-"gpio__task_8c.html#ab2d3777d88090e7626f751901e3ada78":[1,0,0,0,0,7,0,4],
+"gpio__task_8c.html#a97239d1d62c9449c11609f480109ea48":[1,0,0,0,0,7,0,4],
 "gpio__task_8c.html#ab7ce5bf27337d34853e3d833d51c015f":[1,0,0,0,0,7,0,3],
 "gpio__task_8c.html#ab8d872bd0324b426fdd58caaa4fbf079":[1,0,0,0,0,7,0,2],
-"gpio__task_8c.html#ad5ea3ccccc73f817813fe2716a5d3b4f":[1,0,0,0,0,7,0,6],
 "gpio__task_8c.html#adda49d44c45284e232f53859f6ca8a5d":[1,0,0,0,0,7,0,1],
 "gpio__task_8h.html":[1,0,0,0,0,7,1],
 "gpio__task_8h.html#a052ad2f44cf91330ede5cadb80725900":[1,0,0,0,0,7,1,1],
@@ -249,5 +245,9 @@ var NAVTREEINDEX0 =
 "structbutton__event__t.html#a1f9d8d33d4dd442a4a78f3530a74c3bc":[0,0,0,1],
 "structbutton__event__t.html#a3b4a7f2abafd6762475be90c1db2f14c":[0,0,0,2],
 "structbutton__event__t.html#aeb4350a4d00f18ec2d4a4ee35d65e1b9":[0,0,0,0],
-"structconfig__t.html":[0,0,1]
+"structconfig__t.html":[0,0,1],
+"structconfig__t.html#a0b2f40648c9fcb1c09c64ee831985eb2":[0,0,1,2],
+"structconfig__t.html#aa8b34067362e1666f7ab6ed6f49aa103":[0,0,1,1],
+"structconfig__t.html#abc46a404ae3d232619a414f299a15fb8":[0,0,1,0],
+"structconfig__t.html#abd4cac5ba54221a0d6e374e1df9f5e50":[0,0,1,4]
 };
