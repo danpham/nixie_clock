@@ -32,8 +32,6 @@ typedef struct {
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static volatile uint64_t last_tick_us = 0;
-
 static my_gpio_btn_t rotaryEncoderChanA = {
     .pin = GPIO_NUM_5,
     .pull = MY_GPIO_PULL_NONE,
@@ -73,6 +71,8 @@ static void IRAM_ATTR gpio_isr_handler(void* arg)
 {
     (void)arg;
     static uint8_t previous_state = 0xFFU;
+    static uint64_t last_tick_us = 0U;
+
     uint64_t now = esp_timer_get_time();
     
     /* Debounce check */
