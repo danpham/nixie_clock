@@ -31,7 +31,7 @@ typedef uint8_t my_gpio_pull_t;
 typedef struct {
     gpio_num_t pin;
     my_gpio_pull_t pull;
-    button_state_t last_state;
+    button_state_t previous_state;
     button_press_t press_type;
     uint32_t last_change_ms;
     uint32_t press_start_ms;

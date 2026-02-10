@@ -18,7 +18,7 @@
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
 #define GPIOTASK_LOG_THROTTLE_MS           (5U)
-#define GPIOTASK_DEBOUNCE_US               (2000U)
+#define GPIOTASK_DEBOUNCE_US               (100U)
 #define GPIOTASK_ENCODER_QUEUE_SIZE        (50U)
 
 /******************************************************************
@@ -29,7 +29,12 @@ typedef struct {
     button_state_t b;
 } gpio_event_t;
 
-my_gpio_btn_t rotaryEncoderChanA = {
+/******************************************************************
+ * 4. Variable definitions (static then global)
+******************************************************************/
+static volatile uint64_t last_tick_us = 0;
+
+static my_gpio_btn_t rotaryEncoderChanA = {
     .pin = GPIO_NUM_5,
     .pull = MY_GPIO_PULL_NONE,
     .debounce_ms = 10,
@@ -37,7 +42,7 @@ my_gpio_btn_t rotaryEncoderChanA = {
     .isr_handler = NULL,
  };
 
- my_gpio_btn_t rotaryEncoderChanB = {
+ static my_gpio_btn_t rotaryEncoderChanB = {
     .pin = GPIO_NUM_4,
     .pull = MY_GPIO_PULL_NONE,
     .debounce_ms = 10,
@@ -45,11 +50,7 @@ my_gpio_btn_t rotaryEncoderChanA = {
     .isr_handler = NULL,
 };
 
-/******************************************************************
- * 4. Variable definitions (static then global)
-******************************************************************/
-static volatile uint64_t last_tick_us = 0;
-volatile uint8_t last_state = 0xFF;
+
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -68,30 +69,33 @@ static QueueHandle_t gpio_evt_queue = NULL;
  *
  * @param[in] arg Unused argument.
  */
-void IRAM_ATTR gpio_isr_handler(void* arg)
+static void IRAM_ATTR gpio_isr_handler(void* arg)
 {
     (void)arg;
-
-    /* Debounce check */
+    static uint8_t previous_state = 0xFF;
     uint64_t now = esp_timer_get_time();
-    if (now - last_tick_us < GPIOTASK_DEBOUNCE_US) return;
-    last_tick_us = now;
-
-    /* Read current states of encoder channels A and B */
-    gpio_event_t evt;
-    evt.a = gpio_get_level(rotaryEncoderChanA.pin);
-    evt.b = gpio_get_level(rotaryEncoderChanB.pin);
-
-    /* Combine A and B into a single state */
-    uint8_t state = (evt.a << 1) | evt.b;
-
-    /* Reject if same as previous state (duplicate) */
-    if (state == last_state) return;
-    last_state = state;
-
-    /* Send event to queue for processing outside ISR */
-    if (gpio_evt_queue != NULL) {
-        xQueueSendFromISR(gpio_evt_queue, &evt, NULL);
+    
+    /* Debounce check */
+    if ((now - last_tick_us) >= GPIOTASK_DEBOUNCE_US) {
+        last_tick_us = now;
+        
+        /* Read current states of encoder channels A and B */
+        gpio_event_t evt;
+        evt.a = gpio_get_level(rotaryEncoderChanA.pin);
+        evt.b = gpio_get_level(rotaryEncoderChanB.pin);
+        
+        /* Combine A and B into a single state */
+        uint8_t state = (evt.a << 1) | evt.b;
+        
+        /* Reject if same as previous state (duplicate) */
+        if (state != previous_state) {
+            previous_state = state;
+            
+            /* Send event to queue for processing outside ISR */
+            if (gpio_evt_queue != NULL) {
+                xQueueSendFromISR(gpio_evt_queue, &evt, NULL);
+            }
+        }
     }
 }
 
@@ -179,8 +183,8 @@ static void gpio_task(void *arg)
         }
 
         gpio_event_t evt_encoder;
-        if (xQueueReceive(gpio_evt_queue, &evt_encoder, 0)) {
-
+        while (xQueueReceive(gpio_evt_queue, &evt_encoder, 0) == pdTRUE)
+        {
             rotary_encoder_event_t ev = process_rotary_encoder(state_last_rotaryChanA, state_last_rotaryChanB, evt_encoder.a, evt_encoder.b);
             if (ev != ROTARY_ENCODER_EVENT_NONE) {
 

@@ -9,6 +9,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_timer.h"
+#include "hal/gpio_types.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -45,37 +46,35 @@ static bool isr_service_installed = false;
  *      - Other ESP_ERR_XXX codes if GPIO API fails
  */
 esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
-    esp_err_t err = ESP_OK;
-    gpio_config_t io_conf = {0};
-
+    esp_err_t err = ESP_ERR_INVALID_ARG;
+    
     if (btn != NULL) {
+        gpio_config_t io_conf = {0};
         io_conf.pin_bit_mask = UINT64_C(1) << (uint64_t)btn->pin;
         io_conf.mode = GPIO_MODE_INPUT;
         io_conf.pull_up_en = (btn->pull == MY_GPIO_PULL_UP) ? GPIO_PULLUP_ENABLE : GPIO_PULLUP_DISABLE;
         io_conf.pull_down_en = (btn->pull == MY_GPIO_PULL_DOWN) ? GPIO_PULLDOWN_ENABLE : GPIO_PULLDOWN_DISABLE;
         io_conf.intr_type = btn->intr_type;
-
         err = gpio_config(&io_conf);
-
+        
         /* Install ISR service only once */
-        if (isr_service_installed == false) {
+        if ((err == ESP_OK) && (isr_service_installed == false)) {
             esp_err_t ret_isr_install = gpio_install_isr_service(0);
             if ((ret_isr_install != ESP_OK) && (ret_isr_install != ESP_ERR_INVALID_STATE)) {
-                return ret_isr_install;
+                err = ret_isr_install;
+            } else {
+                isr_service_installed = true;
             }
-            isr_service_installed = true;
         }
-
-        if (btn->intr_type != GPIO_INTR_DISABLE) {
+        
+        if ((err == ESP_OK) && (btn->intr_type != GPIO_INTR_DISABLE)) {
             gpio_isr_handler_add(btn->pin, btn->isr_handler, (void*) btn->pin);
         }
-
+        
         if (err == ESP_OK) {
-            btn->last_state = gpio_get_level(btn->pin);
+            btn->previous_state = gpio_get_level(btn->pin);
             btn->last_change_ms = 0;
         }
-    } else {
-        err = ESP_ERR_INVALID_ARG;
     }
     
     return err;
@@ -93,7 +92,7 @@ esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
  *      - BUTTON_STATE_PRESS: button pressed
  *
  * Updates the button structure:
- *      - last_state: last physical state
+ *      - previous_state: last physical state
  *      - press_type: detected press type (short or long)
  */
 button_state_t my_gpio_read_btn(my_gpio_btn_t *btn) {
@@ -104,23 +103,23 @@ button_state_t my_gpio_read_btn(my_gpio_btn_t *btn) {
         state = gpio_get_level(btn->pin);
         btn->press_type = BUTTON_SHORT_PRESS;
 
-        if (state != btn->last_state) {
+        if (state != btn->previous_state) {
             if ((uint32_t)(now - btn->last_change_ms) > btn->debounce_ms) {
                 
-                if ((state == (button_state_t)BUTTON_STATE_PRESS) && (btn->last_state == (button_state_t)BUTTON_STATE_RELEASE)) {
+                if ((state == (button_state_t)BUTTON_STATE_PRESS) && (btn->previous_state == (button_state_t)BUTTON_STATE_RELEASE)) {
                     btn->press_start_ms = now;
                 }
 
-                if ((state == (button_state_t)BUTTON_STATE_RELEASE) && (btn->last_state == (button_state_t)BUTTON_STATE_PRESS)) {
+                if ((state == (button_state_t)BUTTON_STATE_RELEASE) && (btn->previous_state == (button_state_t)BUTTON_STATE_PRESS)) {
                     uint32_t duration = 0;
                     duration = now - btn->press_start_ms;
                     btn->press_type = (duration >= (uint32_t)BUTTON_LONG_PRESS_MS) ? (button_press_t)BUTTON_LONG_PRESS : (button_press_t)BUTTON_SHORT_PRESS;
                 }
 
-                btn->last_state = state;
+                btn->previous_state = state;
                 btn->last_change_ms = now;
             } else {
-                state = btn->last_state;
+                state = btn->previous_state;
             }
         }
     }
