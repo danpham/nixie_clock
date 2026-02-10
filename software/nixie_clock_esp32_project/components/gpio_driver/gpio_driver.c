@@ -45,10 +45,10 @@
  */
 esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
     esp_err_t err = ESP_ERR_INVALID_ARG;
-    static bool isr_service_installed = false;
-    
+
     if (btn != NULL) {
         gpio_config_t io_conf = {0};
+        static bool isr_service_installed = false;
         io_conf.pin_bit_mask = UINT64_C(1) << (uint64_t)btn->pin;
         io_conf.mode = GPIO_MODE_INPUT;
         io_conf.pull_up_en = (btn->pull == MY_GPIO_PULL_UP) ? GPIO_PULLUP_ENABLE : GPIO_PULLUP_DISABLE;
