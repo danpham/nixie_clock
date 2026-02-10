@@ -9,7 +9,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_timer.h"
-#include "hal/gpio_types.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -23,7 +22,6 @@
 /******************************************************************
  * 4. Variable definitions (static then global)
 ******************************************************************/
-static bool isr_service_installed = false;
 
 /******************************************************************
  * 5. Functions prototypes (static only)
@@ -47,6 +45,7 @@ static bool isr_service_installed = false;
  */
 esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
     esp_err_t err = ESP_ERR_INVALID_ARG;
+    static bool isr_service_installed = false;
     
     if (btn != NULL) {
         gpio_config_t io_conf = {0};

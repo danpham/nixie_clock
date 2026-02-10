@@ -2,6 +2,8 @@
 #ifndef ESP_IDF_STUB_H
 #define ESP_IDF_STUB_H
 
+/* GPIO interrupt type */
+#define GPIO_INTR_DISABLE 0
 
 /* FreeRTOS boolean macros */
 #define pdTRUE  1

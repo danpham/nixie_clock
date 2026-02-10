@@ -72,7 +72,7 @@ static QueueHandle_t gpio_evt_queue = NULL;
 static void IRAM_ATTR gpio_isr_handler(void* arg)
 {
     (void)arg;
-    static uint8_t previous_state = 0xFF;
+    static uint8_t previous_state = 0xFFU;
     uint64_t now = esp_timer_get_time();
     
     /* Debounce check */
