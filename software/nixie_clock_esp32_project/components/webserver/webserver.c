@@ -56,11 +56,11 @@ static esp_err_t root_handler(httpd_req_t *req)
 {
     esp_err_t ret = ESP_FAIL;
     config_t config;
-    char html_format[WEBSERVER_HTML_PAGE_SIZE];
     const char *html_page_orig = get_html_page();
 
     ret = config_get_copy(&config);
     if (ESP_OK == ret) {
+		char html_format[WEBSERVER_HTML_PAGE_SIZE];
         int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
         (config.ntp == 1) ? "checked" : "",
         config.time.hours,
