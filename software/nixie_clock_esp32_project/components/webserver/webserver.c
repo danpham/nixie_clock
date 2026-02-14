@@ -73,12 +73,13 @@ static esp_err_t root_handler(httpd_req_t *req)
         (config.mode == 2) ? "checked" : "",
         config.dutycycle);
 
-        if (ret_modify_html < 0) {
-            ret = ESP_FAIL;
+        if (ret_modify_html >= 0) {
+			httpd_resp_send(req, html_format, HTTPD_RESP_USE_STRLEN);
         }
+		else {
+		    ret = ESP_FAIL;
+		}
     }
-
-    httpd_resp_send(req, html_format, HTTPD_RESP_USE_STRLEN);
 
     return ret;
 }
@@ -136,10 +137,10 @@ static esp_err_t update_handler(httpd_req_t *req)
                                 : sizeof(new_config.ssid) - 1U;
 
                 (void)strncpy(new_config.ssid, (char *)decoded, copy_len);
-                new_config.ssid[decoded_len] = '\0';
+                new_config.ssid[copy_len] = '\0';
             }
             else {
-                ESP_LOGE(WEBSERVER_TAG, "URL decode error: 0x%02X", ret);
+                ESP_LOGE(WEBSERVER_TAG, "URL decode error: 0x%02X", ret_decode);
             }
 
         }
@@ -162,10 +163,10 @@ static esp_err_t update_handler(httpd_req_t *req)
                                 : sizeof(new_config.wpa_passphrase) - 1U;
 
                 (void)strncpy(new_config.wpa_passphrase, (char *)decoded, copy_len);
-                new_config.wpa_passphrase[decoded_len] = '\0';
+                new_config.wpa_passphrase[copy_len] = '\0';
             }
             else {
-                ESP_LOGE(WEBSERVER_TAG, "URL decode error: 0x%02X", ret);
+                ESP_LOGE(WEBSERVER_TAG, "URL decode error: 0x%02X", ret_decode);
             }
         }
 
@@ -179,7 +180,9 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.mode = (int)tmp_val;
+                if ((tmp_val >= 0) && (tmp_val <= 2)) {
+                    new_config.mode = (uint8_t)tmp_val;
+                }
             }
         }
 
@@ -192,7 +195,9 @@ static esp_err_t update_handler(httpd_req_t *req)
             const long tmp_val = strtol(tmp, &local_endptr, 10);
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0)) {
-                new_config.ntp = (uint8_t)tmp_val;
+                if ((tmp_val >= 0) && (tmp_val <= 1)) {
+                    new_config.ntp = (uint8_t)tmp_val;
+                }
             }
         }
         else {
@@ -210,7 +215,9 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.time.hours = (int)tmp_val;
+                if ((tmp_val >= 0) && (tmp_val <= 23)) {
+                    new_config.time.hours = (uint8_t)tmp_val;
+                }
             }
         }
 
@@ -224,7 +231,9 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.time.minutes = (int)tmp_val;
+                if ((tmp_val >= 0) && (tmp_val <= 59)) {
+                    new_config.time.minutes = (uint8_t)tmp_val;
+                }
             }
         }
 
@@ -238,7 +247,9 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.time.seconds = (int)tmp_val;
+                if ((tmp_val >= 0) && (tmp_val <= 59)) {
+                    new_config.time.seconds = (uint8_t)tmp_val;
+                }
             }
         }
 
@@ -252,7 +263,9 @@ static esp_err_t update_handler(httpd_req_t *req)
             /* Check for successful numeric conversion */
             if ((local_endptr != tmp) && (*local_endptr == '\0') && (errno == 0))
             {
-                new_config.dutycycle = (int)tmp_val;
+                if ((tmp_val >= 0) && (tmp_val <= 255)) {
+                    new_config.dutycycle = (uint8_t)tmp_val;
+                }
             }
         }
 
