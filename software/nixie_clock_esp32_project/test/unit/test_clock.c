@@ -68,3 +68,17 @@ void test_clock_increment_minutes(void) {
     clock_increment_minutes(&system_clock_ticks);
     TEST_ASSERT_EQUAL_UINT8(0, system_clock_ticks.minutes);
 }
+
+// Test decrementing hours
+void test_clock_decrement_hours(void) {
+    clock_init(&system_clock_ticks, 0, 0, 0);
+    clock_decrement_hours(&system_clock_ticks);
+    TEST_ASSERT_EQUAL_UINT8(23, system_clock_ticks.hours);
+}
+
+// Test decrementing minutes
+void test_clock_decrement_minutes(void) {
+    clock_init(&system_clock_ticks, 0, 0, 0);
+    clock_decrement_minutes(&system_clock_ticks);
+    TEST_ASSERT_EQUAL_UINT8(59, system_clock_ticks.minutes);
+}
