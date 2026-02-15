@@ -5,6 +5,7 @@
 #include "../test/common/esp_stub.h"
 #endif
 #include <errno.h>
+#include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_wifi.h"
@@ -40,6 +41,7 @@
 static const char* get_html_page(void);
 static uint8_t hex_to_uint8(uint8_t c);
 static uint8_t url_decode(uint8_t *dst, size_t dst_size, const uint8_t *src, size_t src_len, size_t *out_len);
+static void html_escape(char *dst, size_t dst_size, const char *src);
 
 /**
  * @brief Handles the root page ("/") request.
@@ -60,14 +62,19 @@ static esp_err_t root_handler(httpd_req_t *req)
 
     ret = config_get_copy(&config);
     if (ESP_OK == ret) {
+		char safe_ssid[CONFIG_SSID_BUF_SZ * 6U];
+		char safe_pass[CONFIG_WPA_PASSPHRASE_BUF_SZ * 6U];
+		html_escape(safe_ssid, sizeof(safe_ssid), config.ssid);
+		html_escape(safe_pass, sizeof(safe_pass), config.wpa_passphrase);
+
 		char html_format[WEBSERVER_HTML_PAGE_SIZE];
         int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
         (config.ntp == 1) ? "checked" : "",
         config.time.hours,
         config.time.minutes,
         config.time.seconds,
-        config.ssid,
-        config.wpa_passphrase,
+        safe_ssid,
+        safe_pass,
         (config.mode == 0) ? "checked" : "",
         (config.mode == 1) ? "checked" : "",
         (config.mode == 2) ? "checked" : "",
@@ -538,4 +545,45 @@ static uint8_t url_decode(uint8_t *dst, size_t dst_size,
         }
     }
     return status;
+}
+
+/**
+ * @brief Escape HTML special characters in a string.
+ *
+ * Replaces &, <, >, " with their HTML entity equivalents
+ * to prevent cross-site scripting (XSS) when embedding
+ * user-provided strings in HTML output.
+ *
+ * @param dst Destination buffer.
+ * @param dst_size Size of the destination buffer.
+ * @param src Source string to escape.
+ */
+static void html_escape(char *dst, size_t dst_size, const char *src)
+{
+    size_t j = 0U;
+
+    for (size_t i = 0U; (src[i] != '\0') && (j < (dst_size - 1U)); i++) {
+        const char *esc = NULL;
+        size_t esc_len = 0U;
+
+        switch (src[i]) {
+            case '&':  esc = "&amp;";  esc_len = 5U; break;
+            case '<':  esc = "&lt;";   esc_len = 4U; break;
+            case '>':  esc = "&gt;";   esc_len = 4U; break;
+            case '"':  esc = "&quot;"; esc_len = 6U; break;
+            default:   break;
+        }
+
+        if ((esc != NULL) && ((j + esc_len) < dst_size)) {
+            (void)memcpy(&dst[j], esc, esc_len);
+            j += esc_len;
+        } else if (esc == NULL) {
+            dst[j] = src[i];
+            j++;
+        } else {
+            break;
+        }
+    }
+
+    dst[j] = '\0';
 }
