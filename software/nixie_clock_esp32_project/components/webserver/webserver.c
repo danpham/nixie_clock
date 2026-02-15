@@ -299,7 +299,7 @@ httpd_handle_t start_webserver(void)
     httpd_handle_t server = NULL;
     esp_err_t start_result = ESP_FAIL;
 
-    config.stack_size = 65535;    /* 16 KB */
+    config.stack_size = 65535;    /* 64 KB */
     config.task_priority = tskIDLE_PRIORITY + 5U;
 
     start_result = httpd_start(&server, &config);
