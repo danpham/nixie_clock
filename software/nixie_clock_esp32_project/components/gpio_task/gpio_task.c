@@ -187,7 +187,16 @@ static void gpio_task(void *arg)
         {
             rotary_encoder_event_t ev = process_rotary_encoder(state_last_rotaryChanA, state_last_rotaryChanB, evt_encoder.a, evt_encoder.b);
             if (ev != ROTARY_ENCODER_EVENT_NONE) {
-
+				
+				/* Publish rotary encoder event */
+				event_bus_message_t evt_message;
+				evt_message.type = EVT_CLOCK_GPIO_CONFIG;
+				evt_message.payload_size = 3U;
+				evt_message.payload[0U] = (buttons_type_t)BUTTON_ROTARY_ENCODER;
+				evt_message.payload[1U] = 0U;
+				evt_message.payload[2U] = (uint8_t)ev;
+				event_bus_publish(evt_message);
+				
                 if ((now - last_log_time) >= GPIOTASK_LOG_THROTTLE_MS) {
                     ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
                     last_log_time = now;
