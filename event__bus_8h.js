@@ -12,6 +12,5 @@ var event__bus_8h =
     [ "event_bus_event_t", "event__bus_8h.html#ad03c610060289a565378332e0f6ebb36", null ],
     [ "event_bus_init", "event__bus_8h.html#a33f2a4382fbba53461edc9ecd30ca51e", null ],
     [ "event_bus_publish", "event__bus_8h.html#a93a79c57756ad83b60ea3a0091019dfd", null ],
-    [ "event_bus_try_publish", "event__bus_8h.html#abe3e99dfebe392de6462bc2ea30d7b62", null ],
     [ "event_bus_wait", "event__bus_8h.html#a4b8ef223aef7d300da0a6d1bbd493424", null ]
 ];
