@@ -15,7 +15,6 @@
 #define HV5622_PIN_MOSI   7    /* SPI_MOSI */
 #define HV5622_PIN_SCLK   6    /* SPI_CLK */
 #define HV5622_PIN_LE     2    /* GPIO2 */
-#define HV5622_PIN_BL     1    /* GPIO1 */
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -37,8 +36,8 @@ static spi_device_handle_t hv5622_spi;
 /**
  * @brief Initialize the HV5622 shift register.
  *
- * Sets up SPI communication, configures LE and BL control pins,
- * and sets their initial states.
+ * Sets up SPI communication, configures the LE control pin,
+ * and sets its initial state. BL is managed by PWM.
  */
 void hv5622_init(void)
 {
@@ -62,16 +61,12 @@ void hv5622_init(void)
     ESP_ERROR_CHECK(spi_bus_add_device(HV5622_SPI_HOST, &devcfg, &hv5622_spi));
 
     if (ret == ESP_OK) {
-        /* Configure control GPIOs */
+        /* Configure control GPIO */
         gpio_reset_pin(HV5622_PIN_LE);
         gpio_set_direction(HV5622_PIN_LE, GPIO_MODE_OUTPUT);
 
-        gpio_reset_pin(HV5622_PIN_BL);
-        gpio_set_direction(HV5622_PIN_BL, GPIO_MODE_OUTPUT);
-        
         /* Initial state */
         gpio_set_level(HV5622_PIN_LE, 1);
-        gpio_set_level(HV5622_PIN_BL, 0);
     }
 }
 
