@@ -29,6 +29,20 @@ jobs:
             --suppress=missingIncludeSystem \
             --force \
             -I main \
-            -I components \
+            -I components/clock \
+            -I components/config \
+            -I components/display \
+            -I components/dispatcher_task \
+            -I components/event_bus \
+            -I components/gpio_driver \
+            -I components/gpio_task \
+            -I components/hv5622 \
+            -I components/ntp \
+            -I components/nvs \
+            -I components/pwm \
+            -I components/rotary_encoder \
+            -I components/uart \
+            -I components/webserver \
+            -I components/wifi \
             -DSTATIC_ANALYSIS=1 \
             main components
