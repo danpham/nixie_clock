@@ -87,17 +87,17 @@ static void clock_task(void *arg) {
             /* Every second */
             if ((now - lastTick) >= tickPeriod) {
                 lastTick += tickPeriod;
+				dots = !dots;
+				
                 xSemaphoreTake(clk_mutex, portMAX_DELAY);
                 clock_tick(&clk);
                 ESP_LOGI(CLOCK_TASK_TAG, "The time is %02d:%02d:%02d", clk.hours, clk.minutes, clk.seconds);
-                xSemaphoreGive(clk_mutex);
-
-                dots = !dots;
-
+                
                 if (clk.seconds == 0U) {
                     in_pattern_mode = true;
                     pattern_step = 0U;
                 }
+				xSemaphoreGive(clk_mutex);
             }
 
             if (in_pattern_mode == false) {
@@ -127,7 +127,9 @@ static void clock_task(void *arg) {
                     in_pattern_mode = false;
                 }
             } else {
+				xSemaphoreTake(clk_mutex, portMAX_DELAY);
                 display_set_time(clk.hours, clk.minutes, clk.seconds, dots, dots);
+				xSemaphoreGive(clk_mutex);
             }
 
             vTaskDelay(displayPeriod);
