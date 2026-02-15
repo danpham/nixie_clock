@@ -17,8 +17,6 @@
 /******************************************************************
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
-#define GPIOTASK_LOG_THROTTLE_MS           (5U)
-#define GPIOTASK_DEBOUNCE_US               (100U)
 #define GPIOTASK_ENCODER_QUEUE_SIZE        (50U)
 
 /******************************************************************
@@ -173,8 +171,9 @@ static void gpio_task(void *arg)
                 accumulator++;
             } else if (ev == ROTARY_ENCODER_EVENT_DECREMENT) {
                 accumulator--;
+            } else {
+                /* ROTARY_ENCODER_EVENT_NONE */
             }
-
             state_last_rotaryChanA = evt_encoder.a;
             state_last_rotaryChanB = evt_encoder.b;
         }
