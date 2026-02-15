@@ -69,15 +69,15 @@ static esp_err_t root_handler(httpd_req_t *req)
 
 		char html_format[WEBSERVER_HTML_PAGE_SIZE];
         int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
-        (config.ntp == 1) ? "checked" : "",
+        (config.ntp == 1U) ? "checked" : "",
         config.time.hours,
         config.time.minutes,
         config.time.seconds,
         safe_ssid,
         safe_pass,
-        (config.mode == 0) ? "checked" : "",
-        (config.mode == 1) ? "checked" : "",
-        (config.mode == 2) ? "checked" : "",
+        (config.mode == 0U) ? "checked" : "",
+        (config.mode == 1U) ? "checked" : "",
+        (config.mode == 2U) ? "checked" : "",
         config.dutycycle);
 
         if (ret_modify_html >= 0) {
@@ -110,7 +110,7 @@ static esp_err_t update_handler(httpd_req_t *req)
     esp_err_t ret = ESP_OK;
 
     /* Start from a copy of the current configuration */
-    config_get_copy(&new_config);
+    ret = config_get_copy(&new_config);
 
     ssize_t len = httpd_req_recv(req, req_recv_buf, (size_t)(sizeof(req_recv_buf) - 1U));
     if (len <= 0) {
