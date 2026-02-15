@@ -43,7 +43,6 @@ typedef struct {
 ******************************************************************/
 void event_bus_init(void);
 void event_bus_publish(event_bus_message_t evt_message);
-bool event_bus_try_publish(event_bus_message_t evt_message, TickType_t timeout);
 event_bus_message_t event_bus_wait(TickType_t timeout);
 
 #endif // EVENT_BUS_H
