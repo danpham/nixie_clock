@@ -165,63 +165,81 @@ void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
         static uint8_t state = CLOCK_MENU_CLOCK;
         event.id = payload[0];
         event.pressed = payload[1];
-        event.updateValue = payload[2];
+        event.state = payload[2];
+        event.updateValue = payload[3];
+        event.steps = payload[4];
 
-        switch (state) {
-            case CLOCK_MENU_CLOCK:
-                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
-                    state = CLOCK_MENU_CONFIGURE_MINUTES;
-                }
-                break;
-            case CLOCK_MENU_CONFIGURE_MINUTES:
-                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
-                    state = CLOCK_MENU_CONFIGURE_HOURS;
-                }
-                else if (event.id == BUTTON_ROTARY_ENCODER) {
-                    if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
-                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
-                        clock_increment_minutes(clk);
-                        xSemaphoreGive(clk_mutex);
+        /* Filter only release states */
+        if (event.state == BUTTON_STATE_RELEASE) {
+            switch (state) {
+                case CLOCK_MENU_CLOCK:
+                    if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
+                        state = CLOCK_MENU_CONFIGURE_MINUTES;
+                        ESP_LOGE("MENU", "CLOCK_MENU_CONFIGURE_MINUTES");
                     }
-                    else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
-                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
-                        clock_decrement_minutes(clk);
-                        xSemaphoreGive(clk_mutex);
+                    break;
+                case CLOCK_MENU_CONFIGURE_MINUTES:
+                    
+                    if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
+                        state = CLOCK_MENU_CONFIGURE_HOURS;
+                        ESP_LOGE("MENU", "CLOCK_MENU_CONFIGURE_HOURS");
+                    }
+                    else if (event.id == BUTTON_ROTARY_ENCODER) {
+                        if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
+                            xSemaphoreTake(clk_mutex, portMAX_DELAY);
+                            for (uint8_t i = 0U; i < event.steps; i++) {
+                                clock_increment_minutes(clk);
+                            }
+                            xSemaphoreGive(clk_mutex);
+                        }
+                        else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
+                            xSemaphoreTake(clk_mutex, portMAX_DELAY);
+                            for (uint8_t i = 0U; i < event.steps; i++) {
+                                clock_decrement_minutes(clk);
+                            }
+                            xSemaphoreGive(clk_mutex);
+                        }
+                        else {
+                            /* ROTARY_ENCODER_EVENT_NONE */    
+                        }
                     }
                     else {
-                        /* ROTARY_ENCODER_EVENT_NONE */    
+                        /* BUTTON_ROTARY_SWITCH_1 && BUTTON_SHORT_PRESS */
                     }
-                }
-                else {
-                    /* BUTTON_ROTARY_SWITCH_1 && BUTTON_SHORT_PRESS */
-                }
-                break;
-            case CLOCK_MENU_CONFIGURE_HOURS:
-                if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
+                    break;
+                case CLOCK_MENU_CONFIGURE_HOURS:
+
+                    if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
+                        state = CLOCK_MENU_CLOCK;
+                        ESP_LOGE("MENU", "CLOCK_MENU_CLOCK");
+                    }
+                    else if (event.id == BUTTON_ROTARY_ENCODER) {
+                        if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
+                            xSemaphoreTake(clk_mutex, portMAX_DELAY);
+                            for (uint8_t i = 0U; i < event.steps; i++) {
+                                clock_increment_hours(clk);
+                            }
+                            xSemaphoreGive(clk_mutex);
+                        }
+                        else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
+                            xSemaphoreTake(clk_mutex, portMAX_DELAY);
+                            for (uint8_t i = 0U; i < event.steps; i++) {
+                                clock_decrement_hours(clk);
+                            }
+                            xSemaphoreGive(clk_mutex);
+                        }
+                        else {
+                            /* ROTARY_ENCODER_EVENT_NONE */
+                        }
+                    }
+                    else {
+                        /* BUTTON_ROTARY_SWITCH_1 && BUTTON_SHORT_PRESS */
+                    }
+                    break;
+                default:
                     state = CLOCK_MENU_CLOCK;
-                }
-                else if (event.id == BUTTON_ROTARY_ENCODER) {
-                    if (event.updateValue == ROTARY_ENCODER_EVENT_INCREMENT) {
-                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
-                        clock_increment_hours(clk);
-                        xSemaphoreGive(clk_mutex);
-                    }
-                    else if (event.updateValue == ROTARY_ENCODER_EVENT_DECREMENT) {
-                        xSemaphoreTake(clk_mutex, portMAX_DELAY);
-                        clock_decrement_hours(clk);
-                        xSemaphoreGive(clk_mutex);
-                    }
-                    else {
-                        /* ROTARY_ENCODER_EVENT_NONE */    
-                    }
-                }
-                else {
-                    /* BUTTON_ROTARY_SWITCH_1 && BUTTON_SHORT_PRESS */
-                }
-                break;
-            default:
-                state = CLOCK_MENU_CLOCK;
-                break;
+                    break;
+            }
         }
     }
 }

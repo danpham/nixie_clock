@@ -48,8 +48,6 @@ static my_gpio_btn_t rotaryEncoderChanA = {
     .isr_handler = NULL,
 };
 
-
-
 /******************************************************************
  * 5. Functions prototypes (static only)
 ******************************************************************/
@@ -70,31 +68,18 @@ static QueueHandle_t gpio_evt_queue = NULL;
 static void IRAM_ATTR gpio_isr_handler(void* arg)
 {
     (void)arg;
-    static uint64_t last_tick_us = 0U;
+    static uint8_t previous_state = 0xFFU;
 
-    uint64_t now = esp_timer_get_time();
-    
-    /* Debounce check */
-    if ((now - last_tick_us) >= GPIOTASK_DEBOUNCE_US) {
-        static uint8_t previous_state = 0xFFU;
-        last_tick_us = now;
-        
-        /* Read current states of encoder channels A and B */
-        gpio_event_t evt;
-        evt.a = gpio_get_level(rotaryEncoderChanA.pin);
-        evt.b = gpio_get_level(rotaryEncoderChanB.pin);
-        
-        /* Combine A and B into a single state */
-        uint8_t state = (evt.a << 1) | evt.b;
-        
-        /* Reject if same as previous state (duplicate) */
-        if (state != previous_state) {
-            previous_state = state;
-            
-            /* Send event to queue for processing outside ISR */
-            if (gpio_evt_queue != NULL) {
-                xQueueSendFromISR(gpio_evt_queue, &evt, NULL);
-            }
+    gpio_event_t evt;
+    evt.a = gpio_get_level(rotaryEncoderChanA.pin);
+    evt.b = gpio_get_level(rotaryEncoderChanB.pin);
+
+    uint8_t state = (evt.a << 1) | evt.b;
+
+    if (state != previous_state) {
+        previous_state = state;
+        if (gpio_evt_queue != NULL) {
+            xQueueSendFromISR(gpio_evt_queue, &evt, NULL);
         }
     }
 }
@@ -152,11 +137,7 @@ static void gpio_task(void *arg)
         ESP_LOGE(GPIO_TASK_TAG, "Failed to create GPIO event queue!");
     }
 
-    uint32_t last_log_time = 0;
-
     while(1) {
-
-        uint32_t now = esp_timer_get_time() / 1000;
         /* Reset watchdog */
         esp_task_wdt_reset();
 
@@ -167,43 +148,62 @@ static void gpio_task(void *arg)
 
             event_bus_message_t evt_message;
             evt_message.type = EVT_CLOCK_GPIO_CONFIG;
-            evt_message.payload_size = 3U;
+            evt_message.payload_size = 5U;
             evt_message.payload[0U] = (buttons_type_t)BUTTON_ROTARY_SWITCH_1;
-            evt_message.payload[1U] = rotaryEncoderSwitch.press_type;
-            evt_message.payload[2U] = 0U;
+            evt_message.payload[1U] = (button_press_t)rotaryEncoderSwitch.press_type;
+            evt_message.payload[2U] = (button_state_t)state_rotarySwitch;
+            evt_message.payload[3U] = 0U;
+            evt_message.payload[4U] = 0U;
             event_bus_publish(evt_message);
-
-            if (state_rotarySwitch == (button_state_t)BUTTON_STATE_PRESS) {
-                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch pressed!");
-            } else {
-                ESP_LOGI(GPIO_TASK_TAG, "Rotary switch released");
-            }
 
             state_last_rotarySwitch = state_rotarySwitch;
         }
 
-        gpio_event_t evt_encoder;
+ gpio_event_t evt_encoder;
+         static int8_t accumulator = 0;
+
+        /* Drain the queue and accumulate */
         while (xQueueReceive(gpio_evt_queue, &evt_encoder, 0) == pdTRUE)
         {
-            rotary_encoder_event_t ev = process_rotary_encoder(state_last_rotaryChanA, state_last_rotaryChanB, evt_encoder.a, evt_encoder.b);
-            if (ev != ROTARY_ENCODER_EVENT_NONE) {
-				
-				/* Publish rotary encoder event */
-				event_bus_message_t evt_message;
-				evt_message.type = EVT_CLOCK_GPIO_CONFIG;
-				evt_message.payload_size = 3U;
-				evt_message.payload[0U] = (buttons_type_t)BUTTON_ROTARY_ENCODER;
-				evt_message.payload[1U] = 0U;
-				evt_message.payload[2U] = (uint8_t)ev;
-				event_bus_publish(evt_message);
-				
-                if ((now - last_log_time) >= GPIOTASK_LOG_THROTTLE_MS) {
-                    ESP_LOGI(GPIO_TASK_TAG, "Rotary encoder %s", (ev == ROTARY_ENCODER_EVENT_INCREMENT) ? "increment" : "decrement");
-                    last_log_time = now;
-                }                
+            rotary_encoder_event_t ev = process_rotary_encoder(
+                state_last_rotaryChanA, state_last_rotaryChanB,
+                evt_encoder.a, evt_encoder.b);
+
+            if (ev == ROTARY_ENCODER_EVENT_INCREMENT) {
+                accumulator++;
+            } else if (ev == ROTARY_ENCODER_EVENT_DECREMENT) {
+                accumulator--;
             }
+
             state_last_rotaryChanA = evt_encoder.a;
             state_last_rotaryChanB = evt_encoder.b;
+        }
+
+        int8_t steps = accumulator / 4;
+        accumulator = accumulator % 4;
+
+        if (steps > 0) {
+            ESP_LOGI(GPIO_TASK_TAG, "ROTARY_ENCODER_EVENT_INCREMENT: %d steps", steps);
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_CLOCK_GPIO_CONFIG;
+            evt_message.payload_size = 5U;
+            evt_message.payload[0U] = (buttons_type_t)BUTTON_ROTARY_ENCODER;
+            evt_message.payload[1U] = 0U;
+            evt_message.payload[2U] = (button_state_t)BUTTON_STATE_RELEASE;
+            evt_message.payload[3U] = (uint8_t)ROTARY_ENCODER_EVENT_INCREMENT;
+            evt_message.payload[4U] = (uint8_t)steps;
+            event_bus_publish(evt_message);
+        } else if (steps < 0) {
+            ESP_LOGI(GPIO_TASK_TAG, "ROTARY_ENCODER_EVENT_DECREMENT: %d steps", -steps);
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_CLOCK_GPIO_CONFIG;
+            evt_message.payload_size = 5U;
+            evt_message.payload[0U] = (buttons_type_t)BUTTON_ROTARY_ENCODER;
+            evt_message.payload[1U] = 0U;
+            evt_message.payload[2U] = (button_state_t)BUTTON_STATE_RELEASE;
+            evt_message.payload[3U] = (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT;
+            evt_message.payload[4U] = (uint8_t)(-steps);    
+            event_bus_publish(evt_message);
         }
         
         vTaskDelay(pdMS_TO_TICKS(10));

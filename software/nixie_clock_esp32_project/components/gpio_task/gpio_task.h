@@ -23,7 +23,9 @@ typedef uint8_t buttons_type_t;
 typedef struct {
     buttons_type_t id;
     button_press_t pressed;
+    button_state_t state;
     rotary_encoder_event_t updateValue;
+    uint8_t steps;
 } button_event_t;
 
 /******************************************************************
