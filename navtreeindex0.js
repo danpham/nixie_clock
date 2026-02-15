@@ -150,10 +150,8 @@ var NAVTREEINDEX0 =
 "gpio__driver_8h.html#acc7228308bca711ea7b42fcc82dc09ce":[1,0,0,0,0,6,1,1],
 "gpio__driver_8h_source.html":[1,0,0,0,0,6,1],
 "gpio__task_8c.html":[1,0,0,0,0,7,0],
-"gpio__task_8c.html#a97239d1d62c9449c11609f480109ea48":[1,0,0,0,0,7,0,4],
-"gpio__task_8c.html#ab7ce5bf27337d34853e3d833d51c015f":[1,0,0,0,0,7,0,3],
-"gpio__task_8c.html#ab8d872bd0324b426fdd58caaa4fbf079":[1,0,0,0,0,7,0,2],
-"gpio__task_8c.html#adda49d44c45284e232f53859f6ca8a5d":[1,0,0,0,0,7,0,1],
+"gpio__task_8c.html#a97239d1d62c9449c11609f480109ea48":[1,0,0,0,0,7,0,2],
+"gpio__task_8c.html#ab8d872bd0324b426fdd58caaa4fbf079":[1,0,0,0,0,7,0,1],
 "gpio__task_8h.html":[1,0,0,0,0,7,1],
 "gpio__task_8h.html#a052ad2f44cf91330ede5cadb80725900":[1,0,0,0,0,7,1,1],
 "gpio__task_8h.html#a4b5833e37e7ee8d809bb9063b674dd5d":[1,0,0,0,0,7,1,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX0 =
 "structconfig__t.html#a0b2f40648c9fcb1c09c64ee831985eb2":[0,0,1,2],
 "structconfig__t.html#aa8b34067362e1666f7ab6ed6f49aa103":[0,0,1,1],
 "structconfig__t.html#abc46a404ae3d232619a414f299a15fb8":[0,0,1,0],
-"structconfig__t.html#abd4cac5ba54221a0d6e374e1df9f5e50":[0,0,1,4]
+"structconfig__t.html#abd4cac5ba54221a0d6e374e1df9f5e50":[0,0,1,4],
+"structconfig__t.html#abf30ec4846f87d683d10929a8ec7a1e7":[0,0,1,3],
+"structconfig__t.html#ad23275d4e5211f553b59e8ec0e1468ba":[0,0,1,5]
 };
