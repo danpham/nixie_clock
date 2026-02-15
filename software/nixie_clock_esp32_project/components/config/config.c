@@ -184,10 +184,13 @@ static esp_err_t _config_read(void)
 {
     /* Load existing configuration from NVS */
     size_t len = CONFIG_SSID_BUF_SZ;
+	esp_err_t ret = ESP_OK;
+	
     esp_err_t ret_load = nvs_load_ssid(cfg.ssid, &len);
     if (ret_load != ESP_OK)
     {
         cfg.ssid[0] = '\0';
+		ret = ESP_FAIL;
     }
 
     len = CONFIG_WPA_PASSPHRASE_BUF_SZ;
@@ -195,20 +198,23 @@ static esp_err_t _config_read(void)
     if (ret_load != ESP_OK)
     {
         cfg.wpa_passphrase[0] = '\0';
+		ret = ESP_FAIL;
     }
 
     ret_load = nvs_load_mode(&cfg.mode);
     if (ret_load != ESP_OK)
     {
         cfg.mode = 0;
+		ret = ESP_FAIL;
     }
-
+	
     ret_load = nvs_load_ntp(&cfg.ntp);
     if (ret_load != ESP_OK)
     {
         cfg.ntp = 0;
+		ret = ESP_FAIL;
     }
-
+	
     cfg.time.hours = CONFIG_CLOCK_DEFAULT_HOURS;
     cfg.time.minutes = CONFIG_CLOCK_DEFAULT_MINUTES;
     cfg.time.seconds = CONFIG_CLOCK_DEFAULT_SECONDS;
@@ -217,9 +223,10 @@ static esp_err_t _config_read(void)
     if (ret_load != ESP_OK)
     {
         cfg.dutycycle = CONFIG_PWM_DEFAULT_DUTYCYCLE;
+		ret = ESP_FAIL;
     }
 
-    return ret_load;
+    return ret;
 }
 
 /**
