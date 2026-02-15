@@ -425,7 +425,7 @@ static const char* get_html_page(void) {
     "}\n"
     "updateTimeInputs();\n"
     "ntpCheckbox.addEventListener('change', updateTimeInputs);\n"
-    "const brightnessSlider = document.getElementById('brightness');\n"
+    "const brightnessSlider = document.getElementById('dutycycle');\n"
     "const brightnessValue = document.getElementById('brightnessValue');\n"
     "brightnessSlider.addEventListener('input', () => { brightnessValue.textContent = brightnessSlider.value; });\n"
     "</script>\n"
