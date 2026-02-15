@@ -293,6 +293,12 @@ static esp_err_t _config_save_nolock(void)
         ret_save = nvs_save_dutycycle(cfg.dutycycle);
         if (ret_save == ESP_OK)
         {
+            /* Push event on bus */
+            event_bus_message_t evt_message;
+            evt_message.type = EVT_PWM_CONFIG;
+            evt_message.payload_size = 0U;
+            event_bus_publish(evt_message);
+
             ret = ESP_OK;
         }
     }
