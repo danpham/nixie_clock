@@ -157,8 +157,8 @@ static void gpio_task(void *arg)
             state_last_rotarySwitch = state_rotarySwitch;
         }
 
- gpio_event_t evt_encoder;
-         static int8_t accumulator = 0;
+        gpio_event_t evt_encoder;
+        static int8_t accumulator = 0;
 
         /* Drain the queue and accumulate */
         while (xQueueReceive(gpio_evt_queue, &evt_encoder, 0) == pdTRUE)

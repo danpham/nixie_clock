@@ -35,10 +35,10 @@ rotary_encoder_event_t process_rotary_encoder(uint8_t lastA, uint8_t lastB, uint
     /* Transition table : lastCode -> currentCode 
       +1 = clockwise, -1 = counterclockwise, 0 = no movement */
     static const int8_t transition_table[4][4] = {
-        {  0, -1, +1,  0 },
-        { +1,  0,  0, -1 },
+        {  0, +1, -1,  0 },
         { -1,  0,  0, +1 },
-        {  0, +1, -1,  0 }
+        { +1,  0,  0, -1 },
+        {  0, -1, +1,  0 }
     };
     
     rotary_encoder_event_t ret = ROTARY_ENCODER_EVENT_NONE;
