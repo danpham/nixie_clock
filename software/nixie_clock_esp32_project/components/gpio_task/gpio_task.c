@@ -203,8 +203,10 @@ static void gpio_task(void *arg)
             evt_message.payload[3U] = (uint8_t)ROTARY_ENCODER_EVENT_DECREMENT;
             evt_message.payload[4U] = (uint8_t)(-steps);    
             event_bus_publish(evt_message);
+        } else {
+            /* steps == 0 */
         }
-        
+
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 }

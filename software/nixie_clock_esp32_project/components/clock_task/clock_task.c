@@ -162,7 +162,6 @@ void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
     button_event_t event;
 
     if ((payload != NULL) && (size == sizeof(event))) {
-        static uint8_t state = CLOCK_MENU_CLOCK;
         event.id = payload[0];
         event.pressed = payload[1];
         event.state = payload[2];
@@ -171,6 +170,7 @@ void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
 
         /* Filter only release states */
         if (event.state == BUTTON_STATE_RELEASE) {
+            static uint8_t state = CLOCK_MENU_CLOCK;
             switch (state) {
                 case CLOCK_MENU_CLOCK:
                     if ((event.id == BUTTON_ROTARY_SWITCH_1) && (event.pressed == BUTTON_LONG_PRESS)) {
