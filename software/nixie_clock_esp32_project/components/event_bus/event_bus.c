@@ -2,6 +2,7 @@
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
 #include "event_bus.h"
+#include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 
@@ -9,6 +10,8 @@
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
 #define EVENT_BUS_QUEUE_SIZE    (32U)
+#define EVENT_BUS_PUBLISH_TIMEOUT_MS (100U)
+#define EVENT_BUS_TAG "event_bus"
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -45,18 +48,19 @@ void event_bus_init(void)
 }
 
 /**
- * @brief Publish an event to the Event Bus (blocking).
+ * @brief Publish an event to the Event Bus.
  *
- * Adds an event to the queue and blocks until space becomes available if the
- * queue is full. This is the simplest and safest way to publish events when
- * timing is not critical.
+ * Adds an event to the queue. If the queue is full, blocks up to
+ * EVENT_BUS_PUBLISH_TIMEOUT_MS then drops the event with a warning log.
  *
- * @param evt The event to publish.
+ * @param evt_message The event to publish.
  */
 void event_bus_publish(event_bus_message_t evt_message)
 {
     if (s_event_queue) {
-        xQueueSend(s_event_queue, &evt_message, portMAX_DELAY);
+        if (xQueueSend(s_event_queue, &evt_message, pdMS_TO_TICKS(EVENT_BUS_PUBLISH_TIMEOUT_MS)) != pdTRUE) {
+            ESP_LOGW(EVENT_BUS_TAG, "Queue full, event %u dropped", (unsigned)evt_message.type);
+        }
     }
 }
 
