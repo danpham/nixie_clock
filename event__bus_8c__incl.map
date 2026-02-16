@@ -1,11 +1,13 @@
 <map id="software/nixie_clock_esp32_project/components/event_bus/event_bus.c" name="software/nixie_clock_esp32_project/components/event_bus/event_bus.c">
-<area shape="rect" id="Node000001" title=" " alt="" coords="64,5,268,60"/>
-<area shape="rect" id="Node000002" href="$event__bus_8h.html" title=" " alt="" coords="115,108,217,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,60,169,94,163,94,163,60"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="105,5,309,60"/>
+<area shape="rect" id="Node000002" href="$event__bus_8h.html" title=" " alt="" coords="113,108,214,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,61,178,97,173,94,192,59"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,181,156,207"/>
-<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="141,62,122,84,106,109,94,139,87,168,82,167,89,137,101,107,118,81,137,59"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="185,181,315,207"/>
-<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="195,59,214,81,231,107,243,138,249,167,244,168,238,139,226,109,210,84,191,62"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="154,135,107,175,103,170,151,131"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="181,131,227,170,224,174,178,135"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="156,62,127,83,103,109,90,139,84,168,79,167,85,137,98,107,123,79,153,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="183,181,312,207"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="216,59,229,107,244,167,239,169,223,109,211,61"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="289,108,373,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="247,58,304,98,301,102,244,62"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="152,135,106,174,103,170,148,131"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="179,131,225,170,221,174,175,135"/>
 </map>

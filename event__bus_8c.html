@@ -96,18 +96,23 @@ $(document).ready(function(){initNavTree('event__bus_8c.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="event__bus_8h_source.html">event_bus.h</a>&quot;</code><br />
+<code>#include &quot;esp_log.h&quot;</code><br />
 <code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
 <code>#include &quot;freertos/queue.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for event_bus.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="event__bus_8c__incl.svg" width="320" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="event__bus_8c__incl.svg" width="379" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ae2bfd215d64a21c508245bfd498f91e1" id="r_ae2bfd215d64a21c508245bfd498f91e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#ae2bfd215d64a21c508245bfd498f91e1">EVENT_BUS_QUEUE_SIZE</a>&#160;&#160;&#160;(32U)</td></tr>
 <tr class="separator:ae2bfd215d64a21c508245bfd498f91e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b4905fd49225ee97306b34d1c22b5bc" id="r_a3b4905fd49225ee97306b34d1c22b5bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a3b4905fd49225ee97306b34d1c22b5bc">EVENT_BUS_PUBLISH_TIMEOUT_MS</a>&#160;&#160;&#160;(100U)</td></tr>
+<tr class="separator:a3b4905fd49225ee97306b34d1c22b5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc2a41609fe281e4d3acc8f0c7b48c53" id="r_adc2a41609fe281e4d3acc8f0c7b48c53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#adc2a41609fe281e4d3acc8f0c7b48c53">EVENT_BUS_TAG</a>&#160;&#160;&#160;&quot;event_bus&quot;</td></tr>
+<tr class="separator:adc2a41609fe281e4d3acc8f0c7b48c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -115,13 +120,27 @@ Functions</h2></td></tr>
 <tr class="memdesc:a33f2a4382fbba53461edc9ecd30ca51e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Event Bus queue.  <br /></td></tr>
 <tr class="separator:a33f2a4382fbba53461edc9ecd30ca51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93a79c57756ad83b60ea3a0091019dfd" id="r_a93a79c57756ad83b60ea3a0091019dfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a93a79c57756ad83b60ea3a0091019dfd">event_bus_publish</a> (<a class="el" href="structevent__bus__message__t.html">event_bus_message_t</a> evt_message)</td></tr>
-<tr class="memdesc:a93a79c57756ad83b60ea3a0091019dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish an event to the Event Bus (blocking).  <br /></td></tr>
+<tr class="memdesc:a93a79c57756ad83b60ea3a0091019dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish an event to the Event Bus.  <br /></td></tr>
 <tr class="separator:a93a79c57756ad83b60ea3a0091019dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b8ef223aef7d300da0a6d1bbd493424" id="r_a4b8ef223aef7d300da0a6d1bbd493424"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structevent__bus__message__t.html">event_bus_message_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a4b8ef223aef7d300da0a6d1bbd493424">event_bus_wait</a> (TickType_t timeout)</td></tr>
 <tr class="memdesc:a4b8ef223aef7d300da0a6d1bbd493424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the next event from the Event Bus.  <br /></td></tr>
 <tr class="separator:a4b8ef223aef7d300da0a6d1bbd493424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a3b4905fd49225ee97306b34d1c22b5bc" name="a3b4905fd49225ee97306b34d1c22b5bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b4905fd49225ee97306b34d1c22b5bc">&#9670;&#160;</a></span>EVENT_BUS_PUBLISH_TIMEOUT_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVENT_BUS_PUBLISH_TIMEOUT_MS&#160;&#160;&#160;(100U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae2bfd215d64a21c508245bfd498f91e1" name="ae2bfd215d64a21c508245bfd498f91e1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2bfd215d64a21c508245bfd498f91e1">&#9670;&#160;</a></span>EVENT_BUS_QUEUE_SIZE</h2>
 
@@ -130,6 +149,20 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define EVENT_BUS_QUEUE_SIZE&#160;&#160;&#160;(32U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc2a41609fe281e4d3acc8f0c7b48c53" name="adc2a41609fe281e4d3acc8f0c7b48c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc2a41609fe281e4d3acc8f0c7b48c53">&#9670;&#160;</a></span>EVENT_BUS_TAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVENT_BUS_TAG&#160;&#160;&#160;&quot;event_bus&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -155,7 +188,7 @@ Functions</h2></td></tr>
 
 <p>Initialize the Event Bus queue. </p>
 <p>This function must be called before any event publication or consumption. It allocates a FreeRTOS queue capable of storing multiple <a class="el" href="structevent__bus__message__t.html">event_bus_message_t</a> messages. Subsequent calls have no effect (idempotent).</p>
-<dl class="section note"><dt>Note</dt><dd>If this function is not called before <a class="el" href="event__bus_8c.html#a93a79c57756ad83b60ea3a0091019dfd" title="Publish an event to the Event Bus (blocking).">event_bus_publish()</a>, events will simply be ignored because the queue does not exist. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If this function is not called before <a class="el" href="event__bus_8c.html#a93a79c57756ad83b60ea3a0091019dfd" title="Publish an event to the Event Bus.">event_bus_publish()</a>, events will simply be ignored because the queue does not exist. </dd></dl>
 
 </div>
 </div>
@@ -175,11 +208,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Publish an event to the Event Bus (blocking). </p>
-<p>Adds an event to the queue and blocks until space becomes available if the queue is full. This is the simplest and safest way to publish events when timing is not critical.</p>
+<p>Publish an event to the Event Bus. </p>
+<p>Adds an event to the queue. If the queue is full, blocks up to EVENT_BUS_PUBLISH_TIMEOUT_MS then drops the event with a warning log.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">evt</td><td>The event to publish. </td></tr>
+    <tr><td class="paramname">evt_message</td><td>The event to publish. </td></tr>
   </table>
   </dd>
 </dl>
