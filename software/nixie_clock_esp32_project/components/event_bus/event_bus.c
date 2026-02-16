@@ -13,7 +13,6 @@
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
 #define EVENT_BUS_QUEUE_SIZE            (32U)
-#define EVENT_BUS_PUBLISH_TIMEOUT_MS    (100U)
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -60,7 +59,8 @@ void event_bus_init(void)
 void event_bus_publish(event_bus_message_t evt_message)
 {
 	static const char EVENT_BUS_TAG[] = "EVENT_BUS";
-		
+	static const TickType_t EVENT_BUS_PUBLISH_TIMEOUT_MS = 100U;
+	
     if (s_event_queue) {
         if (xQueueSend(s_event_queue, &evt_message, pdMS_TO_TICKS(EVENT_BUS_PUBLISH_TIMEOUT_MS)) != pdTRUE) {
             ESP_LOGW(EVENT_BUS_TAG, "Queue full, event %u dropped", (unsigned)evt_message.type);
