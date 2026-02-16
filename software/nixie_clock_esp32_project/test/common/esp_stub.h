@@ -32,5 +32,8 @@ typedef int esp_err_t;
 BaseType_t xQueueReceive( QueueHandle_t xQueue,
                           void * const pvBuffer,
                           TickType_t xTicksToWait );
+BaseType_t xQueueSend( QueueHandle_t xQueue,
+                       const void * const pvItemToQueue,
+                       TickType_t xTicksToWait );
 #endif /* ESP_IDF_STUB_H */
 #endif
