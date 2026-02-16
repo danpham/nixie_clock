@@ -5,9 +5,10 @@
 /* GPIO interrupt type */
 #define GPIO_INTR_DISABLE 0
 
-/* FreeRTOS boolean macros */
+/* FreeRTOS macros */
 #define pdTRUE  1
 #define pdPASS  1
+#define pdMS_TO_TICKS(xTimeInMs)  ((TickType_t)(xTimeInMs))
 
 /* ESP-IDF error codes */
 #define ESP_OK   0
