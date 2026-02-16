@@ -1,6 +1,9 @@
 /******************************************************************
  * 1. Included files (microcontroller ones then user defined ones)
 ******************************************************************/
+#ifdef STATIC_ANALYSIS
+#include "../test/common/esp_stub.h"
+#endif
 #include "event_bus.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
