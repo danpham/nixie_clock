@@ -21,7 +21,7 @@
  * 2. Define declarations (macros then function macros)
 ******************************************************************/
 #define WEBSERVER_HTML_PAGE_SIZE                 (8192U)
-#define WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE     (256U)
+#define WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE     (512U)
 #define WEBSERVER_URLDEC_OK                      ((uint8_t)0x00)
 #define WEBSERVER_URLDEC_WARN_TRUNCATED          ((uint8_t)0x01)
 #define WEBSERVER_URLDEC_WARN_INVALID_SEQ        ((uint8_t)0x02)
@@ -80,7 +80,7 @@ static esp_err_t root_handler(httpd_req_t *req)
         (config.mode == 2U) ? "checked" : "",
         config.dutycycle);
 
-        if (ret_modify_html >= 0) {
+        if ((ret_modify_html >= 0) && ((size_t)ret_modify_html < sizeof(html_format))) {
 			httpd_resp_send(req, html_format, HTTPD_RESP_USE_STRLEN);
         }
 		else {
@@ -357,7 +357,7 @@ static const char* get_html_page(void) {
     "<title>Nixie clock settings</title>\n"
     "<style>\n"
     "body { font-family: 'Roboto', sans-serif; background: #0d0d0d; color: #e0e0e0; margin: 0; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 50px 20px; }\n"
-    ".card { background: #1e1e1e; border-radius: 16px; padding: 40px 30px; width: 380px; max-width: 100%; box-shadow: 0 8px 25px rgba(0,0,0,0.7); border: 1px solid #2c2c2c; }\n"
+    ".card { background: #1e1e1e; border-radius: 16px; padding: 40px 30px; width: 380px; max-width: 100%%; box-shadow: 0 8px 25px rgba(0,0,0,0.7); border: 1px solid #2c2c2c; }\n"
     "h1 { font-size: 2.2em; margin-bottom: 10px; color: #ffffff; text-align: center; letter-spacing: 1px; }\n"
     "h2 { font-size: 1.4em; margin: 25px 0 10px 0; color: #cccccc; border-bottom: 1px solid #333; padding-bottom: 5px; }\n"
     ".input-row { display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }\n"
@@ -373,12 +373,12 @@ static const char* get_html_page(void) {
     ".checkbox-container { margin: 20px 0; }\n"
     ".checkbox-container label { display: flex; align-items: center; font-size: 16px; margin-bottom: 10px; cursor: pointer; user-select: none; }\n"
     ".checkbox-container input[type=checkbox], .checkbox-container input[type=radio] { width: 20px; height: 20px; margin-right: 12px; }\n"
-    "button { width: 100%; padding: 14px; font-size: 18px; background: #555; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: 0.25s; font-weight: bold; }\n"
+    "button { width: 100%%; padding: 14px; font-size: 18px; background: #555; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: 0.25s; font-weight: bold; }\n"
     "button:hover { background: #777; }\n"
     "hr { border: 0; border-top: 1px solid #333; margin: 20px 0; }\n"
     ".brightness-container { display: flex; flex-direction: column; margin-bottom: 20px; }\n"
-    ".brightness-label-row { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }\n"
-    "#brightness { width: 100%; margin-top: 0; }\n"
+    ".brightness-label-row { width: 100%%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }\n"
+    "#brightness { width: 100%%; margin-top: 0; }\n"
     "#brightnessValue { font-size: 18px; }\n"
     "</style>\n"
     "</head>\n"
@@ -572,6 +572,7 @@ static void html_escape(char *dst, size_t dst_size, const char *src)
             case '<':  esc = "&lt;";   esc_len = 4U; break;
             case '>':  esc = "&gt;";   esc_len = 4U; break;
             case '"':  esc = "&quot;"; esc_len = 6U; break;
+            case '\'': esc = "&#39;";  esc_len = 5U; break;
             default:   break;
         }
 

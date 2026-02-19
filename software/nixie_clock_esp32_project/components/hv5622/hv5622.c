@@ -57,17 +57,15 @@ void hv5622_init(void)
         .queue_size = 1,
     };
 
-    esp_err_t ret = spi_bus_initialize(HV5622_SPI_HOST, &buscfg, SPI_DMA_DISABLED);
+    ESP_ERROR_CHECK(spi_bus_initialize(HV5622_SPI_HOST, &buscfg, SPI_DMA_DISABLED));
     ESP_ERROR_CHECK(spi_bus_add_device(HV5622_SPI_HOST, &devcfg, &hv5622_spi));
 
-    if (ret == ESP_OK) {
-        /* Configure control GPIO */
-        gpio_reset_pin(HV5622_PIN_LE);
-        gpio_set_direction(HV5622_PIN_LE, GPIO_MODE_OUTPUT);
+    /* Configure control GPIO */
+    gpio_reset_pin(HV5622_PIN_LE);
+    gpio_set_direction(HV5622_PIN_LE, GPIO_MODE_OUTPUT);
 
-        /* Initial state */
-        gpio_set_level(HV5622_PIN_LE, 1);
-    }
+    /* Initial state */
+    gpio_set_level(HV5622_PIN_LE, 1);
 }
 
 /**

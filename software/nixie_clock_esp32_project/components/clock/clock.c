@@ -72,7 +72,7 @@ void clock_increment_hours(myclock_t *clk) {
  * @param clk Pointer to the clock structure.
  */
 void clock_decrement_hours(myclock_t *clk) {
-    clk->hours = (clk->hours + 23U) % 24U;
+    clk->hours = (uint8_t)((clk->hours + 23U) % 24U);
 }
 
 /**
@@ -90,5 +90,5 @@ void clock_increment_minutes(myclock_t *clk) {
  * @param clk Pointer to the clock structure.
  */
 void clock_decrement_minutes(myclock_t *clk) {
-    clk->minutes = (clk->minutes + 59U) % 60U;
+    clk->minutes = (uint8_t)((clk->minutes + 59U) % 60U);
 }

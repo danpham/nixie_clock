@@ -27,7 +27,7 @@ typedef uint8_t event_bus_event_t;
 typedef struct {
     event_bus_event_t type;
     uint8_t payload[EVENT_BUS_MAX_PAYLOAD_SIZE];
-    size_t payload_size;
+    uint8_t payload_size;
 } event_bus_message_t;
 
 /******************************************************************

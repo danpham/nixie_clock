@@ -124,13 +124,13 @@ static void gpio_task(void *arg)
         ESP_LOGE(GPIO_TASK_TAG, "Failed to initialize rotaryEncoderChanB!");
     }
 
+    /* Create queue before ISR can fire */
+    gpio_evt_queue = xQueueCreate(GPIOTASK_ENCODER_QUEUE_SIZE, sizeof(gpio_event_t));
+
     /* Initialize state_last_ variables */
     button_state_t state_last_rotaryChanA = my_gpio_read_btn(&rotaryEncoderChanA);
     button_state_t state_last_rotaryChanB = my_gpio_read_btn(&rotaryEncoderChanB);
     button_state_t state_last_rotarySwitch = my_gpio_read_btn(&rotaryEncoderSwitch);
-
-    /* Create queue */
-    gpio_evt_queue = xQueueCreate(GPIOTASK_ENCODER_QUEUE_SIZE, sizeof(gpio_event_t));
     if (gpio_evt_queue == NULL) {
         ESP_LOGE(GPIO_TASK_TAG, "Failed to create GPIO event queue!");
     }

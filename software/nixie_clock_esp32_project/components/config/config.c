@@ -159,11 +159,8 @@ esp_err_t config_save(void){
         BaseType_t give_ret = xSemaphoreGive(config_mutex);
 
         if (give_ret != pdTRUE) {
-            ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in init");
+            ESP_LOGE(CONFIG_TAG, "Failed to give config mutex in save");
             ret = ESP_FAIL;
-        }
-        else {
-            ret = ESP_OK;
         }
     }
 

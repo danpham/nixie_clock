@@ -96,23 +96,22 @@ esp_err_t my_gpio_init(my_gpio_btn_t *btn) {
  */
 button_state_t my_gpio_read_btn(my_gpio_btn_t *btn) {
     button_state_t state = BUTTON_STATE_RELEASE;
-    uint32_t now = esp_timer_get_time() / 1000;
+    uint64_t now = (uint64_t)(esp_timer_get_time() / 1000);
 
     if (btn != NULL) {
         state = gpio_get_level(btn->pin);
         btn->press_type = BUTTON_SHORT_PRESS;
 
         if (state != btn->previous_state) {
-            if ((uint32_t)(now - btn->last_change_ms) > btn->debounce_ms) {
+            if ((now - btn->last_change_ms) > (uint64_t)btn->debounce_ms) {
                 
                 if ((state == (button_state_t)BUTTON_STATE_PRESS) && (btn->previous_state == (button_state_t)BUTTON_STATE_RELEASE)) {
                     btn->press_start_ms = now;
                 }
 
                 if ((state == (button_state_t)BUTTON_STATE_RELEASE) && (btn->previous_state == (button_state_t)BUTTON_STATE_PRESS)) {
-                    uint32_t duration = 0;
-                    duration = now - btn->press_start_ms;
-                    btn->press_type = (duration >= (uint32_t)BUTTON_LONG_PRESS_MS) ? (button_press_t)BUTTON_LONG_PRESS : (button_press_t)BUTTON_SHORT_PRESS;
+                    uint64_t duration = now - btn->press_start_ms;
+                    btn->press_type = (duration >= (uint64_t)BUTTON_LONG_PRESS_MS) ? (button_press_t)BUTTON_LONG_PRESS : (button_press_t)BUTTON_SHORT_PRESS;
                 }
 
                 btn->previous_state = state;

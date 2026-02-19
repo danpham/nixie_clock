@@ -157,7 +157,7 @@ static void clock_task(void *arg) {
  * @param[in] payload Pointer to event data buffer.
  * @param[in] size Size of the payload in bytes.
  */
-void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
+static void clock_menu(myclock_t *clk, const uint8_t* payload, const uint8_t size)
 {
     button_event_t event;
 
@@ -280,7 +280,7 @@ void clock_ntp_config_callback(uint8_t* payload, uint8_t size)
 
     /* Update with NTP */
     myclock_t clockUpdate;
-    if ((payload != NULL) && (size == sizeof(clockUpdate))) {
+    if ((payload != NULL) && (size == sizeof(clockUpdate)) && (clk_mutex != NULL)) {
         clockUpdate.hours = payload[0];
         clockUpdate.minutes = payload[1];
         clockUpdate.seconds = payload[2];
@@ -310,7 +310,7 @@ void clock_update_with_menu_callback(uint8_t* payload, uint8_t size)
     if (result == ESP_OK) {
         
         /* If no NTP sync */
-        if (config.ntp == 0U) {
+        if ((config.ntp == 0U) && (clk_mutex != NULL)) {
             clock_menu(&clk, (const uint8_t*)payload, size);
         }
     }
