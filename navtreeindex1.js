@@ -1,7 +1,7 @@
 var NAVTREEINDEX1 =
 {
 "structevent__bus__message__t.html":[0,0,2],
-"structevent__bus__message__t.html#aa57bd3243ab06a4ad6daa7c77843c66f":[0,0,2,1],
+"structevent__bus__message__t.html#a179ccfaf229271fce02ca986f979fc9f":[0,0,2,1],
 "structevent__bus__message__t.html#ac7ed9ecd1fa8617bbd30618eaf8d62f1":[0,0,2,0],
 "structevent__bus__message__t.html#af31a3b5d924eed9aa1b118a26d73eba9":[0,0,2,2],
 "structgpio__event__t.html":[0,0,3],
@@ -11,11 +11,11 @@ var NAVTREEINDEX1 =
 "structmy__gpio__btn__t.html#a026d423340e6e9bd42af6fd20d8f6df0":[0,0,4,6],
 "structmy__gpio__btn__t.html#a0aa0edacbe57255603a2f3e6aae6ae5a":[0,0,4,7],
 "structmy__gpio__btn__t.html#a10b3ac012e2348f7afb9ecbf44f5afb5":[0,0,4,4],
+"structmy__gpio__btn__t.html#a24211d556ede2d62389357070c7eae23":[0,0,4,5],
 "structmy__gpio__btn__t.html#a2dcf914b81c7f04acc534a462eaa8af2":[0,0,4,8],
 "structmy__gpio__btn__t.html#a4fe813c791bb28422f90e75c580ac823":[0,0,4,2],
 "structmy__gpio__btn__t.html#a86ec3908a02808d78d0d8b6def56283a":[0,0,4,0],
-"structmy__gpio__btn__t.html#a8dd95e7eda502b170a8b2f9fd332c8af":[0,0,4,5],
-"structmy__gpio__btn__t.html#ab01af6af705c12f5a6b248ef1cb04ead":[0,0,4,3],
+"structmy__gpio__btn__t.html#ae4fd7fc903bca323099e73e14aceade9":[0,0,4,3],
 "structmy__gpio__btn__t.html#ae572d513b2ee637a1b8e54475bc32032":[0,0,4,1],
 "structmyclock__t.html":[0,0,5],
 "structmyclock__t.html#a39adf3b3fd0cf4849d687cd441585ba0":[0,0,5,2],
