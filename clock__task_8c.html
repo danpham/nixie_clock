@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('clock__task_8c.html',''); initResizabl
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for clock_task.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="clock__task_8c__incl.svg" width="1404" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="clock__task_8c__incl.svg" width="1491" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -137,6 +137,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ad5dae05432bd08122d02917dcd263d85" id="r_ad5dae05432bd08122d02917dcd263d85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#ad5dae05432bd08122d02917dcd263d85">clock_update_from_config_callback</a> (uint8_t *payload, uint8_t size)</td></tr>
 <tr class="memdesc:ad5dae05432bd08122d02917dcd263d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update clock state from configuration.  <br /></td></tr>
 <tr class="separator:ad5dae05432bd08122d02917dcd263d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af996a4614fb6b5cdf318358d13ee2b5e" id="r_af996a4614fb6b5cdf318358d13ee2b5e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__task_8c.html#af996a4614fb6b5cdf318358d13ee2b5e">clock_get_copy</a> (<a class="el" href="structmyclock__t.html">myclock_t</a> *out)</td></tr>
+<tr class="memdesc:af996a4614fb6b5cdf318358d13ee2b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a copy of the current clock state.  <br /></td></tr>
+<tr class="separator:af996a4614fb6b5cdf318358d13ee2b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="af728f959f3192ed40a0abfc8661001c4" name="af728f959f3192ed40a0abfc8661001c4"></a>
@@ -196,6 +199,33 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="af996a4614fb6b5cdf318358d13ee2b5e" name="af996a4614fb6b5cdf318358d13ee2b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af996a4614fb6b5cdf318358d13ee2b5e">&#9670;&#160;</a></span>clock_get_copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool clock_get_copy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmyclock__t.html">myclock_t</a> *&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a copy of the current clock state. </p>
+<p>This function safely copies the current clock state to the provided output structure. It uses a mutex to ensure thread safety when accessing the global clock state.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">out</td><td>Pointer to the clock structure. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a0dbe216f4c3a52414b5e237ef533e891" name="a0dbe216f4c3a52414b5e237ef533e891"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0dbe216f4c3a52414b5e237ef533e891">&#9670;&#160;</a></span>clock_ntp_config_callback()</h2>
 

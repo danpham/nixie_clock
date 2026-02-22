@@ -107,10 +107,11 @@ $(document).ready(function(){initNavTree('webserver_8c.html',''); initResizable(
 <code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="wifi_8h_source.html">wifi.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="event__bus_8h_source.html">../event_bus/event_bus.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="clock__task_8h_source.html">../clock_task/clock_task.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for webserver.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="webserver_8c__incl.svg" width="1452" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="webserver_8c__incl.svg" width="1395" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -127,6 +128,8 @@ Macros</h2></td></tr>
 <tr class="separator:a28f492c3819832cc5cdd33108c69b415"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad27b5374aba14c544e6f2deab18763" id="r_a3ad27b5374aba14c544e6f2deab18763"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webserver_8c.html#a3ad27b5374aba14c544e6f2deab18763">WEBSERVER_URLDEC_ERR_BAD_PARAM</a>&#160;&#160;&#160;((uint8_t)0x80)</td></tr>
 <tr class="separator:a3ad27b5374aba14c544e6f2deab18763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7f44e613d0df6d7eca5d1676edb1949" id="r_aa7f44e613d0df6d7eca5d1676edb1949"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="webserver_8c.html#aa7f44e613d0df6d7eca5d1676edb1949">WEBSERVER_TAG</a>&#160;&#160;&#160;&quot;WEBSERVER&quot;</td></tr>
+<tr class="separator:aa7f44e613d0df6d7eca5d1676edb1949"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -157,6 +160,20 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE&#160;&#160;&#160;(512U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7f44e613d0df6d7eca5d1676edb1949" name="aa7f44e613d0df6d7eca5d1676edb1949"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7f44e613d0df6d7eca5d1676edb1949">&#9670;&#160;</a></span>WEBSERVER_TAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WEBSERVER_TAG&#160;&#160;&#160;&quot;WEBSERVER&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
