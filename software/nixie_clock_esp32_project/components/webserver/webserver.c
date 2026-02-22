@@ -130,8 +130,8 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(req_recv_buf, "ssid", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            uint8_t decoded[64U];
-            size_t decoded_len;
+            uint8_t decoded[64U] = {0};
+            size_t decoded_len = 0U;
 
             uint8_t ret_decode = url_decode(decoded, sizeof(decoded),
                                        (uint8_t *)tmp, strlen(tmp),
@@ -156,8 +156,8 @@ static esp_err_t update_handler(httpd_req_t *req)
         query_res = httpd_query_key_value(req_recv_buf, "wpa-passphrase", tmp, sizeof(tmp));
         if (query_res == ESP_OK)
         {
-            uint8_t decoded[64U];
-            size_t decoded_len;
+            uint8_t decoded[64U] = {0};
+            size_t decoded_len = 0U;
 
             uint8_t ret_decode = url_decode(decoded, sizeof(decoded),
                                        (uint8_t *)tmp, strlen(tmp),

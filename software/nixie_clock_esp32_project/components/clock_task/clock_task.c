@@ -116,7 +116,8 @@ static void clock_task(void *arg) {
             }
 
             if (in_test_mode == true) {
-                display_set_time(12U, 34U, 56U, 1U, 1U);
+                uint8_t display_leading_zero = 1U;
+                display_set_time(12U, 34U, 56U, 1U, 1U, display_leading_zero);
             }
             else if (in_pattern_mode == true) {
                 display_set_pattern_1(pattern_step);
@@ -128,7 +129,8 @@ static void clock_task(void *arg) {
                 }
             } else {
 				xSemaphoreTake(clk_mutex, portMAX_DELAY);
-                display_set_time(clk.hours, clk.minutes, clk.seconds, dots, dots);
+                uint8_t display_leading_zero = 0U;
+                display_set_time(clk.hours, clk.minutes, clk.seconds, dots, dots, display_leading_zero);
 				xSemaphoreGive(clk_mutex);
             }
 
