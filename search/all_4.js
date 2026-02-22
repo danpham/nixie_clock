@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['encode_5ftime_0',['encode_time',['../display_8c.html#a8729556ee3ab200f9e7259e0b56e183f',1,'display.c']]],
+  ['encode_5ftime_0',['encode_time',['../display_8c.html#a745297e1755519025d12a51fa12d92cd',1,'display.c']]],
   ['encode_5ftime_5fdigits_1',['encode_time_digits',['../display_8c.html#af297ab8fc4b0c5d1a7025ebff786cd2b',1,'display.c']]],
   ['event_5fbus_2ec_2',['event_bus.c',['../event__bus_8c.html',1,'']]],
   ['event_5fbus_2eh_3',['event_bus.h',['../event__bus_8h.html',1,'']]],

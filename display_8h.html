@@ -113,9 +113,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a407d5033a6f0198221c8a9081d7e807e" id="r_a407d5033a6f0198221c8a9081d7e807e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="display_8h.html#a407d5033a6f0198221c8a9081d7e807e">display_init</a> (void)</td></tr>
 <tr class="memdesc:a407d5033a6f0198221c8a9081d7e807e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the display.  <br /></td></tr>
 <tr class="separator:a407d5033a6f0198221c8a9081d7e807e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c9f48bad9c684c5d856cfbba449a393" id="r_a1c9f48bad9c684c5d856cfbba449a393"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="display_8h.html#a1c9f48bad9c684c5d856cfbba449a393">display_set_time</a> (uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2)</td></tr>
-<tr class="memdesc:a1c9f48bad9c684c5d856cfbba449a393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current time on the display.  <br /></td></tr>
-<tr class="separator:a1c9f48bad9c684c5d856cfbba449a393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1920b0f6eeb0c64ded03bacc3140d8a" id="r_ae1920b0f6eeb0c64ded03bacc3140d8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="display_8h.html#ae1920b0f6eeb0c64ded03bacc3140d8a">display_set_time</a> (uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t dot1, uint8_t dot2, uint8_t display_leading_zero)</td></tr>
+<tr class="memdesc:ae1920b0f6eeb0c64ded03bacc3140d8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current time on the display.  <br /></td></tr>
+<tr class="separator:ae1920b0f6eeb0c64ded03bacc3140d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa03a0a72321fc3e79fa778634de371ec" id="r_aa03a0a72321fc3e79fa778634de371ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="display_8h.html#aa03a0a72321fc3e79fa778634de371ec">display_set_pattern_1</a> (uint8_t step)</td></tr>
 <tr class="memdesc:aa03a0a72321fc3e79fa778634de371ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pattern 1 on the display.  <br /></td></tr>
 <tr class="separator:aa03a0a72321fc3e79fa778634de371ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,8 +167,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1c9f48bad9c684c5d856cfbba449a393" name="a1c9f48bad9c684c5d856cfbba449a393"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c9f48bad9c684c5d856cfbba449a393">&#9670;&#160;</a></span>display_set_time()</h2>
+<a id="ae1920b0f6eeb0c64ded03bacc3140d8a" name="ae1920b0f6eeb0c64ded03bacc3140d8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1920b0f6eeb0c64ded03bacc3140d8a">&#9670;&#160;</a></span>display_set_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -201,7 +201,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>dot2</em>&#160;</td>
+          <td class="paramname"><em>dot2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>display_leading_zero</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
