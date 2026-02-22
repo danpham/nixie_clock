@@ -39,7 +39,7 @@ NOT_STATIC uint64_t display_pattern_1_get(uint8_t step);
 ******************************************************************/
 
 /**
- * @brief Compute the shift for a given number (0–10).
+ * @brief Compute the shift for a given number (0–9).
  *
  * @param number Number to compute the shift for.
  * @return Calculated shift value.
@@ -47,7 +47,7 @@ NOT_STATIC uint64_t display_pattern_1_get(uint8_t step);
 NOT_STATIC uint8_t shift_compute(uint8_t number) {
     uint8_t shift_number = 0U;
 
-    if  ((number > 0U) && (number <= (uint8_t)10U))
+    if  ((number > 0U) && (number <= (uint8_t)9U))
     {
        shift_number = (uint8_t)10U - number;
     }
