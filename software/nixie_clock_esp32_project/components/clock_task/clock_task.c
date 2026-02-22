@@ -351,3 +351,26 @@ void clock_update_from_config_callback(uint8_t* payload, uint8_t size)
         ESP_LOGE(CLOCK_TASK_TAG, "Failed to get configuration");
     }
 }
+
+/**
+ * @brief Get a copy of the current clock state.
+ *
+ * This function safely copies the current clock state to the provided output structure.
+ * It uses a mutex to ensure thread safety when accessing the global clock state.
+ * 
+ * @param[in,out] out Pointer to the clock structure.
+ */
+bool clock_get_copy(myclock_t *out)
+{
+    bool ret = false;
+
+    if ((out != NULL) && (clk_mutex != NULL)) {
+        if (xSemaphoreTake(clk_mutex, portMAX_DELAY) == pdTRUE) {
+            *out = clk;
+            xSemaphoreGive(clk_mutex);
+            ret = true;
+        }
+    }
+
+    return ret;
+}

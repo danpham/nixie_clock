@@ -16,6 +16,7 @@
 #include "config.h"
 #include "wifi.h"
 #include "../event_bus/event_bus.h"
+#include "../clock_task/clock_task.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -26,6 +27,7 @@
 #define WEBSERVER_URLDEC_WARN_TRUNCATED          ((uint8_t)0x01)
 #define WEBSERVER_URLDEC_WARN_INVALID_SEQ        ((uint8_t)0x02)
 #define WEBSERVER_URLDEC_ERR_BAD_PARAM           ((uint8_t)0x80)
+#define WEBSERVER_TAG                            "WEBSERVER"
 
 /******************************************************************
  * 3. Typedef definitions (simple typedef, then enum and structs)
@@ -68,24 +70,35 @@ static esp_err_t root_handler(httpd_req_t *req)
 		html_escape(safe_pass, sizeof(safe_pass), config.wpa_passphrase);
 
 		char html_format[WEBSERVER_HTML_PAGE_SIZE];
-        int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
-        (config.ntp == 1U) ? "checked" : "",
-        config.time.hours,
-        config.time.minutes,
-        config.time.seconds,
-        safe_ssid,
-        safe_pass,
-        (config.mode == 0U) ? "checked" : "",
-        (config.mode == 1U) ? "checked" : "",
-        (config.mode == 2U) ? "checked" : "",
-        config.dutycycle);
+        myclock_t clk;
+        bool clock_get_copy_result = clock_get_copy(&clk);
 
-        if ((ret_modify_html >= 0) && ((size_t)ret_modify_html < sizeof(html_format))) {
-			httpd_resp_send(req, html_format, HTTPD_RESP_USE_STRLEN);
+        if (clock_get_copy_result == true) {
+            
+            /* Populate HTML page with current configuration values */
+            int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
+            (config.ntp == 1U) ? "checked" : "",
+            clk.hours,
+            clk.minutes,
+            clk.seconds,
+            safe_ssid,
+            safe_pass,
+            (config.mode == 0U) ? "checked" : "",
+            (config.mode == 1U) ? "checked" : "",
+            (config.mode == 2U) ? "checked" : "",
+            config.dutycycle);
+
+            if ((ret_modify_html >= 0) && ((size_t)ret_modify_html < sizeof(html_format))) {
+                httpd_resp_send(req, html_format, HTTPD_RESP_USE_STRLEN);
+            }
+            else {
+                ret = ESP_FAIL;
+            }
         }
-		else {
-		    ret = ESP_FAIL;
-		}
+        else {
+            ESP_LOGE(WEBSERVER_TAG, "Failed to get clock state");
+            ret = ESP_FAIL;
+        }
     }
 
     return ret;
@@ -103,8 +116,6 @@ static esp_err_t root_handler(httpd_req_t *req)
  */
 static esp_err_t update_handler(httpd_req_t *req)
 {
-    static const char WEBSERVER_TAG[] = "WEBSERVER";
-
     char req_recv_buf[WEBSERVER_HTTPD_REQ_RECV_BUFFER_SIZE];
     config_t new_config;
     esp_err_t ret = ESP_OK;

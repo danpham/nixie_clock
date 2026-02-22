@@ -6,6 +6,7 @@
 ******************************************************************/
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "../clock/clock.h"
 
 /******************************************************************
  * 2. Define declarations (macros then function macros)
@@ -30,5 +31,6 @@ void clock_task_start(void);
 void clock_ntp_config_callback(uint8_t* payload, uint8_t size);
 void clock_update_with_menu_callback(uint8_t* payload, uint8_t size);
 void clock_update_from_config_callback(uint8_t* payload, uint8_t size);
+bool clock_get_copy(myclock_t *out);
 
 #endif // CLOCK_TASK_H
