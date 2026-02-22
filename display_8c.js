@@ -1,6 +1,5 @@
 var display_8c =
 [
-    [ "DISPLAY_INVALID_SHIFT", "display_8c.html#a779a9680f4580ba394cf63f748206fb6", null ],
     [ "DISPLAY_NIXIE_COUNT", "display_8c.html#ab92a5d26c245e6db454f8d19358f0064", null ],
     [ "DISPLAY_NIXIE_OFF", "display_8c.html#aea848f7e242fa7a41fca710bec14e989", null ],
     [ "NOT_STATIC", "display_8c.html#aa558662d8b9986390ea07bd25e61d2a9", null ],
