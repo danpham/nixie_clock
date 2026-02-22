@@ -365,7 +365,9 @@ bool clock_get_copy(myclock_t *out)
     bool ret = false;
 
     if ((out != NULL) && (clk_mutex != NULL)) {
-        if (xSemaphoreTake(clk_mutex, portMAX_DELAY) == pdTRUE) {
+
+        BaseType_t taken = xSemaphoreTake(clk_mutex, portMAX_DELAY);
+        if (taken == pdTRUE) {
             *out = clk;
             xSemaphoreGive(clk_mutex);
             ret = true;

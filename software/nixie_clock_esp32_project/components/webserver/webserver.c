@@ -69,13 +69,13 @@ static esp_err_t root_handler(httpd_req_t *req)
 		html_escape(safe_ssid, sizeof(safe_ssid), config.ssid);
 		html_escape(safe_pass, sizeof(safe_pass), config.wpa_passphrase);
 
-		char html_format[WEBSERVER_HTML_PAGE_SIZE];
         myclock_t clk;
         bool clock_get_copy_result = clock_get_copy(&clk);
 
         if (clock_get_copy_result == true) {
-            
+
             /* Populate HTML page with current configuration values */
+            char html_format[WEBSERVER_HTML_PAGE_SIZE];
             int ret_modify_html = snprintf(html_format, sizeof(html_format), html_page_orig,
             (config.ntp == 1U) ? "checked" : "",
             clk.hours,
