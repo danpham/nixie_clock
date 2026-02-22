@@ -17,7 +17,6 @@
 #define NOT_STATIC static
 #endif
 #define DISPLAY_NIXIE_COUNT      (6U)
-#define DISPLAY_INVALID_SHIFT    (0xFFU)
 #define DISPLAY_NIXIE_OFF        (0xFFU)
 
 /******************************************************************
